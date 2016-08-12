@@ -6,8 +6,11 @@
 package co.edu.uniandes.rest.cities.resources;
 
 import co.edu.uniandes.rest.cities.dtos.CityDTO;
+import co.edu.uniandes.rest.cities.dtos.SalaDTO;
 import co.edu.uniandes.rest.cities.exceptions.CityLogicException;
+import co.edu.uniandes.rest.cities.exceptions.SalaException;
 import co.edu.uniandes.rest.cities.mocks.CityLogicMock;
+import co.edu.uniandes.rest.cities.mocks.SalaMock;
 import java.util.List;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -18,13 +21,13 @@ import javax.ws.rs.Produces;
  *
  * @author ya.bejarano10
  */
-public class SalaResource 
-{
 @Path("salas")
 @Produces("application/json")
-public class CityResource {
+public class SalaResource 
+{
 
-    CityLogicMock cityLogic = new CityLogicMock();
+
+    SalaMock sala = new SalaMock();
 
     /**
      * Obtiene el listado de ciudades.
@@ -33,8 +36,8 @@ public class CityResource {
      * @throws CityLogicException excepción retornada por la lógica
      */
     @GET
-    public List<CityDTO> getCities() throws CityLogicException {
-        return cityLogic.getCities();
+    public List<SalaDTO> getCities() throws SalaException {
+        return sala.getSalas();
     }
 
    
@@ -47,11 +50,11 @@ public class CityResource {
      * suministrado
      */
     @POST
-    public CityDTO createCity(CityDTO city) throws CityLogicException {
-        return cityLogic.createCity(city);
+    public SalaDTO createSala(SalaDTO salaN) throws SalaException {
+        return sala.createSala(salaN);
     }
 
     
 }
-}
+
 

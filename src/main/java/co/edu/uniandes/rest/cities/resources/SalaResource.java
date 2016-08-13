@@ -5,11 +5,9 @@
  */
 package co.edu.uniandes.rest.cities.resources;
 
-import co.edu.uniandes.rest.cities.dtos.CityDTO;
+
 import co.edu.uniandes.rest.cities.dtos.SalaDTO;
-import co.edu.uniandes.rest.cities.exceptions.CityLogicException;
 import co.edu.uniandes.rest.cities.exceptions.SalaException;
-import co.edu.uniandes.rest.cities.mocks.CityLogicMock;
 import co.edu.uniandes.rest.cities.mocks.SalaMock;
 import java.util.List;
 import javax.ws.rs.GET;
@@ -30,24 +28,23 @@ public class SalaResource
     SalaMock sala = new SalaMock();
 
     /**
-     * Obtiene el listado de ciudades.
+     * Obtiene el listado de salas.
      *
-     * @return lista de ciudades
-     * @throws CityLogicException excepción retornada por la lógica
+     * @return lista de salas
+     * @throws SalaException excepción retornada por la lógica
      */
     @GET
-    public List<SalaDTO> getCities() throws SalaException {
+    public List<SalaDTO> getSalas() throws SalaException {
         return sala.getSalas();
     }
 
    
     /**
-     * Agrega una ciudad
+     * Agrega una sala
      *
-     * @param city ciudad a agregar
-     * @return datos de la ciudad a agregar
-     * @throws CityLogicException cuando ya existe una ciudad con el id
-     * suministrado
+     * @param salaN sala a agregar
+     * @return datos de la sala a agregar
+     * @throws SalaException cuando ya existe una sala con el numero suministrado
      */
     @POST
     public SalaDTO createSala(SalaDTO salaN) throws SalaException {

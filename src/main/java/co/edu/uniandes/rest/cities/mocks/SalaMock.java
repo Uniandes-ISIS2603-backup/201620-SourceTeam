@@ -5,9 +5,7 @@
  */
 package co.edu.uniandes.rest.cities.mocks;
 
-import co.edu.uniandes.rest.cities.dtos.CityDTO;
 import co.edu.uniandes.rest.cities.dtos.SalaDTO;
-import co.edu.uniandes.rest.cities.exceptions.CityLogicException;
 import co.edu.uniandes.rest.cities.exceptions.SalaException;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +21,7 @@ public class SalaMock {
     // objeto para presentar logs de las operaciones
 	private final static Logger logger = Logger.getLogger(SalaMock.class.getName());
 	
-	// listado de ciudades
+	// listado de salas
     private static ArrayList<SalaDTO> salas;
 
     /**
@@ -47,9 +45,9 @@ public class SalaMock {
     }    
     
 	/**
-	 * Obtiene el listado de personas. 
-	 * @return lista de ciudades
-	 * @throws CityLogicException cuando no existe la lista en memoria  
+	 * Obtiene el listado de salas. 
+	 * @return lista de salas
+	 * @throws SalaException cuando no existe la lista en memoria  
 	 */    
     public List<SalaDTO> getSalas() throws SalaException {
     	if (salas == null) {
@@ -64,43 +62,43 @@ public class SalaMock {
  
 
     /**
-     * Agrega una ciudad a la lista.
-     * @param newCity ciudad a adicionar
-     * @throws CityLogicException cuando ya existe una ciudad con el id suministrado
-     * @return ciudad agregada
+     * Agrega una sala a la lista.
+     * @param newSala sala a adicionar
+     * @throws SalaException cuando ya existe una sala con el id suministrado
+     * @return sala agregada
      */
-    public SalaDTO createSala(SalaDTO newCity) throws SalaException {
-    	logger.info("recibiendo solicitud de agregar ciudad " + newCity);
+    public SalaDTO createSala(SalaDTO newSala) throws SalaException {
+    	logger.info("recibiendo solicitud de agregar sala " + newSala);
     	
-    	// la nueva ciudad tiene id ?
-    	if ( newCity.getNumSala() != null ) {
-	    	// busca la ciudad con el id suministrado
-	        for (SalaDTO city : salas) {
-	        	// si existe una ciudad con ese id
-	            if (Objects.equals(city.getNumSala(), newCity.getNumSala())){
+    	// la nueva sala tiene numero ?
+    	if ( newSala.getNumSala() != null ) {
+	    	// busca la sala con el numero suministrado
+	        for (SalaDTO sala : salas) {
+	        	// si existe una sala con ese id
+	            if (Objects.equals(sala.getNumSala(), newSala.getNumSala())){
 	            	logger.severe("Ya existe una sala con ese numero");
 	                throw new SalaException("Ya existe una sala con ese numero");
 	            }
 	        }
 	        
-	    // la nueva ciudad no tiene id ? 
+	    // la nueva sala no tiene numero ? 
     	} else {
 
-    		// genera un id para la ciudad
+    		// genera un numero para la ciudad
     		logger.info("Generando numero de sala para la nueva sala");
-    		long newSala = 1;
-	        for (SalaDTO city : salas) {
-	            if (newSala <= city.getNumSala()){
-	                newSala =  city.getNumSala() + 1;
+    		long newSal = 1;
+	        for (SalaDTO sala : salas) {
+	            if (newSal <= sala.getNumSala()){
+	                newSal =  sala.getNumSala() + 1;
 	            }
 	        }
-	        newCity.setNumSala(newSala);
+	        newSala.setNumSala(newSal);
     	}
     	
-        // agrega la ciudad
-    	logger.info("agregando sala " + newCity);
-        salas.add(newCity);
-        return newCity;
+        // agrega la sala
+    	logger.info("agregando sala " + newSala);
+        salas.add(newSala);
+        return newSala;
     }
 
 }

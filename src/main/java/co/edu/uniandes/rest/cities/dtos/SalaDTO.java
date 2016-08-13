@@ -27,8 +27,11 @@ public class SalaDTO
 
     /**
      * Constructor con parámetros.
-     * @param id identificador de la ciudad
-     * @param name nombre de la ciudad
+     * @param numSal numero de la sala
+     * @param numS numero de sillas
+     * @param numSillasG numero de sillas generales
+     * @param numSillasP numero de sillas preferenciales
+     * @param esF la sala es festival o no
      */
     public SalaDTO(long numSal, long numS, long numSillasG, long numSillasP, Boolean esF)
     {
@@ -40,8 +43,8 @@ public class SalaDTO
                 this.esFestival = esF;
     }
 
-	/**
-     * @return the id
+    /**
+     * @return el numero de la sala
      */
     
     public Long getNumSala()
@@ -49,44 +52,68 @@ public class SalaDTO
         return numSala;
     }
     
+    /**
+     * @param numSS numero de sala a establecer
+     */
+    
     public void setNumSala(Long numSS)
     {
         this.numSala = numSS;
     }
+    
+    /**
+     * @return el numero de sillas en la sala
+     */
     public Long getNumSillas() {
         return numSillas;
     }
 
     /**
-     * @param id the id to set
+     * @param numS el numero de sillas a establecer
      */
     public void setNumSillas(Long numS) {
         this.numSillas = numS;
     }
 
     /**
-     * @return the name
+     * @return el numero de sillas generales
      */
     public Long getNumSillasGenerales() {
         return numSillasGenerales;
     }
     
+    /**
+     * @param sillasG el numero de sillas generales a establecer
+     */
+    
     public void setNumSillasG(Long sillasG) {
         this.numSillasGenerales = sillasG;
     }
     
+    /**
+     * @return el numero de sillas preferenciales
+     */
     public Long getNumSillasPreferenciales() {
         return numSillasPreferenciales;
     }
     
+    /**
+     * @param sillasP el numero de sillas preferenciales a establecer
+     */
     public void setNumSillasP(Long sillasP) {
         this.numSillasPreferenciales = sillasP;
     }
     
+    /**
+     * @return si es festival o no
+     */
     public Boolean esFestival() {
         return esFestival;
     }
     
+    /**
+     * @param esF el estado actual de la sala
+     */
     public void setEsFestival(Boolean esF) {
         this.esFestival = esF;
     }

@@ -5,7 +5,9 @@
  */
 package co.edu.uniandes.rest.cines.mocks;
 
+import co.edu.uniandes.rest.cines.dtos.ClienteDTO;
 import co.edu.uniandes.rest.cines.dtos.SalaDTO;
+import co.edu.uniandes.rest.cines.exceptions.ClienteException;
 import co.edu.uniandes.rest.cines.exceptions.SalaException;
 import java.util.ArrayList;
 import java.util.List;
@@ -100,5 +102,67 @@ public class SalaMock {
         salas.add(newSala);
         return newSala;
     }
+    
+    /**
+     * Retorna una sala dado su numero
+     * 
+     * @param numero numero de la sala a buscar
+     * @return sala buscada
+     * @throws SalaException cuando no existe el nombre buscado
+     */
+    public SalaDTO getSalabyNumero(int numero) throws  SalaException{
+        if (salas == null) {
+    		logger.severe("Error interno: lista de salas no existe.");
+    		throw new SalaException("Error interno: lista de salas no existe.");    		
+    	}
+        for (int i = 0; i < salas.size(); i++) {
+            if(salas.get(i).getNumSala() == numero){
+                return salas.get(i);
+            }
+        }
+        throw new SalaException("Error interno: no existe una sala con ese nombre.");
+    }
+    
+    /**
+     * Actualiza una sala dado su numero
+     * 
+     * @param numero del cliente a modificar
+     * @param newSala información para actualizar
+     * @return el cliente actualizado
+     * @throws SalaException si no existe un cliente con ese nombre
+     */
+    public SalaDTO updateCliente(int numero, SalaDTO newSala) throws SalaException {
+        for (int i = 0; i < salas.size(); i++) {
+            if(salas.get(i).getNumSala() == numero){
+                salas.set(i, newSala);
+                return salas.get(i);
+            }
+        }
+        logger.severe("No existe una sala con ese numero");
+        throw new SalaException("No existe una sala con ese numero");
+    }
+    
+    /**
+     * Elimina una sala del listado
+     * 
+     * @param numero de la sala a eliminar
+     * @throws SalaException si no existe una sala con ese numero
+     */
+    public void deleteCliente(int numero) throws SalaException{
+
+        for (int i = 0; i < salas.size(); i++) {
+
+            if(salas.get(i).getNumSala() == numero){
+
+                salas.remove(i);
+
+                return;
+            }
+        }
+        logger.severe("No existe un cliente con ese nombre");
+        throw new SalaException("No existe un cliente con ese nombre");
+    }
+    
+    
 
 }

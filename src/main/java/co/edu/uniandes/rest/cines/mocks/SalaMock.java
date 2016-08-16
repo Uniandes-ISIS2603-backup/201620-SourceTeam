@@ -131,7 +131,7 @@ public class SalaMock {
      * @return el cliente actualizado
      * @throws SalaException si no existe un cliente con ese nombre
      */
-    public SalaDTO updateCliente(int numero, SalaDTO newSala) throws SalaException {
+    public SalaDTO updateSala(int numero, SalaDTO newSala) throws SalaException {
         for (int i = 0; i < salas.size(); i++) {
             if(salas.get(i).getNumSala() == numero){
                 salas.set(i, newSala);
@@ -148,7 +148,7 @@ public class SalaMock {
      * @param numero de la sala a eliminar
      * @throws SalaException si no existe una sala con ese numero
      */
-    public void deleteCliente(int numero) throws SalaException{
+    public void deleteSala(int numero) throws SalaException{
 
         for (int i = 0; i < salas.size(); i++) {
 
@@ -159,8 +159,8 @@ public class SalaMock {
                 return;
             }
         }
-        logger.severe("No existe un cliente con ese nombre");
-        throw new SalaException("No existe un cliente con ese nombre");
+        logger.severe("No existe una sala con ese numero");
+        throw new SalaException("No existe una sala con ese numero");
     }
     
     

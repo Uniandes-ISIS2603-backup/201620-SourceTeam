@@ -10,9 +10,12 @@ import co.edu.uniandes.rest.cines.dtos.SalaDTO;
 import co.edu.uniandes.rest.cines.exceptions.SalaException;
 import co.edu.uniandes.rest.cines.mocks.SalaMock;
 import java.util.List;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
 /**
@@ -49,6 +52,46 @@ public class SalaResource
     @POST
     public SalaDTO createSala(SalaDTO salaN) throws SalaException {
         return sala.createSala(salaN);
+    }
+    
+    /**
+     * Retorna una sala dado su numero
+     * 
+     * @param numero de la sala a retornar
+     * @return una sala
+     * @throws SalaeException excepción retornada por la lógica
+     */
+    @GET
+    @Path("{numero: \\d+}")
+    public SalaDTO getSalaPorNumero(@PathParam("numero") int numero) throws SalaException {
+        return sala.getSalabyNumero(numero);
+    }
+    
+    
+    /**
+     * Actualiza la información de una sala identificada con su numero
+     * 
+     * @param numero de la sala
+     * @param salaP con el que actualizar la información
+     * @return la sala  actualizado
+     * @throws SalaException excepción retornada por la lógica
+     */
+    @PUT
+    @Path("{id: \\d+}")
+    public SalaDTO updateSala(@PathParam("id") int numero, SalaDTO salaP) throws SalaException{
+        return sala.updateSala(numero, salaP);
+    }
+    
+    /**
+     * Elimina una sala dado su numero
+     * 
+     * @param numero de la sala eliminada
+     * @throws SalaException excepción retornada por la lógica
+     */
+    @DELETE
+    @Path("{id: \\d+}")
+    public void deleteSala(@PathParam("{id: \\d+}")int  numero) throws SalaException{
+        sala.deleteSala(numero);
     }
 
     

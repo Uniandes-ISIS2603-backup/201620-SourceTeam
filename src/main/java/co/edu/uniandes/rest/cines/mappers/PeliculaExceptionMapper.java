@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.edu.uniandes.rest.cities.mappers;
+package co.edu.uniandes.rest.cines.mappers;
 
-import co.edu.uniandes.rest.cities.exceptions.SalaException;
+
+import co.edu.uniandes.rest.cines.exceptions.PeliculaException;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
@@ -15,10 +16,10 @@ import javax.ws.rs.ext.Provider;
  * @author ya.bejarano10
  */
 @Provider
-public class SalaExceptionMapper implements ExceptionMapper<SalaException>  
+public class PeliculaExceptionMapper implements ExceptionMapper<PeliculaException>
 {
     @Override
-	public Response toResponse(SalaException ex) {
+	public Response toResponse(PeliculaException ex) {
 		// retorna una respuesta
 		return Response
 				.status(Response.Status.NOT_FOUND)	// estado HTTP 404
@@ -26,5 +27,4 @@ public class SalaExceptionMapper implements ExceptionMapper<SalaException>
 				.type("text/plain")
 				.build();
 	}
-    
 }

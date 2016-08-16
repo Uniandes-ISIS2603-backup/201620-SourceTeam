@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.edu.uniandes.rest.cities.mocks;
+package co.edu.uniandes.rest.cines.mocks;
 
-import co.edu.uniandes.rest.cities.dtos.PeliculaDTO;
-import co.edu.uniandes.rest.cities.exceptions.PeliculaException;
+import co.edu.uniandes.rest.cines.dtos.PeliculaDTO;
+import co.edu.uniandes.rest.cines.exceptions.PeliculaException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;

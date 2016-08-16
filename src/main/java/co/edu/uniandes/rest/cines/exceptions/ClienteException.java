@@ -1,9 +1,14 @@
-package co.edu.uniandes.rest.cities.exceptions;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package co.edu.uniandes.rest.cines.exceptions;
 
 /**
- * Representa las excepciones de la lógica de CityLogic 
+ * Representa las excepciones del cliente
  */
-public class CityLogicException extends Exception {
+public class ClienteException extends Exception {
 
 	/**
 	 * versión usada en la serialización de la clase
@@ -13,7 +18,7 @@ public class CityLogicException extends Exception {
 	/**
 	 * Constructor por defecto
 	 */
-	public CityLogicException() 
+	public ClienteException() 
         {
 	}
 
@@ -21,7 +26,7 @@ public class CityLogicException extends Exception {
 	 * Constructor con un mensaje
 	 * @param message mensaje de la excepción
 	 */
-	public CityLogicException(String message) {
+	public ClienteException(String message) {
 		super(message);
 	}
 
@@ -29,7 +34,7 @@ public class CityLogicException extends Exception {
 	 * Constructor con una causa
 	 * @param cause causa de la excepción. Usada para generar la traza.
 	 */
-	public CityLogicException(Throwable cause) {
+	public ClienteException(Throwable cause) {
 		super(cause);
 	}
 
@@ -38,7 +43,7 @@ public class CityLogicException extends Exception {
 	 * @param message mensaje de la excepción
 	 * @param cause causa de la excepción. Usada para generar la traza.
 	 */
-	public CityLogicException(String message, Throwable cause) {
+	public ClienteException(String message, Throwable cause) {
 		super(message, cause);
 	}
 

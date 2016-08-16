@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.edu.uniandes.rest.cities.resources;
+package co.edu.uniandes.rest.cines.resources;
 
 
-import co.edu.uniandes.rest.cities.dtos.SalaDTO;
-import co.edu.uniandes.rest.cities.exceptions.SalaException;
-import co.edu.uniandes.rest.cities.mocks.SalaMock;
+import co.edu.uniandes.rest.cines.dtos.SalaDTO;
+import co.edu.uniandes.rest.cines.exceptions.SalaException;
+import co.edu.uniandes.rest.cines.mocks.SalaMock;
 import java.util.List;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;

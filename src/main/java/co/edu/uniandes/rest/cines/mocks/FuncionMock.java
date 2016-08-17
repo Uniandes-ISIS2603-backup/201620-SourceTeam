@@ -23,7 +23,7 @@ public class FuncionMock
     /**
      * Objeto para presentar los logs de las operaciones.
      */
-    private final static Logger logger = Logger.getLogger(ClienteMock.class.getName());
+    private final static Logger logger = Logger.getLogger(FuncionMock.class.getName());
     
     /**
      * Lista de funciones.

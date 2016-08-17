@@ -11,6 +11,7 @@ package co.edu.uniandes.rest.cines.dtos;
  * and open the template in the editor.
  */
 
+import co.edu.uniandes.rest.cines.exceptions.AbonoException;
  import java.util.ArrayList;
 /**
  *
@@ -49,14 +50,14 @@ public AbonoDTO(String nombreC,int id){
  * @param ArrayList boletas, array que contiene las boletas que se desean abonar
  * @throws Exception, en caso de que el numero de boletas que se desea abonar, sea menor a 10
  */
-public void setBoletasAbono(ArrayList<BoletaDTO> boletas) throws Exception{
+public void setBoletasAbono(ArrayList<BoletaDTO> boletas) throws AbonoException{
 	if(boletas.size()>=10){
 		for(int i=0;i<boletas.size();i++){
 			listaBoletas.add(boletas.get(i));
 		}
 	}
 	else{
-		throw new Exception("Minimo deben comprarse 10 boletas para que sea un abono");
+		throw new AbonoException("Minimo deben comprarse 10 boletas para que sea un abono");
 	}
 }
 /**
@@ -64,7 +65,7 @@ public void setBoletasAbono(ArrayList<BoletaDTO> boletas) throws Exception{
  * 
  * @throws Exception, en caso de que el numero de boletas a abonar sea menor a 10
  */
-public void calcularPrecio()throws Exception{
+public void calcularPrecio()throws AbonoException{
 	if(listaBoletas.size()>=10){
 		double menor = 1000000;
 		for(int i=0; i<listaBoletas.size();i++){
@@ -76,7 +77,7 @@ public void calcularPrecio()throws Exception{
 		precio = menor*cantidad;
 	}
 	else{
-		throw new Exception("Minimo deben comprarse 10 boletas para que sea un abono");
+		throw new AbonoException("Minimo deben comprarse 10 boletas para que sea un abono");
 	}
 }
 /**

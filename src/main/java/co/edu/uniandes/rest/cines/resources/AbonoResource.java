@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.rest.cines.resources;
 import co.edu.uniandes.rest.cines.dtos.AbonoDTO;
+import co.edu.uniandes.rest.cines.exceptions.AbonoException;
 import co.edu.uniandes.rest.cines.mocks.AbonoMock;
 import java.util.List;
 import javax.ws.rs.DELETE;
@@ -31,7 +32,7 @@ public class AbonoResource {
      * @throws Exception excepción retornada por la lógica
      */
     @GET
-    public List<AbonoDTO> getAbonos() throws Exception {
+    public List<AbonoDTO> getAbonos() throws AbonoException {
         return abonos.getAbonos();
     }
 
@@ -45,7 +46,7 @@ public class AbonoResource {
      * suministrado
      */
     @POST
-    public AbonoDTO createBoleta(AbonoDTO abono) throws Exception {
+    public AbonoDTO createBoleta(AbonoDTO abono) throws AbonoException {
         return abonos.createAbono(abono);
     }
 
@@ -59,7 +60,7 @@ public class AbonoResource {
      */
     @GET
     @Path("{id: \\d+}")
-    public AbonoDTO getAbono(@PathParam("id") int id) throws Exception{
+    public AbonoDTO getAbono(@PathParam("id") int id) throws AbonoException{
        return abonos.getAbono(id);
     }
     
@@ -73,7 +74,7 @@ public class AbonoResource {
      */
     @GET
     @Path("{precio: [0-9][0-9]*}")
-    public AbonoDTO getAbonoPorPrecio(@PathParam("precio") double precio) throws Exception {
+    public AbonoDTO getAbonoPorPrecio(@PathParam("precio") double precio) throws AbonoException {
         return abonos.getAbonoPorPrecio(precio);
     }
     
@@ -88,7 +89,7 @@ public class AbonoResource {
      */
     @PUT
     @Path("{id: \\d+}")
-    public AbonoDTO updateAbono(@PathParam("id") int id, AbonoDTO abono) throws Exception{
+    public AbonoDTO updateAbono(@PathParam("id") int id, AbonoDTO abono) throws AbonoException{
         return abonos.updateAbono(id, abono);
     }
     
@@ -100,7 +101,7 @@ public class AbonoResource {
      */
     @DELETE
     @Path("{id: \\d+}")
-    public void deleteAbono(@PathParam("id")int id) throws Exception{
+    public void deleteAbono(@PathParam("id")int id) throws AbonoException{
         abonos.deleteAbono(id);
     }
 }

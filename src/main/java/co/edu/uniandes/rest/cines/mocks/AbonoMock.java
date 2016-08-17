@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.rest.cines.mocks;
 import co.edu.uniandes.rest.cines.dtos.AbonoDTO;
+import co.edu.uniandes.rest.cines.exceptions.AbonoException;
 //import co.edu.uniandes.rest.cines.exceptions.AbonoException;
 import java.util.ArrayList;
 import java.util.List;
@@ -50,10 +51,10 @@ public class AbonoMock {
      * @return lista de boletas
      * @throws Exception cuando no existe la lista en memoria
      */
-    public List<AbonoDTO> getAbonos() throws Exception {
+    public List<AbonoDTO> getAbonos() throws AbonoException {
         if (abonos == null) {
             logger.severe("Error interno: lista de abonos no existe.");
-            throw new Exception("Error interno: lista de abonos no existe.");
+            throw new AbonoException("Error interno: lista de abonos no existe.");
         }
         
         logger.info("retornando todos los abonos");
@@ -66,7 +67,7 @@ public class AbonoMock {
      * @throws Exception cuando ya existe una boleta con el id suministrado
      * @return abono agregada
      */
-    public AbonoDTO createAbono(AbonoDTO newAbono) throws Exception {
+    public AbonoDTO createAbono(AbonoDTO newAbono) throws AbonoException {
         logger.info("recibiendo solicitud de agregar abono" + newAbono);
         
         // la nueva boleta tiene id ?
@@ -76,7 +77,7 @@ public class AbonoMock {
                 // si existe una ciudad con ese id
                 if (Objects.equals(abono.getIdAbono(), newAbono.getIdAbono())){
                     logger.severe("Ya existe abono con ese id");
-                    throw new Exception("Ya existe una boleta con ese id");
+                    throw new AbonoException("Ya existe una boleta con ese id");
                 }
             }
             
@@ -108,17 +109,17 @@ public class AbonoMock {
      * @return abono buscado
      * @throws Exception cuando no existe el id buscado
      */
-    public AbonoDTO getAbono(int id) throws Exception{
+    public AbonoDTO getAbono(int id) throws AbonoException{
         if (abonos == null) {
     		logger.severe("Error interno: lista de abonos no existe.");
-    		throw new Exception("Error interno: lista de abonos no existe.");    		
+    		throw new AbonoException("Error interno: lista de abonos no existe.");    		
     	}
         for (int i = 0; i < abonos.size(); i++) {
             if(abonos.get(i).getIdAbono()==id){
                 return abonos.get(i);
             }
         }
-        throw new Exception("Error interno: no existe un abono con ese id.");
+        throw new AbonoException("Error interno: no existe un abono con ese id.");
     }
     
     
@@ -129,17 +130,17 @@ public class AbonoMock {
      * @return abono buscado
      * @throws Exception cuando no existe el precio buscado
      */
-    public AbonoDTO getAbonoPorPrecio(Double precio) throws Exception{
+    public AbonoDTO getAbonoPorPrecio(Double precio) throws AbonoException{
         if (abonos == null) {
     		logger.severe("Error interno: lista de abonos no existe.");
-    		throw new Exception("Error interno: lista de abonos no existe.");    		
+    		throw new AbonoException("Error interno: lista de abonos no existe.");    		
     	}
         for (int i = 0; i < abonos.size(); i++) {
             if(abonos.get(i).getPrecioAbono()==precio){
                 return abonos.get(i);
             }
         }
-        throw new Exception("Error interno: no existe abono con ese precio.");
+        throw new AbonoException("Error interno: no existe abono con ese precio.");
     }
 /**
      * Retorna una abono dado su cliente
@@ -148,17 +149,17 @@ public class AbonoMock {
      * @return abono buscado
      * @throws Exception cuando no existe el precio buscado
      */
-    public AbonoDTO getAbonoPorCliente(String cliente) throws Exception{
+    public AbonoDTO getAbonoPorCliente(String cliente) throws AbonoException{
         if (abonos == null) {
     		logger.severe("Error interno: lista de abonos no existe.");
-    		throw new Exception("Error interno: lista de abonos no existe.");    		
+    		throw new AbonoException("Error interno: lista de abonos no existe.");    		
     	}
         for (int i = 0; i < abonos.size(); i++) {
             if(abonos.get(i).getCliente()==cliente){
                 return abonos.get(i);
             }
         }
-        throw new Exception("Error interno: no existe abono con ese cliente.");
+        throw new AbonoException("Error interno: no existe abono con ese cliente.");
     }
 
     /**
@@ -169,7 +170,7 @@ public class AbonoMock {
      * @return la abono actualizada
      * @throws Exception si no existe un abono con ese id
      */
-    public AbonoDTO updateAbono(int id, AbonoDTO newAbono) throws Exception {
+    public AbonoDTO updateAbono(int id, AbonoDTO newAbono) throws AbonoException {
         for (int i = 0; i < abonos.size(); i++) {
             if(id == abonos.get(i).getIdAbono()){
                 abonos.set(i, newAbono);
@@ -177,7 +178,7 @@ public class AbonoMock {
             }
         }
         logger.severe("No existe un abono con ese id");
-        throw new Exception("No existe un abono con ese id");
+        throw new AbonoException("No existe un abono con ese id");
     }
     
     
@@ -187,7 +188,7 @@ public class AbonoMock {
      * @param id del abono a eliminar
      * @throws Exception si no existe un abono con ese id
      */
-    public void deleteAbono(int id) throws Exception{
+    public void deleteAbono(int id) throws AbonoException{
 //        logger.info("Antes del ciclo");
         for (int i = 0; i < abonos.size(); i++) {
 //            logger.info("antes del if");
@@ -199,7 +200,7 @@ public class AbonoMock {
             }
         }
         logger.severe("No existe un abono con ese id");
-        throw new Exception("No existe un abono con ese id");
+        throw new AbonoException("No existe un abono con ese id");
     }
   
 }

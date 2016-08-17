@@ -8,6 +8,7 @@ import co.edu.uniandes.rest.cines.dtos.AbonoDTO;
 import co.edu.uniandes.rest.cines.dtos.CalificacionDTO;
 import co.edu.uniandes.rest.cines.dtos.CriticoDTO;
 import co.edu.uniandes.rest.cines.dtos.FuncionDTO;
+import co.edu.uniandes.rest.cines.exceptions.CalificacionException;
 //import co.edu.uniandes.rest.cines.exceptions.AbonoException;
 import java.util.ArrayList;
 import java.util.List;
@@ -60,10 +61,10 @@ public class CalificacionMock {
      * @return lista de calificaciones
      * @throws Exception cuando no existe la lista en memoria
      */
-    public List<CalificacionDTO> getCalificaciones() throws Exception {
+    public List<CalificacionDTO> getCalificaciones() throws CalificacionException {
         if (calificaciones == null) {
             logger.severe("Error interno: lista de calificaciones no existe.");
-            throw new Exception("Error interno: lista de calificaciones no existe.");
+            throw new CalificacionException("Error interno: lista de calificaciones no existe.");
         }
         
         logger.info("retornando todos las calificaciones");
@@ -76,7 +77,7 @@ public class CalificacionMock {
      * @throws Exception cuando ya existe una calificacion con el id suministrado
      * @return calificacion agregada
      */
-    public CalificacionDTO createCalificacion(CalificacionDTO newCalificacion) throws Exception {
+    public CalificacionDTO createCalificacion(CalificacionDTO newCalificacion) throws CalificacionException {
         logger.info("recibiendo solicitud de agregar calificacion " + newCalificacion);
         
         // la nueva boleta tiene id ?
@@ -86,7 +87,7 @@ public class CalificacionMock {
                 // si existe una ciudad con ese id
                 if ((Objects.equals(calificacion.getId(), newCalificacion.getId()))){
                     logger.severe("Ya existe calificacion con el mismo id dado");
-                    throw new Exception("Ya existe calificacion con los parametros dados");
+                    throw new CalificacionException("Ya existe calificacion con los parametros dados");
                 }
             }
             
@@ -118,17 +119,17 @@ public class CalificacionMock {
      * @return calificacion buscado
      * @throws Exception cuando no existe el id buscado
      */
-    public CalificacionDTO getCalificacion(double id) throws Exception{
+    public CalificacionDTO getCalificacion(double id) throws CalificacionException{
         if (calificaciones == null) {
     		logger.severe("Error interno: lista de calificaciones no existe.");
-    		throw new Exception("Error interno: lista de calificaciones no existe.");    		
+    		throw new CalificacionException("Error interno: lista de calificaciones no existe.");    		
     	}
         for (int i = 0; i < calificaciones.size(); i++) {
             if(calificaciones.get(i).getId()==id){
                 return calificaciones.get(i);
             }
         }
-        throw new Exception("Error interno: no existe una calificacion con ese id.");
+        throw new CalificacionException("Error interno: no existe una calificacion con ese id.");
     }
     
     
@@ -139,11 +140,11 @@ public class CalificacionMock {
      * @return criticos , lista calificaciones del critico
      * @throws Exception cuando no existe el critico buscado
      */
-    public ArrayList<CalificacionDTO> getCalificacionPorCritico(CriticoDTO critico) throws Exception{
+    public ArrayList<CalificacionDTO> getCalificacionPorCritico(CriticoDTO critico) throws CalificacionException{
         
         if (calificaciones == null) {
     		logger.severe("Error interno: lista de calificaciones no existe.");
-    		throw new Exception("Error interno: lista de calificaciones no existe.");    		
+    		throw new CalificacionException("Error interno: lista de calificaciones no existe.");    		
     	}
         ArrayList<CalificacionDTO> criticos = new ArrayList<CalificacionDTO>();
         for (int i = 0; i < calificaciones.size(); i++) {
@@ -152,7 +153,7 @@ public class CalificacionMock {
             }
         }
         if(criticos.size()==0){
-        throw new Exception("Error interno: no existe abono con ese precio.");
+        throw new CalificacionException("Error interno: no existe abono con ese precio.");
         }
         else {
             return criticos;
@@ -165,10 +166,10 @@ public class CalificacionMock {
      * @return lista calificaciones de la funcion buscada
      * @throws Exception cuando no existe la funcion buscada
      */
-    public ArrayList<CalificacionDTO>  getCalificacionPorFuncion(FuncionDTO funcion) throws Exception{
+    public ArrayList<CalificacionDTO>  getCalificacionPorFuncion(FuncionDTO funcion) throws CalificacionException{
         if (calificaciones == null) {
     		logger.severe("Error interno: lista de calificaciones no existe.");
-    		throw new Exception("Error interno: lista de calificaciones no existe.");    		
+    		throw new CalificacionException("Error interno: lista de calificaciones no existe.");    		
     	}
         ArrayList<CalificacionDTO> funciones = new ArrayList<>();
         for (int i = 0; i < calificaciones.size(); i++) {
@@ -177,7 +178,7 @@ public class CalificacionMock {
             }
         }
         if(funciones.size()==0){
-        throw new Exception("Error interno: no existe calificacion con esa funcion.");
+        throw new CalificacionException("Error interno: no existe calificacion con esa funcion.");
     }
         return funciones;
     }
@@ -190,7 +191,7 @@ public class CalificacionMock {
      * @return la abono actualizada
      * @throws Exception si no existe un abono con ese id
      */
-    public CalificacionDTO updateCalificacion(double id, CalificacionDTO newcali) throws Exception {
+    public CalificacionDTO updateCalificacion(double id, CalificacionDTO newcali) throws CalificacionException {
         for (int i = 0; i < calificaciones.size(); i++) {
             if(id == calificaciones.get(i).getId()){
                 calificaciones.set(i, newcali);
@@ -198,7 +199,7 @@ public class CalificacionMock {
             }
         }
         logger.severe("No existe un abono con ese id");
-        throw new Exception("No existe un abono con ese id");
+        throw new CalificacionException("No existe un abono con ese id");
     }
     
     /**
@@ -207,7 +208,7 @@ public class CalificacionMock {
      * @param id de la calificacion a eliminar
      * @throws Exception si no existe una calificacion con ese id
      */
-    public void deleteCalificacion(double id) throws Exception{
+    public void deleteCalificacion(double id) throws CalificacionException{
 //        logger.info("Antes del ciclo");
         for (int i = 0; i < calificaciones.size(); i++) {
 //            logger.info("antes del if");
@@ -219,7 +220,7 @@ public class CalificacionMock {
             }
         }
         logger.severe("No existe una calificacion con ese id");
-        throw new Exception("No existe un calificacion con ese id");
+        throw new CalificacionException("No existe un calificacion con ese id");
     }
   
 }

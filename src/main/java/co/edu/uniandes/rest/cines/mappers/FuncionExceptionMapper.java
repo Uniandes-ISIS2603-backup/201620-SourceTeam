@@ -8,11 +8,14 @@ package co.edu.uniandes.rest.cines.mappers;
 import co.edu.uniandes.rest.cines.exceptions.FuncionException;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
+import javax.ws.rs.ext.Provider;
 
 /**
- *
+ * Convertidor de excepciones FuncionException a mensajes REST.
+ * 
  * @author ba.bohorquez10
  */
+@Provider
 public class FuncionExceptionMapper implements ExceptionMapper<FuncionException>
 {
     @Override

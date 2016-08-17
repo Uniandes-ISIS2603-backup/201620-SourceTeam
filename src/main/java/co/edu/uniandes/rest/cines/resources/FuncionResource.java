@@ -27,12 +27,23 @@ public class FuncionResource
 {
     FuncionMock funciones = new FuncionMock();
     
+    /**
+     * Obtiene el listado de funciones.
+     * @return El listado de funciones.
+     * @throws FuncionException Si hay algun problema con el metodo.
+     */
     @GET
     public List<FuncionDTO> getFunciones() throws FuncionException
     {
         return funciones.getFunciones();
     }
     
+    /**
+     * Obtiene la funcion con el id dado por parametro.
+     * @param pId Id de la funcion a buscar.
+     * @return Funcion con el id dado.
+     * @throws FuncionException Si hay algun problema en el metodo.
+     */
     @GET
     @Path("{id: \\d+}")
     public FuncionDTO getFuncionById(@PathParam("id") int pId) throws FuncionException
@@ -40,12 +51,25 @@ public class FuncionResource
         return funciones.getFuncionById(pId);
     }
     
+    /**
+     * Crea una nueva funcion.
+     * @param nueva Nueva funcion.
+     * @return LA funcion creada.
+     * @throws FuncionException 
+     */
     @POST
     public FuncionDTO createFuncion(FuncionDTO nueva) throws FuncionException
     {
         return funciones.createFuncion(nueva);
     }
     
+    /**
+     * Modifica una funcion existente.
+     * @param pId Id de la funcion a modificar.
+     * @param nueva Funcion con la informacion que se quiere actualizar
+     * @return Funcion actualizada.
+     * @throws FuncionException 
+     */
     @PUT
     @Path("{id: \\d+}")
     public FuncionDTO updateFuncion(@PathParam("id") int pId, FuncionDTO nueva) throws FuncionException
@@ -53,6 +77,11 @@ public class FuncionResource
         return funciones.updateFuncion(pId, nueva);
     }
     
+    /**
+     * Elimina la funcion con el id dado.
+     * @param pId Id de la funcion que se quiere eliminar.
+     * @throws FuncionException 
+     */
     @DELETE
     @Path("{id: \\d+}")
     public void deleteFuncion(@PathParam("id") int pId) throws FuncionException

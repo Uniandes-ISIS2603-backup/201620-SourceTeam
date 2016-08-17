@@ -6,26 +6,42 @@
 package co.edu.uniandes.rest.cines.exceptions;
 
 /**
- *
+ *Representa la excepcion de la clase funcion.
  * @author ba.bohorquez10 
  */
 public class FuncionException extends Exception
 {
+    /**
+     * 
+     * @param mensaje 
+     */
     public FuncionException(String mensaje)
     {
         super(mensaje);
     }
     
+    /**
+     * 
+     * @param mensaje
+     * @param cause 
+     */
     public FuncionException(String mensaje, Throwable cause)
     {
         super(mensaje, cause);
     }
     
+    /**
+     * 
+     * @param cause 
+     */
     public FuncionException(Throwable cause)
     {
         super(cause);
     }
     
+    /**
+     * 
+     */
     public FuncionException()
     {
         

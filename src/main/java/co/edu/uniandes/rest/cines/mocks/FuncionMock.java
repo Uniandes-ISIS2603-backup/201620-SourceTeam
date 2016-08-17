@@ -20,10 +20,19 @@ import java.util.logging.Logger;
  */
 public class FuncionMock 
 {
+    /**
+     * Objeto para presentar los logs de las operaciones.
+     */
     private final static Logger logger = Logger.getLogger(ClienteMock.class.getName());
     
+    /**
+     * Lista de funciones.
+     */
     private static ArrayList<FuncionDTO> funciones;
     
+    /**
+     * Constructor que crea los datos de ejemplo.
+     */
     public FuncionMock()
     {
         if(funciones == null)
@@ -43,6 +52,11 @@ public class FuncionMock
     	logger.info("Funciones" + funciones );
     }
     
+    /**
+     * Retorna la lista de funciones.
+     * @return Lista de funciones.
+     * @throws FuncionException Si no hay funciones.
+     */
     public List<FuncionDTO> getFunciones() throws FuncionException
     {
         if(funciones == null)
@@ -55,6 +69,12 @@ public class FuncionMock
         return funciones;
     }
     
+    /**
+     * Busca una funcion en especifico con el id dado.
+     * @param pId Id de la funcion buscada.
+     * @return Funcion con el id dado.
+     * @throws FuncionException Si no existe la funcion.
+     */
     public FuncionDTO getFuncionById(int pId) throws FuncionException
     {
         if(funciones == null)
@@ -99,6 +119,12 @@ public class FuncionMock
         throw new FuncionException("No existe una funcion con la hora dada.");
     }
     
+    /**
+     * Crea una nueva funcion.
+     * @param nueva la funcion nueva a agregar a la lista de funciones.
+     * @return Funcion creada.
+     * @throws FuncionException  Si la funcion ya existe o no pudo ser creada.
+     */
     public FuncionDTO createFuncion(FuncionDTO nueva) throws FuncionException
     {
         logger.info("Recibiendo solicitud de agregar funcion " + nueva);
@@ -117,6 +143,13 @@ public class FuncionMock
         return nueva;
     }
     
+    /**
+     * Actualiza la informacion de una funcion a partir de la informacion dada.
+     * @param pId Id de la funcion que se quiere actualizar.
+     * @param nueva Funcion con la informacion nueva.
+     * @return La funcion actualizada.
+     * @throws FuncionException Si la funcion no se encontro.
+     */
     public FuncionDTO updateFuncion(int pId, FuncionDTO nueva) throws FuncionException
     {
         logger.info("Buscando la funcion.");
@@ -135,6 +168,11 @@ public class FuncionMock
         throw new FuncionException("No existe la funcion con el id dado.");
     }
     
+    /**
+     * Borra la funcion con el id dado.
+     * @param pId Id de la funcion a borrar.
+     * @throws FuncionException Si la funcion con el id dado no se encuentra.
+     */
     public void deleteFuncion(int pId) throws FuncionException
     {
         for (int i = 0; i < funciones.size(); i++) 

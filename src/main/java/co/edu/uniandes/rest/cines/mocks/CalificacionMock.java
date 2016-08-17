@@ -56,8 +56,8 @@ public class CalificacionMock {
     }
     
     /**
-     * Obtiene el listado de ab.onos
-     * @return lista de boletas
+     * Obtiene el listado de calificaciones
+     * @return lista de calificaciones
      * @throws Exception cuando no existe la lista en memoria
      */
     public List<CalificacionDTO> getCalificaciones() throws Exception {
@@ -66,7 +66,7 @@ public class CalificacionMock {
             throw new Exception("Error interno: lista de calificaciones no existe.");
         }
         
-        logger.info("retornando todos los abonos");
+        logger.info("retornando todos las calificaciones");
         return calificaciones;
     }
     
@@ -80,13 +80,13 @@ public class CalificacionMock {
         logger.info("recibiendo solicitud de agregar calificacion " + newCalificacion);
         
         // la nueva boleta tiene id ?
-        if ((Integer) newCalificacion.getIdAbono()!= null ) {
+        if ((Double) newCalificacion.getId()!=null ) {
             // busca el abono con el id suministrado
-            for (CalificacionDTO abono : abonos) {
+            for (CalificacionDTO calificacion : calificaciones) {
                 // si existe una ciudad con ese id
-                if (Objects.equals(abono.getIdAbono(), newAbono.getIdAbono())){
-                    logger.severe("Ya existe abono con ese id");
-                    throw new Exception("Ya existe una boleta con ese id");
+                if ((Objects.equals(calificacion.getId(), newCalificacion.getId()))){
+                    logger.severe("Ya existe calificacion con el mismo id dado");
+                    throw new Exception("Ya existe calificacion con los parametros dados");
                 }
             }
             
@@ -95,83 +95,94 @@ public class CalificacionMock {
             
             // genera un id para la ciudad
             logger.info("Generando id para el nuevo abono");
-            int newId = 1;
-            for (CalificacionDTO abono : abonos) {
-                if (newId <= abono.getIdAbono()){
-                    newId =  abono.getIdAbono() + 1;
+            double newId = 1;
+            for (CalificacionDTO calificacion : calificaciones) {
+                if (newId <= calificacion.getId()){
+                    newId =  calificacion.getId() + 1;
                 }
             }
-            newAbono.setId(newId);
+            newCalificacion.setId(newId);
         }
         
         // agrega la ciudad
-        logger.info("agregando abono " + newAbono);
-        abonos.add(newAbono);
-        return newAbono;
+        logger.info("agregando calificacion " + newCalificacion);
+        calificaciones.add(newCalificacion);
+        return newCalificacion;
     }
 
    
     /**
-     * Retorna un abono dado su id
+     * Retorna una calificacion dado su id
      * 
-     * @param id de la abono a buscar
-     * @return abono buscado
+     * @param id de la calificacion a buscar
+     * @return calificacion buscado
      * @throws Exception cuando no existe el id buscado
      */
-    public CalificacionDTO getAbono(int id) throws Exception{
-        if (abonos == null) {
-    		logger.severe("Error interno: lista de abonos no existe.");
-    		throw new Exception("Error interno: lista de abonos no existe.");    		
+    public CalificacionDTO getCalificacion(double id) throws Exception{
+        if (calificaciones == null) {
+    		logger.severe("Error interno: lista de calificaciones no existe.");
+    		throw new Exception("Error interno: lista de calificaciones no existe.");    		
     	}
-        for (int i = 0; i < abonos.size(); i++) {
-            if(abonos.get(i).getIdAbono()==id){
-                return abonos.get(i);
+        for (int i = 0; i < calificaciones.size(); i++) {
+            if(calificaciones.get(i).getId()==id){
+                return calificaciones.get(i);
             }
         }
-        throw new Exception("Error interno: no existe un abono con ese id.");
+        throw new Exception("Error interno: no existe una calificacion con ese id.");
     }
     
     
     /**
-     * Retorna una abono dado su precio
+     * Retorna una lista de calificaciones dado su critico
      * 
-     * @param precio precio del abono a buscar
-     * @return abono buscado
-     * @throws Exception cuando no existe el precio buscado
+     * @param critico, critico a buscar
+     * @return criticos , lista calificaciones del critico
+     * @throws Exception cuando no existe el critico buscado
      */
-    public AbonoDTO getAbonoPorPrecio(Double precio) throws Exception{
-        if (abonos == null) {
-    		logger.severe("Error interno: lista de abonos no existe.");
-    		throw new Exception("Error interno: lista de abonos no existe.");    		
+    public ArrayList<CalificacionDTO> getCalificacionPorCritico(CriticoDTO critico) throws Exception{
+        
+        if (calificaciones == null) {
+    		logger.severe("Error interno: lista de calificaciones no existe.");
+    		throw new Exception("Error interno: lista de calificaciones no existe.");    		
     	}
-        for (int i = 0; i < abonos.size(); i++) {
-            if(abonos.get(i).getPrecioAbono()==precio){
-                return abonos.get(i);
+        ArrayList<CalificacionDTO> criticos = new ArrayList<CalificacionDTO>();
+        for (int i = 0; i < calificaciones.size(); i++) {
+            if(Objects.equals(calificaciones.get(i).getCritico(), critico)){
+                criticos.add(calificaciones.get(i));
             }
         }
+        if(criticos.size()==0){
         throw new Exception("Error interno: no existe abono con ese precio.");
+        }
+        else {
+            return criticos;
+        }
     }
 /**
-     * Retorna una abono dado su cliente
+     * Retorna una abono dado su funcion
      * 
-     * @param cliente, cliente del abono a buscar
-     * @return abono buscado
-     * @throws Exception cuando no existe el precio buscado
+     * @param funcion, funcion a buscar
+     * @return lista calificaciones de la funcion buscada
+     * @throws Exception cuando no existe la funcion buscada
      */
-    public AbonoDTO getAbonoPorCliente(String cliente) throws Exception{
-        if (abonos == null) {
-    		logger.severe("Error interno: lista de abonos no existe.");
-    		throw new Exception("Error interno: lista de abonos no existe.");    		
+    public ArrayList<CalificacionDTO>  getCalificacionPorFuncion(FuncionDTO funcion) throws Exception{
+        if (calificaciones == null) {
+    		logger.severe("Error interno: lista de calificaciones no existe.");
+    		throw new Exception("Error interno: lista de calificaciones no existe.");    		
     	}
-        for (int i = 0; i < abonos.size(); i++) {
-            if(abonos.get(i).getCliente()==cliente){
-                return abonos.get(i);
+        ArrayList<CalificacionDTO> funciones = new ArrayList<>();
+        for (int i = 0; i < calificaciones.size(); i++) {
+            if(calificaciones.get(i).getFuncion()==funcion){
+                funciones.add(calificaciones.get(i));
             }
         }
-        throw new Exception("Error interno: no existe abono con ese cliente.");
+        if(funciones.size()==0){
+        throw new Exception("Error interno: no existe calificacion con esa funcion.");
     }
-
-    /**
+        return funciones;
+    }
+    
+        /**
      * Actualiza un abono dado su id
      * 
      * @param id del abono a modificar
@@ -179,37 +190,36 @@ public class CalificacionMock {
      * @return la abono actualizada
      * @throws Exception si no existe un abono con ese id
      */
-    public AbonoDTO updateAbono(int id, AbonoDTO newAbono) throws Exception {
-        for (int i = 0; i < abonos.size(); i++) {
-            if(id == abonos.get(i).getIdAbono()){
-                abonos.set(i, newAbono);
-                return abonos.get(i);
+    public CalificacionDTO updateCalificacion(double id, CalificacionDTO newcali) throws Exception {
+        for (int i = 0; i < calificaciones.size(); i++) {
+            if(id == calificaciones.get(i).getId()){
+                calificaciones.set(i, newcali);
+                return calificaciones.get(i);
             }
         }
         logger.severe("No existe un abono con ese id");
         throw new Exception("No existe un abono con ese id");
     }
     
-    
     /**
-     * Elimina un abono del listado
+     * Elimina una calificacion del listado
      * 
-     * @param id del abono a eliminar
-     * @throws Exception si no existe un abono con ese id
+     * @param id de la calificacion a eliminar
+     * @throws Exception si no existe una calificacion con ese id
      */
-    public void deleteAbono(int id) throws Exception{
+    public void deleteCalificacion(double id) throws Exception{
 //        logger.info("Antes del ciclo");
-        for (int i = 0; i < abonos.size(); i++) {
+        for (int i = 0; i < calificaciones.size(); i++) {
 //            logger.info("antes del if");
-            if(abonos.get(i).getIdAbono()==id){
+            if(calificaciones.get(i).getId()==id){
 //                logger.info("dentro del if");
-               abonos.remove(i);
+               calificaciones.remove(i);
 //                logger.info("despues de remover");
                 return;
             }
         }
-        logger.severe("No existe un abono con ese id");
-        throw new Exception("No existe un abono con ese id");
+        logger.severe("No existe una calificacion con ese id");
+        throw new Exception("No existe un calificacion con ese id");
     }
   
 }

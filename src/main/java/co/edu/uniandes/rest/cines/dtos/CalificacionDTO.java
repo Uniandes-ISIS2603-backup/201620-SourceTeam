@@ -18,6 +18,7 @@ private String comentarioCritico;
 private String comentarioFuncion;
 private int calificacionCritico;
 private int calificacionFuncion;
+private double id;
   /**
  * Metodo constructor de la clase Calificacion
  * @param c, criticio al cual se le va a otorgar la calificacion
@@ -27,6 +28,7 @@ public CalificacionDTO(CriticoDTO c,FuncionDTO f){
 super();
 	critico = c;
 	funcion = f;
+        id = Math.random();
 }
 /**
  * Metodo que le asigna un comentario al critico
@@ -74,23 +76,29 @@ private void setFuncion(FuncionDTO f){
  * Metodo que retorna el comentario que se le dio al critico
  * @return comentarioCritico, comentario que se dio respecto al critico
  */
-private String getComentarioCritico(){
+public String getComentarioCritico(){
 	return comentarioCritico;
 }
-private String getComentarioFuncion(){
+public String getComentarioFuncion(){
 	return comentarioFuncion;
 }
-private int getCalificacionCritico(){
+public int getCalificacionCritico(){
 	return calificacionCritico;
 }
-private int getCalificacionFuncion(){
+public int getCalificacionFuncion(){
 	return calificacionFuncion;
 }
-private CriticoDTO getCritico(){
+public CriticoDTO getCritico(){
 	return critico;
 }
-private FuncionDTO getFuncion(){
+public FuncionDTO getFuncion(){
 	return funcion;
+}
+public double getId(){
+return id;
+}
+public void setId(double a){
+id=a;
 }
 }
   

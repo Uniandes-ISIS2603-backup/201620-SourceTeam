@@ -55,8 +55,8 @@ public class FestivalMock {
     /**
      * Agrega un festival a la lista.
      * @param newFestival ciudad a adicionar
-     * @throws BoletaException cuando ya existe una boleta con el id suministrado
-     * @return boleta agregada
+     * @throws FestivalException cuando ya existe un festival con el id suministrado
+     * @return festival agregado
      */
     public FestivalDTO createFestival(FestivalDTO newFestival) throws FestivalException {
         logger.info("recibiendo solicitud de agregar un festival " + newFestival);
@@ -80,8 +80,8 @@ public class FestivalMock {
      * Retorna un festival dado su nombre
      * 
      * @param nombre del festival a buscar
-     * @return boleta buscada
-     * @throws BoletaException cuando no existe el id buscado
+     * @return festival buscado
+     * @throws FestivalException cuando no existe el id buscado
      */
     public FestivalDTO getFestival(String nombre) throws FestivalException{
         if (festivales == null) {

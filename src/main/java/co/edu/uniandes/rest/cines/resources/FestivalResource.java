@@ -33,7 +33,7 @@ public class FestivalResource {
      * @throws FestivalException excepción retornada por la lógica
      */
     @GET
-    public List<FestivalDTO> getBoletas() throws FestivalException {
+    public List<FestivalDTO> getFestivales() throws FestivalException {
         return festivales.getFestivales();
     }
 
@@ -47,7 +47,7 @@ public class FestivalResource {
      * suministrado
      */
     @POST
-    public FestivalDTO createBoleta(FestivalDTO festival) throws FestivalException {
+    public FestivalDTO createFestival(FestivalDTO festival) throws FestivalException {
         return festivales.createFestival(festival);
     }
 
@@ -75,7 +75,7 @@ public class FestivalResource {
      */
     @GET
     @Path("{precio: [0-9][0-9]*}")
-    public FestivalDTO getBoletaPorPrecio(@PathParam("duracion") int duracion) throws FestivalException {
+    public FestivalDTO getFestivalPorDuracion(@PathParam("duracion") int duracion) throws FestivalException {
         return festivales.getFestivalPorDuracion(duracion);
     }
     
@@ -84,14 +84,14 @@ public class FestivalResource {
      * Actualiza la información del festival identificada con nombre
      * 
      * @param nombre del festival
-     * @param festival con el que actualizar la información
+     * @param festival festival con el que actualizar la información
      * @return el festival actualizado
      * @throws FestivalException excepción retornada por la lógica
      */
     @PUT
     @Path("{id: \\d+}")
-    public FestivalDTO updateCity(@PathParam("nombre") String nombre, FestivalDTO boleta) throws FestivalException{
-        return festivales.updateFestival(nombre, boleta);
+    public FestivalDTO updateFestival(@PathParam("nombre") String nombre, FestivalDTO festival) throws FestivalException{
+        return festivales.updateFestival(nombre, festival);
     }
     
     /**
@@ -102,7 +102,7 @@ public class FestivalResource {
      */
     @DELETE
     @Path("{id: \\d+}")
-    public void deleteCity(@PathParam("nombre")String nombre) throws FestivalException{
+    public void deleteFestival(@PathParam("nombre")String nombre) throws FestivalException{
         festivales.deleteFestival(nombre);
     }
 }

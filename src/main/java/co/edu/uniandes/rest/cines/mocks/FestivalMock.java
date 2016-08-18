@@ -28,7 +28,13 @@ public class FestivalMock {
      */
     public FestivalMock() {
 
-
+        if(festivales == null)
+        {
+            festivales = new ArrayList<>();
+            festivales.add( new FestivalDTO(1, "Festival1", "Pat1") );
+            festivales.add( new FestivalDTO(1, "Festival2", "Pat2"));
+            festivales.add( new FestivalDTO(1, "Festival3", "Pat3") );
+        }
         
     	// indica que se muestren todos los mensajes
     	logger.setLevel(Level.INFO);

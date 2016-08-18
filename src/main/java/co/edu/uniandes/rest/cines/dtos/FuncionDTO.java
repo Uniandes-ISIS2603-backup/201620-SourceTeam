@@ -13,10 +13,29 @@ import java.util.Date;
  */
 public class FuncionDTO 
 {
+    /**
+     * Identificador unico de la funcion.
+     */
     private int id;
+    
+    /**
+     * Hora de la funcion.
+     */
     private int hora;
+    
+    /**
+     * Precio de la funcion.
+     */
     private double precio;
+    
+    /**
+     * Fecha de la funcion.
+     */
     private Date dia;
+    
+    /**
+     * Boolean que indica si la funcion pertenece o no a un festival.
+     */
     private boolean esFestival;
     
     /**
@@ -28,12 +47,12 @@ public class FuncionDTO
     }
     
     /**
-     * Constructor funcion.
-     * @param pId Id funcion.
-     * @param pHora Hora funcion.
-     * @param pPrecio Precio funcion.
-     * @param pDia Dia de la funcion.
-     * @param pFestival Si la funcion pertenece o no al festival.
+     * Constructor de la funcion.
+     * @param pId Id de la funcion.
+     * @param pHora Hora de la funcion.
+     * @param pPrecio Precio de la funcion.
+     * @param pDia Fecha de la funcion.
+     * @param pFestival Si la funcion pertenece o no a un festival.
      */
     public FuncionDTO(int pId, int pHora, double pPrecio, Date pDia, boolean pFestival)
     {
@@ -45,8 +64,8 @@ public class FuncionDTO
     }
     
     /**
-     * 
-     * @return 
+     * Retorna el id de la funcion.
+     * @return Id de la funcion.
      */
     public int getId()
     {
@@ -54,8 +73,8 @@ public class FuncionDTO
     }
     
     /**
-     * 
-     * @return 
+     * Retorna la hora de la funcion.
+     * @return Hora de la funcion.
      */
     public int getHora()
     {
@@ -63,8 +82,8 @@ public class FuncionDTO
     }
     
     /**
-     * 
-     * @return 
+     * Retorna el precio de la funcion.
+     * @return Precio de la funcion.
      */
     public double getPrecio()
     {
@@ -72,8 +91,8 @@ public class FuncionDTO
     }
     
     /**
-     * 
-     * @return 
+     * Retorna la fecha de la funcion.
+     * @return Fecha de la funcion.
      */
     public Date getDia()
     {
@@ -81,7 +100,7 @@ public class FuncionDTO
     }
     
     /**
-     * 
+     * Indica si la funcion pertenece a un festival.
      * @return 
      */
     public boolean esFestival()
@@ -90,8 +109,8 @@ public class FuncionDTO
     }
     
     /**
-     * 
-     * @param pId 
+     * Cambia el id de la funcion.
+     * @param pId Nuevo id.
      */
     public void setId(int pId)
     {
@@ -99,8 +118,8 @@ public class FuncionDTO
     }
     
     /**
-     * 
-     * @param pHora 
+     * Cambia la hora de la funcion.
+     * @param pHora Nueva hora.
      */
     public void setHora(int pHora)
     {
@@ -108,8 +127,8 @@ public class FuncionDTO
     }
     
     /**
-     * 
-     * @param pPrecio 
+     * Cambia el precio de la funcion.
+     * @param pPrecio Nuevo precio.
      */
     public void setPrecio(double pPrecio)
     {
@@ -117,8 +136,8 @@ public class FuncionDTO
     }
     
     /**
-     * 
-     * @param pDia 
+     * Cambia la fecha de la funcion.
+     * @param pDia Nueva fecha.
      */
     public void setDia(Date pDia)
     {
@@ -126,7 +145,7 @@ public class FuncionDTO
     }
     
     /**
-     * 
+     * Modifica la funcion para indicar si esta pertenece a un festival o no.
      * @param pFestival 
      */
     public void setEsFestival(boolean pFestival)

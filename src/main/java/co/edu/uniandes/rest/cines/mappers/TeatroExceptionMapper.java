@@ -10,7 +10,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 
 /**
- *
+ * Convertidor de excepciones FuncionException a mensajes REST.
  * @author ba.bohorquez10
  */
 public class TeatroExceptionMapper implements ExceptionMapper<TeatroException>

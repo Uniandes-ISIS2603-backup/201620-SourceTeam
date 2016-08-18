@@ -10,7 +10,6 @@ import co.edu.uniandes.rest.cines.exceptions.FuncionException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -42,7 +41,6 @@ public class FuncionMock
             funciones.add( new FuncionDTO(2, 10, 3400, new Date(), true) );
             funciones.add( new FuncionDTO(3, 14, 8100, new Date(), false) );
         }
-        
         
         // indica que se muestren todos los mensajes
     	logger.setLevel(Level.INFO);
@@ -97,28 +95,6 @@ public class FuncionMock
         throw new FuncionException("No existe una funcion con el id dado.");
     }
     
-    public FuncionDTO getFuncionByHour(int pHora) throws FuncionException
-    {
-        if(funciones == null)
-        {
-            logger.severe("Error, la lista de funciones no existe.");
-            throw new FuncionException("La lista de funciones no existe.");
-        }
-        
-        logger.info("Buscando funcion por hora. ");
-        
-        for(FuncionDTO funcion: funciones)
-        {
-            if(funcion.getHora() == pHora)
-            {
-                return funcion;
-            }
-        }
-        
-        logger.severe("Error, no existe una funcion con la hora dada.");
-        throw new FuncionException("No existe una funcion con la hora dada.");
-    }
-    
     /**
      * Crea una nueva funcion.
      * @param nueva la funcion nueva a agregar a la lista de funciones.
@@ -131,10 +107,10 @@ public class FuncionMock
         
         for(FuncionDTO funcion: funciones)
         {
-            if ( Objects.equals(funcion.getId(), nueva.getId() ) )
+            if ( funcion.getId() == nueva.getId()  )
             {
                 logger.severe("Ya existe una funcion con el id dado.");
-                throw new FuncionException("Ya existe una funcion con ese nombre.");
+                throw new FuncionException("Ya existe una funcion con el id dado.");
             }
         }
         

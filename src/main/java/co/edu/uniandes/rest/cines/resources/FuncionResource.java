@@ -54,7 +54,7 @@ public class FuncionResource
     /**
      * Crea una nueva funcion.
      * @param nueva Nueva funcion.
-     * @return LA funcion creada.
+     * @return La funcion creada.
      * @throws FuncionException 
      */
     @POST
@@ -66,9 +66,9 @@ public class FuncionResource
     /**
      * Modifica una funcion existente.
      * @param pId Id de la funcion a modificar.
-     * @param nueva Funcion con la informacion que se quiere actualizar
+     * @param nueva Funcion con la informacion que se quiere actualizar.
      * @return Funcion actualizada.
-     * @throws FuncionException 
+     * @throws FuncionException Si hay algun problema en el metodo.
      */
     @PUT
     @Path("{id: \\d+}")
@@ -80,7 +80,7 @@ public class FuncionResource
     /**
      * Elimina la funcion con el id dado.
      * @param pId Id de la funcion que se quiere eliminar.
-     * @throws FuncionException 
+     * @throws FuncionException Si hay algun problema en el metodo.
      */
     @DELETE
     @Path("{id: \\d+}")

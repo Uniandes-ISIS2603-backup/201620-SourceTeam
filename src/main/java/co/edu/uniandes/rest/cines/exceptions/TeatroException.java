@@ -6,7 +6,7 @@
 package co.edu.uniandes.rest.cines.exceptions;
 
 /**
- *
+ * Representa la excepcion de la clase teatro.
  * @author ba.bohorquez10
  */
 public class TeatroException extends Exception

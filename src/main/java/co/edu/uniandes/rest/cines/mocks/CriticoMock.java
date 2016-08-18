@@ -29,6 +29,14 @@ public class CriticoMock {
      */
     public CriticoMock() {
 
+        
+        if(criticos == null)
+        {
+            criticos = new ArrayList<>();
+            criticos.add( new CriticoDTO(0, "cri1", 0));
+            criticos.add( new CriticoDTO(1, "cri2", 0) );
+            criticos.add( new CriticoDTO(0, "cri2", 0)) ;
+        }
 
         
     	// indica que se muestren todos los mensajes

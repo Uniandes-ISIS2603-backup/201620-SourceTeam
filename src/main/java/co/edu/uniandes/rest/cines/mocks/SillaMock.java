@@ -125,10 +125,10 @@ public class SillaMock {
      * @return la boleta actualizada
      * @throws BoletaException si no existe una ciudad con ese id
      */
-    public SillaDTO updateBoleta(int id, SillaDTO newBoleta) throws SillaException {
+    public SillaDTO updateSilla(int id, SillaDTO newSilla) throws SillaException {
         for (int i = 0; i < sillas.size(); i++) {
             if(id == sillas.get(i).getId()){
-                sillas.set(i, newBoleta);
+                sillas.set(i, newSilla);
                 return sillas.get(i);
             }
         }
@@ -143,7 +143,7 @@ public class SillaMock {
      * @param id de la boleta a eliminar
      * @throws BoletaException si no existe una boleta con ese id
      */
-    public void deleteBoleta(int id) throws SillaException{
+    public void deleteSilla(int id) throws SillaException{
 //        logger.info("Antes del ciclo");
         for (int i = 0; i < sillas.size(); i++) {
 //            logger.info("antes del if");

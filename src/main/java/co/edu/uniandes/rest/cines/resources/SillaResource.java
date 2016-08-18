@@ -69,14 +69,14 @@ public class SillaResource {
      * Actualiza la información de la boleta identificada con id
      * 
      * @param id de la boleta
-     * @param boleta con la que actualizar la información
+     * @param silla con la que actualizar la información
      * @return la boleta actualizada
      * @throws SillaException excepción retornada por la lógica
      */
     @PUT
     @Path("{id: \\d+}")
-    public SillaDTO updateSilla(@PathParam("id") int id, SillaDTO boleta) throws SillaException{
-        return sillas.updateBoleta(id, boleta);
+    public SillaDTO updateSilla(@PathParam("id") int id, SillaDTO silla) throws SillaException{
+        return sillas.updateSilla(id, silla);
     }
     
     /**
@@ -88,6 +88,6 @@ public class SillaResource {
     @DELETE
     @Path("{id: \\d+}")
     public void deleteSilla(@PathParam("id")int id) throws SillaException{
-        sillas.deleteBoleta(id);
+        sillas.deleteSilla(id);
     }
 }

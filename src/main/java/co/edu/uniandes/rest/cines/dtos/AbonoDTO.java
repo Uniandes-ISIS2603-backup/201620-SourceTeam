@@ -104,6 +104,7 @@ public int getIdAbono(){
 public void setIdAbono(int id){
 idAbono=id;
 }
+@Override
     public String toString() {
         return "{" + "NombreCliente:\"" + this.getCliente() + "Id del abono:"+ this.getIdAbono()+ "\"}";
     }

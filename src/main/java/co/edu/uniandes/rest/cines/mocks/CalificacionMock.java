@@ -32,16 +32,17 @@ public class CalificacionMock {
      */
     public CalificacionMock() {
 
+        
     	if (calificaciones == null) {
-            FuncionDTO fa = new FuncionDTO();
-            fa.setId(1);
-             FuncionDTO fb = new FuncionDTO();
-            fa.setId(2);
-             FuncionDTO fc = new FuncionDTO();
-            fa.setId(3);
-            CriticoDTO a = new CriticoDTO(1, "a", 1);
-            CriticoDTO b = new CriticoDTO(2,"b",2);
-           CriticoDTO c = new CriticoDTO(3,"c",3);
+            String fa = "fa";
+           
+             String fb ="fb";
+         
+             String fc = "fc";
+            
+           String a ="a";
+           String b = "b";
+           String c = "c";
             calificaciones = new ArrayList<CalificacionDTO>();
             calificaciones.add(new CalificacionDTO(a, fa));
             calificaciones.add(new CalificacionDTO(b, fb));
@@ -140,7 +141,7 @@ public class CalificacionMock {
      * @return criticos , lista calificaciones del critico
      * @throws Exception cuando no existe el critico buscado
      */
-    public ArrayList<CalificacionDTO> getCalificacionPorCritico(CriticoDTO critico) throws CalificacionException{
+    public ArrayList<CalificacionDTO> getCalificacionPorCritico(String critico) throws CalificacionException{
         
         if (calificaciones == null) {
     		logger.severe("Error interno: lista de calificaciones no existe.");
@@ -166,7 +167,7 @@ public class CalificacionMock {
      * @return lista calificaciones de la funcion buscada
      * @throws Exception cuando no existe la funcion buscada
      */
-    public ArrayList<CalificacionDTO>  getCalificacionPorFuncion(FuncionDTO funcion) throws CalificacionException{
+    public ArrayList<CalificacionDTO>  getCalificacionPorFuncion(String funcion) throws CalificacionException{
         if (calificaciones == null) {
     		logger.severe("Error interno: lista de calificaciones no existe.");
     		throw new CalificacionException("Error interno: lista de calificaciones no existe.");    		

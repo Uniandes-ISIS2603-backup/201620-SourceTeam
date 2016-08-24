@@ -12,8 +12,8 @@ package co.edu.uniandes.rest.cines.dtos;
 public class CalificacionDTO {
     
 
-private CriticoDTO critico;
-private FuncionDTO funcion;
+private String critico;
+private String funcion;
 private String comentarioCritico;
 private String comentarioFuncion;
 private int calificacionCritico;
@@ -24,7 +24,7 @@ private double id;
  * @param c, criticio al cual se le va a otorgar la calificacion
  * @param f, funcion a la  cual se le va a otorgar la calificacion
  */
-public CalificacionDTO(CriticoDTO c,FuncionDTO f){
+public CalificacionDTO(String c,String f){
 super();
 	critico = c;
 	funcion = f;
@@ -62,14 +62,14 @@ private void setCalificacionFuncion(int a){
  * Metodo que le asigna un critico a la calificacion
  * @param c, Critico al que se le dara la calificacion
  */
-private void setCritico(CriticoDTO c){
+private void setCritico(String c){
 	critico=c;
 }
 /**
  * Metodo que asigna la funcion que se desea calificar
  * @param f, funcion a calificar
  */
-private void setFuncion(FuncionDTO f){
+private void setFuncion(String f){
 	funcion=f;
 }
 /**
@@ -88,10 +88,10 @@ public int getCalificacionCritico(){
 public int getCalificacionFuncion(){
 	return calificacionFuncion;
 }
-public CriticoDTO getCritico(){
+public String getCritico(){
 	return critico;
 }
-public FuncionDTO getFuncion(){
+public String getFuncion(){
 	return funcion;
 }
 public double getId(){

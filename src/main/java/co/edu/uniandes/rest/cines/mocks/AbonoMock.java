@@ -93,7 +93,7 @@ public class AbonoMock {
                     newId =  abono.getIdAbono() + 1;
                 }
             }
-            newAbono.setId(newId);
+            newAbono.setIdAbono(newId);
         }
         
         // agrega la ciudad

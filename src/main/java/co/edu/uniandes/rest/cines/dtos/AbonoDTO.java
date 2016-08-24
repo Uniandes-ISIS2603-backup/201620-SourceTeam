@@ -101,7 +101,7 @@ public String getCliente(){
 public int getIdAbono(){
 	return idAbono;
 }
-public void setId(int id){
+public void setIdAbono(int id){
 idAbono=id;
 }
     public String toString() {

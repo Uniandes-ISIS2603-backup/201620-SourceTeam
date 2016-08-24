@@ -105,7 +105,7 @@ public void setId(int id){
 idAbono=id;
 }
     public String toString() {
-        return "{" + "NombreCliente:\"" + this.nombreCliente + "Id del abono:"+ this.idAbono+ "\"}";
+        return "{" + "NombreCliente:\"" + this.getCliente() + "Id del abono:"+ this.getIdAbono()+ "\"}";
     }
 }
 

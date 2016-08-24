@@ -104,5 +104,8 @@ public int getIdAbono(){
 public void setId(int id){
 idAbono=id;
 }
+    public String toString() {
+        return "{" + "NombreCliente:\"" + nombreCliente + "\", precio:\"" + precio +"Id del abono:"+idAbono+ "\"}";
+    }
 }
 

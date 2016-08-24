@@ -100,6 +100,9 @@ return id;
 public void setId(double a){
 id=a;
 }
+    public String toString() {
+        return "{" + "id:\"" + id + "\", critico:\"" + critico + "/ funcion:"+funcion+"\"}";
+    }
 }
   
 

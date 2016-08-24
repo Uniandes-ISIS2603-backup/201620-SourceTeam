@@ -21,7 +21,7 @@ import javax.ws.rs.Produces;
  *
  * @author s.ardila13
  */
-@Path("festivales")
+@Path("criticos")
 @Produces("application/json")
 public class CriticoResource {
     CriticoMock criticos = new CriticoMock();
@@ -60,8 +60,8 @@ public class CriticoResource {
      * @throws CriticoException excepción retornada por la lógica
      */
     @GET
-    @Path("{id: \\d+}")
-    public CriticoDTO getCritico(@PathParam("credencial") int credencial) throws CriticoException{
+    @Path("{credencial: \\d+}")
+    public CriticoDTO getCritico(@PathParam("credencial") long credencial) throws CriticoException{
        return criticos.getCritico(credencial);
     }
     
@@ -74,9 +74,9 @@ public class CriticoResource {
      * @throws CriticoException excepción retornada por la lógica
      */
     @GET
-    @Path("{id: \\id+}")
-    public CriticoDTO getCriticoPorDuracion(@PathParam("duracion") int duracion) throws CriticoException {
-        return criticos.getCriticoPorDuracion(duracion);
+    @Path("{duracion: \\id+}")
+    public CriticoDTO getCriticoPorDuracion(@PathParam("duracion") long duracion) throws CriticoException {
+        return criticos.getCriticoPorDuracion((int)duracion);
     }
     
     
@@ -89,20 +89,20 @@ public class CriticoResource {
      * @throws CriticoException excepción retornada por la lógica
      */
     @PUT
-    @Path("{id: \\d+}")
-    public CriticoDTO updateCritico(@PathParam("credencial") int credencial, CriticoDTO critico) throws CriticoException{
-        return criticos.updateCritico(credencial, critico);
+    @Path("{credencial: \\d+}")
+    public CriticoDTO updateCritico(@PathParam("credencial") long credencial, CriticoDTO critico) throws CriticoException{
+        return criticos.updateCritico((int)credencial, critico);
     }
     
     /**
      * Elimina un festival dado su nombre
      * 
-     * @param nombre del festival eliminado
-     * @throws FestivalException excepción retornada por la lógica
+     * @param credencial del festival eliminado
+     * @throws CriticoException excepción retornada por la lógica
      */
     @DELETE
     @Path("{id: \\d+}")
-    public void deleteCritico(@PathParam("credencial")int credencial) throws CriticoException{
-        criticos.deleteCritico(credencial);
+    public void deleteCritico(@PathParam("credencial")long credencial) throws CriticoException{
+        criticos.deleteCritico((int)credencial);
     }
 }

@@ -31,9 +31,9 @@ public class FestivalMock {
         if(festivales == null)
         {
             festivales = new ArrayList<>();
-            festivales.add( new FestivalDTO(1, "Festival1", "Pat1") );
-            festivales.add( new FestivalDTO(1, "Festival2", "Pat2"));
-            festivales.add( new FestivalDTO(1, "Festival3", "Pat3") );
+            festivales.add( new FestivalDTO(1, "Aventura", "Pat1") );
+            festivales.add( new FestivalDTO(1, "Accion", "Pat2"));
+            festivales.add( new FestivalDTO(1, "Thriller", "Pat3") );
         }
         
     	// indica que se muestren todos los mensajes
@@ -106,21 +106,21 @@ public class FestivalMock {
     /**
      * Retorna un festival dado su duracion
      * 
-     * @param duracion del festival a buscar
+     * @param nombre del festival a buscar
      * @return festival buscado
      * @throws FestivalException cuando no existe la duracion buscada
      */
-    public FestivalDTO getFestivalPorDuracion(int duracion) throws FestivalException{
+    public FestivalDTO getFestivalPorNombre(String nombre) throws FestivalException{
         if (festivales == null) {
     		logger.severe("Error interno: lista de festivales no existe.");
     		throw new FestivalException("Error interno: lista de festivales no existe.");    		
     	}
         for (int i = 0; i < festivales.size(); i++) {
-            if(festivales.get(i).getDuracion()==duracion){
+            if(festivales.get(i).getNombre().equalsIgnoreCase(nombre)){
                 return festivales.get(i);
             }
         }
-        throw new FestivalException("Error interno: no existe un festival con esa duracion.");
+        throw new FestivalException("Error interno: no existe un festival con ese nombre.");
     }
 
     /**
@@ -147,17 +147,19 @@ public class FestivalMock {
      * Elimina un festival del listado
      * 
      * @param nombre del festival a eliminar
+     * @return Festival eliminado
      * @throws FestivalException si no existe un festival con ese nombre
      */
-    public void deleteFestival(String nombre) throws FestivalException{
+    public FestivalDTO deleteFestival(String nombre) throws FestivalException{
 //        logger.info("Antes del ciclo");
         for (int i = 0; i < festivales.size(); i++) {
 //            logger.info("antes del if");
             if(festivales.get(i).getNombre().equalsIgnoreCase(nombre)){
 //                logger.info("dentro del if");
+                FestivalDTO eliminado = festivales.get(i);
                 festivales.remove(i);
 //                logger.info("despues de remover");
-                return;
+                return eliminado;
             }
         }
         logger.severe("No existe una boleta con ese id");

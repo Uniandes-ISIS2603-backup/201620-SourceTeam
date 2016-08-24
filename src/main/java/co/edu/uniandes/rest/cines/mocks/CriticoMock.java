@@ -33,9 +33,9 @@ public class CriticoMock {
         if(criticos == null)
         {
             criticos = new ArrayList<>();
-            criticos.add( new CriticoDTO(0, "cri1", 0));
-            criticos.add( new CriticoDTO(1, "cri2", 0) );
-            criticos.add( new CriticoDTO(0, "cri2", 0)) ;
+            criticos.add( new CriticoDTO(1, "Juan", 1));
+            criticos.add( new CriticoDTO(1, "Pablo", 2) );
+            criticos.add( new CriticoDTO(1, "Pedro", 3)) ;
         }
 
         
@@ -88,17 +88,17 @@ public class CriticoMock {
     /**
      * Retorna un festival dado su nombre
      * 
-     * @param nombre del critico a buscar
+     * @param credencial del critico a buscar
      * @return critico buscada
      * @throws CriticoException cuando no existe el id buscado
      */
-    public CriticoDTO getCritico(int credencial) throws CriticoException{
+    public CriticoDTO getCritico(long credencial) throws CriticoException{
         if (criticos == null) {
     		logger.severe("Error interno: lista de criticos no existe.");
     		throw new CriticoException("Error interno: criticos de festivales no existe.");    		
     	}
         for (int i = 0; i < criticos.size(); i++) {
-            if(criticos.get(i).getCredencial() == credencial){
+            if(criticos.get(i).getCredencial() == (int)credencial){
                 return criticos.get(i);
             }
         }

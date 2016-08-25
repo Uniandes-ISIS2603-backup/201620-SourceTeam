@@ -64,21 +64,7 @@ public class CriticoResource {
     public CriticoDTO getCritico(@PathParam("credencial") long credencial) throws CriticoException{
        return criticos.getCritico(credencial);
     }
-    
-    
-    /**
-     * Retorna un critico dado su duracion
-     * 
-     * @param duracion del critico a retornar
-     * @return un critico
-     * @throws CriticoException excepción retornada por la lógica
-     */
-    @GET
-    @Path("{duracion: \\id+}")
-    public CriticoDTO getCriticoPorDuracion(@PathParam("duracion") long duracion) throws CriticoException {
-        return criticos.getCriticoPorDuracion((int)duracion);
-    }
-    
+        
     
     /**
      * Actualiza la información del festival identificado con credencial
@@ -101,8 +87,8 @@ public class CriticoResource {
      * @throws CriticoException excepción retornada por la lógica
      */
     @DELETE
-    @Path("{id: \\d+}")
-    public void deleteCritico(@PathParam("credencial")long credencial) throws CriticoException{
-        criticos.deleteCritico((int)credencial);
+    @Path("{credencial: \\d+}")
+    public CriticoDTO deleteCritico(@PathParam("credencial")long credencial) throws CriticoException{
+         return criticos.deleteCritico((int)credencial);
     }
 }

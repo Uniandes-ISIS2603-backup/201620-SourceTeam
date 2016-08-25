@@ -105,27 +105,6 @@ public class CriticoMock {
         throw new CriticoException("Error interno: no existe un festival con ese nombre.");
     }
     
-    
-    /**
-     * Retorna un festival dado su duracion
-     * 
-     * @param duracion del critico a buscar
-     * @return critico buscado
-     * @throws CriticoException cuando no existe la duracion buscada
-     */
-    public CriticoDTO getCriticoPorDuracion(int duracion) throws CriticoException{
-        if (criticos == null) {
-    		logger.severe("Error interno: lista de criticos no existe.");
-    		throw new CriticoException("Error interno: lista de criticos no existe.");    		
-    	}
-        for (int i = 0; i < criticos.size(); i++) {
-            if(criticos.get(i).getDuracion()==duracion){
-                return criticos.get(i);
-            }
-        }
-        throw new CriticoException("Error interno: no existe un critico con esa duracion.");
-    }
-
     /**
      * Actualiza un critico dada su credencial
      * 
@@ -149,23 +128,25 @@ public class CriticoMock {
     /**
      * Elimina un critico del listado
      * 
-     * @param crendencial del critico a eliminar
+     * @param credencial del critico a eliminar
      * @throws CriticoException si no existe un critico con ese nombre
      */
-    public void deleteCritico(int credencial) throws CriticoException{
-//        logger.info("Antes del ciclo");
+    public CriticoDTO deleteCritico(int credencial) throws CriticoException{
+//        logger.info("Antes del ciclo " + credencial);
         boolean found = false;
         for (int i = 0; i < criticos.size() && !found; i++) {
 //            logger.info("antes del if");
             if(criticos.get(i).getCredencial() == credencial){
 //                logger.info("dentro del if");
+                CriticoDTO encontrado = criticos.get(i);
                 criticos.remove(i);
 //                logger.info("despues de remover");
                 found = true;
+                return encontrado;
             }
         }
         logger.severe("No existe un critico con ese id");
-        throw new CriticoException("No existe un critico con ese id");
+        throw new CriticoException("No existe un critico con ese id" + credencial);
     }
     
 }

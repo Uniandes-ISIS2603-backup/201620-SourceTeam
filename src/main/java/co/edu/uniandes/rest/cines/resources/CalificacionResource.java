@@ -47,7 +47,7 @@ public class CalificacionResource {
      * suministrado
      */
     @POST
-    public CalificacionDTO createBoleta(CalificacionDTO calificacion) throws CalificacionException {
+    public CalificacionDTO createCalificacion(CalificacionDTO calificacion) throws CalificacionException {
         return calificaciones.createCalificacion(calificacion);
     }
 
@@ -83,12 +83,13 @@ public class CalificacionResource {
     /**
      * Actualiza la información de la calificacion identificada con id
      * 
-     * @param id del calificacion
+   
      * @param calificacion con la que actualizar la información
      * @return el calificacion actualizado
      * @throws Exception excepción retornada por la lógica
      */
     @PUT
+    
     @Path("{id: \\d+}")
     public CalificacionDTO updateCalificacion(@PathParam("id") double id, CalificacionDTO cali) throws CalificacionException{
         return calificaciones.updateCalificacion(id, cali);

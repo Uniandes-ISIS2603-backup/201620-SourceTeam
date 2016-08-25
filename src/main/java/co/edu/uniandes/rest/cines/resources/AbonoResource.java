@@ -46,7 +46,7 @@ public class AbonoResource {
      * suministrado
      */
     @POST
-    public AbonoDTO createBoleta(AbonoDTO abono) throws AbonoException {
+    public AbonoDTO createAbono(AbonoDTO abono) throws AbonoException {
         return abonos.createAbono(abono);
     }
 

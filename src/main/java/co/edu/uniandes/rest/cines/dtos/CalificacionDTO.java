@@ -102,7 +102,7 @@ id=a;
 }
 @Override
     public String toString() {
-        return "{" + "id:\"" + id + "\", critico:\"" + critico + "/ funcion:"+funcion+"\"}";
+        return "{" + "id:\"" + this.getId() + "\",nombre critico:\"" + this.getCritico() + "/ nombre funcion:"+this.getFuncion()+"\"}";
     }
 }
   

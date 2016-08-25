@@ -6,3 +6,16 @@
 
 var moduloFestival = ng.module("festivalesModule",[ngMessages]);
 
+moduloFestival.config(['$stateProvider','$urlRouterProvider', function($stateProvider,$urlRouterProvider){
+        var basePath = 'src/modules/festivales/';
+        $urlRouterProvider.otherwise("/festivales");
+        $stateProvider
+                .state('festivales',{
+                    url: "/festivales",
+                    templateUrl: basePath + "festivales.html",
+                    controller: function($scope){
+                        $scope.festivales = [];
+                    }
+                })
+}]);
+

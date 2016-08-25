@@ -28,7 +28,8 @@ public class AbonoMock {
      */
     public AbonoMock() {
 
-    	if (abonos == null) {
+ 
+        abonos= new ArrayList<AbonoDTO>();
             String a = "a";
             String b = "b";
             String c = "c";
@@ -36,7 +37,7 @@ public class AbonoMock {
             abonos.add(new AbonoDTO(a, 2000));
             abonos.add(new AbonoDTO(b, 3000));
             abonos.add(new AbonoDTO(c, 5000));
-        }
+        
         
     	// indica que se muestren todos los mensajes
     	logger.setLevel(Level.INFO);
@@ -92,7 +93,7 @@ public class AbonoMock {
                     newId =  abono.getIdAbono() + 1;
                 }
             }
-            newAbono.setId(newId);
+            newAbono.setIdAbono(newId);
         }
         
         // agrega la ciudad

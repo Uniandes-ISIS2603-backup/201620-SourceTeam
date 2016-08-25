@@ -101,11 +101,12 @@ public String getCliente(){
 public int getIdAbono(){
 	return idAbono;
 }
-public void setId(int id){
+public void setIdAbono(int id){
 idAbono=id;
 }
+@Override
     public String toString() {
-        return "{" + "NombreCliente:\"" + nombreCliente + "\", precio:\"" + precio +"Id del abono:"+idAbono+ "\"}";
+        return "{" + "NombreCliente:\"" + this.getCliente() + "Id del abono:"+ this.getIdAbono()+ "\"}";
     }
 }
 

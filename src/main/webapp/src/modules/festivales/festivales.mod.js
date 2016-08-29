@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-var moduloFestival = ng.module("festivalesModule",[ngMessages]);
+var moduloFestival = ng.module("festivalesModule",['ui.router']);
 
 moduloFestival.config(['$stateProvider','$urlRouterProvider', function($stateProvider,$urlRouterProvider){
         var basePath = 'src/modules/festivales/';

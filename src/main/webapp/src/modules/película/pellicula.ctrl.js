@@ -30,7 +30,7 @@
                 // el registro actual debe estar vacio
                 $scope.currentRecord = {
                     nombre: undefined /*Tipo Long. El valor se asigna en el backend*/,
-                    name: '' /*Tipo String*/,
+                    name: '' /*Tipo String*/
                 };
               
                 $scope.alerts = [];
@@ -41,7 +41,7 @@
                 currentRecord = $scope.currentRecord;
                 
                 // si el nombre es null, es un registro nuevo, entonces lo crea
-                if (name == null) {
+                if (name === null) {
 
                     // ejecuta POST en el recurso REST
                     return $http.post(context, currentRecord)

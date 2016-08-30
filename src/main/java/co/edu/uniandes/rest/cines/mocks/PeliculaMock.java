@@ -6,9 +6,7 @@
 package co.edu.uniandes.rest.cines.mocks;
 
 import co.edu.uniandes.rest.cines.dtos.PeliculaDTO;
-import co.edu.uniandes.rest.cines.dtos.SalaDTO;
 import co.edu.uniandes.rest.cines.exceptions.PeliculaException;
-import co.edu.uniandes.rest.cines.exceptions.SalaException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;

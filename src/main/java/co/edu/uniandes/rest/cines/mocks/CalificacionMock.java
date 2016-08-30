@@ -33,21 +33,17 @@ public class CalificacionMock {
     public CalificacionMock() {
 
         
-    	if (calificaciones == null) {
-            String fa = "fa";
-           
-             String fb ="fb";
-         
-             String fc = "fc";
-            
-           String a ="a";
-           String b = "b";
-           String c = "c";
+           String fa ="funcion A";         
+           String fb ="funcion B";         
+           String fc ="funcion C";            
+           String a ="critico A";
+           String b ="critico B";
+           String c ="critico c";
             calificaciones = new ArrayList<CalificacionDTO>();
             calificaciones.add(new CalificacionDTO(a, fa));
             calificaciones.add(new CalificacionDTO(b, fb));
             calificaciones.add(new CalificacionDTO(c, fc));
-        }
+        
         
     	// indica que se muestren todos los mensajes
     	logger.setLevel(Level.INFO);
@@ -93,7 +89,8 @@ public class CalificacionMock {
             }
             
             // la nueva ciudad no tiene id ?
-        } else {
+        }
+        else {
             
             // genera un id para la ciudad
             logger.info("Generando id para el nuevo abono");
@@ -147,13 +144,13 @@ public class CalificacionMock {
     		logger.severe("Error interno: lista de calificaciones no existe.");
     		throw new CalificacionException("Error interno: lista de calificaciones no existe.");    		
     	}
-        ArrayList<CalificacionDTO> criticos = new ArrayList<CalificacionDTO>();
+        ArrayList<CalificacionDTO> criticos = new ArrayList();
         for (int i = 0; i < calificaciones.size(); i++) {
             if(Objects.equals(calificaciones.get(i).getCritico(), critico)){
                 criticos.add(calificaciones.get(i));
             }
         }
-        if(criticos.size()==0){
+        if(criticos.isEmpty()){
         throw new CalificacionException("Error interno: no existe abono con ese precio.");
         }
         else {
@@ -174,11 +171,11 @@ public class CalificacionMock {
     	}
         ArrayList<CalificacionDTO> funciones = new ArrayList<>();
         for (int i = 0; i < calificaciones.size(); i++) {
-            if(calificaciones.get(i).getFuncion()==funcion){
+            if(Objects.equals(calificaciones.get(i).getFuncion(), funcion)){
                 funciones.add(calificaciones.get(i));
             }
         }
-        if(funciones.size()==0){
+        if(funciones.isEmpty()){
         throw new CalificacionException("Error interno: no existe calificacion con esa funcion.");
     }
         return funciones;
@@ -194,7 +191,7 @@ public class CalificacionMock {
      */
     public CalificacionDTO updateCalificacion(double id, CalificacionDTO newcali) throws CalificacionException {
         for (int i = 0; i < calificaciones.size(); i++) {
-            if(id == calificaciones.get(i).getId()){
+            if(Objects.equals(id, calificaciones.get(i).getId()) ){
                 calificaciones.set(i, newcali);
                 return calificaciones.get(i);
             }
@@ -213,7 +210,7 @@ public class CalificacionMock {
 //        logger.info("Antes del ciclo");
         for (int i = 0; i < calificaciones.size(); i++) {
 //            logger.info("antes del if");
-            if(calificaciones.get(i).getId()==id){
+            if(Objects.equals(id, calificaciones.get(i).getId()) ){
 //                logger.info("dentro del if");
                calificaciones.remove(i);
 //                logger.info("despues de remover");

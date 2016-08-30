@@ -5,4 +5,12 @@
  */
 
 var mod = ng.module("funcionesModule", ["ngMessages"]);
-
+mod.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider)
+    {
+        var basePath = 'src/modules/teatros/';
+        $stateProvider
+        .state('teatros', {
+            url:"/teatros",
+            templateUtl: basePath + "teatros.html"
+        });
+    }]);

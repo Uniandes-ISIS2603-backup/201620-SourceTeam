@@ -4,13 +4,55 @@
  * and open the template in the editor.
  */
 
-var mod = ng.module("funcionesModule", ["ngMessages"]);
-mod.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider)
+(function (ng){
+    
+    var mod = ng.module("teatrosModule", ["ngMessages"]);
+    mod.constant("teatrosContext", "api/teatros");
+    
+    mod.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider)
     {
         var basePath = 'src/modules/teatros/';
+        $urlRouterProvider.otherwise("/teatrosList");
+        
         $stateProvider
-        .state('teatros', {
+        .state('teatrosList', {
             url:"/teatros",
-            templateUtl: basePath + "teatros.html"
+            views: {
+                    'mainView': {
+                        controller: 'teatrosCtrl',
+                        controllerAs: 'ctrl',
+                        templateUrl: basePath + 'teatros.list.html'
+                    }
+                }
+        })
+        .state('teatroCreate', {
+            url: '/teatros/create',
+            views: {
+                'mainView': {
+                    controller: 'teatrosCtrl',
+                    controllerAs: 'ctrl',
+                    templateUrl: basePath + 'teatros.create.html'
+                }
+            }
+        })
+        .state('teatroEdit', {
+            url: '/teatros/:nombreTeatro',
+            param: {
+                    nombreTeatro: null
+            },
+            views: {
+                'mainView': {
+                    controller: 'teatrosCtrl',
+                    controllerAs: 'ctrl',
+                    templateUrl: basePath + 'teatros.create.html'
+                }
+            }
         });
     }]);
+
+})(window.angular);
+
+
+
+
+

@@ -1,30 +1,30 @@
 (function (ng) {
-    var mod = ng.module("boletasModule");
+    var mod = ng.module("criticosModule");
 
-    mod.controller("boletasCtrl", ['$scope', '$state', '$stateParams', '$http', 'boletasContext', function ($scope, $state, $stateParams, $http, context) {
+    mod.controller("criticosCtrl", ['$scope', '$state', '$stateParams', '$http', 'criticosContext', function ($scope, $state, $stateParams, $http, context) {
 
-            // inicialmente el listado de ciudades está vacio
+            // inicialmente el listado de criticos está vacio
             $scope.records = {};
-            // carga las ciudades
+            // carga los criticos
             $http.get(context).then(function(response){
                 $scope.records = response.data;    
             }, responseError);
 
-            // el controlador recibió un boletaId ??
-            // revisa los parámetros (ver el :boletaId en la definición de la ruta)
-            if ($stateParams.boletaId !== null && $stateParams.boletaId !== undefined) {
+            // el controlador recibió un CriticoCredencial ??
+            // revisa los parámetros (ver el criticoCredencial en la definición de la ruta)
+            if ($stateParams.criticoCredencial !== null && $stateParams.criticoCredencial !== undefined) {
                 
                 // toma el id del parámetro
-                id = $stateParams.boletaId;
+                credencial = $stateParams.criticoCredencial;
                 // obtiene el dato del recurso REST
-                $http.get(context + "/" + id)
+                $http.get(context + "/" + credencial)
                     .then(function (response) {
                         // $http.get es una promesa
                         // cuando llegue el dato, actualice currentRecord
                         $scope.currentRecord = response.data;
                     }, responseError);
 
-            // el controlador no recibió un boletaId
+            // el controlador no recibió un criticoCredencial
             } else
             {
                 // el registro actual debe estar vacio
@@ -37,29 +37,29 @@
             }
 
 
-            this.saveRecord = function (id) {
+            this.saveRecord = function (nombre) {
                 currentRecord = $scope.currentRecord;
                 
                 // si el id es null, es un registro nuevo, entonces lo crea
-                if (id == null) {
+                if (credencial == null) {
 
                     // ejecuta POST en el recurso REST
                     return $http.post(context, currentRecord)
                         .then(function () {
                             // $http.post es una promesa
                             // cuando termine bien, cambie de estado
-                            $state.go('boletasList');
+                            $state.go('criticosList');
                         }, responseError);
                         
                 // si el id no es null, es un registro existente entonces lo actualiza
                 } else {
                     
                     // ejecuta PUT en el recurso REST
-                    return $http.put(context + "/" + currentRecord.id, currentRecord)
+                    return $http.put(context + "/" + currentRecord.credencial, currentRecord)
                         .then(function () {
                             // $http.put es una promesa
                             // cuando termine bien, cambie de estado
-                            $state.go('boletasList');
+                            $state.go('criticosList');
                         }, responseError);
                 };
             };
@@ -101,3 +101,4 @@
         }]);
 
 })(window.angular);
+

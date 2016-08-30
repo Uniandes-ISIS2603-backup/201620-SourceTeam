@@ -1,21 +1,26 @@
+/* 
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 (function (ng) {
-    var mod = ng.module("boletasModule");
+    var mod = ng.module("calificacionesModule");
 
-    mod.controller("boletasCtrl", ['$scope', '$state', '$stateParams', '$http', 'boletasContext', function ($scope, $state, $stateParams, $http, context) {
+    mod.controller("calificacionesCtrl", ['$scope', '$state', '$stateParams', '$http', 'calificacionesContext', function ($scope, $state, $stateParams, $http, context) {
 
-            // inicialmente el listado de ciudades está vacio
+            // inicialmente el listado de clientes está vacio
             $scope.records = {};
-            // carga las ciudades
+            // carga los clientes
             $http.get(context).then(function(response){
                 $scope.records = response.data;    
             }, responseError);
 
-            // el controlador recibió un boletaId ??
-            // revisa los parámetros (ver el :boletaId en la definición de la ruta)
-            if ($stateParams.boletaId !== null && $stateParams.boletaId !== undefined) {
+            // el controlador recibió un clienteNombre ??
+            // revisa los parámetros (ver el :clienteNombre en la definición de la ruta)
+            if ($stateParams.calificacionId !== null && $stateParams.calificacionId !== undefined) {
                 
                 // toma el id del parámetro
-                id = $stateParams.boletaId;
+                id = $stateParams.calificacionId;
                 // obtiene el dato del recurso REST
                 $http.get(context + "/" + id)
                     .then(function (response) {
@@ -24,13 +29,13 @@
                         $scope.currentRecord = response.data;
                     }, responseError);
 
-            // el controlador no recibió un boletaId
+            // el controlador no recibió un clienteNombre
             } else
             {
                 // el registro actual debe estar vacio
                 $scope.currentRecord = {
-                    id: undefined /*Tipo Long. El valor se asigna en el backend*/,
-                    name: '' /*Tipo String*/,
+                    id: undefined /*Tipo double. El valor se asigna en el backend*/,
+                    
                 };
               
                 $scope.alerts = [];
@@ -48,7 +53,7 @@
                         .then(function () {
                             // $http.post es una promesa
                             // cuando termine bien, cambie de estado
-                            $state.go('boletasList');
+                            $state.go('calificacionesList');
                         }, responseError);
                         
                 // si el id no es null, es un registro existente entonces lo actualiza
@@ -59,7 +64,7 @@
                         .then(function () {
                             // $http.put es una promesa
                             // cuando termine bien, cambie de estado
-                            $state.go('boletasList');
+                            $state.go('calificacionesList');
                         }, responseError);
                 };
             };
@@ -101,3 +106,6 @@
         }]);
 
 })(window.angular);
+
+
+

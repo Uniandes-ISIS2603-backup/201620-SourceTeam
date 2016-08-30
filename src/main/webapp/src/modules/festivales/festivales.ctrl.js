@@ -1,30 +1,30 @@
 (function (ng) {
-    var mod = ng.module("boletasModule");
+    var mod = ng.module("festivalesModule");
 
-    mod.controller("boletasCtrl", ['$scope', '$state', '$stateParams', '$http', 'boletasContext', function ($scope, $state, $stateParams, $http, context) {
+    mod.controller("festivalesCtrl", ['$scope', '$state', '$stateParams', '$http', 'clientesContext', function ($scope, $state, $stateParams, $http, context) {
 
-            // inicialmente el listado de ciudades está vacio
+            // inicialmente el listado de festivales está vacio
             $scope.records = {};
-            // carga las ciudades
+            // carga los festivales
             $http.get(context).then(function(response){
                 $scope.records = response.data;    
             }, responseError);
 
-            // el controlador recibió un boletaId ??
-            // revisa los parámetros (ver el :boletaId en la definición de la ruta)
-            if ($stateParams.boletaId !== null && $stateParams.boletaId !== undefined) {
+            // el controlador recibió un FestivalNombre ??
+            // revisa los parámetros (ver el :festivalNombre en la definición de la ruta)
+            if ($stateParams.festivalNombre !== null && $stateParams.festivalNombre !== undefined) {
                 
                 // toma el id del parámetro
-                id = $stateParams.boletaId;
+                nombre = $stateParams.festivalNombre;
                 // obtiene el dato del recurso REST
-                $http.get(context + "/" + id)
+                $http.get(context + "/" + nombre)
                     .then(function (response) {
                         // $http.get es una promesa
                         // cuando llegue el dato, actualice currentRecord
                         $scope.currentRecord = response.data;
                     }, responseError);
 
-            // el controlador no recibió un boletaId
+            // el controlador no recibió un festivalNombre
             } else
             {
                 // el registro actual debe estar vacio
@@ -37,29 +37,29 @@
             }
 
 
-            this.saveRecord = function (id) {
+            this.saveRecord = function (nombre) {
                 currentRecord = $scope.currentRecord;
                 
                 // si el id es null, es un registro nuevo, entonces lo crea
-                if (id == null) {
+                if (nombre == null) {
 
                     // ejecuta POST en el recurso REST
                     return $http.post(context, currentRecord)
                         .then(function () {
                             // $http.post es una promesa
                             // cuando termine bien, cambie de estado
-                            $state.go('boletasList');
+                            $state.go('festivalesList');
                         }, responseError);
                         
                 // si el id no es null, es un registro existente entonces lo actualiza
                 } else {
                     
                     // ejecuta PUT en el recurso REST
-                    return $http.put(context + "/" + currentRecord.id, currentRecord)
+                    return $http.put(context + "/" + currentRecord.nombre, currentRecord)
                         .then(function () {
                             // $http.put es una promesa
                             // cuando termine bien, cambie de estado
-                            $state.go('boletasList');
+                            $state.go('festivalesList');
                         }, responseError);
                 };
             };
@@ -101,3 +101,4 @@
         }]);
 
 })(window.angular);
+

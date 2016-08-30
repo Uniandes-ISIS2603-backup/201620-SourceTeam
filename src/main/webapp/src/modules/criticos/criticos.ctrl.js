@@ -10,21 +10,21 @@
                 $scope.records = response.data;    
             }, responseError);
 
-            // el controlador recibió un CriticoNombre ??
-            // revisa los parámetros (ver el criticoNombre en la definición de la ruta)
-            if ($stateParams.criticoNombre !== null && $stateParams.criticoNombre !== undefined) {
+            // el controlador recibió un CriticoCredencial ??
+            // revisa los parámetros (ver el criticoCredencial en la definición de la ruta)
+            if ($stateParams.criticoCredencial !== null && $stateParams.criticoCredencial !== undefined) {
                 
                 // toma el id del parámetro
-                nombre = $stateParams.criticoNombre;
+                credencial = $stateParams.criticoCredencial;
                 // obtiene el dato del recurso REST
-                $http.get(context + "/" + id)
+                $http.get(context + "/" + credencial)
                     .then(function (response) {
                         // $http.get es una promesa
                         // cuando llegue el dato, actualice currentRecord
                         $scope.currentRecord = response.data;
                     }, responseError);
 
-            // el controlador no recibió un criticoNombre
+            // el controlador no recibió un criticoCredencial
             } else
             {
                 // el registro actual debe estar vacio
@@ -41,7 +41,7 @@
                 currentRecord = $scope.currentRecord;
                 
                 // si el id es null, es un registro nuevo, entonces lo crea
-                if (nombre == null) {
+                if (credencial == null) {
 
                     // ejecuta POST en el recurso REST
                     return $http.post(context, currentRecord)
@@ -55,7 +55,7 @@
                 } else {
                     
                     // ejecuta PUT en el recurso REST
-                    return $http.put(context + "/" + currentRecord.id, currentRecord)
+                    return $http.put(context + "/" + currentRecord.credencial, currentRecord)
                         .then(function () {
                             // $http.put es una promesa
                             // cuando termine bien, cambie de estado

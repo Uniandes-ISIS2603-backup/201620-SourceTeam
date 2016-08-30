@@ -4,5 +4,17 @@
  * and open the template in the editor.
  */
 
+var moduloCritico = ng.module("criticosModule",['ui.router']);
 
-var moduloCritico = ng.module("criticosModule",[ngMessages]);
+moduloCritico.config(['$stateProvider','$urlRouterProvider', function($stateProvider,$urlRouterProvider){
+        var basePath = 'src/modules/criticos/';
+        $urlRouterProvider.otherwise("/criticos");
+        $stateProvider
+                .state('criticos',{
+                    url: "/criticos",
+                    templateUrl: basePath + "criticos.html",
+                    controller: function($scope){
+                        $scope.festivales = [];
+                    }
+                })
+}]);

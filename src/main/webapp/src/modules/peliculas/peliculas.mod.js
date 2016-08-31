@@ -3,39 +3,39 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-var mod = angular.module('peliculaModule', ['ui.router']);
+var mod = angular.module('peliculasModule', ['ui.router']);
 mod.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider){
         var basePath = 'src/modules/pelicula/';
-         $urlRouterProvider.otherwise("/pelicula");
-        $stateProvider.state('peliculaList', {
+         $urlRouterProvider.otherwise("/peliculas");
+        $stateProvider.state('peliculas', {
                 url: '/pelicula',
                 views: {
                     'mainView': {
-                        controller: 'peliculaCtrl',
+                        controller: 'peliculasCtrl',
                         controllerAs: 'ctrl',
-                        templateUrl: basePath + 'pelicula.list.html'
+                        templateUrl: basePath + 'peliculas.list.html'
                     }
                 }
-            }).state('peliculaCreate', {
-                url: '/pelicula/create',
+            }).state('peliculasCreate', {
+                url: '/peliculas/create',
                 views: {
                     'mainView': {
-                        controller: 'peliculaCtrl',
+                        controller: 'peliculasCtrl',
                         controllerAs: 'ctrl',
-                        templateUrl: basePath + 'pelicula.create.html'
+                        templateUrl: basePath + 'peliculas.create.html'
                     }
                 }
 
-            }).state('peliculaEdit', {
-                url: '/pelicula/:nombrePelicula',
+            }).state('peliculasEdit', {
+                url: '/peliculas/:nombrePelicula',
                 param: {
                     nombrePelicula: null
                 },
                 views: {
                     'mainView': {
-                        controller: 'peliculaCtrl',
+                        controller: 'peliculasCtrl',
                         controllerAs: 'ctrl',
-                        templateUrl: basePath + 'pelicula.create.html'
+                        templateUrl: basePath + 'peliculas.create.html'
                     }
                 }
             });

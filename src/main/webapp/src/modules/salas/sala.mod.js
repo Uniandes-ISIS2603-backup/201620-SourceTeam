@@ -3,39 +3,39 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-var mod = angular.module('salaModule', ['ui.router']);
+var mod = angular.module('salasModule', ['ui.router']);
 mod.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider){
-        var basePath = 'src/modules/sala/';
-         $urlRouterProvider.otherwise("/sala");
-         $stateProvider.state('salaList', {
-                url: '/sala',
+        var basePath = 'src/modules/salas/';
+         $urlRouterProvider.otherwise("/salas");
+         $stateProvider.state('salasList', {
+                url: '/salas',
                 views: {
                     'mainView': {
-                        controller: 'salaCtrl',
+                        controller: 'salasCtrl',
                         controllerAs: 'ctrl',
-                        templateUrl: basePath + 'sala.list.html'
+                        templateUrl: basePath + 'salas.list.html'
                     }
                 }
-            }).state('salaCreate', {
-                url: '/sala/create',
+            }).state('salasCreate', {
+                url: '/salas/create',
                 views: {
                     'mainView': {
-                        controller: 'salaCtrl',
+                        controller: 'salasCtrl',
                         controllerAs: 'ctrl',
-                        templateUrl: basePath + 'sala.create.html'
+                        templateUrl: basePath + 'salas.create.html'
                     }
                 }
 
-            }).state('salaEdit', {
-                url: '/sala/:numSala',
+            }).state('salasEdit', {
+                url: '/salas/:numSala',
                 param: {
                     numSala: null
                 },
                 views: {
                     'mainView': {
-                        controller: 'salaCtrl',
+                        controller: 'salasCtrl',
                         controllerAs: 'ctrl',
-                        templateUrl: basePath + 'sala.create.html'
+                        templateUrl: basePath + 'salas.create.html'
                     }
                 }
             });

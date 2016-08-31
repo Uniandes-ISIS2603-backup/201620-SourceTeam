@@ -48,7 +48,7 @@
                         .then(function () {
                             // $http.post es una promesa
                             // cuando termine bien, cambie de estado
-                            $state.go('peliculaList');
+                            $state.go('peliculasList');
                         }, responseError);
                         
                 // si el id no es null, es un registro existente entonces lo actualiza
@@ -59,7 +59,7 @@
                         .then(function () {
                             // $http.put es una promesa
                             // cuando termine bien, cambie de estado
-                            $state.go('peliculaList');
+                            $state.go('peliculasList');
                         }, responseError);
                 };
             };

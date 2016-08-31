@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+(function(ng){
 var moduloFestival = ng.module("festivalesModule",['ui.router']);
 
 moduloFestival.config(['$stateProvider','$urlRouterProvider', function($stateProvider,$urlRouterProvider){
@@ -18,6 +18,6 @@ moduloFestival.config(['$stateProvider','$urlRouterProvider', function($statePro
                     }
                 })
 }]);
-
+})(window.angular);
 
 

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+(function(ng){
 var moduloCritico = ng.module("criticosModule",['ui.router']);
 
 moduloCritico.config(['$stateProvider','$urlRouterProvider', function($stateProvider,$urlRouterProvider){
@@ -18,3 +18,4 @@ moduloCritico.config(['$stateProvider','$urlRouterProvider', function($stateProv
                     }
                 })
 }]);
+})(window.angular)

@@ -3,19 +3,44 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-(function(ng){
-var moduloCritico = ng.module("criticosModule",['ui.router']);
-
-moduloCritico.config(['$stateProvider','$urlRouterProvider', function($stateProvider,$urlRouterProvider){
-        var basePath = 'src/modules/criticos/';
-        $urlRouterProvider.otherwise("/criticos");
-        $stateProvider
-                .state('criticos',{
-                    url: "/criticos",
-                    templateUrl: basePath + "criticos.html",
-                    controller: function($scope){
-                        $scope.festivales = [];
+(function (ng) {
+    var mod = ng.module("criticosModule", ["ngMessages"]);
+    mod.constant("criticosContext", "api/criticos");
+    mod.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
+            var basePath = 'src/modules/criticos/';
+            $urlRouterProvider.otherwise("/criticosList");
+     
+            $stateProvider.state('criticosList', {
+                url: '/criticos',
+                views: {
+                    'mainView': {
+                        controller: 'criticosCtrl',
+                        controllerAs: 'ctrl',
+                        templateUrl: basePath + 'criticos.list.html'
                     }
-                })
-}]);
-})(window.angular)
+                }
+            }).state('criticosCreate', {
+                url: '/criticos/create',
+                views: {
+                    'mainView': {
+                        controller: 'criticosCtrl',
+                        controllerAs: 'ctrl',
+                        templateUrl: basePath + 'criticos.create.html'
+                    }
+                }
+
+            }).state('criticosEdit', {
+                url: '/criticos/:criticosNombre',
+                param: {
+                    clienteNombre: null
+                },
+                views: {
+                    'mainView': {
+                        controller: 'criticosCtrl',
+                        controllerAs: 'ctrl',
+                        templateUrl: basePath + 'criticos.create.html'
+                    }
+                }
+            });
+        }]);
+})(window.angular);

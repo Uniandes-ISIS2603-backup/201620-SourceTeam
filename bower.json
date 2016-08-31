@@ -1,5 +1,5 @@
 {
-  "name": "SourceTeam_cines",
+  "name": "sourceteam_cines",
   "version": "1.0-SNAPSHOT",
   "main": "src/main/webapp/index.html",
   "dependencies": {

@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.rest.cines.mocks;
 import co.edu.uniandes.rest.cines.dtos.AbonoDTO;
+import co.edu.uniandes.rest.cines.dtos.ClienteDTO;
 import co.edu.uniandes.rest.cines.exceptions.AbonoException;
 //import co.edu.uniandes.rest.cines.exceptions.AbonoException;
 import java.util.ArrayList;
@@ -30,13 +31,14 @@ public class AbonoMock {
 
  
         abonos= new ArrayList<AbonoDTO>();
-            String a = "a";
-            String b = "b";
-            String c = "c";
+            
+            ClienteDTO clienteA = new ClienteDTO("Juan", true);
+             ClienteDTO clienteB = new ClienteDTO("Pedro", true);
+              ClienteDTO clienteC = new ClienteDTO("Juliana", true);
             abonos = new ArrayList<>();
-            abonos.add(new AbonoDTO(a, 2000));
-            abonos.add(new AbonoDTO(b, 3000));
-            abonos.add(new AbonoDTO(c, 5000));
+            abonos.add(new AbonoDTO(clienteA, 2000));
+            abonos.add(new AbonoDTO(clienteB, 3000));
+            abonos.add(new AbonoDTO(clienteC, 5000));
         
         
     	// indica que se muestren todos los mensajes
@@ -150,13 +152,13 @@ public class AbonoMock {
      * @return abono buscado
      * @throws Exception cuando no existe el precio buscado
      */
-    public AbonoDTO getAbonoPorCliente(String cliente) throws AbonoException{
+    public AbonoDTO getAbonoPorCliente(String nombreCliente) throws AbonoException{
         if (abonos == null) {
     		logger.severe("Error interno: lista de abonos no existe.");
     		throw new AbonoException("Error interno: lista de abonos no existe.");    		
     	}
         for (int i = 0; i < abonos.size(); i++) {
-            if(abonos.get(i).getCliente()==cliente){
+            if(abonos.get(i).getNombreCliente()==nombreCliente){
                 return abonos.get(i);
             }
         }

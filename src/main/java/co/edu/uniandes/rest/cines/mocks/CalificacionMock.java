@@ -11,6 +11,7 @@ import co.edu.uniandes.rest.cines.dtos.FuncionDTO;
 import co.edu.uniandes.rest.cines.exceptions.CalificacionException;
 //import co.edu.uniandes.rest.cines.exceptions.AbonoException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.logging.Level;
@@ -30,19 +31,17 @@ public class CalificacionMock {
     /**
      * Constructor. Crea los datos de ejemplo.
      */
-    public CalificacionMock() {
-
-        
-           String fa ="funcion A";         
-           String fb ="funcion B";         
-           String fc ="funcion C";            
-           String a ="critico A";
-           String b ="critico B";
-           String c ="critico c";
+    public CalificacionMock() {           
+           CriticoDTO criticoA = new CriticoDTO(1, "a", 1);
+           CriticoDTO criticoB = new CriticoDTO(2, "b", 2);
+           CriticoDTO criticoC = new CriticoDTO(3, "c", 3);
+           FuncionDTO fa = new FuncionDTO(1, 0, 0,new Date() , true);
+           FuncionDTO fb = new FuncionDTO(2, 10, 10,new Date() , false);
+           FuncionDTO fc = new FuncionDTO(3, 20, 20,new Date() , true);
             calificaciones = new ArrayList<CalificacionDTO>();
-            calificaciones.add(new CalificacionDTO(a, fa));
-            calificaciones.add(new CalificacionDTO(b, fb));
-            calificaciones.add(new CalificacionDTO(c, fc));
+            calificaciones.add(new CalificacionDTO(criticoA, fa));
+            calificaciones.add(new CalificacionDTO(criticoB, fb));
+            calificaciones.add(new CalificacionDTO(criticoC, fc));
         
         
     	// indica que se muestren todos los mensajes
@@ -138,7 +137,7 @@ public class CalificacionMock {
      * @return criticos , lista calificaciones del critico
      * @throws Exception cuando no existe el critico buscado
      */
-    public ArrayList<CalificacionDTO> getCalificacionPorCritico(String critico) throws CalificacionException{
+    public ArrayList<CalificacionDTO> getCalificacionPorCritico(String nombreCritico) throws CalificacionException{
         
         if (calificaciones == null) {
     		logger.severe("Error interno: lista de calificaciones no existe.");
@@ -146,7 +145,7 @@ public class CalificacionMock {
     	}
         ArrayList<CalificacionDTO> criticos = new ArrayList();
         for (int i = 0; i < calificaciones.size(); i++) {
-            if(Objects.equals(calificaciones.get(i).getCritico(), critico)){
+            if(Objects.equals(calificaciones.get(i).getCritico().getNombre(), nombreCritico)){
                 criticos.add(calificaciones.get(i));
             }
         }
@@ -164,7 +163,7 @@ public class CalificacionMock {
      * @return lista calificaciones de la funcion buscada
      * @throws Exception cuando no existe la funcion buscada
      */
-    public ArrayList<CalificacionDTO>  getCalificacionPorFuncion(String funcion) throws CalificacionException{
+    public ArrayList<CalificacionDTO>  getCalificacionPorFuncion(FuncionDTO funcion) throws CalificacionException{
         if (calificaciones == null) {
     		logger.severe("Error interno: lista de calificaciones no existe.");
     		throw new CalificacionException("Error interno: lista de calificaciones no existe.");    		

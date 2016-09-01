@@ -11,9 +11,9 @@ package co.edu.uniandes.rest.cines.dtos;
  */
 public class CalificacionDTO {
     
-
-private String critico;
-private String funcion;
+private CriticoDTO critico;
+private FuncionDTO funcion;
+private String nombreCritico;
 private String comentarioCritico;
 private String comentarioFuncion;
 private int calificacionCritico;
@@ -24,11 +24,11 @@ private double id;
  * @param c, criticio al cual se le va a otorgar la calificacion
  * @param f, funcion a la  cual se le va a otorgar la calificacion
  */
-public CalificacionDTO(String c,String f){
+public CalificacionDTO(CriticoDTO c,FuncionDTO f){
 super();
 	critico = c;
 	funcion = f;
-        id = Math.random();
+        id = funcion.getId()+critico.getCredencial();
 }
 /**
  * Metodo que le asigna un comentario al critico
@@ -62,14 +62,14 @@ private void setCalificacionFuncion(int a){
  * Metodo que le asigna un critico a la calificacion
  * @param c, Critico al que se le dara la calificacion
  */
-private void setCritico(String c){
+private void setCritico(CriticoDTO c){
 	critico=c;
 }
 /**
  * Metodo que asigna la funcion que se desea calificar
  * @param f, funcion a calificar
  */
-private void setFuncion(String f){
+private void setFuncion(FuncionDTO f){
 	funcion=f;
 }
 /**
@@ -88,10 +88,10 @@ public int getCalificacionCritico(){
 public int getCalificacionFuncion(){
 	return calificacionFuncion;
 }
-public String getCritico(){
+public CriticoDTO getCritico(){
 	return critico;
 }
-public String getFuncion(){
+public FuncionDTO getFuncion(){
 	return funcion;
 }
 public double getId(){
@@ -102,7 +102,7 @@ id=a;
 }
 @Override
     public String toString() {
-        return "{" + "id:\"" + this.getId() + "\",nombre critico:\"" + this.getCritico() + "/ nombre funcion:"+this.getFuncion()+"\"}";
+        return "{" + "id:\"" + this.getId() + "\",nombre critico:\"" + this.getCritico().getNombre() + "/ nombre funcion:"+this.getFuncion().toString()+"\"}";
     }
 }
   

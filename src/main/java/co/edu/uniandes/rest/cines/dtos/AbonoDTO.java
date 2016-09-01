@@ -21,7 +21,7 @@ import co.edu.uniandes.rest.cines.exceptions.AbonoException;
 public class AbonoDTO {
    
 
-
+private ClienteDTO cliente;
 	// nombre del cliente que compra el abono
 private String nombreCliente;
 // identificador unico del abono
@@ -39,10 +39,11 @@ public AbonoDTO(){
  * @param nombreC, nombre del cliente que desea comprar el abono
  * @param id, identificador del abono que se desea comprar
  */
-public AbonoDTO(String nombreC,int id){
-	nombreCliente = nombreC;
+public AbonoDTO(ClienteDTO client,int id){
+	cliente = client;
 	idAbono = id;
 	listaBoletas = new ArrayList<BoletaDTO>();
+        nombreCliente = cliente.getNombre();
 }
 /**
  * Metodo que se encarga de agregar la lista de boletas al abono
@@ -91,8 +92,17 @@ public double getPrecioAbono(){
  * Metodo que retorna el nombre del Cliente dueño del abono
  * @return nombreCliente, nombre del cliente dueño del abono
  */
-public String getCliente(){
+public String getNombreCliente(){
 	return nombreCliente;
+}
+public ClienteDTO getCliente(){
+return cliente;
+}
+public void setCliente(ClienteDTO c){
+    cliente= c;
+}
+public void setNombreCliente(String name){
+nombreCliente= name;
 }
 /**
  * metodo que retorna el identificador del abono
@@ -106,7 +116,7 @@ idAbono=id;
 }
 @Override
     public String toString() {
-        return "{" + "NombreCliente:\"" + this.getCliente() + "Id del abono:"+ this.getIdAbono()+ "\"}";
+        return "{" + "NombreCliente:\"" + this.getNombreCliente() + "Id del abono:"+ this.getIdAbono()+ "\"}";
     }
 }
 

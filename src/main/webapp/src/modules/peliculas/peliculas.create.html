@@ -1,0 +1,41 @@
+
+<div class="col-md-6 well">
+    <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="ctrl.closeAlert($index)" dismiss-on-timeout="5000">{{alert.msg}} </alert>
+    <form novalidate name="form" id="pelicula-form" role="form" ng-submit="form.$valid && ctrl.saveRecord(currentRecord.id)">
+        
+        <div ng-messages="form.$error">
+            <div ng-message="required">Llene los campos requeridos</div>
+        </div>
+   
+        <fieldset>
+            <div class="form-group col-md-12" ng-class="{'has-success': form.name.$valid && form.name.$dirty, 'has-error': form.name.$invalid && (form.name.$dirty || form.$submitted)}" >
+                <label for="name" class="col-md-2 control-label">Nombre</label>
+                <div class="col-md-10">
+                    <input id="name" name="name" class="form-control" type="text" ng-model="currentRecord.name" ng-init="currentRecord.name" required />
+                </div>
+                <label for="anuncio" class="col-md-2 control-label">Anuncio</label>
+                <div class="col-md-10">
+                    <input id="anuncio" anuncio="anuncio" class="form-control" type="text" ng-model="currentRecord.anuncio" ng-init="currentRecord.anuncio" required />
+                </div>
+                <label for="creditos" class="col-md-2 control-label">Creditos</label>
+                <div class="col-md-10">
+                    <input id="creditos" creditos="creditos" class="form-control" type="text" ng-model="currentRecord.creditos" ng-init="currentRecord.creditos" required />
+                </div>
+                <label for="critico" class="col-md-2 control-label">Critico</label>
+                <div class="col-md-10">
+                    <input id="critico" critico="critico" class="form-control" type="text" ng-model="currentRecord.critico" ng-init="currentRecord.critico" required />
+                </div>
+                <label for="duracion" class="col-md-2 control-label">Duracion</label>
+                <div class="col-md-10">
+                    <input id="name" name="duracion" class="form-control" type="text" ng-model="currentRecord.duracion" ng-init="currentRecord.duracion" required />
+                </div>
+                <label for="pais" class="col-md-2 control-label">Pais</label>
+                <div class="col-md-10">
+                    <input id="pais" pais="pais" class="form-control" type="text" ng-model="currentRecord.pais" ng-init="currentRecord.pais" required />
+                </div>
+            </div>
+            <button type="button" ui-sref='peliculaList'>Cancel</button>
+            <button type="submit" >Save</button>    
+        </fieldset>
+    </form>
+</div>

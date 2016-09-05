@@ -25,7 +25,7 @@
                     }
                 }
         })
-        .state('teatroCreate', {
+        .state('teatrosCreate', {
             url: '/teatros/create',
             views: {
                 'mainView': {

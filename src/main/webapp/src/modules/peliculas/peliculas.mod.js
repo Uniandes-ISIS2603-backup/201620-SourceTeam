@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-var mod = angular.module('peliculasModule', ['ui.router']);
+var mod = angular.module('peliculasModule', ["ngMessages"]);
 mod.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider){
-        var basePath = 'src/modules/pelicula/';
+        var basePath = 'src/modules/peliculas/';
          $urlRouterProvider.otherwise("/peliculas");
         $stateProvider.state('peliculas', {
-                url: '/pelicula',
+                url: '/peliculas',
                 views: {
                     'mainView': {
                         controller: 'peliculasCtrl',

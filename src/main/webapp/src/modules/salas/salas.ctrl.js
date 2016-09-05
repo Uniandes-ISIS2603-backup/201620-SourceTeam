@@ -1,7 +1,7 @@
 (function (ng) {
-    var mod = ng.module("salaModule");
+    var mod = ng.module("salasModule");
 
-    mod.controller("salaCtrl", ['$scope', '$state', '$stateParams', '$http', 'peliculaContext', function ($scope, $state, $stateParams, $http, context) {
+    mod.controller("salasCtrl", ['$scope', '$state', '$stateParams', '$http', 'peliculaContext', function ($scope, $state, $stateParams, $http, context) {
 
             // inicialmente el listado de salas está vacio
             $scope.records = {};

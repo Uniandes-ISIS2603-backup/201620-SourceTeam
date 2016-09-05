@@ -3,11 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-var mod = angular.module('salasModule', ['ui.router']);
-mod.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider){
-        var basePath = 'src/modules/salas/';
-         $urlRouterProvider.otherwise("/salas");
-         $stateProvider.state('salasList', {
+(function (ng) {
+    var mod = ng.module("salasModule", ["ngMessages"]);
+    mod.constant("salasContext", "api/salas");
+    mod.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
+            var basePath = 'src/modules/salas/';
+            $urlRouterProvider.otherwise("/salasList");
+     
+            $stateProvider.state('salasList', {
                 url: '/salas',
                 views: {
                     'mainView': {
@@ -16,7 +19,7 @@ mod.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
                         templateUrl: basePath + 'salas.list.html'
                     }
                 }
-            }).state('salasCreate', {
+            }).state('salaCreate', {
                 url: '/salas/create',
                 views: {
                     'mainView': {
@@ -26,10 +29,10 @@ mod.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
                     }
                 }
 
-            }).state('salasEdit', {
-                url: '/salas/:numSala',
+            }).state('salaEdit', {
+                url: '/salas/:salaId',
                 param: {
-                    numSala: null
+                    salaId: null
                 },
                 views: {
                     'mainView': {
@@ -39,6 +42,7 @@ mod.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
                     }
                 }
             });
-}]);
+        }]);
+})(window.angular);
 
 

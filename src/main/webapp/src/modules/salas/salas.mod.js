@@ -19,7 +19,7 @@
                         templateUrl: basePath + 'salas.list.html'
                     }
                 }
-            }).state('salaCreate', {
+            }).state('salasCreate', {
                 url: '/salas/create',
                 views: {
                     'mainView': {
@@ -29,7 +29,7 @@
                     }
                 }
 
-            }).state('salaEdit', {
+            }).state('salasEdit', {
                 url: '/salas/:salaId',
                 param: {
                     salaId: null

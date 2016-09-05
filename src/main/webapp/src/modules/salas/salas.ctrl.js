@@ -1,7 +1,7 @@
 (function (ng) {
     var mod = ng.module("salasModule");
 
-    mod.controller("salasCtrl", ['$scope', '$state', '$stateParams', '$http', 'peliculaContext', function ($scope, $state, $stateParams, $http, context) {
+    mod.controller("salasCtrl", ['$scope', '$state', '$stateParams', '$http', 'salasContext', function ($scope, $state, $stateParams, $http, context) {
 
             // inicialmente el listado de salas está vacio
             $scope.records = {};
@@ -48,7 +48,7 @@
                         .then(function () {
                             // $http.post es una promesa
                             // cuando termine bien, cambie de estado
-                            $state.go('SalaList');
+                            $state.go('SalasList');
                         }, responseError);
                         
                 // si el numero no es null, es un registro existente entonces lo actualiza
@@ -59,7 +59,7 @@
                         .then(function () {
                             // $http.put es una promesa
                             // cuando termine bien, cambie de estado
-                            $state.go('salaList');
+                            $state.go('salasList');
                         }, responseError);
                 };
             };

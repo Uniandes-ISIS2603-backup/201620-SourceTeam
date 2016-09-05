@@ -37,7 +37,7 @@
             }
 
 
-            this.saveRecord = function (nombre) {
+            this.saveRecord = function (nombrew) {
                 currentRecord = $scope.currentRecord;
                 
                 // si el id es null, es un registro nuevo, entonces lo crea

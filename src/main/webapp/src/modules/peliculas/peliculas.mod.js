@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 var mod = angular.module('peliculasModule', ["ngMessages"]);
+ mod.constant("peliculasContext", "api/peliculas");
 mod.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider){
         var basePath = 'src/modules/peliculas/';
          $urlRouterProvider.otherwise("/peliculas");
@@ -29,7 +30,7 @@ mod.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
             }).state('peliculasEdit', {
                 url: '/peliculas/:nombrePelicula',
                 param: {
-                    nombrePelicula: null
+                    peliculaNombre: null
                 },
                 views: {
                     'mainView': {

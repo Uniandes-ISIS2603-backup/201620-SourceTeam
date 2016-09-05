@@ -25,7 +25,7 @@
                     }
                 }
         })
-        .state('funcionCreate', {
+        .state('funcionesCreate', {
             url: '/funciones/create',
             views: {
                 'mainView': {

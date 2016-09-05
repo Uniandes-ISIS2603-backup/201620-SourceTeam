@@ -20,7 +20,7 @@
                         templateUrl: basePath + 'abonos.list.html'
                     }
                 }
-            }).state('abonoCreate', {
+            }).state('abonosCreate', {
                 url: '/abonos/create',
                 views: {
                     'mainView': {
@@ -30,7 +30,7 @@
                     }
                 }
 
-            }).state('abonoEdit', {
+            }).state('abonosEdit', {
                 url: '/abonos/:abonoId',
                 param: {
                     abonoId: null

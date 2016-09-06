@@ -22,7 +22,8 @@ public class SalaDTO
      */
     public SalaDTO() 
     {
-        
+        /* autoimplemented method
+        */
     }
 
     /**

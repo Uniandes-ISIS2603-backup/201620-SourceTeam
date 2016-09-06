@@ -19,7 +19,7 @@
                         templateUrl: basePath + 'calificaciones.list.html'
                     }
                 }
-            }).state('calificacionCreate', {
+            }).state('calificacionesCreate', {
                 url: '/calificaciones/create',
                 views: {
                     'mainView': {

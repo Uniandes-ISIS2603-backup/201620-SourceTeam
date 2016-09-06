@@ -7,7 +7,7 @@
         }]);
 
     mainApp.config(['$urlRouterProvider', function ($urlRouterProvider) {
-            $urlRouterProvider.otherwise('/citiesList');
+            $urlRouterProvider.otherwise('/cines');
         }]);
 
   

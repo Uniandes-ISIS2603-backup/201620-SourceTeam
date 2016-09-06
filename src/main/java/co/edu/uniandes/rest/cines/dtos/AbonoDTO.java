@@ -36,12 +36,12 @@ public AbonoDTO(){
 }
 /**
  * Metodo que inicia el abono, con el nombre del cliente y el identificador del abono dados como parametro
- * @param nombreC, nombre del cliente que desea comprar el abono
+ * @param client, nombre del cliente que desea comprar el abono
  * @param id, identificador del abono que se desea comprar
  */
-public AbonoDTO(ClienteDTO client,int id){
+public AbonoDTO(ClienteDTO client,int i){
 	cliente = client;
-	idAbono = id;
+	idAbono = i;
 	listaBoletas = new ArrayList<BoletaDTO>();
         nombreCliente = cliente.getNombre();
 }
@@ -111,8 +111,8 @@ nombreCliente= name;
 public int getIdAbono(){
 	return idAbono;
 }
-public void setIdAbono(int id){
-idAbono=id;
+public void setIdAbono(int i){
+idAbono=i;
 }
 @Override
     public String toString() {

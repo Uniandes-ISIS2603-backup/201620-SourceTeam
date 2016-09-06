@@ -29,7 +29,7 @@ public class AbonoMock {
      */
     public AbonoMock() {
 
- 
+ if (abonos == null){
         abonos= new ArrayList<AbonoDTO>();
             
             ClienteDTO clienteA = new ClienteDTO("Juan", true);
@@ -39,7 +39,7 @@ public class AbonoMock {
             abonos.add(new AbonoDTO(clienteA, 2000));
             abonos.add(new AbonoDTO(clienteB, 3000));
             abonos.add(new AbonoDTO(clienteC, 5000));
-        
+ }
         
     	// indica que se muestren todos los mensajes
     	logger.setLevel(Level.INFO);

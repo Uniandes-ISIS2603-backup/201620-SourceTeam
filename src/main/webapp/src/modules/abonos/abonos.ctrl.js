@@ -34,8 +34,8 @@
             {
                 // el registro actual debe estar vacio
                 $scope.currentRecord = {
-                    id: undefined /*Tipo int. El valor se asigna en el backend*/   
-            
+                    id: '' /*Tipo int. El valor se asigna en el backend*/, 
+                    critico: '' /*Tipo String*/
                 };
               
                 $scope.alerts = [];

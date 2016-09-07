@@ -34,12 +34,12 @@ public AbonoDTO(){
 /**
  * Metodo que inicia el abono, con el nombre del cliente y el identificador del abono dados como parametro
  * @param client, nombre del cliente que desea comprar el abono
- * @param id, identificador del abono que se desea comprar
+ * @param i, identificador del abono que se desea comprar
  */
 public AbonoDTO(String client,int i){
 	nombreCliente = client;
 	id = i;
-	listaBoletas = new ArrayList<BoletaDTO>();
+	listaBoletas = new ArrayList<>();
      
 }
 /**

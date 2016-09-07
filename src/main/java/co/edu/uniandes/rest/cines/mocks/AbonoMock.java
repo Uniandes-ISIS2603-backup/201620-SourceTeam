@@ -102,7 +102,7 @@ public class AbonoMock {
                 // si existe una ciudad con ese id
                 if (Objects.equals(abono.getId(), newAbono.getId())){
                     logger.severe("Ya existe abono con ese id");
-                    throw new AbonoException("Ya existe una boleta con ese id");
+                    throw new AbonoException("Ya existe un abono con ese id");
                 }
             }
             

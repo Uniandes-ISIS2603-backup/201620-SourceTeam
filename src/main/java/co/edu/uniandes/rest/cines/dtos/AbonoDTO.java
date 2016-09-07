@@ -108,7 +108,9 @@ id=i;
 }
 @Override
     public String toString() {
-        return "{" + "NombreCliente:\"" + this.getNombreCliente() + "Id del abono:"+ this.getId()+ "\"}";
+        return "{NombreCliente:"+this.getNombreCliente() 
+                + "Id del abono: \""+ this.getId()
+                + "\"}";
     }
 }
 

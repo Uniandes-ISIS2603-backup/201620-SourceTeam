@@ -36,6 +36,19 @@ public class AbonoResource {
         return abonos.getAbonos();
     }
 
+        /**
+     * Retorna un abono dado su id
+     * 
+     * @param id id del abono a retornar
+     * @return un abono
+     * @throws Exception excepción retornada por la lógica
+     */
+    @GET
+    @Path("{id: \\d+}")
+    public AbonoDTO getAbono(@PathParam("id") int id) throws AbonoException{
+       return abonos.getAbono(id);
+    }
+    
    
     /**
      * Agrega un abono
@@ -51,21 +64,6 @@ public class AbonoResource {
     }
 
 
-   
-    /**
-     * Retorna un abono dado su id
-     * 
-     * @param id id del abono a retornar
-     * @return un abono
-     * @throws Exception excepción retornada por la lógica
-     */
-    @GET
-    @Path("{id: \\d+}")
-    public AbonoDTO getAbono(@PathParam("id") int id) throws AbonoException{
-       return abonos.getAbono(id);
-    }
-    
-    
     /**
      * Retorna un abono dado su precio
      * 
@@ -73,11 +71,11 @@ public class AbonoResource {
      * @return un abono
      * @throws Exception excepción retornada por la lógica
      */
-    @GET
-    @Path("{precio: [0-9][0-9]*}")
-    public AbonoDTO getAbonoPorPrecio(@PathParam("precio") double precio) throws AbonoException {
-        return abonos.getAbonoPorPrecio(precio);
-    }
+   // @GET
+   // @Path("{precio: [0-9][0-9]*}")
+   // public AbonoDTO getAbonoPorPrecio(@PathParam("precio") double precio) throws AbonoException {
+   //     return abonos.getAbonoPorPrecio(precio);
+   // }
     
     
     /**

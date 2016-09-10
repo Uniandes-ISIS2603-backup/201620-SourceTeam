@@ -8,7 +8,7 @@ var mod = angular.module('peliculasModule', ["ngMessages"]);
 mod.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider){
         var basePath = 'src/modules/peliculas/';
          $urlRouterProvider.otherwise("/peliculas");
-        $stateProvider.state('peliculas', {
+        $stateProvider.state('peliculasList', {
                 url: '/peliculas',
                 views: {
                     'mainView': {

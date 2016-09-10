@@ -30,15 +30,27 @@
                 }
 
             }).state('salasEdit', {
-                url: '/salas/:salaId',
+                url: '/salas/:numSala',
                 param: {
-                    salaId: null
+                    numSala: null
                 },
                 views: {
                     'mainView': {
                         controller: 'salasCtrl',
                         controllerAs: 'ctrl',
                         templateUrl: basePath + 'salas.create.html'
+                    }
+                }
+            }).state('salasDelete',{
+                url: '/salas/:numSala',
+                param: {
+                    numSala: null
+                },
+                views: {
+                    'mainView': {
+                        controller: 'salasCtrl',
+                        controllerAs: 'ctrl',
+                        templateUrl: basePath + 'salas.list.html'
                     }
                 }
             });

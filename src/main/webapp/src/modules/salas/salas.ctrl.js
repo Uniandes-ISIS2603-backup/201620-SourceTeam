@@ -1,4 +1,4 @@
-(function (ng) {
+    (function (ng) {
     var mod = ng.module("salasModule");
 
     mod.controller("salasCtrl", ['$scope', '$state', '$stateParams', '$http', 'salasContext', function ($scope, $state, $stateParams, $http, context) {
@@ -37,18 +37,18 @@
             }
 
 
-            this.saveRecord = function (numero) {
+            this.saveRecord = function (numSala) {
                 currentRecord = $scope.currentRecord;
                 
                 // si el nombre es null, es un registro nuevo, entonces lo crea
-                if (numero === null) {
+                if (numSala == null) {
 
                     // ejecuta POST en el recurso REST
                     return $http.post(context, currentRecord)
                         .then(function () {
                             // $http.post es una promesa
                             // cuando termine bien, cambie de estado
-                            $state.go('SalasList');
+                            $state.go('salasList');
                         }, responseError);
                         
                 // si el numero no es null, es un registro existente entonces lo actualiza
@@ -61,6 +61,20 @@
                             // cuando termine bien, cambie de estado
                             $state.go('salasList');
                         }, responseError);
+                };
+            };
+            this.deleteRecord = function(numSala){
+                currentRecord = $scope.currentRecord;
+                if(nummSala == null)
+                {
+                    responseError;
+                }
+                else
+                {
+                    return $http.delete(context + "/" + currentRecord)
+                            .then(function (){
+                                $state.go('salasList');
+                    }, responseError);
                 };
             };
 

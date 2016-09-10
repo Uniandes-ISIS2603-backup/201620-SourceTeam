@@ -5,14 +5,9 @@
  */
 package co.edu.uniandes.rest.cines.resources;
 
-import co.edu.uniandes.rest.cines.dtos.ClienteDTO;
 import co.edu.uniandes.rest.cines.dtos.PeliculaDTO;
-import co.edu.uniandes.rest.cines.dtos.SalaDTO;
-import co.edu.uniandes.rest.cines.exceptions.ClienteException;
 import co.edu.uniandes.rest.cines.exceptions.PeliculaException;
-import co.edu.uniandes.rest.cines.exceptions.SalaException;
 import co.edu.uniandes.rest.cines.mocks.PeliculaMock;
-import co.edu.uniandes.rest.cines.mocks.SalaMock;
 import java.util.List;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;

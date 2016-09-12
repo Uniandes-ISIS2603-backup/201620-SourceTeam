@@ -33,6 +33,8 @@
                         
                         $scope.currentRecord = response.data; 
                     }, responseError); 
+                    
+                    
 
             // El controlador no recibió un clienteNombre. 
                     

@@ -29,17 +29,17 @@
             {
                 // el registro actual debe estar vacio
                 $scope.currentRecord = {
-                    id: undefined /*Tipo Long. El valor se asigna en el backend*/,
-                    name: '' /*Tipo String*/,
+                    credencial: undefined /*Tipo Long. El valor se asigna en el backend*/,
+                    nombre: '' /*Tipo String*/,
+                    duracion: undefined /*Tipo Long*/
                 };
               
                 $scope.alerts = [];
             }
 
 
-            this.saveRecord = function (nombre) {
+            this.saveRecord = function (credencial) {
                 currentRecord = $scope.currentRecord;
-                
                 // si el id es null, es un registro nuevo, entonces lo crea
                 if (credencial == null) {
 
@@ -63,6 +63,11 @@
                         }, responseError);
                 };
             };
+            
+            
+            //this.deleteRecord() = function(credencial){
+            //    currentRecord = $scope.currentRecord;
+            //}
 
 
 

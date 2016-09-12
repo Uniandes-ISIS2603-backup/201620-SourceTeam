@@ -39,12 +39,29 @@
             {
                 // El registro actual tiene que estar vacio.
                 $scope.currentRecord = {
-                    id: undefined /* Tipo String. El valor se asigna en el backend */,
+                    nombre: undefined /* Tipo String. El valor se asigna en el backend */,
+                    ciudad: undefined
                 };
               
                 $scope.alerts = [];
              }
-               
+            
+            this.deleteRecord = function (record) 
+            {
+                currentRecord = $scope.currentRecord;
+                if(record!=null)
+                {   
+                    return $http.delete(context + "/" + record.nombre)
+                        .then(function () { 
+                            $scope.records = {};
+                            $http.get(context).then(function(response){
+                                $scope.records = response.data;    
+                            }, responseError);
+                            $state.go('teatrosList');
+                        }, responseError); 
+                }
+            }
+            
             this.saveRecord = function (id) {
                 currentRecord = $scope.currentRecord;
                     

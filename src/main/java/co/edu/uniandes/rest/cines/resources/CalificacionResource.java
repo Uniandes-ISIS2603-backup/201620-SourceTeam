@@ -61,26 +61,10 @@ public class CalificacionResource {
      */
     @GET
     @Path("{id: \\d+}")
-    public CalificacionDTO getCalificacion(@PathParam("id") double id) throws CalificacionException{
+    public CalificacionDTO getCalificacion(@PathParam("id") int id) throws CalificacionException{
        return calificaciones.getCalificacion(id);
     }
-    
-    
-    /**
-     * Retorna una Calificacion dado su precio
-     * 
-     * @param precio del abono a retornar
-     * @return un abono
-     * @throws Exception excepción retornada por la lógica
-     */
-  //  @GET
-    //@Path("{precio: [0-9][0-9]*}")
-    //public AbonoDTO getAbonoPorPrecio(@PathParam("precio") double precio) throws Exception {
-     //   return abonos.getAbonoPorPrecio(precio);
-   // }
-    
-    
-    /**
+/**
      * Actualiza la información de la calificacion identificada con id
      * 
    
@@ -91,7 +75,7 @@ public class CalificacionResource {
     @PUT
     
     @Path("{id: \\d+}")
-    public CalificacionDTO updateCalificacion(@PathParam("id") double id, CalificacionDTO cali) throws CalificacionException{
+    public CalificacionDTO updateCalificacion(@PathParam("id") int id, CalificacionDTO cali) throws CalificacionException{
         return calificaciones.updateCalificacion(id, cali);
     }
     
@@ -103,7 +87,7 @@ public class CalificacionResource {
      */
     @DELETE
     @Path("{id: \\d+}")
-    public void deleteCalificacion(@PathParam("id")double id) throws CalificacionException{
+    public void deleteCalificacion(@PathParam("id")int id) throws CalificacionException{
         calificaciones.deleteCalificacion(id);
     }
     

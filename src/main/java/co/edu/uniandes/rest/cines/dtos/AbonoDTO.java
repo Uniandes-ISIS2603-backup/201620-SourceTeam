@@ -20,7 +20,7 @@ import co.edu.uniandes.rest.cines.exceptions.AbonoException;
 //Clase que representa un abono de boletas
 public class AbonoDTO {
 	// nombre del cliente que compra el abono
-private String nombreCliente;
+private ClienteDTO dueño;
 // identificador unico del abono
 private int id;
 //Lista de boletas(minimo 10) que hacen parte del abono
@@ -36,65 +36,49 @@ public AbonoDTO(){
  * @param client, nombre del cliente que desea comprar el abono
  * @param i, identificador del abono que se desea comprar
  */
-public AbonoDTO(String client,int i){
-	nombreCliente = client;
+public AbonoDTO(ClienteDTO client,int i){
+    super();
+	dueño = client;
 	id = i;
 	listaBoletas = new ArrayList<>();
      
 }
-/**
- * Metodo que se encarga de agregar la lista de boletas al abono
- * 
- * @param ArrayList boletas, array que contiene las boletas que se desean abonar
- * @throws Exception, en caso de que el numero de boletas que se desea abonar, sea menor a 10
- */
-//public void setBoletasAbono(ArrayList<BoletaDTO> boletas) throws AbonoException{
-//	if(boletas.size()>=10){
-//		for(int i=0;i<boletas.size();i++){
-//			listaBoletas.add(boletas.get(i));
-//		}
-//	}
-//	else{
-//		throw new AbonoException("Minimo deben comprarse 10 boletas para que sea un abono");
-//	}
-//}
-/**
- * Metodo que calcula el precio total del abono 
+/** Metodo que calcula el precio total del abono 
  * 
  * @throws Exception, en caso de que el numero de boletas a abonar sea menor a 10
  */
-//public void calcularPrecio()throws AbonoException{
-//	if(listaBoletas.size()>=10){
-//		double menor = 1000000;
-//		for(int i=0; i<listaBoletas.size();i++){
-//			if(listaBoletas.get(i).getPrecio()<menor){
-//				menor=listaBoletas.get(i).getPrecio();
-//			}
-//		}
-//		int cantidad=listaBoletas.size();
-//		precio = menor*cantidad;
-//	}
-//	else{
-//		throw new AbonoException("Minimo deben comprarse 10 boletas para que sea un abono");
-//	}
-//}
+public void calcularPrecio()throws AbonoException{
+	if(listaBoletas.size()>=10){
+	double menor = 1000000;
+		for(int i=0; i<listaBoletas.size();i++){
+			if(listaBoletas.get(i).getPrecio()<menor){
+				menor=listaBoletas.get(i).getPrecio();
+			}
+		}
+		int cantidad=listaBoletas.size();
+		precio = menor*cantidad;
+	}
+	else{
+		throw new AbonoException("Minimo deben comprarse 10 boletas para que sea un abono");
+	}
+}
 /**
  * Metodo que retorna el precio total del abono
  * @return precio total del abono
  */
-//public double getPrecioAbono(){
-//	return precio;
-//}
+public double getPrecioAbono(){
+	return precio;
+}
 /**
  * Metodo que retorna el nombre del Cliente dueño del abono
  * @return nombreCliente, nombre del cliente dueño del abono
  */
-public String getNombreCliente(){
-	return nombreCliente;
+public ClienteDTO getCliente(){
+	return dueño;
 }
 
-public void setNombreCliente(String name){
-nombreCliente= name;
+public void setCliente(ClienteDTO nuevo){
+    dueño= nuevo;
 }
 /**
  * metodo que retorna el identificador del abono
@@ -108,9 +92,12 @@ id=i;
 }
 @Override
     public String toString() {
-        return "{NombreCliente:"+this.getNombreCliente() 
+        return "{NombreCliente:"+this.getCliente().getNombre()
                 + "Id del abono: \""+ this.getId()
                 + "\"}";
     }
+public ArrayList getBoletas(){
+return listaBoletas;
+}
 }
 

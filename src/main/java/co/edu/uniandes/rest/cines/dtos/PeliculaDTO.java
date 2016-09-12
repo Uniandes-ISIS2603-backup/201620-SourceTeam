@@ -131,6 +131,11 @@ public class PeliculaDTO
         return pais;
     }
     
+    
+    public void setPais(String paiss)
+    {
+        this.pais = paiss;
+    }
     /**
      * @param paisP el pais de la pelicula a establecer
      */

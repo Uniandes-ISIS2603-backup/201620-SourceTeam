@@ -30,13 +30,19 @@ public class CalificacionMock {
     /**
      * Constructor. Crea los datos de ejemplo.
      */
-    public CalificacionMock() {           
-
-            calificaciones = new ArrayList<CalificacionDTO>();
-            calificaciones.add(new CalificacionDTO("Critico 1", "funcion 1"));
-            calificaciones.add(new CalificacionDTO("Critico 2", "funcion 2"));
-            calificaciones.add(new CalificacionDTO("Critico 3", "funcion 3"));
-        
+    public CalificacionMock() {  
+        if(calificaciones==null){
+            calificaciones = new ArrayList();
+           CriticoDTO cA = new CriticoDTO(1,"critico 1 ", 1);
+            CriticoDTO cB = new CriticoDTO(2,"critico 2",2);
+            CriticoDTO cC = new CriticoDTO(3,"critico 3",3);  
+            FuncionDTO fA = new FuncionDTO(1, 1, 1, new Date(), true);
+            FuncionDTO fB = new FuncionDTO(2, 1, 1, new Date(), true);
+            FuncionDTO fC = new FuncionDTO(3, 1, 1, new Date(), false);
+            calificaciones.add(new CalificacionDTO(cA,fA));
+            calificaciones.add(new CalificacionDTO(cB,fB));
+            calificaciones.add(new CalificacionDTO(cC,fC));
+        }
         
     	// indica que se muestren todos los mensajes
     	logger.setLevel(Level.INFO);
@@ -64,17 +70,17 @@ public class CalificacionMock {
         /**
      * Retorna una calificacion dado su id
      * 
-     * @param id de la calificacion a buscar
+     * @param funcion funcion de la calificacion a buscar
      * @return calificacion buscado
      * @throws Exception cuando no existe el id buscado
      */
-    public CalificacionDTO getCalificacion(double id) throws CalificacionException{
+    public CalificacionDTO getCalificacion(FuncionDTO funcion) throws CalificacionException{
         if (calificaciones == null) {
     		logger.severe("Error interno: lista de calificaciones no existe.");
     		throw new CalificacionException("Error interno: lista de calificaciones no existe.");    		
     	}
         for (int i = 0; i < calificaciones.size(); i++) {
-            if(calificaciones.get(i).getId()==id){
+            if(calificaciones.get(i).getFuncion()==funcion){
                 return calificaciones.get(i);
             }
         }
@@ -88,37 +94,23 @@ public class CalificacionMock {
      */
     public CalificacionDTO createCalificacion(CalificacionDTO newCalificacion) throws CalificacionException {
         logger.info("recibiendo solicitud de agregar calificacion " + newCalificacion);
-        
-        // la nueva boleta tiene id ?
-        if ((Double) newCalificacion.getId()!=null ) {
+        boolean encontro = false;
             // busca el abono con el id suministrado
-            for (CalificacionDTO calificacion : calificaciones) {
-                // si existe una ciudad con ese id
-                if ((Objects.equals(calificacion.getId(), newCalificacion.getId()))){
+        for (int i = 0; i < calificaciones.size(); i++) {
+            if(calificaciones.get(i).getId()==newCalificacion.getId()){
+               encontro=true;
+            }
+        }
+        if(encontro){
                     logger.severe("Ya existe calificacion con el mismo id dado");
-                    throw new CalificacionException("Ya existe calificacion con los parametros dados");
-                }
-            }
-            
-            // la nueva ciudad no tiene id ?
-        }
+                    throw new CalificacionException("Ya existe calificacion con los parametros dados");        
+        }                        
+
         else {
-         
-            // genera un id para la ciudad
-            logger.info("Generando id para el nuevo abono");
-            double newId = 1;
-            for (CalificacionDTO calificacion : calificaciones) {
-                if (newId <= calificacion.getId()){
-                    newId =  calificacion.getId() + 1;
-                }
-            }
-            newCalificacion.setId(newId);
+            logger.info("agregando calificacion " + newCalificacion);
+            calificaciones.add(newCalificacion);
+            return newCalificacion;
         }
-        
-        // agrega la ciudad
-        logger.info("agregando calificacion " + newCalificacion);
-        calificaciones.add(newCalificacion);
-        return newCalificacion;
     }
 
     /**
@@ -174,20 +166,20 @@ public class CalificacionMock {
         /**
      * Actualiza una calificacion dado su id
      * 
-     * @param id del abono a modificar
+     * @param funcion de la calificacion a modificar
      * @param newAbono información para actualizar
      * @return la abono actualizada
      * @throws Exception si no existe un abono con ese id
      */
-    public CalificacionDTO updateCalificacion(double id, CalificacionDTO newcali) throws CalificacionException {
+    public CalificacionDTO updateCalificacion(FuncionDTO funcion, CalificacionDTO newcali) throws CalificacionException {
         for (int i = 0; i < calificaciones.size(); i++) {
-            if(Objects.equals(id, calificaciones.get(i).getId()) ){
+            if(Objects.equals(funcion, calificaciones.get(i).getFuncion()) ){
                 calificaciones.set(i, newcali);
                 return calificaciones.get(i);
             }
         }
-        logger.severe("No existe un abono con ese id");
-        throw new CalificacionException("No existe un abono con ese id");
+        logger.severe("No existe una calificacion para esa funcion");
+        throw new CalificacionException("No existe una calificacion para esa funcion");
     }
     
     /**
@@ -196,19 +188,19 @@ public class CalificacionMock {
      * @param id de la calificacion a eliminar
      * @throws Exception si no existe una calificacion con ese id
      */
-    public void deleteCalificacion(double id) throws CalificacionException{
+    public void deleteCalificacion(FuncionDTO funcion) throws CalificacionException{
 //        logger.info("Antes del ciclo");
         for (int i = 0; i < calificaciones.size(); i++) {
 //            logger.info("antes del if");
-            if(Objects.equals(id, calificaciones.get(i).getId()) ){
+            if(Objects.equals(funcion, calificaciones.get(i).getFuncion()) ){
 //                logger.info("dentro del if");
                calificaciones.remove(i);
 //                logger.info("despues de remover");
                 return;
             }
         }
-        logger.severe("No existe una calificacion con ese id");
-        throw new CalificacionException("No existe un calificacion con ese id");
+        logger.severe("No existe una calificacion para esa funcion");
+        throw new CalificacionException("No existe un calificacion para esa funcion");
     }
   
 }

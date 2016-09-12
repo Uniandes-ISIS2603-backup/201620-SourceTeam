@@ -10,24 +10,24 @@ package co.edu.uniandes.rest.cines.dtos;
  * @author pa.alvarado10
  */
 public class CalificacionDTO {
-    
-private String funcion;
-private String critico;
+private CriticoDTO critico;    
+private FuncionDTO funcion;
 private String comentarioCritico;
 private String comentarioFuncion;
 private int calificacionCritico;
 private int calificacionFuncion;
-private double id;
+private int id;
   /**
  * Metodo constructor de la clase Calificacion
  * @param c, criticio al cual se le va a otorgar la calificacion
  * @param f, funcion a la  cual se le va a otorgar la calificacion
  */
-public CalificacionDTO(String c,String f){
+public CalificacionDTO(CriticoDTO c,FuncionDTO f){
+    super();
 
-	critico = c;
-	funcion = f;
-        id = Integer.decode(c+f);
+	this.critico = c;
+	this.funcion = f;
+        this.id = this.critico.getCredencial()+this.funcion.getId();
 
 }
 /**
@@ -62,14 +62,14 @@ private void setCalificacionFuncion(int a){
  * Metodo que le asigna un critico a la calificacion
  * @param c, Critico al que se le dara la calificacion
  */
-private void setCritico(String c){
+private void setCritico(CriticoDTO c){
 	critico=c;
 }
 /**
  * Metodo que asigna la funcion que se desea calificar
  * @param f, funcion a calificar
  */
-private void setFuncion(String f){
+private void setFuncion(FuncionDTO f){
 	funcion=f;
 }
 /**
@@ -88,24 +88,23 @@ public int getCalificacionCritico(){
 public int getCalificacionFuncion(){
 	return calificacionFuncion;
 }
-public String getCritico(){
+public CriticoDTO getCritico(){
 	return critico;
 }
-public String getFuncion(){
+public FuncionDTO getFuncion(){
 	return funcion;
 }
-public double getId(){
+public int getId(){
 return id;
 }
-public void setId(double a){
+public void setId(int a){
 id=a;
 }
 @Override
     public String toString() {
-        return "{id:"+ this.getId()
-                + ",nombre critico:\"" + this.getCritico()
-                + ",nombre funcion:\""+this.getFuncion()
-                +"\"}";
+        return "id:"+ this.getId()
+                + ",nombre critico:\"" + this.getCritico().getNombre()
+                + ",nombre funcion:\""+this.getFuncion().toString();
     }
 }
   

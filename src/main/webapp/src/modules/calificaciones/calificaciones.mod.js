@@ -30,7 +30,7 @@
                 }
 
             }).state('calificacionesEdit', {
-                url: '/calificaciones/:calificacionId',
+                url: '/calificaciones/:calificacionesId',
                 param: {
                     calificacionId: null
                 },

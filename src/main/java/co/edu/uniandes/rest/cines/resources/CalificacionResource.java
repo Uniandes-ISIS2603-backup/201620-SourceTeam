@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.rest.cines.resources;
 import co.edu.uniandes.rest.cines.dtos.CalificacionDTO;
+import co.edu.uniandes.rest.cines.dtos.FuncionDTO;
 import co.edu.uniandes.rest.cines.exceptions.CalificacionException;
 import co.edu.uniandes.rest.cines.mocks.CalificacionMock;
 import java.util.List;
@@ -60,27 +61,11 @@ public class CalificacionResource {
      * @throws Exception excepción retornada por la lógica
      */
     @GET
-    @Path("{id: \\d+}")
-    public CalificacionDTO getCalificacion(@PathParam("id") double id) throws CalificacionException{
-       return calificaciones.getCalificacion(id);
+    @Path("{funcion: [a-zA-Z][a-zA-Z]*}")
+    public CalificacionDTO getCalificacion(@PathParam("funcion") FuncionDTO funcion) throws CalificacionException{
+       return calificaciones.getCalificacion(funcion);
     }
-    
-    
-    /**
-     * Retorna una Calificacion dado su precio
-     * 
-     * @param precio del abono a retornar
-     * @return un abono
-     * @throws Exception excepción retornada por la lógica
-     */
-  //  @GET
-    //@Path("{precio: [0-9][0-9]*}")
-    //public AbonoDTO getAbonoPorPrecio(@PathParam("precio") double precio) throws Exception {
-     //   return abonos.getAbonoPorPrecio(precio);
-   // }
-    
-    
-    /**
+/**
      * Actualiza la información de la calificacion identificada con id
      * 
    
@@ -90,9 +75,9 @@ public class CalificacionResource {
      */
     @PUT
     
-    @Path("{id: \\d+}")
-    public CalificacionDTO updateCalificacion(@PathParam("id") double id, CalificacionDTO cali) throws CalificacionException{
-        return calificaciones.updateCalificacion(id, cali);
+    @Path("{funcion: [a-zA-Z][a-zA-Z]*}")
+    public CalificacionDTO updateCalificacion(@PathParam("funcion") FuncionDTO funcion, CalificacionDTO cali) throws CalificacionException{
+        return calificaciones.updateCalificacion(funcion, cali);
     }
     
     /**
@@ -102,9 +87,9 @@ public class CalificacionResource {
      * @throws Exception excepción retornada por la lógica
      */
     @DELETE
-    @Path("{id: \\d+}")
-    public void deleteCalificacion(@PathParam("id")double id) throws CalificacionException{
-        calificaciones.deleteCalificacion(id);
+    @Path("{name: [a-zA-Z][a-zA-Z]*}")
+    public void deleteCalificacion(@PathParam("funcion")FuncionDTO funcion) throws CalificacionException{
+        calificaciones.deleteCalificacion(funcion);
     }
     
     

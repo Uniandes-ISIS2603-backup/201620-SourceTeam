@@ -63,6 +63,22 @@
                         }, responseError);
                 };
             };
+            
+            this.deleteRecord = function (nombre) {
+                currentRecord = $scope.currentRecord;
+                if(nombre!=null)
+                {            
+                    // ejecuta delete en el recurso REST
+                    return $http.delete(context + "/" + nombre,currentRecord)
+                        .then(function () {
+                            $scope.records = {};
+                            $http.get(context).then(function(response){
+                                $scope.records = response.data;    
+                            }, responseError);
+                            $state.go('peliculasList');
+                        }, responseError); 
+                }
+                }
 
 
 

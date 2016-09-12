@@ -1,7 +1,7 @@
 (function (ng) {
     var mod = ng.module("festivalesModule");
 
-    mod.controller("festivalesCtrl", ['$scope', '$state', '$stateParams', '$http', 'clientesContext', function ($scope, $state, $stateParams, $http, context) {
+    mod.controller("festivalesCtrl", ['$scope', '$state', '$stateParams', '$http', 'festivalesContext', function ($scope, $state, $stateParams, $http, context) {
 
             // inicialmente el listado de festivales está vacio
             $scope.records = {};
@@ -29,8 +29,10 @@
             {
                 // el registro actual debe estar vacio
                 $scope.currentRecord = {
-                    id: undefined /*Tipo Long. El valor se asigna en el backend*/,
-                    name: '' /*Tipo String*/,
+                    nombre: '' /*Tipo String*/,
+                    duracion: undefined /*Tipo String*/,
+                    patrocinador: '' /*Tipo String*/
+                    
                 };
               
                 $scope.alerts = [];

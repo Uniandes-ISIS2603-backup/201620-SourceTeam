@@ -5,18 +5,40 @@
  */
 (function(ng){
 var moduloFestival = ng.module("festivalesModule",['ui.router']);
-
-moduloFestival.config(['$stateProvider','$urlRouterProvider', function($stateProvider,$urlRouterProvider){
+    moduloFestival.constant("festivalesContext", "api/festivales");
+    moduloFestival.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider){
         var basePath = 'src/modules/festivales/';
-        $urlRouterProvider.otherwise("/festivales");
+        $urlRouterProvider.otherwise("/festivalesList");
         $stateProvider
-                .state('festivales',{
+                .state('festivalesList',{
                     url: "/festivales",
-                    templateUrl: basePath + "festivales.html",
-                    controller: function($scope){
-                        $scope.festivales = [];
+                     views: {
+                    'mainView': {
+                        controller: 'festivalesCtrl',
+                        controllerAs: 'ctrl',
+                        templateUrl: basePath + 'festivales.list.html'
                     }
-                })
+                }
+                }).state('festivalesCreate', {
+                url: '/festivales/create',
+                views: {
+                    'mainView': {
+                        controller: 'festivalesCtrl',
+                        controllerAs: 'ctrl',
+                        templateUrl: basePath + 'festivales.create.html'
+                    }
+                }
+
+            }).state('festivalesEdit', {
+                url: '/festivales/:festivalesNombre',
+                views: {
+                    'mainView': {
+                        controller: 'festivalesCtrl',
+                        controllerAs: 'ctrl',
+                        templateUrl: basePath + 'festivales.create.html'
+                    }
+                }
+            });
 }]);
 })(window.angular);
 

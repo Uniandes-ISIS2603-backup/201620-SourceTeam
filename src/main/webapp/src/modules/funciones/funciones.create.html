@@ -10,13 +10,34 @@
         <fieldset>
             <input id="id" class="form-control" type="hidden" ng-model="currentRecord.id"/>
             <div class="form-group col-md-12" ng-class="{'has-success': form.name.$valid && form.name.$dirty, 'has-error': form.name.$invalid && (form.name.$dirty || form.$submitted)}" >
-                <label for="name" class="col-md-2 control-label">Nombre</label> 
+                <label for="name" class="col-md-2 control-label">Id</label> 
                 <div class="col-md-10">  
-                    <input id="anuncio" name="name" class="form-control" type="text" ng-model="currentRecord.name" ng-init="currentRecord.name" required />
+                    <input id="anuncio" name="name" class="form-control" type="text" ng-model="currentRecord.id" ng-init="currentRecord.id" required />
+                </div>
+            </div>
+            <input id="id" class="form-control" type="hidden" ng-model="currentRecord.fecha"/>
+            <div class="form-group col-md-12" ng-class="{'has-success': form.name.$valid && form.name.$dirty, 'has-error': form.name.$invalid && (form.name.$dirty || form.$submitted)}" >
+                <label for="name" class="col-md-2 control-label">Fecha</label> 
+                <div class="col-md-10"> 
+                    <input id="anuncio" name="name" class="form-control" type="date" ng-model="currentRecord.fecha" ng-init="currentRecord.fecha" required />
+                </div>
+            </div>
+            <input id="id" class="form-control" type="hidden" ng-model="currentRecord.precio"/>
+            <div class="form-group col-md-12" ng-class="{'has-success': form.name.$valid && form.name.$dirty, 'has-error': form.name.$invalid && (form.name.$dirty || form.$submitted)}" >
+                <label for="name" class="col-md-2 control-label">Precio</label> 
+                <div class="col-md-10">  
+                    <input id="anuncio" name="name" class="form-control" type="number" ng-model="currentRecord.precio" ng-init="currentRecord.precio" required />
+                </div>
+            </div>
+            <input id="id" class="form-control" type="hidden" ng-model="currentRecord.hora"/>
+            <div class="form-group col-md-12" ng-class="{'has-success': form.name.$valid && form.name.$dirty, 'has-error': form.name.$invalid && (form.name.$dirty || form.$submitted)}" >
+                <label for="name" class="col-md-2 control-label">Precio</label> 
+                <div class="col-md-10">  
+                    <input id="anuncio" name="name" class="form-control" type="time" ng-model="currentRecord.hora" ng-init="currentRecord.hora" required />
                 </div>
             </div>
             <button type="button" ui-sref='funcionesList'>Cancel</button>   
-            <button type="submit" >Save</button>           
+            <button type="submit" >Save</button>
         </fieldset>
     </form>
 </div>

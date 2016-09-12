@@ -92,7 +92,7 @@ id=i;
 }
 @Override
     public String toString() {
-        return "{NombreCliente:"+this.getCliente().getNombre()
+        return "{"+" NombreCliente:"+this.getCliente().getNombre()
                 + "Id del abono: \""+ this.getId()
                 + "\"}";
     }

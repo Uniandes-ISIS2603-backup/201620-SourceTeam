@@ -21,7 +21,7 @@ import co.edu.uniandes.rest.cines.exceptions.AbonoException;
 public class AbonoDTO {
     private String nombreCliente;
 	// nombre del cliente que compra el abono
-private ClienteDTO dueño;
+private ClienteDTO cliente;
 // identificador unico del abono
 private int id;
 //Lista de boletas(minimo 10) que hacen parte del abono
@@ -39,10 +39,10 @@ public AbonoDTO(){
  */
 public AbonoDTO(ClienteDTO client,int i){
     super();
-	this.dueño = client;
+	this.cliente = client;
 	this.id = i;
 	this.listaBoletas = new ArrayList<>();
-        this.nombreCliente = dueño.getNombre();
+        this.nombreCliente = cliente.getNombre();
      
 }
 /** Metodo que calcula el precio total del abono 
@@ -76,11 +76,11 @@ public double getPrecioAbono(){
  * @return nombreCliente, nombre del cliente dueño del abono
  */
 public ClienteDTO getCliente(){
-	return dueño;
+	return cliente;
 }
 
 public void setCliente(ClienteDTO nuevo){
-    dueño= nuevo;
+    cliente= nuevo;
 }
 /**
  * metodo que retorna el identificador del abono

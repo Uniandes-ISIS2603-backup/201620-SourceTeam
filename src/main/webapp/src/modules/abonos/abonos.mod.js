@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 (function (ng) {
     var mod = ng.module("abonosModule", ["ngMessages"]);
     mod.constant("abonosContext", "api/abonos");
@@ -31,7 +30,7 @@
                 }
 
             }).state('abonosEdit', {
-                url: '/abonos/:abonoId',
+                url: '/abonos/:abonosId',
                 param: {
                     abonoId: null
                 },

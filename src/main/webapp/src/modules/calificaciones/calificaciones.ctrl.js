@@ -17,12 +17,12 @@
 
             // el controlador recibió un clienteNombre ??
             // revisa los parámetros (ver el :clienteNombre en la definición de la ruta)
-            if ($stateParams.calificacionId !== null && $stateParams.calificacionId !== undefined) {
+            if ($stateParams.calificacionFuncion !== null && $stateParams.calificacionId !== undefined) {
                 
                 // toma el id del parámetro
-                id = $stateParams.calificacionId;
+                funcion = $stateParams.calificacionFuncion;
                 // obtiene el dato del recurso REST
-                $http.get(context + "/" + id)
+                $http.get(context + "/" + funcion)
                     .then(function (response) {
                         // $http.get es una promesa
                         // cuando llegue el dato, actualice currentRecord
@@ -34,7 +34,8 @@
             {
                 // el registro actual debe estar vacio
                 $scope.currentRecord = {
-                    id: undefined /*Tipo double. El valor se asigna en el backend*/,
+                    funcion: undefined /*Tipo double. El valor se asigna en el backend*/,
+                    critico: '' /*Tipo String*/
                     
                 };
               
@@ -42,11 +43,11 @@
             }
 
 
-            this.saveRecord = function (id) {
+            this.saveRecord = function (funcion) {
                 currentRecord = $scope.currentRecord;
                 
                 // si el id es null, es un registro nuevo, entonces lo crea
-                if (id == null) {
+                if (funcion == null) {
 
                     // ejecuta POST en el recurso REST
                     return $http.post(context, currentRecord)
@@ -60,7 +61,7 @@
                 } else {
                     
                     // ejecuta PUT en el recurso REST
-                    return $http.put(context + "/" + currentRecord.id, currentRecord)
+                    return $http.put(context + "/" + currentRecord.funcion, currentRecord)
                         .then(function () {
                             // $http.put es una promesa
                             // cuando termine bien, cambie de estado
@@ -68,6 +69,22 @@
                         }, responseError);
                 };
             };
+            
+                 this.deleteRecord = function (funcion) {
+                currentRecord = $scope.currentRecord;
+                if(funcion!=null)
+                {            
+                    // ejecuta delete en el recurso REST
+                    return $http.delete(context + "/" + funcion,currentRecord)
+                        .then(function () {
+                            $scope.records = {};
+                            $http.get(context).then(function(response){
+                                $scope.records = response.data;    
+                            }, responseError);
+                            $state.go('calificacionesList');
+                        }, responseError); 
+                }
+                }
 
 
 

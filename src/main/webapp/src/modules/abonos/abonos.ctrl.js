@@ -12,7 +12,7 @@
             // inicialmente el listado de clientes está vacio
             $scope.records = {};
             // carga los clientes
-            $http.get(abonosContext).then(function(response){
+            $http.get(context).then(function(response){
                 $scope.records = response.data;    
             }, responseError);
 
@@ -37,22 +37,16 @@
                 $scope.currentRecord = {
                     id: undefined /*Tipo int. El valor se asigna en el backend*/, 
                     critico: '' /*Tipo String*/
-                    festivales();
+                  
                 };
               
                 $scope.alerts = [];
             }
-            $http.get(festivalesContext).then(function (response) {
-                $scope.festivales = response.data;
-            }};
-
-
-
             this.saveRecord = function (id) {
                 currentRecord = $scope.currentRecord;
                 
                 // si el id es null, es un registro nuevo, entonces lo crea
-                if (id != null) {
+                if (id == null) {
 
                     // ejecuta POST en el recurso REST
                     return $http.post(abonosContext, currentRecord)
@@ -74,6 +68,21 @@
                         }, responseError);
                 };
             };
+            this.deleteRecord = function (nombre) {
+                currentRecord = $scope.currentRecord;
+                if(id!=null)
+                {            
+                    // ejecuta delete en el recurso REST
+                    return $http.delete(context + "/" + id,currentRecord)
+                        .then(function () {
+                            $scope.records = {};
+                            $http.get(context).then(function(response){
+                                $scope.records = response.data;    
+                            }, responseError);
+                            $state.go('abonosList');
+                        }, responseError); 
+                }
+                }
 
 
 

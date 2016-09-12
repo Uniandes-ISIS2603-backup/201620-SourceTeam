@@ -6,12 +6,13 @@
 (function (ng) {
     var mod = ng.module("abonosModule");
 
-    mod.controller("abonosCtrl", ['$scope', '$state', '$stateParams', '$http', 'abonosContext', function ($scope, $state, $stateParams, $http, context) {
+    mod.controller("abonosCtrl", ['$scope', '$state', '$stateParams', '$http', 'abonosContext','festivalesContext',
+        function ($scope, $state, $stateParams, $http, abonosContext, festivalesContext) {
 
             // inicialmente el listado de clientes está vacio
             $scope.records = {};
             // carga los clientes
-            $http.get(context).then(function(response){
+            $http.get(abonosContext).then(function(response){
                 $scope.records = response.data;    
             }, responseError);
 
@@ -22,8 +23,8 @@
                 // toma el id del parámetro
                 id = $stateParams.abonoId;
                 // obtiene el dato del recurso REST
-                $http.get(context + "/" + id)
-                    .then(function (response) {
+                $http.get(abonosContext + "/" + id)
+                        .then(function (response) {
                         // $http.get es una promesa
                         // cuando llegue el dato, actualice currentRecord
                         $scope.currentRecord = response.data;
@@ -34,12 +35,17 @@
             {
                 // el registro actual debe estar vacio
                 $scope.currentRecord = {
-                    id: '' /*Tipo int. El valor se asigna en el backend*/, 
+                    id: undefined /*Tipo int. El valor se asigna en el backend*/, 
                     critico: '' /*Tipo String*/
+                    festivales();
                 };
               
                 $scope.alerts = [];
             }
+            $http.get(festivalesContext).then(function (response) {
+                $scope.festivales = response.data;
+            }};
+
 
 
             this.saveRecord = function (id) {
@@ -49,7 +55,7 @@
                 if (id == null) {
 
                     // ejecuta POST en el recurso REST
-                    return $http.post(context, currentRecord)
+                    return $http.post(abonosContext, currentRecord)
                         .then(function () {
                             // $http.post es una promesa
                             // cuando termine bien, cambie de estado
@@ -60,7 +66,7 @@
                 } else {
                     
                     // ejecuta PUT en el recurso REST
-                    return $http.put(context + "/" + currentRecord.id, currentRecord)
+                    return $http.put(abonosContext+ "/" + currentRecord.id, currentRecord)
                         .then(function () {
                             // $http.put es una promesa
                             // cuando termine bien, cambie de estado

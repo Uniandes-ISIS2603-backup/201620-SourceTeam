@@ -1,16 +1,37 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
-</html>
+
+<div class="col-md-6 well">
+    <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="ctrl.closeAlert($index)" dismiss-on-timeout="5000">{{alert.msg}} </alert>
+    <form novalidate name="form" id="festivales-form" role="form" ng-submit="form.$valid && ctrl.saveRecord(currentRecord.id)">
+        
+        <div ng-messages="form.$error">
+            <div ng-message="required">Llene los campos requeridos</div>
+        </div>
+   
+        <fieldset>
+            <div class="form-group col-md-12" ng-class="{'has-success': form.name.$valid && form.name.$dirty, 'has-error': form.name.$invalid && (form.name.$dirty || form.$submitted)}" >
+                <label for="idnum" class="col-md-2 control-label">Id</label>
+                <div class="col-md-10">
+                    <input id="idnum" idnum="idnum" class="form-control" type="text" ng-model="currentRecord.idnum" ng-init="currentRecord.idnum" required />
+                </div>
+                <label for="fila" class="col-md-2 control-label">Fila</label>
+                <div class="col-md-10">
+                    <input id="fila" fila="fila" class="form-control" type="text" ng-model="currentRecord.fila" ng-init="currentRecord.fila" required />
+                </div>
+                <label for="numero" class="col-md-2 control-label">Numero</label>
+                <div class="col-md-10">
+                    <input id="numero" numero="numero" class="form-control" type="text" ng-model="currentRecord.numero" ng-init="currentRecord.numero" required />
+                </div>
+                <label for="pref" class="col-md-2 control-label">Preferencial</label>
+                <div class="col-md-10">
+                    <input id="pref" pref="pref" class="form-control" type="text" ng-model="currentRecord.pref" ng-init="currentRecord.pref" required />
+                </div>
+                <label for="reser" class="col-md-2 control-label">Reservada</label>
+                <div class="col-md-10">
+                    <input id="reser" reser="reser" class="form-control" type="text" ng-model="currentRecord.reser" ng-init="currentRecord.reser" required />
+                </div>
+            </div>
+            <button type="button" ui-sref='sillasList'>Cancel</button>
+            <button type="submit" >Save</button>    
+        </fieldset>
+    </form>
+</div>

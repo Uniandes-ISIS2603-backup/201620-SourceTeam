@@ -33,9 +33,9 @@ public class AbonoMock {
 
  if (abonos == null){
         abonos= new ArrayList<AbonoDTO>();
-        String clienteA = "Juan";
-        String clienteB = "Mariana";
-        String clienteC = "Pacho";
+        ClienteDTO clienteA = new ClienteDTO("juan", true);
+        ClienteDTO clienteB = new ClienteDTO("Mariana", true);
+        ClienteDTO clienteC = new ClienteDTO("Pacho", true);
             abonos = new ArrayList<>();
             abonos.add(new AbonoDTO(clienteA, 2000));
             abonos.add(new AbonoDTO(clienteB, 3000));
@@ -126,27 +126,6 @@ public class AbonoMock {
         return newAbono;
     }
 
-   
-
-    /**
-     * Retorna una abono dado su precio
-     * 
-     * @param precio precio del abono a buscar
-     * @return abono buscado
-     * @throws Exception cuando no existe el precio buscado
-     */
-    //public AbonoDTO getAbonoPorPrecio(Double precio) throws AbonoException{
-    //    if (abonos == null) {
-    //		logger.severe("Error interno: lista de abonos no existe.");
-    //		throw new AbonoException("Error interno: lista de abonos no existe.");    		
-    //	}
-      //  for (int i = 0; i < abonos.size(); i++) {
-        //    if(abonos.get(i).getPrecioAbono()==precio){
-        //        return abonos.get(i);
-        //    }
-        //}
-       // throw new AbonoException("Error interno: no existe abono con ese precio.");
-    //}
 /**
      * Retorna una abono dado su cliente
      * 
@@ -180,7 +159,7 @@ public class AbonoMock {
        for (AbonoDTO abono : abonos) {
             if (Objects.equals(abono.getId(), id)){
                 abono.setId(newAbono.getId());
-               abono.setNombreCliente(newAbono.getNombreCliente());
+               abono.setCliente(newAbono.getCliente());
     
                 logger.info("Modificando abono " + abono);
                 return abono;

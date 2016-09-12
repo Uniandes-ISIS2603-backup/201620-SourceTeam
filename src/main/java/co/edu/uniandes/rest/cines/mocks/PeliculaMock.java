@@ -32,9 +32,9 @@ public class PeliculaMock
 
     	if (peliculas == null) {
             peliculas = new ArrayList<>();
-            peliculas.add(new PeliculaDTO("superman", "", "","" , 180, ""));
-            peliculas.add(new PeliculaDTO("batman", "", "", "", 180, ""));
-            peliculas.add(new PeliculaDTO("tarzan", "", "", "", 180, ""));
+            peliculas.add(new PeliculaDTO("superman", "tttt", "ttttt","ttttt" , 180, "hhhh"));
+            peliculas.add(new PeliculaDTO("batman", "hththt", "hththth", "dfdf", 180, "erwerw"));
+            peliculas.add(new PeliculaDTO("tarzan", "fdgdf", "hghfgf", "qwefszz", 180, "yuiyi"));
         }
         
     	// indica que se muestren todos los mensajes

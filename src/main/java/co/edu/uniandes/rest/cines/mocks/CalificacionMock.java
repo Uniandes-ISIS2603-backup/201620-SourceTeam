@@ -30,19 +30,19 @@ public class CalificacionMock {
     /**
      * Constructor. Crea los datos de ejemplo.
      */
-    public CalificacionMock() {           
-
+    public CalificacionMock() {  
+        if(calificaciones==null){
+            calificaciones = new ArrayList();
            CriticoDTO cA = new CriticoDTO(1,"critico 1 ", 1);
             CriticoDTO cB = new CriticoDTO(2,"critico 2",2);
             CriticoDTO cC = new CriticoDTO(3,"critico 3",3);  
             FuncionDTO fA = new FuncionDTO(1, 1, 1, new Date(), true);
             FuncionDTO fB = new FuncionDTO(2, 1, 1, new Date(), true);
             FuncionDTO fC = new FuncionDTO(3, 1, 1, new Date(), false);
-        calificaciones = new ArrayList<CalificacionDTO>();
             calificaciones.add(new CalificacionDTO(cA,fA));
             calificaciones.add(new CalificacionDTO(cB,fB));
             calificaciones.add(new CalificacionDTO(cC,fC));
-        
+        }
         
     	// indica que se muestren todos los mensajes
     	logger.setLevel(Level.INFO);
@@ -94,37 +94,23 @@ public class CalificacionMock {
      */
     public CalificacionDTO createCalificacion(CalificacionDTO newCalificacion) throws CalificacionException {
         logger.info("recibiendo solicitud de agregar calificacion " + newCalificacion);
-        
-        // la nueva boleta tiene id ?
-        if ( (Object)newCalificacion.getId()!=null ) {
+        boolean encontro = false;
             // busca el abono con el id suministrado
-            for (CalificacionDTO calificacion : calificaciones) {
-                // si existe una ciudad con ese id
-                if ((Objects.equals(calificacion.getId(), newCalificacion.getId()))){
+        for (int i = 0; i < calificaciones.size(); i++) {
+            if(calificaciones.get(i).getId()==newCalificacion.getId()){
+               encontro=true;
+            }
+        }
+        if(encontro){
                     logger.severe("Ya existe calificacion con el mismo id dado");
-                    throw new CalificacionException("Ya existe calificacion con los parametros dados");
-                }
-            }
-            
-            // la nueva ciudad no tiene id ?
-        }
+                    throw new CalificacionException("Ya existe calificacion con los parametros dados");        
+        }                        
+
         else {
-         
-            // genera un id para la ciudad
-            logger.info("Generando id para el nuevo abono");
-            int newId = 1;
-            for (CalificacionDTO calificacion : calificaciones) {
-                if (newId <= calificacion.getId()){
-                    newId =  calificacion.getId() + 1;
-                }
-            }
-            newCalificacion.setId(newId);
+            logger.info("agregando calificacion " + newCalificacion);
+            calificaciones.add(newCalificacion);
+            return newCalificacion;
         }
-        
-        // agrega la ciudad
-        logger.info("agregando calificacion " + newCalificacion);
-        calificaciones.add(newCalificacion);
-        return newCalificacion;
     }
 
     /**

@@ -19,6 +19,7 @@ import co.edu.uniandes.rest.cines.exceptions.AbonoException;
  */
 //Clase que representa un abono de boletas
 public class AbonoDTO {
+    private String nombreCliente;
 	// nombre del cliente que compra el abono
 private ClienteDTO dueño;
 // identificador unico del abono
@@ -38,9 +39,10 @@ public AbonoDTO(){
  */
 public AbonoDTO(ClienteDTO client,int i){
     super();
-	dueño = client;
-	id = i;
-	listaBoletas = new ArrayList<>();
+	this.dueño = client;
+	this.id = i;
+	this.listaBoletas = new ArrayList<>();
+        this.nombreCliente = dueño.getNombre();
      
 }
 /** Metodo que calcula el precio total del abono 
@@ -92,9 +94,8 @@ id=i;
 }
 @Override
     public String toString() {
-        return "{"+" NombreCliente:"+this.getCliente().getNombre()
-                + "Id del abono: \""+ this.getId()
-                + "\"}";
+        return "NombreCliente: "+nombreCliente
+                + "Id del abono: \""+ id;
     }
 public ArrayList getBoletas(){
 return listaBoletas;

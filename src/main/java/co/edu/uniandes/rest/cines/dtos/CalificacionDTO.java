@@ -25,9 +25,9 @@ private int id;
 public CalificacionDTO(CriticoDTO c,FuncionDTO f){
     super();
 
-	critico = c;
-	funcion = f;
-        id = this.critico.getCredencial()+this.funcion.getId();
+	this.critico = c;
+	this.funcion = f;
+        this.id = this.critico.getCredencial()+this.funcion.getId();
 
 }
 /**
@@ -102,10 +102,9 @@ id=a;
 }
 @Override
     public String toString() {
-        return "{id:"+ this.getId()
+        return "id:"+ this.getId()
                 + ",nombre critico:\"" + this.getCritico().getNombre()
-                + ",nombre funcion:\""+this.getFuncion().toString()
-                +"\"}";
+                + ",nombre funcion:\""+this.getFuncion().toString();
     }
 }
   

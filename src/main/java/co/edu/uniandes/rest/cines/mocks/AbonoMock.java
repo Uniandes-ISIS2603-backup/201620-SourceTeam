@@ -32,11 +32,10 @@ public class AbonoMock {
     public AbonoMock() {
 
  if (abonos == null){
-        abonos= new ArrayList<AbonoDTO>();
+        abonos= new ArrayList();
         ClienteDTO clienteA = new ClienteDTO("juan", true);
         ClienteDTO clienteB = new ClienteDTO("Mariana", true);
         ClienteDTO clienteC = new ClienteDTO("Pacho", true);
-            abonos = new ArrayList<>();
             abonos.add(new AbonoDTO(clienteA, 2000));
             abonos.add(new AbonoDTO(clienteB, 3000));
             abonos.add(new AbonoDTO(clienteC, 5000));
@@ -94,36 +93,25 @@ public class AbonoMock {
      */
     public AbonoDTO createAbono(AbonoDTO newAbono) throws AbonoException {
         logger.info("recibiendo solicitud de agregar abono"+newAbono);
-        
-        // el nuevo abono tiene id?
-        if ((Integer) newAbono.getId()!= null ) {
-            // busca el abono con el id suministrado
-            for (AbonoDTO abono : abonos) {
-                // si existe una ciudad con ese id
-                if (Objects.equals(abono.getId(), newAbono.getId())){
+        boolean encontro = false;
+        for(int i = 0; i < abonos.size()&& !encontro;i++){
+        AbonoDTO abonoActual= abonos.get(i);
+        if(abonoActual.getId()==newAbono.getId()){
+            encontro = true;
+        }
+        }
+        if (encontro){
                     logger.severe("Ya existe abono con ese id");
                     throw new AbonoException("Ya existe un abono con ese id");
-                }
+                
             }
-            
-    
-        } else {
-
-            // genera un id para la ciudad
-            logger.info("Generando id para el nuevo abono"+newAbono);
-            int newId = 1;
-            for (AbonoDTO abono : abonos) {
-                if (newId <= abono.getId()){
-                    newId =  abono.getId() + 1;
-                }
-            }
-            newAbono.setId(newId);
-        }
-        
-        // agrega la ciudad
+        else {
+                    // agrega la ciudad
         logger.info("agregando abono " + newAbono);
         abonos.add(newAbono);
         return newAbono;
+        }
+   
     }
 
 /**
@@ -156,13 +144,10 @@ public class AbonoMock {
      */
     public AbonoDTO updateAbono(int id, AbonoDTO newAbono) throws AbonoException {
         logger.info("recibiendo solictud de modificar author " + newAbono);
-       for (AbonoDTO abono : abonos) {
-            if (Objects.equals(abono.getId(), id)){
-                abono.setId(newAbono.getId());
-               abono.setCliente(newAbono.getCliente());
-    
-                logger.info("Modificando abono " + abono);
-                return abono;
+                for (int i = 0; i < abonos.size(); i++) {
+            if(abonos.get(i).getId()==newAbono.getId()){
+                abonos.set(i, newAbono);
+                return abonos.get(i);
             }
         }
         logger.severe("No existe un abono con ese id");

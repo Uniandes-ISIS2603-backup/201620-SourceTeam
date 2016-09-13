@@ -23,10 +23,10 @@
             if ($stateParams.funcionId !== null && $stateParams.funcionId !== undefined) {
                         
                 // Se toma el id del parámetro. 
-                id = $stateParams.funcionId;
+                idd = $stateParams.funcionId;
                 
                 // Se obtiene el dato del recurso REST.
-                $http.get(context + "/" + id)  
+                $http.get(context + "/" + idd)  
                     .then(function (response) {
                         // $http.get es una promesa.  
                         // Cuando llegue el dato, actualice currentRecord.        
@@ -67,6 +67,19 @@
                 }
             };  
             
+            this.updateRecord = function (id) {
+                  currentRecord = $scope.currentRecord;
+                      
+                     // Se ejecuta PUT en el recurso REST.  
+                     return $http.put(context + "/" + currentRecord.id, currentRecord)
+                         .then(function () {
+                             // $http.put es una promesa.
+                             // Cuando termine bien, cambie de estado.   
+                             $state.go('funcionesList');
+                         }, responseError);
+                 
+             }; 
+             
             this.saveRecord = function (id) {
                 currentRecord = $scope.currentRecord; 
                 // En caso de que el id sea nulo significa que el registro no existe entonces se crea.        

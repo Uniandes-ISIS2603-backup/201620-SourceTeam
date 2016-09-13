@@ -44,7 +44,7 @@
                 'mainView': {
                     controller: 'funcionesCtrl',
                     controllerAs: 'ctrl',
-                    templateUrl: basePath + 'funciones.create.html'
+                    templateUrl: basePath + 'funciones.update.html'
                 }
             }
         });

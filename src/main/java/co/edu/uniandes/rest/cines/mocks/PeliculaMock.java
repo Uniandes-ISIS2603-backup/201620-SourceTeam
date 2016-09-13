@@ -32,9 +32,9 @@ public class PeliculaMock
 
     	if (peliculas == null) {
             peliculas = new ArrayList<>();
-            peliculas.add(new PeliculaDTO("superman", "", "","" , 180, ""));
-            peliculas.add(new PeliculaDTO("batman", "", "", "", 180, ""));
-            peliculas.add(new PeliculaDTO("tarzan", "", "", "", 180, ""));
+            peliculas.add(new PeliculaDTO("superman", "heroe", "nn","antonio" , 180, "estados unidos"));
+            peliculas.add(new PeliculaDTO("batman", "heroe", "nn", "antonio", 180, "estados unidos"));
+            peliculas.add(new PeliculaDTO("tarzan", "heroe", "nn", "antonio", 180, "estados unidos"));
         }
         
     	// indica que se muestren todos los mensajes
@@ -56,7 +56,7 @@ public class PeliculaMock
     		throw new PeliculaException("Error interno: lista de peliculas no existe.");    		
     	}
     	
-    	logger.info("retornando todas las salas");
+    	logger.info("retornando todas las peliculas");
     	return peliculas;
     }
 

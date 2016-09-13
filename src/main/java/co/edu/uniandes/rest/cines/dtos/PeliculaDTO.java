@@ -131,12 +131,10 @@ public class PeliculaDTO
         return pais;
     }
     
-    /**
-     * @param paisP el pais de la pelicula a establecer
-     */
-    public void setEsFestival(String paisP) {
-        this.pais = paisP;
+    public void setPais(String paiss) {
+        this.pais = paiss;
     }
+    
     
     /**
      * Convierte el objeto a una cadena

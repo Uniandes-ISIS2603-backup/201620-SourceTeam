@@ -3,7 +3,7 @@
     mod.constant("sillasContext", "api/sillas");
     mod.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
             var basePath = 'src/modules/sillas/';
-            $urlRouterProvider.otherwise("/sillasList");
+            $urlRouterProvider.otherwise("/sillas");
      
             $stateProvider.state('sillasList', {
                 url: '/sillas',

@@ -6,21 +6,18 @@ and open the template in the editor.
 -->
 <div class="col-md-6 well">
     <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="ctrl.closeAlert($index)" dismiss-on-timeout="5000">{{alert.msg}} </alert>
-    <form novalidate name="form" id="abonos-form" role="form" ng-submit="form.$valid && ctrl.saveRecord(currentRecord.id)">
+    <form novalidate name="form" id="festivales-form" role="form" ng-submit="form.$valid && ctrl.saveRecord(currentRecord.id)">
         
         <div ng-messages="form.$error">
             <div ng-message="required">Llene los campos requeridos</div>
         </div>
    
         <fieldset>
-            <input id="id" class="form-control" type="hidden" ng-model="currentRecord.id"/>
-            <!-- Critico -->
             <div class="form-group col-md-12" ng-class="{'has-success': form.name.$valid && form.name.$dirty, 'has-error': form.name.$invalid && (form.name.$dirty || form.$submitted)}" >
                 <label for="cliente" class="col-md-2 control-label">Cliente</label>
                 <div class="col-md-10">
                     <input id="cliente" cliente="cliente" class="form-control" type="text" ng-model="currentRecord.cliente" ng-init="currentRecord.cliente" required />
                 </div>
-                <!-- Critico -->
                           <label for="id" class="col-md-2 control-label">Id del abono</label>
                 <div class="col-md-10">
                     <input id="id" idAbono="id" class="form-control" type="text" ng-model="currentRecord.id" ng-init="currentRecord.id" required />

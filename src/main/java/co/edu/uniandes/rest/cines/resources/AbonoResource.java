@@ -62,6 +62,22 @@ public class AbonoResource {
     public AbonoDTO createAbono(AbonoDTO abono) throws AbonoException {
         return abonos.createAbono(abono);
     }
+
+
+    /**
+     * Retorna un abono dado su precio
+     * 
+     * @param precio del abono a retornar
+     * @return un abono
+     * @throws Exception excepción retornada por la lógica
+     */
+   // @GET
+   // @Path("{precio: [0-9][0-9]*}")
+   // public AbonoDTO getAbonoPorPrecio(@PathParam("precio") double precio) throws AbonoException {
+   //     return abonos.getAbonoPorPrecio(precio);
+   // }
+    
+    
     /**
      * Actualiza la información del abono identificado con id
      * 

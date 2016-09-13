@@ -44,7 +44,7 @@
                 'mainView': {
                     controller: 'teatrosCtrl',
                     controllerAs: 'ctrl',
-                    templateUrl: basePath + 'teatros.create.html'
+                    templateUrl: basePath + 'teatros.update.html'
                 }
             }
         });

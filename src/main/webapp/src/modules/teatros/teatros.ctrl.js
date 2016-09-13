@@ -63,6 +63,20 @@
                  }
              };
              
+             this.updateRecord = function (id) {
+                  currentRecord = $scope.currentRecord;
+                      
+                     // Se ejecuta PUT en el recurso REST.  
+                     return $http.put(context + "/" + currentRecord.nombre, currentRecord)
+                         .then(function () {
+                             // $http.put es una promesa.
+                             // Cuando termine bien, cambie de estado.   
+                             $state.go('teatrosList');
+                         }, responseError);
+                 
+             };  
+             
+             
               this.saveRecord = function (id) {
                   currentRecord = $scope.currentRecord;
                       
@@ -81,7 +95,7 @@
                  } else {
                      
                      // Se ejecuta PUT en el recurso REST.  
-                     return $http.put(context + "/" + currentRecord.id, currentRecord)
+                     return $http.put(context + "/" + currentRecord.nombre, currentRecord)
                          .then(function () {
                              // $http.put es una promesa.
                              // Cuando termine bien, cambie de estado.   

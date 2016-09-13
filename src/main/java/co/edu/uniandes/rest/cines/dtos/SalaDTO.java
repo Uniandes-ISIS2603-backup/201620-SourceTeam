@@ -11,10 +11,10 @@ package co.edu.uniandes.rest.cines.dtos;
  */
 public class SalaDTO 
 {
-    private Long numSala;
-    private Long numSillas;
-    private Long numSillasGenerales;
-    private Long numSillasPreferenciales;
+    private int numSala;
+    private int numSillas;
+    private int numSillasGenerales;
+    private int numSillasPreferenciales;
     private Boolean esFestival;
 
     /**
@@ -34,7 +34,7 @@ public class SalaDTO
      * @param numSillasP numero de sillas preferenciales
      * @param esF la sala es festival o no
      */
-    public SalaDTO(long numSal, long numS, long numSillasG, long numSillasP, Boolean esF)
+    public SalaDTO(int numSal, int numS, int numSillasG, int numSillasP, Boolean esF)
     {
 		super();
                 this.numSala = numSal;
@@ -48,7 +48,7 @@ public class SalaDTO
      * @return el numero de la sala
      */
     
-    public Long getNumSala()
+    public int getNumSala()
     {
         return numSala;
     }
@@ -57,7 +57,7 @@ public class SalaDTO
      * @param numSS numero de sala a establecer
      */
     
-    public void setNumSala(Long numSS)
+    public void setNumSala(int numSS)
     {
         this.numSala = numSS;
     }
@@ -65,21 +65,21 @@ public class SalaDTO
     /**
      * @return el numero de sillas en la sala
      */
-    public Long getNumSillas() {
+    public int getNumSillas() {
         return numSillas;
     }
 
     /**
      * @param numS el numero de sillas a establecer
      */
-    public void setNumSillas(Long numS) {
+    public void setNumSillas(int numS) {
         this.numSillas = numS;
     }
 
     /**
      * @return el numero de sillas generales
      */
-    public Long getNumSillasGenerales() {
+    public int getNumSillasGenerales() {
         return numSillasGenerales;
     }
     
@@ -87,21 +87,21 @@ public class SalaDTO
      * @param sillasG el numero de sillas generales a establecer
      */
     
-    public void setNumSillasG(Long sillasG) {
+    public void setNumSillasGenerales(int sillasG) {
         this.numSillasGenerales = sillasG;
     }
     
     /**
      * @return el numero de sillas preferenciales
      */
-    public Long getNumSillasPreferenciales() {
+    public int getNumSillasPreferenciales() {
         return numSillasPreferenciales;
     }
     
     /**
      * @param sillasP el numero de sillas preferenciales a establecer
      */
-    public void setNumSillasP(Long sillasP) {
+    public void setNumSillasPreferenciales(int sillasP) {
         this.numSillasPreferenciales = sillasP;
     }
     

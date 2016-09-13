@@ -5,9 +5,7 @@
  */
 package co.edu.uniandes.rest.cines.mocks;
 
-import co.edu.uniandes.rest.cines.dtos.ClienteDTO;
 import co.edu.uniandes.rest.cines.dtos.SalaDTO;
-import co.edu.uniandes.rest.cines.exceptions.ClienteException;
 import co.edu.uniandes.rest.cines.exceptions.SalaException;
 import java.util.ArrayList;
 import java.util.List;
@@ -148,11 +146,11 @@ public class SalaMock {
      * @param numero de la sala a eliminar
      * @throws SalaException si no existe una sala con ese numero
      */
-    public void deleteSala(int numero) throws SalaException{
+    public void deleteSala(int numSala) throws SalaException{
 
         for (int i = 0; i < salas.size(); i++) {
 
-            if(salas.get(i).getNumSala() == numero){
+            if(salas.get(i).getNumSala() == numSala){
 
                 salas.remove(i);
 

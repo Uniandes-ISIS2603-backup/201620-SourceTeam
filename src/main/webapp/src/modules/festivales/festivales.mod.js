@@ -30,9 +30,8 @@ var moduloFestival = ng.module("festivalesModule",['ui.router']);
                 }
 
             }).state('festivalesEdit', {
-                url: '/festivales/:festivalesNombre',
+                url: '/festivales/:festivalNombre',
                 param: { 'festivalNombre' : null},
-                parent: 'festivales',
                 views: {
                     'mainView': {
                         controller: 'festivalesCtrl',

@@ -41,8 +41,8 @@
 
             this.saveRecord = function (nombre) {
                 currentRecord = $scope.currentRecord;
-                
-                // si el id es null, es un registro nuevo, entonces lo crea
+                console.log(nombre);
+                // si el nombre es null, es un registro nuevo, entonces lo crea
                 if (nombre == null) {
 
                     // ejecuta POST en el recurso REST
@@ -66,6 +66,21 @@
                 };
             };
 
+            this.deleteRecord = function (record) {
+                currentRecord = $scope.currentRecord;
+                if(record !=null)
+                {            
+                    // ejecuta delete en el recurso REST
+                    return $http.delete(context + "/" + record.nombre)
+                        .then(function () {
+                            $scope.records = {};
+                            $http.get(context).then(function(response){
+                                $scope.records = response.data;    
+                            }, responseError);
+                            $state.go('festivalesList');
+                        }, responseError); 
+                }
+                }
 
 
             // -----------------------------------------------------------------

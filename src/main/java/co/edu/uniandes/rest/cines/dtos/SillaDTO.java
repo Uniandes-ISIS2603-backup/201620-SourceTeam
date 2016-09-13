@@ -78,9 +78,15 @@ public class SillaDTO {
         this.preferencial = pPreferencial;
     }
      
+    public boolean getReservada() {
+        return reservada;
+    }
+     public void setReservada(boolean pReservada) {
+        this.reservada = pReservada;
+    }
     @Override
     public String toString() {
-        return "{ id : " + getId() + ", fila:" + fila + ", numero:" + numero + ", Preferencial:\"" + preferencial + "\", Reservada:\""+ reservada + "\"}";
+        return "{ id : " + getId() + ", fila:" + fila + ", numero:" + numero + ", Preferencial:" + preferencial + ", Reservada:"+ reservada + "}";
     }
     
 }

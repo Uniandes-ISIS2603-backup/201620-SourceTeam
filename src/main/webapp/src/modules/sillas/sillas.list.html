@@ -3,18 +3,20 @@
     <table class="table table-striped" class="col-md-4">
         <thead>
             <tr>
-                <th>Name</th>        
-                <th>Actions</th>
+                <th>Id</th>        
+                <th>Fila</th>
+                <th>Numero</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
             <tr ng-repeat="record in records">
-                <td id="{{$index}}-id">{{record.nombre}}</td>
-                <td id="{{$index}}-fila">{{record.nombre}}</td>
-                <td id="{{$index}}-numero">{{record.nombre}}</td>
+                <td id="{{$index}}-id">{{record.id}}</td>
+                <td id="{{$index}}-fila">{{record.fila}}</td>
+                <td id="{{$index}}-numero">{{record.numero}}</td>
 
                 <td>
-                    <button id="{{$index}}-edit-btn" class="btn btn-default btn-sm" ui-sref="sillaEdit({sillaid: record.silla})"><span class="glyphicon glyphicon-edit"></span> Edit</button>
+                    <button id="{{$index}}-edit-btn" class="btn btn-default btn-sm" ui-sref="sillaEdit({sillaId: record.id})"><span class="glyphicon glyphicon-edit"></span> Edit</button>
                     <button id="{{$index}}-delete-btn" class="btn btn-default btn-sm" ng-click="ctrl.deleteRecord(record.nombre)"><span class="glyphicon glyphicon-minus"></span> Remove</button>
 
                 </td>

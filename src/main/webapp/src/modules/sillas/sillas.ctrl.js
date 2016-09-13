@@ -3,7 +3,7 @@
 
     mod.controller("sillasCtrl", ['$scope', '$state', '$stateParams', '$http', 'sillasContext', function ($scope, $state, $stateParams, $http, context) {
 
-            // inicialmente el listado de ciudades está vacio
+            // inicialmente el listado de sillas está vacio
             $scope.records = {};
             // carga las ciudades
             $http.get(context).then(function(response){

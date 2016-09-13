@@ -27,36 +27,36 @@ public class SillaResource {
     SillaMock sillas = new SillaMock();
     
     /**
-     * Obtiene el listado de boletas.
+     * Obtiene el listado de sillas.
      *
-     * @return lista de boletas
+     * @return lista de Sillas
      * @throws SillaException excepción retornada por la lógica
      */
     @GET
-    public List<SillaDTO> getBoletas() throws SillaException {
+    public List<SillaDTO> getSillas() throws SillaException {
         return sillas.getSillas();
     }
 
    
     /**
-     * Agrega una boleta
+     * Agrega una silla
      *
      * @param silla silla a agregar
-     * @return datos de la boleta a agregar
-     * @throws SillaException cuando ya existe una boleta con el id
+     * @return datos de la silla a agregar
+     * @throws SillaException cuando ya existe una silla con el id
      * suministrado
      */
     @POST
-    public SillaDTO createBoleta(SillaDTO silla) throws SillaException {
+    public SillaDTO createSilla(SillaDTO silla) throws SillaException {
         return sillas.createSilla(silla);
     }
 
 
     /**
-     * Retorna una boleta dado su id
+     * Retorna una silla dado su id
      * 
-     * @param id id de la boleta a retornar
-     * @return una boleta
+     * @param id id de la silla a retornar
+     * @return una silla
      * @throws SillaException excepción retornada por la lógica
      */
     @GET
@@ -66,11 +66,11 @@ public class SillaResource {
     }    
     
     /**
-     * Actualiza la información de la boleta identificada con id
+     * Actualiza la información de la silla identificada con id
      * 
-     * @param id de la boleta
+     * @param id de la silla
      * @param silla con la que actualizar la información
-     * @return la boleta actualizada
+     * @return la silla actualizada
      * @throws SillaException excepción retornada por la lógica
      */
     @PUT
@@ -80,9 +80,9 @@ public class SillaResource {
     }
     
     /**
-     * Elimina una boleta dado su id
+     * Elimina una silla dado su id
      * 
-     * @param id de la boleta eliminada
+     * @param id de la silla eliminada
      * @throws SillaException excepción retornada por la lógica
      */
     @DELETE

@@ -11,25 +11,26 @@
             <div class="form-group col-md-12" ng-class="{'has-success': form.name.$valid && form.name.$dirty, 'has-error': form.name.$invalid && (form.name.$dirty || form.$submitted)}" >
                 <label for="idnum" class="col-md-2 control-label">Id</label>
                 <div class="col-md-10">
-                    <input id="idnum" idnum="idnum" class="form-control" type="text" ng-model="currentRecord.id" ng-init="currentRecord.id" required />
+                    <input id="idnum" idnum="idnum" class="form-control" type="number" ng-model="currentRecord.id" ng-init="currentRecord.id" required />
                 </div>
                 <label for="fila" class="col-md-2 control-label">Fila</label>
                 <div class="col-md-10">
-                    <input id="fila" fila="fila" class="form-control" type="text" ng-model="currentRecord.fila" ng-init="currentRecord.fila" required />
+                    <input id="fila" fila="fila" class="form-control" type="number" ng-model="currentRecord.fila" ng-init="currentRecord.fila" required />
                 </div>
                 <label for="numero" class="col-md-2 control-label">Numero</label>
                 <div class="col-md-10">
-                    <input id="numero" numero="numero" class="form-control" type="text" ng-model="currentRecord.numero" ng-init="currentRecord.numero" required />
+                    <input id="numero" numero="numero" class="form-control" type="number" ng-model="currentRecord.numero" ng-init="currentRecord.numero" required />
                 </div>
                 
-                
+                <label for="pref" class="col-md-4 control-label">Preferencial</label>
                 <div class="col-md-10">
-                    <label for="pref" class="col-md-2 control-label">Preferencial</label>
+                    
                     <input id="pref" pref="pref" type="checkbox" ng-model="currentRecord.preferencial" ng-true-value="true" ng-false-value="false"/>
                 </div>
                 
+                <label for="reser" class="col-md-4 control-label">Reservada</label>
                 <div class="col-md-10">
-                    <label for="reser" class="col-md-2 control-label">Reservada</label>
+                    
                     <input id="reser" reser="reser" type="checkbox" ng-model="currentRecord.reservada" ng-true-value="true" ng-false-value="false"/>
                 </div>
             </div>

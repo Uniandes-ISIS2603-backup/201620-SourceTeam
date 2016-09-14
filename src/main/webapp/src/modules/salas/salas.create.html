@@ -1,6 +1,6 @@
 <div class="col-md-6 well">
     <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="ctrl.closeAlert($index)" dismiss-on-timeout="5000">{{alert.msg}} </alert>
-    <form novalidate name="form" id="festivales-form" role="form" ng-submit="form.$valid && ctrl.saveRecord(currentRecord.numSala)">
+    <form novalidate name="form" id="festivales-form" role="form" ng-submit="form.$valid && ctrl.saveRecord(currentRecord.id)">
         
         <div ng-messages="form.$error">
             <div ng-message="required">Llene los campos requeridos</div>
@@ -27,7 +27,7 @@
                  <label for="esFestival" class="col-md-4 control-label">Es festival</label>
                 <div class="col-md-10">
                     
-                    <input id="esFestival" esFestival="esFestival" type="checkbox" ng-model="currentRecord.esFestival" ng-true-value="true" ng-false-value="false"/>
+                    <input id="esFestival" esFestival="esFestival" type="boolean" ng-model="currentRecord.esFestival" ng-true-value="true" ng-false-value="false"/>
                 </div>
                 
             </div>

@@ -29,6 +29,7 @@ public class SalaMock {
      */
     public SalaMock() {
 
+        
     	if (salas == null) {
             salas = new ArrayList<>();
             salas.add(new SalaDTO(1, 30 ,15, 15, Boolean.TRUE));
@@ -71,7 +72,7 @@ public class SalaMock {
     	logger.info("recibiendo solicitud de agregar sala " + newSala);
     	
     	// la nueva sala tiene numero ?
-    	if ( newSala.getNumSala() != null ) {
+    	if ( newSala.getNumSala() != 0 ) {
 	    	// busca la sala con el numero suministrado
 	        for (SalaDTO sala : salas) {
 	        	// si existe una sala con ese id
@@ -86,7 +87,7 @@ public class SalaMock {
 
     		// genera un numero para la ciudad
     		logger.info("Generando numero de sala para la nueva sala");
-    		long newSal = 1;
+    		int newSal = 1;
 	        for (SalaDTO sala : salas) {
 	            if (newSal <= sala.getNumSala()){
 	                newSal =  sala.getNumSala() + 1;
@@ -143,7 +144,7 @@ public class SalaMock {
     /**
      * Elimina una sala del listado
      * 
-     * @param numero de la sala a eliminar
+     * @param numSala de la sala a eliminar
      * @throws SalaException si no existe una sala con ese numero
      */
     public void deleteSala(int numSala) throws SalaException{

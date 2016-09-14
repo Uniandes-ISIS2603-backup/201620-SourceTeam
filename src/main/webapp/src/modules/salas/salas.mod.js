@@ -3,12 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-(function (ng) {
-    var mod = ng.module("salasModule", ["ngMessages"]);
+    var mod = angular.module("salasModule", ["ngMessages"]);
     mod.constant("salasContext", "api/salas");
     mod.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
             var basePath = 'src/modules/salas/';
-            $urlRouterProvider.otherwise("/salasList");
+            $urlRouterProvider.otherwise("/salas");
      
             $stateProvider.state('salasList', {
                 url: '/salas',
@@ -43,6 +42,6 @@
                 }
             });
         }]);
-})(window.angular);
+(window.angular);
 
 

@@ -12,10 +12,10 @@
 
             // el controlador recibió un numSala ??
             // revisa los parámetros (ver el :numSala en la definición de la ruta)
-            if ($stateParams.numeroSala !== null && $stateParams.numeroSala !== undefined) {
+            if ($stateParams.numSala !== null && $stateParams.numSala !== undefined) {
                 
                 // toma el id del parámetro
-                numSala = $stateParams.numeroSala;
+                numSala = $stateParams.numSala;
                 // obtiene el dato del recurso REST
                 $http.get(context + "/" + numSala)
                     .then(function (response) {

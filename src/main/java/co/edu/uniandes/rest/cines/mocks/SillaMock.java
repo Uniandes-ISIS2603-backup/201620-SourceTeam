@@ -31,12 +31,16 @@ public class SillaMock {
     public SillaMock() {
 
     	if (sillas == null) {
-            sillas = new ArrayList<>();
-            sillas.add(new SillaDTO(1L,1,3,false, false));
-            sillas.add(new SillaDTO(2L,1,5,false, false));
-            sillas.add(new SillaDTO(3L,1,6,true,false));
-            sillas.add(new SillaDTO(4L,2,2,false, false));
-            sillas.add(new SillaDTO(5L,3,4,false, false));
+                try {
+                    sillas = new ArrayList<>();
+                    createSilla(new SillaDTO(1,3,false, false));
+                    createSilla(new SillaDTO(7,5,false, true));
+                    createSilla(new SillaDTO(1,6,true,false));
+                    createSilla(new SillaDTO(2,2,false, false));
+                    createSilla(new SillaDTO(3,4,true, true));
+                } catch (SillaException ex) {
+                   logger.severe("Error interno: No se pueden crear las sillas de prueba.");
+                }
         }
         
     	// indica que se muestren todos los mensajes
@@ -74,7 +78,7 @@ public class SillaMock {
     	logger.info("recibiendo solicitud de agregar silla " + newSilla);
     	
     	// la nueva Sillas tiene id ?
-    	if ( newSilla.getFila() != 0  ) {
+    	if ( newSilla.getId()!= null && newSilla.getId() != 0  ) {
 	    	// busca la Sillas con el id suministrado
 	        for (SillaDTO city : sillas) {
 	        	// si existe una Sillas con ese id
@@ -83,7 +87,6 @@ public class SillaMock {
 	                throw new SillaException("Ya existe una silla con ese id");
 	            }
 	        }
-	        
 	    // la nueva Sillas no tiene id ? 
     	} else {
 

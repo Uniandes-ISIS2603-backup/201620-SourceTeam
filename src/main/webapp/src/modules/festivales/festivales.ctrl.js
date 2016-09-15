@@ -29,6 +29,7 @@
             {
                 // el registro actual debe estar vacio
                 $scope.currentRecord = {
+                    id : undefined,
                     nombre: '' /*Tipo String*/,
                     duracion: undefined /*Tipo String*/,
                     patrocinador: '' /*Tipo String*/
@@ -39,11 +40,11 @@
             }
 
 
-            this.saveRecord = function (nombre) {
+            this.saveRecord = function (id) {
                 currentRecord = $scope.currentRecord;
-                console.log(nombre);
+                console.log(id);
                 // si el nombre es null, es un registro nuevo, entonces lo crea
-                if (nombre == null) {
+                if (id == null) {
 
                     // ejecuta POST en el recurso REST
                     return $http.post(context, currentRecord)
@@ -55,9 +56,10 @@
                         
                 // si el id no es null, es un registro existente entonces lo actualiza
                 } else {
+                    console.log("Entro");
                     
                     // ejecuta PUT en el recurso REST
-                    return $http.put(context + "/" + currentRecord.nombre, currentRecord)
+                    return $http.put(context + "/" + currentRecord.id, currentRecord)
                         .then(function () {
                             // $http.put es una promesa
                             // cuando termine bien, cambie de estado
@@ -67,11 +69,13 @@
             };
 
             this.deleteRecord = function (record) {
+                
                 currentRecord = $scope.currentRecord;
-                if(record !=null)
-                {            
+                if(record != null)
+                {
+                    console.log(record);
                     // ejecuta delete en el recurso REST
-                    return $http.delete(context + "/" + record.nombre)
+                    return $http.delete(context + "/" + record)
                         .then(function () {
                             $scope.records = {};
                             $http.get(context).then(function(response){

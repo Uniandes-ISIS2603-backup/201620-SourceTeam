@@ -63,7 +63,7 @@ public class SalaResource
      */
     @GET
     @Path("{id: \\d+}")
-    public SalaDTO getSalaPorNumero(@PathParam("id") Long id) throws SalaException {
+    public SalaDTO getSalaPorNumero(@PathParam("id") int id) throws SalaException {
         return sala.getSalabyId(id);
     }
     
@@ -78,7 +78,7 @@ public class SalaResource
      */
     @PUT
     @Path("{id: \\d+}")
-    public SalaDTO updateSala(@PathParam("id") Long id, SalaDTO salaP) throws SalaException{
+    public SalaDTO updateSala(@PathParam("id") int id, SalaDTO salaP) throws SalaException{
         return sala.updateSala(id, salaP);
     }
     
@@ -90,7 +90,7 @@ public class SalaResource
      */
     @DELETE
     @Path("{id: \\d+}")
-    public void deleteSala(@PathParam("{id: \\d+}")Long  id) throws SalaException{
+    public void deleteSala(@PathParam("id")int  id) throws SalaException{
         sala.deleteSala(id);
     }
 

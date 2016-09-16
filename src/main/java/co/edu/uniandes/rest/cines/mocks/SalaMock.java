@@ -6,7 +6,6 @@
 package co.edu.uniandes.rest.cines.mocks;
 
 import co.edu.uniandes.rest.cines.dtos.SalaDTO;
-import co.edu.uniandes.rest.cines.dtos.SillaDTO;
 import co.edu.uniandes.rest.cines.exceptions.SalaException;
 import java.util.ArrayList;
 import java.util.List;
@@ -114,7 +113,7 @@ public class SalaMock {
      * @return sala buscada
      * @throws SalaException cuando no existe el nombre buscado
      */
-    public SalaDTO getSalabyId(Long id) throws  SalaException{
+    public SalaDTO getSalabyId(int id) throws  SalaException{
         if (salas == null) {
     		logger.severe("Error interno: lista de salas no existe.");
     		throw new SalaException("Error interno: lista de salas no existe.");    		
@@ -135,7 +134,7 @@ public class SalaMock {
      * @return el cliente actualizado
      * @throws SalaException si no existe un cliente con ese nombre
      */
-    public SalaDTO updateSala(Long id, SalaDTO newSala) throws SalaException {
+    public SalaDTO updateSala(int id, SalaDTO newSala) throws SalaException {
         for (int i = 0; i < salas.size(); i++) {
             if(salas.get(i).getId() == id){
                 salas.set(i, newSala);
@@ -152,7 +151,7 @@ public class SalaMock {
      * @param id de la sala a eliminar
      * @throws SalaException si no existe una sala con ese numero
      */
-    public void deleteSala(Long id) throws SalaException{
+    public void deleteSala(int id) throws SalaException{
 
         for (int i = 0; i < salas.size(); i++) {
 

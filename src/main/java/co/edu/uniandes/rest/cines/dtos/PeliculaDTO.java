@@ -11,6 +11,7 @@ package co.edu.uniandes.rest.cines.dtos;
  */
 public class PeliculaDTO
 {
+    private Long id;
     private String nombre;
     private String anuncio;
     private String creditos;
@@ -39,6 +40,7 @@ public class PeliculaDTO
     public PeliculaDTO(String nomb, String anun, String credi, String criti, int dura, String paisP)
     {
 		super();
+                this.id = 0L;
                 this.nombre = nomb;
                 this.anuncio = anun;
 		this.creditos = credi;
@@ -50,6 +52,14 @@ public class PeliculaDTO
     /**
      * @return el nombre de la pelicula
      */
+    public Long getId()
+    {
+        return id;
+    }
+    public void setId(Long idd)
+    {
+        id = idd;
+    }
     public String getNombre()
     {
         return nombre;

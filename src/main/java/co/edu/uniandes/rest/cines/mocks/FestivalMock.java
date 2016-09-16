@@ -120,17 +120,17 @@ public class FestivalMock {
      * @return festival buscado
      * @throws FestivalException cuando no existe el id buscado
      */
-    public FestivalDTO getFestival(String nombre) throws FestivalException{
+    public FestivalDTO getFestival(Long id) throws FestivalException{
         if (festivales == null) {
     		logger.severe("Error interno: lista de festivales no existe.");
     		throw new FestivalException("Error interno: lista de festivales no existe.");    		
     	}
         for (int i = 0; i < festivales.size(); i++) {
-            if(festivales.get(i).getNombre().equalsIgnoreCase(nombre)){
+            if(festivales.get(i).getId() == id){
                 return festivales.get(i);
             }
         }
-        throw new FestivalException("Error interno: no existe un festival con ese nombre.");
+        throw new FestivalException("Error interno: no existe un festival con ese id.");
     }
     
     
@@ -141,13 +141,13 @@ public class FestivalMock {
      * @return festival buscado
      * @throws FestivalException cuando no existe la duracion buscada
      */
-    public FestivalDTO getFestivalPorNombre(Long id) throws FestivalException{
+    public FestivalDTO getFestivalPorNombre(String nombre) throws FestivalException{
         if (festivales == null) {
     		logger.severe("Error interno: lista de festivales no existe.");
     		throw new FestivalException("Error interno: lista de festivales no existe.");    		
     	}
         for (int i = 0; i < festivales.size(); i++) {
-            if(festivales.get(i).getId() == id){
+            if(festivales.get(i).getNombre().equalsIgnoreCase(nombre)){
                 return festivales.get(i);
             }
         }

@@ -63,7 +63,7 @@ public class FestivalResource {
     @GET
     @Path("{id: \\d+}")
     public FestivalDTO getFestivalPorNombre(@PathParam("id") Long id) throws FestivalException {
-        return festivales.getFestivalPorNombre(id);
+        return festivales.getFestival(id);
     }
     
     

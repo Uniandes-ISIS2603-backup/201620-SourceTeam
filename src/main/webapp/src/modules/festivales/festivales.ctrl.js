@@ -12,10 +12,10 @@
 
             // el controlador recibió un FestivalNombre ??
             // revisa los parámetros (ver el :festivalNombre en la definición de la ruta)
-            if ($stateParams.festivalNombre !== null && $stateParams.festivalNombre !== undefined) {
+            if ($stateParams.festivalId !== null && $stateParams.festivalId !== undefined) {
                 
                 // toma el id del parámetro
-                id = $stateParams.f;
+                id = $stateParams.festivalId;
                 // obtiene el dato del recurso REST
                 $http.get(context + "/" + id)
                     .then(function (response) {
@@ -42,7 +42,6 @@
 
             this.saveRecord = function (id) {
                 currentRecord = $scope.currentRecord;
-                console.log(id);
                 // si el nombre es null, es un registro nuevo, entonces lo crea
                 if (id == null) {
 
@@ -56,7 +55,6 @@
                         
                 // si el id no es null, es un registro existente entonces lo actualiza
                 } else {
-                    console.log("Entro");
                     
                     // ejecuta PUT en el recurso REST
                     return $http.put(context + "/" + currentRecord.id, currentRecord)

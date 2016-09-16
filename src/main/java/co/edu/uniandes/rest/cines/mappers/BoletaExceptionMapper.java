@@ -8,19 +8,18 @@ package co.edu.uniandes.rest.cines.mappers;
 import co.edu.uniandes.rest.cines.exceptions.BoletaException;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
-import javax.ws.rs.ext.Provider;
 
 /**
- * Convertidor de Excepciones BoletaException a mensajes REST.
- * 
- * @author ca.nieto11
+ *
+ * @author s.rodriguez20
  */
-@Provider
 public class BoletaExceptionMapper implements ExceptionMapper<BoletaException>{
     /**
      * Generador de una respuesta a partir de una excepción
      * @param ex excecpión a convertir a una respuesta REST
+     * @return 
      */
+
     @Override
     public Response toResponse(BoletaException ex) {
         // retorna una respuesta

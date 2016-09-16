@@ -6,12 +6,13 @@
 package co.edu.uniandes.rest.cines.dtos;
 
 /**
- * Objeto de transferencia de datos de Boletas
- * @author ca.nieto11
+ * Objeto de transferencia de datos de Silla
+ * @author s.rodriguez20
  */
 public class BoletaDTO {
-    private int id;
-    private double precio;
+    private Long id;
+    private int precio;
+    
 
     /**
      *
@@ -24,46 +25,39 @@ public class BoletaDTO {
      * @param id
      * @param precio
      */
-    public BoletaDTO(int id, double precio) {
-        this.id = id;
-        this.precio = precio;
+    public BoletaDTO(int pPrecio) {
+        this.id=0L;
+        this.precio = pPrecio;
+        
+    }
+    public Long getId() {
+        return id;
     }
 
+    /**
+     * @param id the id to set
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
     /**
      *
      * @return
      */
-    public int getId() {
-        return id;
+    public int getPrecio() {
+        return precio;
     }
 
     /**
      *
      * @param id
      */
-    public void setId(int id) {
-        this.id = id;
+    public void setPrecio(int pPrecio) {
+        this.precio = pPrecio;
     }
-
-    /**
-     *
-     * @return
-     */
-    public double getPrecio() {
-        return precio;
-    }
-
-    /**
-     *
-     * @param precio
-     */
-    public void setPrecio(double precio) {
-        this.precio = precio;
-    }
-
     @Override
     public String toString() {
-        return "{" + "id:\"" + id + "\", precio:\"" + precio + "\"}";
+        return "{ id : " + id + ", precio:" + precio+"}";
     }
     
 }

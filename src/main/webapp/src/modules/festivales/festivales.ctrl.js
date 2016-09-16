@@ -15,9 +15,9 @@
             if ($stateParams.festivalNombre !== null && $stateParams.festivalNombre !== undefined) {
                 
                 // toma el id del parámetro
-                nombre = $stateParams.festivalNombre;
+                id = $stateParams.f;
                 // obtiene el dato del recurso REST
-                $http.get(context + "/" + nombre)
+                $http.get(context + "/" + id)
                     .then(function (response) {
                         // $http.get es una promesa
                         // cuando llegue el dato, actualice currentRecord
@@ -73,7 +73,6 @@
                 currentRecord = $scope.currentRecord;
                 if(record != null)
                 {
-                    console.log(record);
                     // ejecuta delete en el recurso REST
                     return $http.delete(context + "/" + record)
                         .then(function () {

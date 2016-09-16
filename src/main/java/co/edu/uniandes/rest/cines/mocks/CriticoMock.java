@@ -35,9 +35,9 @@ public class CriticoMock {
         if(criticos == null)
         {
             criticos = new ArrayList<>();
-            criticos.add( new CriticoDTO(1L,1, "Juan", 1));
-            criticos.add( new CriticoDTO(2L,2, "Pablo", 2));
-            criticos.add( new CriticoDTO(3L,3, "Pedro", 3)) ;
+            criticos.add( new CriticoDTO(1L,1, "Juan", 10208));
+            criticos.add( new CriticoDTO(2L,2, "Pablo", 25445));
+            criticos.add( new CriticoDTO(3L,3, "Pedro", 36546)) ;
         }
 
         
@@ -124,13 +124,13 @@ public class CriticoMock {
      * @return critico buscada
      * @throws CriticoException cuando no existe el id buscado
      */
-    public CriticoDTO getCritico(long credencial) throws CriticoException{
+    public CriticoDTO getCritico(long id) throws CriticoException{
         if (criticos == null) {
     		logger.severe("Error interno: lista de criticos no existe.");
     		throw new CriticoException("Error interno: criticos de festivales no existe.");    		
     	}
         for (int i = 0; i < criticos.size(); i++) {
-            if(criticos.get(i).getCredencial() == (int)credencial){
+            if(criticos.get(i).getId()== (int)id){
                 return criticos.get(i);
             }
         }
@@ -147,7 +147,7 @@ public class CriticoMock {
      */
     public CriticoDTO updateCritico(int credencial, CriticoDTO newCritico) throws CriticoException {
         for (int i = 0; i < criticos.size(); i++) {
-            if(credencial == criticos.get(i).getCredencial()){
+            if(credencial == criticos.get(i).getId()){
                 criticos.set(i, newCritico);
                 return criticos.get(i);
             }
@@ -163,12 +163,12 @@ public class CriticoMock {
      * @param credencial del critico a eliminar
      * @throws CriticoException si no existe un critico con ese nombre
      */
-    public CriticoDTO deleteCritico(int credencial) throws CriticoException{
+    public CriticoDTO deleteCritico(int id) throws CriticoException{
 //        logger.info("Antes del ciclo " + credencial);
         boolean found = false;
         for (int i = 0; i < criticos.size() && !found; i++) {
 //            logger.info("antes del if");
-            if(criticos.get(i).getCredencial() == credencial){
+            if(criticos.get(i).getId() == id){
 //                logger.info("dentro del if");
                 CriticoDTO encontrado = criticos.get(i);
                 criticos.remove(i);
@@ -178,7 +178,7 @@ public class CriticoMock {
             }
         }
         logger.severe("No existe un critico con ese id");
-        throw new CriticoException("No existe un critico con ese id" + credencial);
+        throw new CriticoException("No existe un critico con ese id" + id);
     }
     
 }

@@ -81,9 +81,9 @@ public class CriticoResource {
     }
     
     /**
-     * Elimina un festival dado su nombre
+     * Elimina un festival dado su id
      * 
-     * @param credencial del festival eliminado
+     * @param id del festival eliminado
      * @throws CriticoException excepción retornada por la lógica
      */
     @DELETE

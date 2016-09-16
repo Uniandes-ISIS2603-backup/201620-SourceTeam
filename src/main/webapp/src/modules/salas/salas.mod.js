@@ -29,9 +29,9 @@
                 }
 
             }).state('salasEdit', {
-                url: '/salas/:numeroSala',
+                url: '/salas/:salaId',
                 param: {
-                    numeroSala: null
+                    salaId: null
                 },
                 views: {
                     'mainView': {

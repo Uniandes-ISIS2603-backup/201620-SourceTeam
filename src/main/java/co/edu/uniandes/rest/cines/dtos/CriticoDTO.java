@@ -11,6 +11,8 @@ package co.edu.uniandes.rest.cines.dtos;
  */
 public class CriticoDTO {
     
+    private Long id;
+    
     private int duracion;
     
     private String nombre;
@@ -21,7 +23,9 @@ public class CriticoDTO {
         
     }
     
-    public CriticoDTO(int duracion, String nombre, int credencial){
+    public CriticoDTO(Long id, int duracion, String nombre, int credencial){
+        
+        this.id = id;
         
         this.duracion = duracion;
         
@@ -37,6 +41,10 @@ public class CriticoDTO {
     
     public String getNombre(){
         return nombre;
+    }
+    
+    public Long getId(){
+        return this.id;
     }
     
     public int getCredencial(){
@@ -55,9 +63,13 @@ public class CriticoDTO {
         this.credencial = credencial;
     }
     
+    public void setId(Long id){
+        this.id =id;
+    }
+    
     @Override
     public String toString(){
-        return "Nombre: " + nombre + ", duracion: " + duracion + " credencial: " + credencial;
+        return "Id : " + id + ", nombre: " + nombre + ", duracion: " + duracion + " credencial: " + credencial;
     }
     
 }

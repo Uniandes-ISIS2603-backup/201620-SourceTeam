@@ -11,6 +11,7 @@ package co.edu.uniandes.rest.cines.dtos;
  */
 public class SalaDTO 
 {
+    private Long id;
     private int numSala;
     private int numSillas;
     private int numSillasGenerales;
@@ -36,7 +37,8 @@ public class SalaDTO
      */
     public SalaDTO(int numSal, int numS, int numSillasG, int numSillasP, Boolean esF)
     {
-		super();
+                super();
+                 id = 0L;
                 this.numSala = numSal;
 		this.numSillas = numS;
 		this.numSillasGenerales = numSillasG;
@@ -47,6 +49,14 @@ public class SalaDTO
     /**
      * @return el numero de la sala
      */
+    public Long getId()
+    {
+        return id;
+    }
+    public void setId(Long pid)
+    {
+        id = pid;
+    }
     
     public int getNumSala()
     {

@@ -60,9 +60,9 @@ public class CriticoResource {
      * @throws CriticoException excepción retornada por la lógica
      */
     @GET
-    @Path("{credencial: \\d+}")
-    public CriticoDTO getCritico(@PathParam("credencial") long credencial) throws CriticoException{
-       return criticos.getCritico(credencial);
+    @Path("{id: \\d+}")
+    public CriticoDTO getCritico(@PathParam("id") long id) throws CriticoException{
+       return criticos.getCritico(id);
     }
         
     
@@ -75,20 +75,20 @@ public class CriticoResource {
      * @throws CriticoException excepción retornada por la lógica
      */
     @PUT
-    @Path("{credencial: \\d+}")
-    public CriticoDTO updateCritico(@PathParam("credencial") long credencial, CriticoDTO critico) throws CriticoException{
-        return criticos.updateCritico((int)credencial, critico);
+    @Path("{id: \\d+}")
+    public CriticoDTO updateCritico(@PathParam("id") long id, CriticoDTO critico) throws CriticoException{
+        return criticos.updateCritico((int)id, critico);
     }
     
     /**
-     * Elimina un festival dado su nombre
+     * Elimina un festival dado su id
      * 
-     * @param credencial del festival eliminado
+     * @param id del festival eliminado
      * @throws CriticoException excepción retornada por la lógica
      */
     @DELETE
-    @Path("{credencial: \\d+}")
-    public CriticoDTO deleteCritico(@PathParam("credencial")long credencial) throws CriticoException{
-         return criticos.deleteCritico((int)credencial);
+    @Path("{id: \\d+}")
+    public CriticoDTO deleteCritico(@PathParam("id")long id) throws CriticoException{
+         return criticos.deleteCritico((int)id);
     }
 }

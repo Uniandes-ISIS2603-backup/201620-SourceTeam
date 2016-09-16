@@ -61,9 +61,9 @@ public class FestivalResource {
      * @throws FestivalException excepción retornada por la lógica
      */
     @GET
-    @Path("{nombre: [a-zA-Z][a-zA-Z]*}")
-    public FestivalDTO getFestivalPorNombre(@PathParam("nombre") String nombre) throws FestivalException {
-        return festivales.getFestivalPorNombre(nombre);
+    @Path("{id: \\d+}")
+    public FestivalDTO getFestivalPorNombre(@PathParam("id") Long id) throws FestivalException {
+        return festivales.getFestivalPorNombre(id);
     }
     
     
@@ -76,9 +76,9 @@ public class FestivalResource {
      * @throws FestivalException excepción retornada por la lógica
      */
     @PUT
-    @Path("{nombre: [a-zA-Z][a-zA-Z]*}")
-    public FestivalDTO updateFestival(@PathParam("nombre") String nombre, FestivalDTO festival) throws FestivalException{
-        return festivales.updateFestival(nombre, festival);
+    @Path("{id: \\d+}")
+    public FestivalDTO updateFestival(@PathParam("id") Long id, FestivalDTO festival) throws FestivalException{
+        return festivales.updateFestival(id, festival);
     }
     
     /**
@@ -89,8 +89,8 @@ public class FestivalResource {
      * @throws FestivalException excepción retornada por la lógica
      */
     @DELETE
-    @Path("{nombre: [a-zA-Z][a-zA-Z]*}")
-    public FestivalDTO deleteFestival(@PathParam("nombre")String nombre) throws FestivalException{
-        return festivales.deleteFestival(nombre);
+    @Path("{id: \\d+}")
+    public FestivalDTO deleteFestival(@PathParam("id")Long id) throws FestivalException{
+        return festivales.deleteFestival(id);
     }
 }

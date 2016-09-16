@@ -15,8 +15,7 @@ public class FestivalException extends Exception{
     /**
      * Constructor con un mensaje
      * @param message mensaje de la excepción
-     */
-    public FestivalException(String message) {
+     */public FestivalException(String message) {
         super(message);
     }
     

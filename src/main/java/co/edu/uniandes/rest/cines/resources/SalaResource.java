@@ -57,41 +57,41 @@ public class SalaResource
     /**
      * Retorna una sala dado su numero
      * 
-     * @param numero de la sala a retornar
+     * @param id de la sala a retornar
      * @return una sala
      * @throws SalaeException excepción retornada por la lógica
      */
     @GET
-    @Path("{numero: \\d+}")
-    public SalaDTO getSalaPorNumero(@PathParam("numero") int numero) throws SalaException {
-        return sala.getSalabyNumero(numero);
+    @Path("{id: \\d+}")
+    public SalaDTO getSalaPorNumero(@PathParam("id") Long id) throws SalaException {
+        return sala.getSalabyId(id);
     }
     
     
     /**
      * Actualiza la información de una sala identificada con su numero
      * 
-     * @param numero de la sala
+     * @param id de la sala
      * @param salaP con el que actualizar la información
      * @return la sala  actualizado
      * @throws SalaException excepción retornada por la lógica
      */
     @PUT
     @Path("{id: \\d+}")
-    public SalaDTO updateSala(@PathParam("id") int numero, SalaDTO salaP) throws SalaException{
-        return sala.updateSala(numero, salaP);
+    public SalaDTO updateSala(@PathParam("id") Long id, SalaDTO salaP) throws SalaException{
+        return sala.updateSala(id, salaP);
     }
     
     /**
      * Elimina una sala dado su numero
      * 
-     * @param numero de la sala eliminada
+     * @param id de la sala eliminada
      * @throws SalaException excepción retornada por la lógica
      */
     @DELETE
     @Path("{id: \\d+}")
-    public void deleteSala(@PathParam("{id: \\d+}")int  numero) throws SalaException{
-        sala.deleteSala(numero);
+    public void deleteSala(@PathParam("{id: \\d+}")Long  id) throws SalaException{
+        sala.deleteSala(id);
     }
 
     

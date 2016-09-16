@@ -77,7 +77,7 @@ public class SalaMock {
     	logger.info("recibiendo solicitud de agregar sala " + newSala);
     	
     	// la nueva sala tiene numero ?
-    	if ( newSala.getId() != 0 ) {
+    	if ( newSala.getId()!= null && newSala.getId() != 0 ) {
 	    	// busca la sala con el numero suministrado
 	        for (SalaDTO sala : salas) {
 	        	// si existe una sala con ese id

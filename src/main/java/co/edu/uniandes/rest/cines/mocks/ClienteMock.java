@@ -15,14 +15,14 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author ca.nieto11
+ * @author s.rodriguez20
  */
 public class ClienteMock {
-    
-    // objeto para presentar logs de las operaciones
-    private final static Logger logger = Logger.getLogger(ClienteMock.class.getName());
-    
-    // listado de clientes
+	
+	// objeto para presentar logs de las operaciones
+	private final static Logger logger = Logger.getLogger(ClienteMock.class.getName());
+	
+	// listado de Clientes
     private static ArrayList<ClienteDTO> clientes;
 
     /**
@@ -31,119 +31,133 @@ public class ClienteMock {
     public ClienteMock() {
 
     	if (clientes == null) {
-            clientes = new ArrayList<>();
-            clientes.add(new ClienteDTO("Camilo", true));
-            clientes.add(new ClienteDTO("Sebastian", false));
-            clientes.add(new ClienteDTO("Laura", true));
+                try {
+                    clientes = new ArrayList<>();
+                    createCliente(new ClienteDTO("Santipan","Rodriguez ",12341L, true));
+                    createCliente(new ClienteDTO("Batman","Rodriguez ",12213L, false));
+                    createCliente(new ClienteDTO("Maxitos","Rodriguez ",3214L, true));
+                } catch (ClienteException ex) {
+                   logger.severe("Error interno: No se pueden crear las clientes de prueba.");
+                }
         }
         
     	// indica que se muestren todos los mensajes
     	logger.setLevel(Level.INFO);
     	
     	// muestra información 
-    	logger.info("Inicializa la lista de clientes");
-    	logger.info("clientes" + clientes );
+    	logger.info("Inicializa la lista de Clientes");
+    	logger.info("Clientes" + clientes );
     }    
     
 	/**
 	 * Obtiene el listado de personas. 
-	 * @return lista de clientes
+	 * @return lista de Clientes
 	 * @throws ClienteException cuando no existe la lista en memoria  
 	 */    
     public List<ClienteDTO> getClientes() throws ClienteException {
     	if (clientes == null) {
-    		logger.severe("Error interno: lista de clientes no existe.");
-    		throw new ClienteException("Error interno: lista de clientes no existe.");    		
+    		logger.severe("Error interno: lista de Clientes no existe.");
+    		throw new ClienteException("Error interno: lista clientes no existe.");    		
     	}
     	
-    	logger.info("retornando todas los clientes");
+    	logger.info("retornando todas las clientes");
     	return clientes;
     }
 
  
 
     /**
-     * Agrega un cliente a la lista.
-     * @param newClient cliente a adicionar
-     * @throws ClienteException cuando ya existe un cliente con el id suministrado
-     * @return cliente agregado
+     * Agrega una Clientes a la lista.
+     * @param newCliente Clientes a adicionar
+     * @throws ClienteException cuando ya existe una Clientes con el id suministrado
+     * @return Clientes agregada
      */
-    public ClienteDTO createCliente(ClienteDTO newClient) throws ClienteException {
-        logger.info("recibiendo solicitud de agregar cliente " + newClient);
-        
-        // busca la ciudad con el nombre suministrado
-        for (ClienteDTO cliente : clientes) {
-            // si existe un cliente con ese nombre
-            if (Objects.equals(cliente.getNombre(), newClient.getNombre())){
-                logger.severe("Ya existe un cliente con ese nombre");
-                throw new ClienteException("Ya existe un cliente con ese nombre");
-            }
-        }
-        // agrega al cliente
-        logger.info("agregando cliente " + newClient);
-        clientes.add(newClient);
-        return newClient;
+    public ClienteDTO createCliente(ClienteDTO newCliente) throws ClienteException {
+    	logger.info("recibiendo solicitud de agregar cliente " + newCliente);
+    	
+    	// la nueva Clientes tiene id ?
+    	if ( newCliente.getId()!= null && newCliente.getId() != 0  ) {
+	    	// busca la Clientes con el id suministrado
+	        for (ClienteDTO city : clientes) {
+	        	// si existe una Clientes con ese id
+	            if (Objects.equals(city.getId(), newCliente.getId())){
+	            	logger.severe("Ya existe una Clientes con ese id");
+	                throw new ClienteException("Ya existe una cliente con ese id");
+	            }
+	        }
+	    // la nueva Clientes no tiene id ? 
+    	} else {
+
+    		// genera un id para la Clientes
+    		logger.info("Generando id paa la nueva Clientes");
+    		long newId = 1;
+	        for (ClienteDTO city : clientes) {
+	            if (newId <= city.getId()){
+	                newId =  city.getId() + 1;
+	            }
+	        }
+	        newCliente.setId(newId);
+    	}
+    	
+        // agrega la Clientes
+    	logger.info("agregando cliente " + newCliente);
+        clientes.add(newCliente);
+        return newCliente;
     }
-   
-    
-    /**
-     * Retorna un cliente dado su nombre
-     * 
-     * @param name nombre del cliente a buscar
-     * @return cliente buscado
-     * @throws ClienteException cuando no existe el nombre buscado
-     */
-    public ClienteDTO getClientbyName(String name) throws ClienteException{
+    public ClienteDTO getCliente(int id) throws ClienteException{
         if (clientes == null) {
-    		logger.severe("Error interno: lista de clientes no existe.");
+    		logger.severe("Error interno: lista de Clientes no existe.");
     		throw new ClienteException("Error interno: lista de clientes no existe.");    		
     	}
         for (int i = 0; i < clientes.size(); i++) {
-            if(clientes.get(i).getNombre().equalsIgnoreCase(name)){
+            if(clientes.get(i).getId()==id){
                 return clientes.get(i);
             }
         }
-        throw new ClienteException("Error interno: no existe un cliente con ese nombre.");
+        throw new ClienteException("Error interno: no existe una cliente con ese id.");
     }
+    
 
     /**
-     * Actualiza un cliente dado su nombre
+     * Actualiza una Clientes dado su id
      * 
-     * @param nombre del cliente a modificar
-     * @param newClient información para actualizar
-     * @return el cliente actualizado
-     * @throws ClienteException si no existe un cliente con ese nombre
+     * @param id de la Clientes a modificar
+     * @param newClientes información para actualizar
+     * @return la Clientes actualizada
+     * @throws ClientesException si no existe una Clientes con ese id
      */
-    public ClienteDTO updateCliente(String nombre, ClienteDTO newClient) throws ClienteException {
+    public ClienteDTO updateCliente(int id, ClienteDTO newCliente) throws ClienteException {
         for (int i = 0; i < clientes.size(); i++) {
-            if(clientes.get(i).getNombre().equalsIgnoreCase(nombre)){
-                clientes.set(i, newClient);
+            if(id == clientes.get(i).getId()){
+                clientes.set(i, newCliente);
                 return clientes.get(i);
             }
         }
-        logger.severe("No existe un cliente con ese nombre");
-        throw new ClienteException("No existe un cliente con ese nombre");
+        logger.severe("No existe una Clientes con ese id");
+        throw new ClienteException("No existe una Clientes con ese id");
     }
     
     
     /**
-     * Elimina un cliente del listado
+     * Elimina una Clientes del listado
      * 
-     * @param nombre del cliente a eliminar
-     * @throws ClienteException si no existe un cliente con ese nombre
+     * @param id de la Clientes a eliminar
+     * @throws ClientesException si no existe una Clientes con ese id
      */
-    public void deleteCliente(String nombre) throws ClienteException{
+    public void deleteCliente(int id) throws ClienteException{
 //        logger.info("Antes del ciclo");
         for (int i = 0; i < clientes.size(); i++) {
 //            logger.info("antes del if");
-            if(clientes.get(i).getNombre().equals(nombre)){
+            if(clientes.get(i).getId()==id){
 //                logger.info("dentro del if");
                 clientes.remove(i);
 //                logger.info("despues de remover");
                 return;
             }
         }
-        logger.severe("No existe un cliente con ese nombre");
-        throw new ClienteException("No existe un cliente con ese nombre");
+        logger.severe("No existe una Clientes con ese id");
+        throw new ClienteException("No existe una Clientes con ese id");
     }
+
+   
 }

@@ -1,0 +1,40 @@
+
+<div class="col-md-6 well">
+    <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="ctrl.closeAlert($index)" dismiss-on-timeout="5000">{{alert.msg}} </alert>
+    <form novalidate name="form" id="festivales-form" role="form" ng-submit="form.$valid && ctrl.saveRecord(currentRecord.id)">
+        
+        <div ng-messages="form.$error">
+            <div ng-message="required">Llene los campos requeridos</div>
+        </div>
+   
+        <fieldset>
+            <div class="form-group col-md-12" ng-class="{'has-success': form.name.$valid && form.name.$dirty, 'has-error': form.name.$invalid && (form.name.$dirty || form.$submitted)}" >
+                <label for="idnum" class="col-md-2 control-label">Id</label>
+                <div class="col-md-10">
+                    <input id="idnum" idnum="idnum" class="form-control" type="number" ng-model="currentRecord.id" ng-init="currentRecord.id" readonly="readonly" />
+                </div>
+                <label for="names" class="col-md-2 control-label">Nombres</label>
+                <div class="col-md-10">
+                    <input id="names" names="names" class="form-control" type="text" ng-model="currentRecord.nombres" ng-init="currentRecord.nombres" required />
+                </div>
+                <label for="lanames" class="col-md-2 control-label">Apellidos</label>
+                <div class="col-md-10">
+                    <input id="lanames" lanames="lanames" class="form-control" type="text" ng-model="currentRecord.apellidos" ng-init="currentRecord.apellidos" required />
+                </div>
+                
+                <label for="docum" class="col-md-2 control-label">Documento</label>
+                <div class="col-md-10">
+                    <input id="docum" docum="docum" class="form-control" type="number" ng-model="currentRecord.documento" ng-init="currentRecord.documento" />
+                </div>
+                
+                <label for="afili" class="col-md-4 control-label">Afiliado</label>
+                <div class="col-md-10">
+                    
+                    <input id="afili" afili="afili" type="checkbox" ng-model="currentRecord.afiliado" ng-true-value="true" ng-false-value="false"/>
+                </div>
+            </div>
+            <button type="button" ui-sref='clientesList'>Cancel</button>
+            <button type="submit" >Save</button>    
+        </fieldset>
+    </form>
+</div>

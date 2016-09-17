@@ -1,0 +1,28 @@
+<div class="container-fluid" >
+   
+    <table class="table table-striped" class="col-md-4">
+        <thead>
+            <tr>
+                <th>Id</th>        
+                <th>Nombres</th>
+                <th>Apellidos</th>
+                <th>Documento</th>
+                <th>Afiliado</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="record in records">
+                <td id="{{$index}}-id">{{record.id}}</td>
+                <td id="{{$index}}-nombres">{{record.nombres}}</td>
+                <td id="{{$index}}-apellidos">{{record.apellidos}}</td>
+                <td id="{{$index}}-apellidos">{{record.documento}}</td>
+                <td id="{{$index}}-afiliado">{{record.afiliado}}</td>
+                <td>
+                    <button id="{{$index}}-edit-btn" class="btn btn-default btn-sm" ui-sref="clienteEdit({clienteId: record.id})"><span class="glyphicon glyphicon-edit"></span> Edit</button>
+                    <button id="{{$index}}-delete-btn" class="btn btn-default btn-sm" ng-click="ctrl.deleteRecord(record.id)"><span class="glyphicon glyphicon-minus"></span> Remove</button>
+
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

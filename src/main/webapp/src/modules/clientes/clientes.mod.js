@@ -3,7 +3,7 @@
     mod.constant("clientesContext", "api/clientes");
     mod.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
             var basePath = 'src/modules/clientes/';
-            $urlRouterProvider.otherwise("/clientesList");
+            $urlRouterProvider.otherwise("/clientes");
      
             $stateProvider.state('clientesList', {
                 url: '/clientes',
@@ -25,9 +25,9 @@
                 }
 
             }).state('clienteEdit', {
-                url: '/clientes/:clienteNombre',
+                url: '/clientes/:clienteId',
                 param: {
-                    clienteNombre: null
+                    clienteId: null
                 },
                 views: {
                     'mainView': {

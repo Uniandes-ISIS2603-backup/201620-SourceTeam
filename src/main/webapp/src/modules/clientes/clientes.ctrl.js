@@ -5,17 +5,17 @@
 
             // inicialmente el listado de clientes está vacio
             $scope.records = {};
-            // carga los clientes
+            // carga las ciudades
             $http.get(context).then(function(response){
                 $scope.records = response.data;    
             }, responseError);
 
-            // el controlador recibió un clienteNombre ??
-            // revisa los parámetros (ver el :clienteNombre en la definición de la ruta)
-            if ($stateParams.clienteNombre !== null && $stateParams.clienteNombre !== undefined) {
+            // el controlador recibió un clienteId ??
+            // revisa los parámetros (ver el :clienteId en la definición de la ruta)
+            if ($stateParams.clienteId !== null && $stateParams.clienteId !== undefined) {
                 
                 // toma el id del parámetro
-                nombre = $stateParams.clienteNombre;
+                id = $stateParams.clienteId;
                 // obtiene el dato del recurso REST
                 $http.get(context + "/" + id)
                     .then(function (response) {
@@ -24,24 +24,24 @@
                         $scope.currentRecord = response.data;
                     }, responseError);
 
-            // el controlador no recibió un clienteNombre
+            // el controlador no recibió un clienteId
             } else
             {
                 // el registro actual debe estar vacio
                 $scope.currentRecord = {
                     id: undefined /*Tipo Long. El valor se asigna en el backend*/,
-                    name: '' /*Tipo String*/,
+                    name: '' /*Tipo String*/
                 };
               
                 $scope.alerts = [];
             }
 
 
-            this.saveRecord = function (nombre) {
+            this.saveRecord = function (id) {
                 currentRecord = $scope.currentRecord;
                 
                 // si el id es null, es un registro nuevo, entonces lo crea
-                if (nombre == null) {
+                if (id == null) {
 
                     // ejecuta POST en el recurso REST
                     return $http.post(context, currentRecord)
@@ -64,8 +64,22 @@
                 };
             };
 
-
-
+            this.deleteRecord = function (id) {
+                currentRecord = $scope.currentRecord;
+                if(id!=null)
+                {            
+                    // ejecuta delete en el recurso REST
+                    return $http.delete(context + "/" + id,currentRecord)
+                        .then(function () {
+                            $scope.records = {};
+                            $http.get(context).then(function(response){
+                                $scope.records = response.data;    
+                            }, responseError);
+                            $state.go('clientesList');
+                        }, responseError); 
+                }
+                }
+            
             // -----------------------------------------------------------------
             // Funciones para manejra los mensajes en la aplicación
 

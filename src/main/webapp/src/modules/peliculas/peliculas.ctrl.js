@@ -12,12 +12,12 @@
 
             // el controlador recibió un clienteNombre ??
             // revisa los parámetros (ver el :clienteNombre en la definición de la ruta)
-            if ($stateParams.peliculaNombre !== null && $stateParams.peliculaNombre !== undefined) {
+            if ($stateParams.peliculaId !== null && $stateParams.peliculaId!== undefined) {
                 
                 // toma el id del parámetro
-                nombre = $stateParams.peliculaNombre;
+                id = $stateParams.peliculaId;
                 // obtiene el dato del recurso REST
-                $http.get(context + "/" + nombre)
+                $http.get(context + "/" + id)
                     .then(function (response) {
                         // $http.get es una promesa
                         // cuando llegue el dato, actualice currentRecord
@@ -37,11 +37,11 @@
             }
 
 
-            this.saveRecord = function (nombre) {
+            this.saveRecord = function (id) {
                 currentRecord = $scope.currentRecord;
                 
                 // si el id es null, es un registro nuevo, entonces lo crea
-                if (nombre == null) {
+                if (id == null) {
 
                     // ejecuta POST en el recurso REST
                     return $http.post(context, currentRecord)
@@ -55,7 +55,7 @@
                 } else {
                     
                     // ejecuta PUT en el recurso REST
-                    return $http.put(context + "/" + currentRecord.nombre, currentRecord)
+                    return $http.put(context + "/" + currentRecord.id, currentRecord)
                         .then(function () {
                             // $http.put es una promesa
                             // cuando termine bien, cambie de estado
@@ -64,12 +64,12 @@
                 };
             };
             
-            this.deleteRecord = function (nombre) {
+            this.deleteRecord = function (id) {
                 currentRecord = $scope.currentRecord;
-                if(nombre!=null)
+                if(id!=null)
                 {            
                     // ejecuta delete en el recurso REST
-                    return $http.delete(context + "/" + nombre,currentRecord)
+                    return $http.delete(context + "/" + id,currentRecord)
                         .then(function () {
                             $scope.records = {};
                             $http.get(context).then(function(response){

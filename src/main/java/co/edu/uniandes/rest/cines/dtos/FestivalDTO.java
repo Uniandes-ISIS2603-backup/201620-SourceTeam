@@ -8,8 +8,9 @@ package co.edu.uniandes.rest.cines.dtos;
 /**
  *
  * @author s.ardila13
- */
-public class FestivalDTO {
+ */public class FestivalDTO {
+    
+    private Long id;
     
     private int duracion;
     
@@ -21,8 +22,10 @@ public class FestivalDTO {
         
     }
     
-    public FestivalDTO(int duracion, String nombre, String patrocinador){
+    public FestivalDTO(Long id, int duracion, String nombre, String patrocinador){
         
+        this.id = id;
+                
         this.duracion = duracion;
         
         this.nombre = nombre;
@@ -43,6 +46,10 @@ public class FestivalDTO {
         return patrocinador;
     }
     
+    public Long getId(){
+        return id;
+    }
+    
     public void setDuracion(int duracion){
         this.duracion = duracion;
     }
@@ -51,13 +58,17 @@ public class FestivalDTO {
         this.nombre = nombre;
     }
     
+    public void setId(Long id){
+        this.id = id;
+    }
+    
     public void setPatrocinador(String patrocinador){
         this.patrocinador = patrocinador;
     }
     
     @Override
     public String toString(){
-        return "Nombre: " + nombre + ", duracion: " + duracion + " patrocinar: " + patrocinador;
+        return "Id: " + id + "nombre: " + nombre + ", duracion: " + duracion + " patrocinar: " + patrocinador;
     }
     
 }

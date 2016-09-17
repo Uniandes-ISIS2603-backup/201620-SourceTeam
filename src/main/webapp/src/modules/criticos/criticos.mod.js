@@ -30,9 +30,9 @@
                 }
 
             }).state('criticosEdit', {
-                url: '/criticos/:criticosNombre',
+                url: '/criticos/:criticoId',
                 param: {
-                    clienteNombre: null
+                    criticoId: null
                 },
                 views: {
                     'mainView': {

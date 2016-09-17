@@ -13,28 +13,27 @@
                 <div class="col-md-10">
                     <input id="idnum" idnum="idnum" class="form-control" type="number" ng-model="currentRecord.id" ng-init="currentRecord.id" readonly="readonly" />
                 </div>
-                <label for="fila" class="col-md-2 control-label">Fila</label>
+                <label for="names" class="col-md-2 control-label">Nombres</label>
                 <div class="col-md-10">
-                    <input id="fila" fila="fila" class="form-control" type="number" ng-model="currentRecord.fila" ng-init="currentRecord.fila" required />
+                    <input id="names" names="names" class="form-control" type="text" ng-model="currentRecord.nombres" ng-init="currentRecord.nombres" required />
                 </div>
-                <label for="numero" class="col-md-2 control-label">Numero</label>
+                <label for="lanames" class="col-md-2 control-label">Apellidos</label>
                 <div class="col-md-10">
-                    <input id="numero" numero="numero" class="form-control" type="number" ng-model="currentRecord.numero" ng-init="currentRecord.numero" required />
-                </div>
-                
-                <label for="pref" class="col-md-4 control-label">Preferencial</label>
-                <div class="col-md-10">
-                    
-                    <input id="pref" pref="pref" type="checkbox" ng-model="currentRecord.preferencial" ng-true-value="true" ng-false-value="false"/>
+                    <input id="lanames" lanames="lanames" class="form-control" type="text" ng-model="currentRecord.apellidos" ng-init="currentRecord.apellidos" required />
                 </div>
                 
-                <label for="reser" class="col-md-4 control-label">Reservada</label>
+                <label for="docum" class="col-md-2 control-label">Documento</label>
+                <div class="col-md-10">
+                    <input id="docum" docum="docum" class="form-control" type="number" ng-model="currentRecord.documento" ng-init="currentRecord.documento" />
+                </div>
+                
+                <label for="afili" class="col-md-4 control-label">Afiliado</label>
                 <div class="col-md-10">
                     
-                    <input id="reser" reser="reser" type="checkbox" ng-model="currentRecord.reservada" ng-true-value="true" ng-false-value="false"/>
+                    <input id="afili" afili="afili" type="checkbox" ng-model="currentRecord.afiliado" ng-true-value="true" ng-false-value="false"/>
                 </div>
             </div>
-            <button type="button" ui-sref='sillasList'>Cancel</button>
+            <button type="button" ui-sref='clientesList'>Cancel</button>
             <button type="submit" >Save</button>    
         </fieldset>
     </form>

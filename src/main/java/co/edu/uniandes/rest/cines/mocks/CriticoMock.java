@@ -6,10 +6,12 @@
 package co.edu.uniandes.rest.cines.mocks;
 
 import co.edu.uniandes.rest.cines.dtos.CriticoDTO;
+import co.edu.uniandes.rest.cines.dtos.FestivalDTO;
 import co.edu.uniandes.rest.cines.exceptions.CriticoException;
 import co.edu.uniandes.rest.cines.exceptions.FestivalException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -33,9 +35,9 @@ public class CriticoMock {
         if(criticos == null)
         {
             criticos = new ArrayList<>();
-            criticos.add( new CriticoDTO(1, "Juan", 1));
-            criticos.add( new CriticoDTO(1, "Pablo", 2) );
-            criticos.add( new CriticoDTO(1, "Pedro", 3)) ;
+            criticos.add( new CriticoDTO(1L,1, "Juan", 10208));
+            criticos.add( new CriticoDTO(2L,2, "Pablo", 25445));
+            criticos.add( new CriticoDTO(3L,3, "Pedro", 36546)) ;
         }
 
         
@@ -68,37 +70,67 @@ public class CriticoMock {
      * @return critico agregado
      */
     public CriticoDTO createCritico(CriticoDTO newCritico) throws CriticoException {
-        logger.info("recibiendo solicitud de agregar un critico " + newCritico);
-       boolean found = false; 
-       for(int i = 0; i < criticos.size()&& !found;i++){
-           CriticoDTO actualCritico = criticos.get(i);
-           if(actualCritico.getCredencial() == newCritico.getCredencial())
-               found = true;
-       }
-       if(found){
-           throw new CriticoException("El critico ya existe");
-       }
-       else{
-           criticos.add(newCritico);
-           return newCritico;
-       }
+        logger.info("recibiendo solicitud de agregar critico " + newCritico);
+
+        // la nueva ciudad tiene id ?
+        if (newCritico.getId() != null) {
+            // busca la ciudad con el id suministrado
+            for (CriticoDTO critico : criticos) {
+                // si existe una ciudad con ese id
+                if (Objects.equals(critico.getId(), newCritico.getId())) {
+                    logger.severe("Ya existe una ciudad con ese id");
+                    throw new CriticoException("Ya existe un critico con ese id");
+                };
+                if (Objects.equals(critico.getNombre(), newCritico.getNombre())) {
+                    logger.severe("Ya existe un critico con ese nombre");
+                    throw new CriticoException("Ya existe un critico con ese nombre");
+                }
+
+            }
+
+            // la nueva ciudad no tiene id ? 
+        } else {
+            for (CriticoDTO critico : criticos) {
+                // si existe una ciudad con ese id
+                
+                if (Objects.equals(critico.getNombre(), newCritico.getNombre())) {
+                    logger.severe("Ya existe un critico con ese nombre");
+                    throw new CriticoException("Ya existe un critico con ese nombre");
+                }
+
+            }
+            // genera un id para la ciudad
+            logger.info("Generando id para el nuevo critico");
+            long newId = 1;
+            for (CriticoDTO critico : criticos) {
+                if (newId <= critico.getId()) {
+                    newId = critico.getId() + 1;
+                }
+            }
+            newCritico.setId(newId);
+        }
+
+        // agrega la ciudad
+        logger.info("agregando ciudad " + newCritico);
+        criticos.add(newCritico);
+        return newCritico;
     }
 
    
     /**
-     * Retorna un festival dado su nombre
+     * Retorna un critico dado su nombre
      * 
      * @param credencial del critico a buscar
      * @return critico buscada
      * @throws CriticoException cuando no existe el id buscado
      */
-    public CriticoDTO getCritico(long credencial) throws CriticoException{
+    public CriticoDTO getCritico(long id) throws CriticoException{
         if (criticos == null) {
     		logger.severe("Error interno: lista de criticos no existe.");
     		throw new CriticoException("Error interno: criticos de festivales no existe.");    		
     	}
         for (int i = 0; i < criticos.size(); i++) {
-            if(criticos.get(i).getCredencial() == (int)credencial){
+            if(criticos.get(i).getId()== (int)id){
                 return criticos.get(i);
             }
         }
@@ -115,7 +147,7 @@ public class CriticoMock {
      */
     public CriticoDTO updateCritico(int credencial, CriticoDTO newCritico) throws CriticoException {
         for (int i = 0; i < criticos.size(); i++) {
-            if(credencial == criticos.get(i).getCredencial()){
+            if(credencial == criticos.get(i).getId()){
                 criticos.set(i, newCritico);
                 return criticos.get(i);
             }
@@ -131,12 +163,12 @@ public class CriticoMock {
      * @param credencial del critico a eliminar
      * @throws CriticoException si no existe un critico con ese nombre
      */
-    public CriticoDTO deleteCritico(int credencial) throws CriticoException{
+    public CriticoDTO deleteCritico(int id) throws CriticoException{
 //        logger.info("Antes del ciclo " + credencial);
         boolean found = false;
         for (int i = 0; i < criticos.size() && !found; i++) {
 //            logger.info("antes del if");
-            if(criticos.get(i).getCredencial() == credencial){
+            if(criticos.get(i).getId() == id){
 //                logger.info("dentro del if");
                 CriticoDTO encontrado = criticos.get(i);
                 criticos.remove(i);
@@ -146,7 +178,7 @@ public class CriticoMock {
             }
         }
         logger.severe("No existe un critico con ese id");
-        throw new CriticoException("No existe un critico con ese id" + credencial);
+        throw new CriticoException("No existe un critico con ese id" + id);
     }
     
 }

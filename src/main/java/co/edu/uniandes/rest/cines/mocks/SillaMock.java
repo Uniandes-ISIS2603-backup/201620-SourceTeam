@@ -22,7 +22,7 @@ public class SillaMock {
 	// objeto para presentar logs de las operaciones
 	private final static Logger logger = Logger.getLogger(SillaMock.class.getName());
 	
-	// listado de ciudades
+	// listado de Sillas
     private static ArrayList<SillaDTO> sillas;
 
     /**
@@ -31,25 +31,29 @@ public class SillaMock {
     public SillaMock() {
 
     	if (sillas == null) {
-            sillas = new ArrayList<>();
-            sillas.add(new SillaDTO(1L,1,3,false, false));
-            sillas.add(new SillaDTO(2L,1,5,false, false));
-            sillas.add(new SillaDTO(3L,1,6,true,false));
-            sillas.add(new SillaDTO(4L,2,2,false, false));
-            sillas.add(new SillaDTO(5L,3,4,false, false));
+                try {
+                    sillas = new ArrayList<>();
+                    createSilla(new SillaDTO(1,3,false, false));
+                    createSilla(new SillaDTO(7,5,false, true));
+                    createSilla(new SillaDTO(1,6,true,false));
+                    createSilla(new SillaDTO(2,2,false, false));
+                    createSilla(new SillaDTO(3,4,true, true));
+                } catch (SillaException ex) {
+                   logger.severe("Error interno: No se pueden crear las sillas de prueba.");
+                }
         }
         
     	// indica que se muestren todos los mensajes
     	logger.setLevel(Level.INFO);
     	
     	// muestra información 
-    	logger.info("Inicializa la lista de ciudades");
+    	logger.info("Inicializa la lista de Sillas");
     	logger.info("Sillas" + sillas );
     }    
     
 	/**
 	 * Obtiene el listado de personas. 
-	 * @return lista de ciudades
+	 * @return lista de Sillas
 	 * @throws SillaException cuando no existe la lista en memoria  
 	 */    
     public List<SillaDTO> getSillas() throws SillaException {
@@ -65,30 +69,29 @@ public class SillaMock {
  
 
     /**
-     * Agrega una ciudad a la lista.
-     * @param newSilla ciudad a adicionar
-     * @throws SillaException cuando ya existe una ciudad con el id suministrado
-     * @return ciudad agregada
+     * Agrega una Sillas a la lista.
+     * @param newSilla Sillas a adicionar
+     * @throws SillaException cuando ya existe una Sillas con el id suministrado
+     * @return Sillas agregada
      */
     public SillaDTO createSilla(SillaDTO newSilla) throws SillaException {
     	logger.info("recibiendo solicitud de agregar silla " + newSilla);
     	
-    	// la nueva ciudad tiene id ?
-    	if ( newSilla.getFila() != 0  ) {
-	    	// busca la ciudad con el id suministrado
+    	// la nueva Sillas tiene id ?
+    	if ( newSilla.getId()!= null && newSilla.getId() != 0  ) {
+	    	// busca la Sillas con el id suministrado
 	        for (SillaDTO city : sillas) {
-	        	// si existe una ciudad con ese id
+	        	// si existe una Sillas con ese id
 	            if (Objects.equals(city.getId(), newSilla.getId())){
-	            	logger.severe("Ya existe una ciudad con ese id");
+	            	logger.severe("Ya existe una Sillas con ese id");
 	                throw new SillaException("Ya existe una silla con ese id");
 	            }
 	        }
-	        
-	    // la nueva ciudad no tiene id ? 
+	    // la nueva Sillas no tiene id ? 
     	} else {
 
-    		// genera un id para la ciudad
-    		logger.info("Generando id paa la nueva ciudad");
+    		// genera un id para la Sillas
+    		logger.info("Generando id paa la nueva Sillas");
     		long newId = 1;
 	        for (SillaDTO city : sillas) {
 	            if (newId <= city.getId()){
@@ -98,14 +101,14 @@ public class SillaMock {
 	        newSilla.setId(newId);
     	}
     	
-        // agrega la ciudad
+        // agrega la Sillas
     	logger.info("agregando silla " + newSilla);
         sillas.add(newSilla);
         return newSilla;
     }
     public SillaDTO getSilla(int id) throws SillaException{
         if (sillas == null) {
-    		logger.severe("Error interno: lista de ciudades no existe.");
+    		logger.severe("Error interno: lista de Sillas no existe.");
     		throw new SillaException("Error interno: lista de sillas no existe.");    		
     	}
         for (int i = 0; i < sillas.size(); i++) {
@@ -118,12 +121,12 @@ public class SillaMock {
     
 
     /**
-     * Actualiza una boleta dado su id
+     * Actualiza una Sillas dado su id
      * 
-     * @param id de la boleta a modificar
-     * @param newBoleta información para actualizar
-     * @return la boleta actualizada
-     * @throws BoletaException si no existe una ciudad con ese id
+     * @param id de la Sillas a modificar
+     * @param newSillas información para actualizar
+     * @return la Sillas actualizada
+     * @throws SillasException si no existe una Sillas con ese id
      */
     public SillaDTO updateSilla(int id, SillaDTO newSilla) throws SillaException {
         for (int i = 0; i < sillas.size(); i++) {
@@ -132,16 +135,16 @@ public class SillaMock {
                 return sillas.get(i);
             }
         }
-        logger.severe("No existe una boleta con ese id");
-        throw new SillaException("No existe una boleta con ese id");
+        logger.severe("No existe una Sillas con ese id");
+        throw new SillaException("No existe una Sillas con ese id");
     }
     
     
     /**
-     * Elimina una boleta del listado
+     * Elimina una Sillas del listado
      * 
-     * @param id de la boleta a eliminar
-     * @throws BoletaException si no existe una boleta con ese id
+     * @param id de la Sillas a eliminar
+     * @throws SillasException si no existe una Sillas con ese id
      */
     public void deleteSilla(int id) throws SillaException{
 //        logger.info("Antes del ciclo");
@@ -154,8 +157,8 @@ public class SillaMock {
                 return;
             }
         }
-        logger.severe("No existe una boleta con ese id");
-        throw new SillaException("No existe una boleta con ese id");
+        logger.severe("No existe una Sillas con ese id");
+        throw new SillaException("No existe una Sillas con ese id");
     }
 
    

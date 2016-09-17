@@ -12,12 +12,12 @@
 
             // el controlador recibió un FestivalNombre ??
             // revisa los parámetros (ver el :festivalNombre en la definición de la ruta)
-            if ($stateParams.festivalNombre !== null && $stateParams.festivalNombre !== undefined) {
+            if ($stateParams.festivalId !== null && $stateParams.festivalId !== undefined) {
                 
                 // toma el id del parámetro
-                nombre = $stateParams.festivalNombre;
+                id = $stateParams.festivalId;
                 // obtiene el dato del recurso REST
-                $http.get(context + "/" + nombre)
+                $http.get(context + "/" + id)
                     .then(function (response) {
                         // $http.get es una promesa
                         // cuando llegue el dato, actualice currentRecord
@@ -29,6 +29,7 @@
             {
                 // el registro actual debe estar vacio
                 $scope.currentRecord = {
+                    id : undefined,
                     nombre: '' /*Tipo String*/,
                     duracion: undefined /*Tipo String*/,
                     patrocinador: '' /*Tipo String*/
@@ -39,11 +40,10 @@
             }
 
 
-            this.saveRecord = function (nombre) {
+            this.saveRecord = function (id) {
                 currentRecord = $scope.currentRecord;
-                console.log(nombre);
                 // si el nombre es null, es un registro nuevo, entonces lo crea
-                if (nombre == null) {
+                if (id == null) {
 
                     // ejecuta POST en el recurso REST
                     return $http.post(context, currentRecord)
@@ -57,7 +57,7 @@
                 } else {
                     
                     // ejecuta PUT en el recurso REST
-                    return $http.put(context + "/" + currentRecord.nombre, currentRecord)
+                    return $http.put(context + "/" + currentRecord.id, currentRecord)
                         .then(function () {
                             // $http.put es una promesa
                             // cuando termine bien, cambie de estado
@@ -67,11 +67,12 @@
             };
 
             this.deleteRecord = function (record) {
+                
                 currentRecord = $scope.currentRecord;
-                if(record !=null)
-                {            
+                if(record != null)
+                {
                     // ejecuta delete en el recurso REST
-                    return $http.delete(context + "/" + record.nombre)
+                    return $http.delete(context + "/" + record)
                         .then(function () {
                             $scope.records = {};
                             $http.get(context).then(function(response){

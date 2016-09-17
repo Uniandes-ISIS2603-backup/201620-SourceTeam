@@ -6,16 +6,15 @@
 package co.edu.uniandes.rest.cines.dtos;
 
 /**
- * Objeto de transferencia de datos de Clientes
- * @author ca.nieto11
+ * Objeto de transferencia de datos de Cliente
+ * @author s.rodriguez20
  */
 public class ClienteDTO {
- 
-    private String nombre;
+    private Long id;
+    private String nombres;
+    private String apellidos;
+    private Long documento;
     private boolean afiliado;
-    private int[] calificacionCritico;
-    private int[] calificacionPelicula;
-    private int[] reservas;             //TODO Cambiar por Silla[]
 
     /**
      *
@@ -25,115 +24,66 @@ public class ClienteDTO {
 
     /**
      *
-     * @param nombre
-     * @param afiliado
+     * @param pNombre
+     * @param pApellido
+     * @param pDocumento
+     * @param pAfiliado
      */
-    public ClienteDTO(String nombre, boolean afiliado) {
-        super();
-        this.nombre = nombre;
-        this.afiliado = afiliado;
+    public ClienteDTO(String pNombre, String pApellido, Long pDocumento, boolean pAfiliado) {
+        this.id=0L;
+        this.nombres = pNombre;
+        this.apellidos = pApellido;
+        this.documento= pDocumento;
+        this.afiliado= pAfiliado;
+    }
+    public Long getId() {
+        return id;
     }
 
     /**
-     *
-     * @param nombre
-     * @param afiliado
-     * @param calificacionCritico
-     * @param calificacionPelicula
-     * @param reservas
+     * @param id the id to set
      */
-    public ClienteDTO(String nombre, boolean afiliado, int[] calificacionCritico, int[] calificacionPelicula, int[] reservas) {
-        super();
-        this.nombre = nombre;
-        this.afiliado = afiliado;
-        this.calificacionCritico = calificacionCritico;
-        this.calificacionPelicula = calificacionPelicula;
-        this.reservas = reservas;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    /**
-     *
-     * @return
-     */
-    public String getNombre() {
-        return nombre;
+    public String getNombres() {
+        return nombres;
     }
 
-    /**
-     *
-     * @param nombre
-     */
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setNombres(String nombres) {
+        this.nombres = nombres;
     }
 
-    /**
-     *
-     * @return
-     */
+    public String getApellidos() {
+        return apellidos;
+    }
+
+    public void setApellidos(String apellidos) {
+        this.apellidos = apellidos;
+    }
+
+    public Long getDocumento() {
+        return documento;
+    }
+
+    public void setDocumento(Long documento) {
+        this.documento = documento;
+    }
+
     public boolean isAfiliado() {
         return afiliado;
     }
 
-    /**
-     *
-     * @param afiliado
-     */
     public void setAfiliado(boolean afiliado) {
         this.afiliado = afiliado;
     }
-
-    /**
-     *
-     * @return
-     */
-    public int[] getCalificacionCritico() {
-        return calificacionCritico;
-    }
-
-    /**
-     *
-     * @param calificacionCritico
-     */
-    public void setCalificacionCritico(int[] calificacionCritico) {
-        this.calificacionCritico = calificacionCritico;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public int[] getCalificacionPelicula() {
-        return calificacionPelicula;
-    }
-
-    /**
-     *
-     * @param calificacionPelicula
-     */
-    public void setCalificacionPelicula(int[] calificacionPelicula) {
-        this.calificacionPelicula = calificacionPelicula;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public int[] getReservas() {
-        return reservas;
-    }
-
-    /**
-     *
-     * @param reservas
-     */
-    public void setReservas(int[] reservas) {
-        this.reservas = reservas;
-    }
-
+    
+    
+    
     @Override
     public String toString() {
-        return "{nombre:\"" + nombre + "\", afiliado:\"" + afiliado + "\"}'";
+        return "{ id : " + getId() + ", nombre: \"" + nombres + "\", apellidos:\"" + apellidos + "\", documento:" + documento + ", afiliados:"+ afiliado + "}";
     }
     
 }

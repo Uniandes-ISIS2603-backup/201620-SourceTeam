@@ -12,12 +12,12 @@
 
             // el controlador recibió un CriticoCredencial ??
             // revisa los parámetros (ver el criticoCredencial en la definición de la ruta)
-            if ($stateParams.criticoCredencial !== null && $stateParams.criticoCredencial !== undefined) {
+            if ($stateParams.criticoId !== null && $stateParams.criticoId !== undefined) {
                 
                 // toma el id del parámetro
-                credencial = $stateParams.criticoCredencial;
+                id = $stateParams.criticoId;
                 // obtiene el dato del recurso REST
-                $http.get(context + "/" + credencial)
+                $http.get(context + "/" + id)
                     .then(function (response) {
                         // $http.get es una promesa
                         // cuando llegue el dato, actualice currentRecord
@@ -38,10 +38,10 @@
             }
 
 
-            this.saveRecord = function (credencial) {
+            this.saveRecord = function (id) {
                 currentRecord = $scope.currentRecord;
                 // si el id es null, es un registro nuevo, entonces lo crea
-                if (credencial == null) {
+                if (id == null) {
 
                     // ejecuta POST en el recurso REST
                     return $http.post(context, currentRecord)
@@ -53,9 +53,8 @@
                         
                 // si el id no es null, es un registro existente entonces lo actualiza
                 } else {
-                    
                     // ejecuta PUT en el recurso REST
-                    return $http.put(context + "/" + currentRecord.credencial, currentRecord)
+                    return $http.put(context + "/" + currentRecord.id, currentRecord)
                         .then(function () {
                             // $http.put es una promesa
                             // cuando termine bien, cambie de estado
@@ -74,7 +73,7 @@
                 if(record !=null)
                 {            
                     // ejecuta delete en el recurso REST
-                    return $http.delete(context + "/" + record.credencial)
+                    return $http.delete(context + "/" + record.id)
                         .then(function () {
                             $scope.records = {};
                             $http.get(context).then(function(response){

@@ -15,139 +15,118 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author ca.nieto11
+ * @author s.rodriguez20
  */
 public class BoletaMock {
-    // objeto para presentar logs de las operaciones
-    private final static Logger logger = Logger.getLogger(BoletaMock.class.getName());
 	
-    // listado de boletas
+	// objeto para presentar logs de las operaciones
+	private final static Logger logger = Logger.getLogger(BoletaMock.class.getName());
+	
+	// listado de Boletas
     private static ArrayList<BoletaDTO> boletas;
-    
+
     /**
      * Constructor. Crea los datos de ejemplo.
      */
     public BoletaMock() {
 
     	if (boletas == null) {
-            boletas = new ArrayList<>();
-            boletas.add(new BoletaDTO(1, 2000));
-            boletas.add(new BoletaDTO(2, 3000));
-            boletas.add(new BoletaDTO(3, 5000));
+                try {
+                    boletas = new ArrayList<>();
+                    createBoleta(new BoletaDTO(8000));
+                    createBoleta(new BoletaDTO(5000));
+                    createBoleta(new BoletaDTO(6000));
+                    createBoleta(new BoletaDTO(7000));
+                    createBoleta(new BoletaDTO(8000));
+                } catch (BoletaException ex) {
+                   logger.severe("Error interno: No se pueden crear las boletas de prueba.");
+                }
         }
         
     	// indica que se muestren todos los mensajes
     	logger.setLevel(Level.INFO);
     	
     	// muestra información 
-    	logger.info("Inicializa la lista de boletas");
-    	logger.info("Boletas:" + boletas );
-    }
+    	logger.info("Inicializa la lista de Boletas");
+    	logger.info("Boletas" + boletas );
+    }    
     
-    /**
-     * Obtiene el listado de boletas.
-     * @return lista de boletas
-     * @throws BoletaException cuando no existe la lista en memoria
-     */
+	/**
+	 * Obtiene el listado de personas. 
+	 * @return lista de Boletas
+	 * @throws BoletaException cuando no existe la lista en memoria  
+	 */    
     public List<BoletaDTO> getBoletas() throws BoletaException {
-        if (boletas == null) {
-            logger.severe("Error interno: lista de boletas no existe.");
-            throw new BoletaException("Error interno: lista de boletas no existe.");
-        }
-        
-        logger.info("retornando todas las boletas");
-        return boletas;
+    	if (boletas == null) {
+    		logger.severe("Error interno: lista de boletas no existe.");
+    		throw new BoletaException("Error interno: lista boletas no existe.");    		
+    	}
+    	
+    	logger.info("retornando todas las boletas");
+    	return boletas;
     }
-    
+
+ 
+
     /**
-     * Agrega una boleta a la lista.
-     * @param newBoleta ciudad a adicionar
-     * @throws BoletaException cuando ya existe una boleta con el id suministrado
-     * @return boleta agregada
+     * Agrega una Boletas a la lista.
+     * @param newBoleta Boletas a adicionar
+     * @throws BoletaException cuando ya existe una Boletas con el id suministrado
+     * @return Boletas agregada
      */
     public BoletaDTO createBoleta(BoletaDTO newBoleta) throws BoletaException {
-        logger.info("recibiendo solicitud de agregar boleta " + newBoleta);
-        
-        // la nueva boleta tiene id ?
-        if ((Integer) newBoleta.getId() != null ) {
-            // busca la boleta con el id suministrado
-            for (BoletaDTO boleta : boletas) {
-                // si existe una ciudad con ese id
-                if (Objects.equals(boleta.getId(), newBoleta.getId())){
-                    logger.severe("Ya existe una boleta con ese id");
-                    throw new BoletaException("Ya existe una boleta con ese id");
-                }
-            }
-            
-            // la nueva ciudad no tiene id ?
-        } else {
-            
-            // genera un id para la ciudad
-            logger.info("Generando id para la nueva boleta");
-            int newId = 1;
-            for (BoletaDTO boleta : boletas) {
-                if (newId <= boleta.getId()){
-                    newId =  boleta.getId() + 1;
-                }
-            }
-            newBoleta.setId(newId);
-        }
-        
-        // agrega la ciudad
-        logger.info("agregando bolera " + newBoleta);
+    	logger.info("recibiendo solicitud de agregar boleta " + newBoleta);
+    	
+    	// la nueva Boletas tiene id ?
+    	if ( newBoleta.getId()!= null && newBoleta.getId() != 0  ) {
+	    	// busca la Boletas con el id suministrado
+	        for (BoletaDTO city : boletas) {
+	        	// si existe una Boletas con ese id
+	            if (Objects.equals(city.getId(), newBoleta.getId())){
+	            	logger.severe("Ya existe una Boletas con ese id");
+	                throw new BoletaException("Ya existe una boleta con ese id");
+	            }
+	        }
+	    // la nueva Boletas no tiene id ? 
+    	} else {
+
+    		// genera un id para la Boletas
+    		logger.info("Generando id paa la nueva Boletas");
+    		long newId = 1;
+	        for (BoletaDTO city : boletas) {
+	            if (newId <= city.getId()){
+	                newId =  city.getId() + 1;
+	            }
+	        }
+	        newBoleta.setId(newId);
+    	}
+    	
+        // agrega la Boletas
+    	logger.info("agregando boleta " + newBoleta);
         boletas.add(newBoleta);
         return newBoleta;
     }
-
-   
-    /**
-     * Retorna una boleta dado su id
-     * 
-     * @param id de la boleta a buscar
-     * @return boleta buscada
-     * @throws BoletaException cuando no existe el id buscado
-     */
     public BoletaDTO getBoleta(int id) throws BoletaException{
         if (boletas == null) {
-    		logger.severe("Error interno: lista de ciudades no existe.");
-    		throw new BoletaException("Error interno: lista de ciudades no existe.");    		
+    		logger.severe("Error interno: lista de Boletas no existe.");
+    		throw new BoletaException("Error interno: lista de boletas no existe.");    		
     	}
         for (int i = 0; i < boletas.size(); i++) {
             if(boletas.get(i).getId()==id){
                 return boletas.get(i);
             }
         }
-        throw new BoletaException("Error interno: no existe una ciudad con ese id.");
+        throw new BoletaException("Error interno: no existe una boleta con ese id.");
     }
     
-    
-    /**
-     * Retorna una boleta dado su precio
-     * 
-     * @param precio nombre de la ciudad a buscar
-     * @return boleta buscada
-     * @throws BoletaException cuando no existe el precio buscado
-     */
-    public BoletaDTO getBoletaPorPrecio(Double precio) throws BoletaException{
-        if (boletas == null) {
-    		logger.severe("Error interno: lista de boletas no existe.");
-    		throw new BoletaException("Error interno: lista de boletas no existe.");    		
-    	}
-        for (int i = 0; i < boletas.size(); i++) {
-            if(boletas.get(i).getPrecio()==precio){
-                return boletas.get(i);
-            }
-        }
-        throw new BoletaException("Error interno: no existe una ciudad con ese nombre.");
-    }
 
     /**
-     * Actualiza una boleta dado su id
+     * Actualiza una Boletas dado su id
      * 
-     * @param id de la boleta a modificar
-     * @param newBoleta información para actualizar
-     * @return la boleta actualizada
-     * @throws BoletaException si no existe una ciudad con ese id
+     * @param id de la Boletas a modificar
+     * @param newBoletas información para actualizar
+     * @return la Boletas actualizada
+     * @throws BoletasException si no existe una Boletas con ese id
      */
     public BoletaDTO updateBoleta(int id, BoletaDTO newBoleta) throws BoletaException {
         for (int i = 0; i < boletas.size(); i++) {
@@ -156,16 +135,16 @@ public class BoletaMock {
                 return boletas.get(i);
             }
         }
-        logger.severe("No existe una boleta con ese id");
-        throw new BoletaException("No existe una boleta con ese id");
+        logger.severe("No existe una Boletas con ese id");
+        throw new BoletaException("No existe una Boletas con ese id");
     }
     
     
     /**
-     * Elimina una boleta del listado
+     * Elimina una Boletas del listado
      * 
-     * @param id de la boleta a eliminar
-     * @throws BoletaException si no existe una boleta con ese id
+     * @param id de la Boletas a eliminar
+     * @throws BoletasException si no existe una Boletas con ese id
      */
     public void deleteBoleta(int id) throws BoletaException{
 //        logger.info("Antes del ciclo");
@@ -178,7 +157,9 @@ public class BoletaMock {
                 return;
             }
         }
-        logger.severe("No existe una boleta con ese id");
-        throw new BoletaException("No existe una boleta con ese id");
+        logger.severe("No existe una Boletas con ese id");
+        throw new BoletaException("No existe una Boletas con ese id");
     }
+
+   
 }

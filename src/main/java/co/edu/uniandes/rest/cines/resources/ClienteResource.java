@@ -19,7 +19,7 @@ import javax.ws.rs.Produces;
 
 /**
  *
- * @author ca.nieto11
+ * @author s.rodriguez20
  */
 @Path("clientes")
 @Produces("application/json")
@@ -29,7 +29,7 @@ public class ClienteResource {
     /**
      * Obtiene el listado de clientes.
      *
-     * @return lista de clientes
+     * @return lista de Clientes
      * @throws ClienteException excepción retornada por la lógica
      */
     @GET
@@ -39,56 +39,55 @@ public class ClienteResource {
 
    
     /**
-     * Agrega un cliente
+     * Agrega una cliente
      *
-     * @param cliente  a agregar
-     * @return datos del cliente a agregar
-     * @throws ClienteException cuando ya existe una boleta con el id
+     * @param cliente cliente a agregar
+     * @return datos de la cliente a agregar
+     * @throws ClienteException cuando ya existe una cliente con el id
      * suministrado
      */
     @POST
     public ClienteDTO createCliente(ClienteDTO cliente) throws ClienteException {
         return clientes.createCliente(cliente);
     }
-    
-    
+
+
     /**
-     * Retorna un cliente dado su nombre
+     * Retorna una cliente dado su id
      * 
-     * @param nombre del cliente a retornar
-     * @return un cliente
+     * @param id id de la cliente a retornar
+     * @return una cliente
      * @throws ClienteException excepción retornada por la lógica
      */
     @GET
-    @Path("{name: [a-zA-Z][a-zA-Z]*}")
-    public ClienteDTO getClientbyName(@PathParam("name") String nombre) throws ClienteException {
-        return clientes.getClientbyName(nombre);
-    }
-    
+    @Path("{id: \\d+}")
+    public ClienteDTO getCliente(@PathParam("id") int id) throws ClienteException{
+       return clientes.getCliente(id);
+    }    
     
     /**
-     * Actualiza la información de un cliente identificada con su nombre
+     * Actualiza la información de la cliente identificada con id
      * 
-     * @param nombre del cliente
-     * @param cliente con el que actualizar la información
-     * @return el cliente actualizado
+     * @param id de la cliente
+     * @param cliente con la que actualizar la información
+     * @return la cliente actualizada
      * @throws ClienteException excepción retornada por la lógica
      */
     @PUT
-    @Path("{name: [a-zA-Z][a-zA-Z]*}")
-    public ClienteDTO updateCliente(@PathParam("name") String nombre, ClienteDTO cliente) throws ClienteException{
-        return clientes.updateCliente(nombre, cliente);
+    @Path("{id: \\d+}")
+    public ClienteDTO updateCliente(@PathParam("id") int id, ClienteDTO cliente) throws ClienteException{
+        return clientes.updateCliente(id, cliente);
     }
     
     /**
-     * Elimina un cliente dado su nombre
+     * Elimina una cliente dado su id
      * 
-     * @param nombre del cliente eliminado
+     * @param id de la cliente eliminada
      * @throws ClienteException excepción retornada por la lógica
      */
     @DELETE
-    @Path("{name: [a-zA-Z][a-zA-Z]*}")
-    public void deleteCity(@PathParam("name")String nombre) throws ClienteException{
-        clientes.deleteCliente(nombre);
+    @Path("{id: \\d+}")
+    public void deleteCliente(@PathParam("id")int id) throws ClienteException{
+        clientes.deleteCliente(id);
     }
 }

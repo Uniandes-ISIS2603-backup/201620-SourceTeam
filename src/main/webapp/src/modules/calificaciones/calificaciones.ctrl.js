@@ -34,7 +34,7 @@
             {
                 // el registro actual debe estar vacio
                 $scope.currentRecord = {
-                    id: undefined /*Tipo double. El valor se asigna en el backend*/,
+                    id: undefined /*Tipo double. El valor se asigna en el backend*/
                     
                 };
               

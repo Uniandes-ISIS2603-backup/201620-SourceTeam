@@ -27,8 +27,8 @@ public class SillaDTO {
      * @param id
      * @param precio
      */
-    public SillaDTO(Long pid,int pFila, int pNumero, boolean pPreferencial, boolean pReservada) {
-        this.id=pid;
+    public SillaDTO(int pFila, int pNumero, boolean pPreferencial, boolean pReservada) {
+        this.id=0L;
         this.fila = pFila;
         this.numero = pNumero;
         this.preferencial= pPreferencial;

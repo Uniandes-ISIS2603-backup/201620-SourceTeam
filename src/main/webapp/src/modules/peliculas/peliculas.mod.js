@@ -28,9 +28,9 @@ mod.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
                 }
 
             }).state('peliculasEdit', {
-                url: '/peliculas/:nombrePelicula',
+                url: '/peliculas/:peliculaId',
                 param: {
-                    peliculaNombre: null
+                    peliculaId: null
                 },
                 views: {
                     'mainView': {

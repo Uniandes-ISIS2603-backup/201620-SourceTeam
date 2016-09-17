@@ -12,12 +12,12 @@
 
             // el controlador recibió un numSala ??
             // revisa los parámetros (ver el :numSala en la definición de la ruta)
-            if ($stateParams.numSala !== null && $stateParams.numSala !== undefined) {
+            if ($stateParams.salaId !== null && $stateParams.salaId !== undefined) {
                 
                 // toma el id del parámetro
-                numSala = $stateParams.numSala;
+                id = $stateParams.salaId;
                 // obtiene el dato del recurso REST
-                $http.get(context + "/" + numSala)
+                $http.get(context + "/" + id)
                     .then(function (response) {
                         // $http.get es una promesa
                         // cuando llegue el dato, actualice currentRecord
@@ -29,7 +29,7 @@
             {
                 // el registro actual debe estar vacio
                 $scope.currentRecord = {
-                    numero: undefined /*Tipo Long. El valor se asigna en el backend*/,
+                    id: undefined /*Tipo Long. El valor se asigna en el backend*/,
                     name: '' /*Tipo String*/
                 };
               
@@ -37,11 +37,11 @@
             }
 
 
-            this.saveRecord = function (numSala) {
+            this.saveRecord = function (id) {
                 currentRecord = $scope.currentRecord;
                 
                 // si el nombre es null, es un registro nuevo, entonces lo crea
-                if (numSala == null) {
+                if (id == null) {
 
                     // ejecuta POST en el recurso REST
                     return $http.post(context, currentRecord)
@@ -55,7 +55,7 @@
                 } else {
                     
                     // ejecuta PUT en el recurso REST
-                    return $http.put(context + "/" + currentRecord.numero, currentRecord)
+                    return $http.put(context + "/" + currentRecord.id, currentRecord)
                         .then(function () {
                             // $http.put es una promesa
                             // cuando termine bien, cambie de estado
@@ -63,20 +63,22 @@
                         }, responseError);
                 };
             };
-            this.deleteRecord = function(numSala){
+            
+            this.deleteRecord = function (id) {
                 currentRecord = $scope.currentRecord;
-                if(nummSala == null)
-                {
-                    responseError;
+                if(id != null)
+                {            
+                    // ejecuta delete en el recurso REST
+                    return $http.delete(context + "/" + id,currentRecord)
+                        .then(function () {
+                            $scope.records = {};
+                            $http.get(context).then(function(response){
+                                $scope.records = response.data;    
+                            }, responseError);
+                            $state.go('salasList');
+                        }, responseError); 
                 }
-                else
-                {
-                    return $http.delete(context + "/" + currentRecord)
-                            .then(function (){
-                                $state.go('salasList');
-                    }, responseError);
                 };
-            };
 
 
 

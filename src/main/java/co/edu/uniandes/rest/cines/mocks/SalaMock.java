@@ -5,9 +5,7 @@
  */
 package co.edu.uniandes.rest.cines.mocks;
 
-import co.edu.uniandes.rest.cines.dtos.ClienteDTO;
 import co.edu.uniandes.rest.cines.dtos.SalaDTO;
-import co.edu.uniandes.rest.cines.exceptions.ClienteException;
 import co.edu.uniandes.rest.cines.exceptions.SalaException;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,11 +29,16 @@ public class SalaMock {
      */
     public SalaMock() {
 
+        
     	if (salas == null) {
-            salas = new ArrayList<>();
-            salas.add(new SalaDTO(1, 30 ,15, 15, Boolean.TRUE));
-            salas.add(new SalaDTO(2, 30, 15, 15, Boolean.TRUE));
-            salas.add(new SalaDTO(3, 30, 15, 15, Boolean.TRUE));
+                try {
+                    salas = new ArrayList<>();
+                    createSala(new SalaDTO(1, 30 ,15, 15, Boolean.TRUE));
+                    createSala(new SalaDTO(2, 30, 15, 15, Boolean.TRUE));
+                    createSala(new SalaDTO(3, 30, 15, 15, Boolean.TRUE));
+                } catch (SalaException ex) {
+                    Logger.getLogger(SalaMock.class.getName()).log(Level.SEVERE, null, ex);
+                }
         }
         
     	// indica que se muestren todos los mensajes
@@ -73,11 +76,11 @@ public class SalaMock {
     	logger.info("recibiendo solicitud de agregar sala " + newSala);
     	
     	// la nueva sala tiene numero ?
-    	if ( newSala.getNumSala() != null ) {
+    	if ( newSala.getId()!= null && newSala.getId() != 0 ) {
 	    	// busca la sala con el numero suministrado
 	        for (SalaDTO sala : salas) {
 	        	// si existe una sala con ese id
-	            if (Objects.equals(sala.getNumSala(), newSala.getNumSala())){
+	            if (Objects.equals(sala.getId(), newSala.getId())){
 	            	logger.severe("Ya existe una sala con ese numero");
 	                throw new SalaException("Ya existe una sala con ese numero");
 	            }
@@ -87,14 +90,14 @@ public class SalaMock {
     	} else {
 
     		// genera un numero para la ciudad
-    		logger.info("Generando numero de sala para la nueva sala");
-    		long newSal = 1;
-	        for (SalaDTO sala : salas) {
-	            if (newSal <= sala.getNumSala()){
-	                newSal =  sala.getNumSala() + 1;
+    		logger.info("Generando id paa la nueva Salas");
+    		long newId = 1;
+	        for (SalaDTO city : salas) {
+	            if (newId <= city.getId()){
+	                newId =  city.getId() + 1;
 	            }
 	        }
-	        newSala.setNumSala(newSal);
+	        newSala.setId(newId);
     	}
     	
         // agrega la sala
@@ -106,17 +109,17 @@ public class SalaMock {
     /**
      * Retorna una sala dado su numero
      * 
-     * @param numero numero de la sala a buscar
+     * @param id numero de la sala a buscar
      * @return sala buscada
      * @throws SalaException cuando no existe el nombre buscado
      */
-    public SalaDTO getSalabyNumero(int numero) throws  SalaException{
+    public SalaDTO getSalabyId(int id) throws  SalaException{
         if (salas == null) {
     		logger.severe("Error interno: lista de salas no existe.");
     		throw new SalaException("Error interno: lista de salas no existe.");    		
     	}
         for (int i = 0; i < salas.size(); i++) {
-            if(salas.get(i).getNumSala() == numero){
+            if(salas.get(i).getId() == id){
                 return salas.get(i);
             }
         }
@@ -126,14 +129,14 @@ public class SalaMock {
     /**
      * Actualiza una sala dado su numero
      * 
-     * @param numero del cliente a modificar
+     * @param id del cliente a modificar
      * @param newSala información para actualizar
      * @return el cliente actualizado
      * @throws SalaException si no existe un cliente con ese nombre
      */
-    public SalaDTO updateSala(int numero, SalaDTO newSala) throws SalaException {
+    public SalaDTO updateSala(int id, SalaDTO newSala) throws SalaException {
         for (int i = 0; i < salas.size(); i++) {
-            if(salas.get(i).getNumSala() == numero){
+            if(salas.get(i).getId() == id){
                 salas.set(i, newSala);
                 return salas.get(i);
             }
@@ -145,14 +148,14 @@ public class SalaMock {
     /**
      * Elimina una sala del listado
      * 
-     * @param numero de la sala a eliminar
+     * @param id de la sala a eliminar
      * @throws SalaException si no existe una sala con ese numero
      */
-    public void deleteSala(int numero) throws SalaException{
+    public void deleteSala(int id) throws SalaException{
 
         for (int i = 0; i < salas.size(); i++) {
 
-            if(salas.get(i).getNumSala() == numero){
+            if(salas.get(i).getId() == id){
 
                 salas.remove(i);
 

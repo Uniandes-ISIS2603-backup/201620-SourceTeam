@@ -19,7 +19,7 @@ import javax.ws.rs.Produces;
 
 /**
  *
- * @author ca.nieto11
+ * @author s.rodriguez20
  */
 @Path("boletas")
 @Produces("application/json")
@@ -29,7 +29,7 @@ public class BoletaResource {
     /**
      * Obtiene el listado de boletas.
      *
-     * @return lista de boletas
+     * @return lista de Boletas
      * @throws BoletaException excepción retornada por la lógica
      */
     @GET
@@ -63,22 +63,7 @@ public class BoletaResource {
     @Path("{id: \\d+}")
     public BoletaDTO getBoleta(@PathParam("id") int id) throws BoletaException{
        return boletas.getBoleta(id);
-    }
-    
-    
-    /**
-     * Retorna una boleta dado su precio
-     * 
-     * @param precio de la boleta a retornar
-     * @return una boleta
-     * @throws BoletaException excepción retornada por la lógica
-     */
-    @GET
-    @Path("{precio: [0-9][0-9]*}")
-    public BoletaDTO getBoletaPorPrecio(@PathParam("precio") double precio) throws BoletaException {
-        return boletas.getBoletaPorPrecio(precio);
-    }
-    
+    }    
     
     /**
      * Actualiza la información de la boleta identificada con id
@@ -90,7 +75,7 @@ public class BoletaResource {
      */
     @PUT
     @Path("{id: \\d+}")
-    public BoletaDTO updateCity(@PathParam("id") int id, BoletaDTO boleta) throws BoletaException{
+    public BoletaDTO updateBoleta(@PathParam("id") int id, BoletaDTO boleta) throws BoletaException{
         return boletas.updateBoleta(id, boleta);
     }
     
@@ -102,7 +87,7 @@ public class BoletaResource {
      */
     @DELETE
     @Path("{id: \\d+}")
-    public void deleteCity(@PathParam("id")int id) throws BoletaException{
+    public void deleteBoleta(@PathParam("id")int id) throws BoletaException{
         boletas.deleteBoleta(id);
     }
 }

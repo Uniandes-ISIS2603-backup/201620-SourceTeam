@@ -3,7 +3,7 @@
     mod.constant("boletasContext", "api/boletas");
     mod.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
             var basePath = 'src/modules/boletas/';
-            $urlRouterProvider.otherwise("/boletasList");
+            $urlRouterProvider.otherwise("/boletas");
      
             $stateProvider.state('boletasList', {
                 url: '/boletas',

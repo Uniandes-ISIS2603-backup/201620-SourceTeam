@@ -6,6 +6,7 @@
 package co.edu.uniandes.rest.cines.mocks;
 
 import co.edu.uniandes.rest.cines.dtos.PeliculaDTO;
+import co.edu.uniandes.rest.cines.dtos.SillaDTO;
 import co.edu.uniandes.rest.cines.exceptions.PeliculaException;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,10 +32,14 @@ public class PeliculaMock
     public PeliculaMock() {
 
     	if (peliculas == null) {
-            peliculas = new ArrayList<>();
-            peliculas.add(new PeliculaDTO("superman", "", "","" , 180, ""));
-            peliculas.add(new PeliculaDTO("batman", "", "", "", 180, ""));
-            peliculas.add(new PeliculaDTO("tarzan", "", "", "", 180, ""));
+                try {
+                    peliculas = new ArrayList<>();
+                    createPelicula(new PeliculaDTO("superman", "heroe", "nn","antonio" , 180, "estados unidos"));
+                    createPelicula(new PeliculaDTO("batman", "heroe", "nn", "antonio", 180, "estados unidos"));
+                    createPelicula(new PeliculaDTO("tarzan", "heroe", "nn", "antonio", 180, "estados unidos"));
+                } catch (PeliculaException ex) {
+                    Logger.getLogger(PeliculaMock.class.getName()).log(Level.SEVERE, null, ex);
+                }
         }
         
     	// indica que se muestren todos los mensajes
@@ -56,7 +61,7 @@ public class PeliculaMock
     		throw new PeliculaException("Error interno: lista de peliculas no existe.");    		
     	}
     	
-    	logger.info("retornando todas las salas");
+    	logger.info("retornando todas las peliculas");
     	return peliculas;
     }
 
@@ -72,7 +77,7 @@ public class PeliculaMock
     	logger.info("recibiendo solicitud de agregar pelicula " + newPelicula);
     	
     	// la nueva pelicula tiene nombre ?
-    	if ( newPelicula.getNombre() != null ) {
+    	if ( newPelicula.getId() != null && newPelicula.getId() != 0) {
 	    	// busca la pelicula con el nombre suministrado
 	        for (PeliculaDTO pelicula : peliculas) {
 	        	// si existe una pelicula con ese nombre
@@ -82,10 +87,17 @@ public class PeliculaMock
 	            }
 	        }
 	        
-	    // la nueva pelicula no tiene nombre ? 
+	    // la nueva pelicula no tiene id ? 
     	} else {
 
-    		throw new PeliculaException("la nueva pelicula necesita un nombre");
+    		logger.info("Generando id paa la nueva pelicula");
+    		long newId = 1;
+	        for (PeliculaDTO peli : peliculas) {
+	            if (newId <= peli.getId()){
+	                newId =  peli.getId() + 1;
+	            }
+	        }
+	        newPelicula.setId(newId);
     	}
     	
         // agrega la sala
@@ -97,17 +109,17 @@ public class PeliculaMock
     /**
      * Retorna una pelicula dado su nombre
      * 
-     * @param nombre nombre de la pelicula a buscar
+     * @param idd nombre de la pelicula a buscar
      * @return pelicula buscada
      * @throws PeliculaException cuando no existe el nombre buscado
      */
-    public PeliculaDTO getPeliculaPorNombre(String nombre) throws  PeliculaException{
+    public PeliculaDTO getPeliculaPorId(Long idd) throws  PeliculaException{
         if (peliculas == null) {
     		logger.severe("Error interno: lista de peliculas no existe.");
     		throw new PeliculaException("Error interno: lista de peliculas no existe.");    		
     	}
         for (int i = 0; i < peliculas.size(); i++) {
-            if(peliculas.get(i).getNombre().equals(nombre)){
+            if(peliculas.get(i).getId().equals(idd)){
                 return peliculas.get(i);
             }
         }
@@ -117,14 +129,14 @@ public class PeliculaMock
     /**
      * Actualiza una pelicula dado su nombre
      * 
-     * @param nombre de la pelicula a modificar
+     * @param id de la pelicula a modificar
      * @param newPelicula información para actualizar
      * @return la pelicula actualizada
      * @throws PeliculaException si no existe una pelicula con ese nombre
      */
-    public PeliculaDTO updatePelicula(String nombre, PeliculaDTO newPelicula) throws PeliculaException {
+    public PeliculaDTO updatePelicula(Long id, PeliculaDTO newPelicula) throws PeliculaException {
         for (int i = 0; i < peliculas.size(); i++) {
-            if(peliculas.get(i).getNombre().equals(nombre)){
+            if(peliculas.get(i).getId().equals(id)){
                 peliculas.set(i, newPelicula);
                 return peliculas.get(i);
             }
@@ -136,22 +148,22 @@ public class PeliculaMock
     /**
      * Elimina una pelicula del listado
      * 
-     * @param nombre de la sala a eliminar
+     * @param id de la sala a eliminar
      * @throws PeliculaException si no existe una sala con ese numero
      */
-    public void deletePelicula(String nombre) throws PeliculaException{
+    public void deletePelicula(Long id) throws PeliculaException{
 
         for (int i = 0; i < peliculas.size(); i++) {
 
-            if(peliculas.get(i).getNombre().equals(nombre)){
+            if(peliculas.get(i).getId().equals(id)){
 
                 peliculas.remove(i);
 
                 return;
             }
         }
-        logger.severe("No existe una pelicula con ese nombre");
-        throw new PeliculaException("No existe una pelicula con ese nombre");
+        logger.severe("No existe una pelicula con ese ide");
+        throw new PeliculaException("No existe una pelicula con ese id");
     }
 
 }

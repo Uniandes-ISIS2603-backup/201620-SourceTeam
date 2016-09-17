@@ -8,7 +8,7 @@ package co.edu.uniandes.rest.cines.exceptions;
 /**
  * Representa las excepciones de la clase Boleta
  * 
- * @author ca.nieto11
+ * @author s.rodriguez20
  */
 public class BoletaException extends Exception{
 

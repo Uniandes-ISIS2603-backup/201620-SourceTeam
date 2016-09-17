@@ -3,13 +3,19 @@
     <table class="table table-striped" class="col-md-4">
         <thead>
             <tr>
-                <th>Name</th>        
+                <th>Id</th>
+                <th>Name</th>
+                <th>Credencial</th>
+                <th>Duración</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
             <tr ng-repeat="record in records">
+                <td id="{{$index}}-id">{{record.id}}</td>
                 <td id="{{$index}}-name">{{record.nombre}}</td>
+                <td id="{{$index}}-credencial">{{record.credencial}}</td>
+                <td id="{{$index}}-duracion">{{record.duracion}}</td>
 
                 <td>
                     <button id="{{$index}}-edit-btn" class="btn btn-default btn-sm" ui-sref="criticosEdit({criticoId: record.id})"><span class="glyphicon glyphicon-edit"></span> Edit</button>

@@ -40,15 +40,14 @@ public class TeatroResource
     
     /**
      * Obtiene el teatro con el nombre que ingresa por parametro en el path.
-     * @param nombre Nombre del teatro que se quiere buscar.
+     * @param id Nombre del teatro que se quiere buscar.
      * @return Teatro con el nombre dado.
      * @throws TeatroException Si hay algun problema en el metodo.
      */
     @GET
-    @Path("{name: [a-zA-Z][a-zA-Z]*}")
-    public TeatroDTO getTeatroByName(@PathParam("name") String nombre) throws TeatroException
-    {
-        return teatros.getTeatroByName(nombre);
+    @Path("{id: \\d+}")
+    public TeatroDTO getTeatro(@PathParam("id") Long id) throws TeatroException {
+        return teatros.getTeatro(id);
     }
 
     /**
@@ -65,27 +64,25 @@ public class TeatroResource
     
     /**
      * Modifica el teatro con el nombre que ingresa por parametro en el path.
-     * @param nombre Nombre del teatro a modificar.
+     * @param id Nombre del teatro a modificar.
      * @param nuevo DTO con la informacion de las modificaciones que se quieren realizar.
      * @return Teatro modificado.
      * @throws TeatroException Si hay algun problema en el metodo.
      */
     @PUT
-    @Path("{name: [a-zA-Z][a-zA-Z]*}")
-    public TeatroDTO updateTeatro(@PathParam("name") String nombre, TeatroDTO nuevo) throws TeatroException
-    {
-        return teatros.updateTeatro(nombre, nuevo);
+    @Path("{id: \\d+}")
+    public TeatroDTO updateTeatro(@PathParam("id") Long id, TeatroDTO nuevo) throws TeatroException {
+        return teatros.updateTeatro(id, nuevo);
     }
     
     /**
      * Elimina el teatro con el nombre que ingresa por parametro en el path.
-     * @param nombre Nombre del teatro que se quiere eliminar.
+     * @param id Nombre del teatro que se quiere eliminar.
      * @throws TeatroException Si hay algun problema en el metodo.
      */
     @DELETE
-    @Path("{name: [a-zA-Z][a-zA-Z]*}")
-    public void deleteTeatro(@PathParam("name")String nombre) throws TeatroException
-    {
-        teatros.deleteTeatro(nombre);
+    @Path("{id: \\d+}")
+    public TeatroDTO deleteTeatro(@PathParam("id") Long id) throws TeatroException {
+    	return teatros.deleteTeatro(id);
     }
 }

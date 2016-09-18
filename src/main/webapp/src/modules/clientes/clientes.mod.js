@@ -5,8 +5,19 @@
             var basePath = 'src/modules/clientes/';
             $urlRouterProvider.otherwise("/clientes");
      
-            $stateProvider.state('clientesList', {
+            $stateProvider.state('clientes', {
                 url: '/clientes',
+                abstract: true,
+                views: {
+                    'mainView': {
+                        controller: 'clientesCtrl',
+                        controllerAs: 'ctrl',
+                        templateUrl: basePath + 'clientes.html'
+                    }
+                }
+            }).state('clientesList', {
+                url: '/clientes',
+                parent: 'clientes',
                 views: {
                     'mainView': {
                         controller: 'clientesCtrl',
@@ -16,6 +27,7 @@
                 }
             }).state('clienteCreate', {
                 url: '/clientes/create',
+                parent: 'clientes',
                 views: {
                     'mainView': {
                         controller: 'clientesCtrl',
@@ -29,11 +41,14 @@
                 param: {
                     clienteId: null
                 },
+                parent: 'clientes',
                 views: {
                     'mainView': {
                         controller: 'clientesCtrl',
                         controllerAs: 'ctrl',
                         templateUrl: basePath + 'clientes.create.html'
+                    },'childView': {
+                        templateUrl: basePath + 'clientes.instance.html'
                     }
                 }
             });

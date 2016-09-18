@@ -7,8 +7,9 @@
      
             $stateProvider.state('boletasList', {
                 url: '/boletas',
+                parent: 'clienteEdit',
                 views: {
-                    'mainView': {
+                    'clienteInstanceView': {
                         controller: 'boletasCtrl',
                         controllerAs: 'ctrl',
                         templateUrl: basePath + 'boletas.list.html'
@@ -16,8 +17,9 @@
                 }
             }).state('boletaCreate', {
                 url: '/boletas/create',
+                parent: 'clienteEdit',
                 views: {
-                    'mainView': {
+                    'clienteInstanceView': {
                         controller: 'boletasCtrl',
                         controllerAs: 'ctrl',
                         templateUrl: basePath + 'boletas.create.html'
@@ -29,8 +31,9 @@
                 param: {
                     boletaId: null
                 },
+                parent: 'clienteEdit',
                 views: {
-                    'mainView': {
+                    'clienteInstanceView': {
                         controller: 'boletasCtrl',
                         controllerAs: 'ctrl',
                         templateUrl: basePath + 'boletas.create.html'

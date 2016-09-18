@@ -10,6 +10,7 @@ import co.edu.uniandes.rest.cines.exceptions.FuncionException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -37,9 +38,9 @@ public class FuncionMock
         if(funciones == null)
         {
             funciones = new ArrayList<>();
-            funciones.add( new FuncionDTO(1, 23, 1500, new Date(), true) );
-            funciones.add( new FuncionDTO(2, 10, 3400, new Date(), true) );
-            funciones.add( new FuncionDTO(3, 14, 8100, new Date(), false) );
+            funciones.add( new FuncionDTO(1L, 1500, new Date() ) );
+            funciones.add( new FuncionDTO(2L, 3400, new Date() ) );
+            funciones.add( new FuncionDTO(3L, 8100, new Date() ) );
         }
         
         // indica que se muestren todos los mensajes
@@ -59,109 +60,133 @@ public class FuncionMock
     {
         if(funciones == null)
         {
-            logger.severe("Error, la lista de funciones no existe.");
-            throw new FuncionException("La lista de funciones no existe.");
+            logger.severe("No hay funciones.");
+            throw new FuncionException("No hay funciones.");
         }
         
-        logger.info("Retornando la lista de funciones.");
+        logger.info("Retornando funciones.");
         return funciones;
     }
     
     /**
      * Busca una funcion en especifico con el id dado.
-     * @param pId Id de la funcion buscada.
+     * @param id Id de la funcion buscada.
      * @return Funcion con el id dado.
      * @throws FuncionException Si no existe la funcion.
      */
-    public FuncionDTO getFuncionById(int pId) throws FuncionException
+    public FuncionDTO getFuncion(Long id) throws FuncionException
     {
-        if(funciones == null)
-        {
-            logger.severe("Error, la lista de funciones no existe.");
-            throw new FuncionException("La lista de funciones no existe.");
-        }
+        logger.info("Recibiendo solicitud de teatro con id " + id);
         
-        logger.info("Buscando funcion por id. ");
-        
-        for(FuncionDTO funcion: funciones)
-        {
-            if(funcion.getId() == pId)
-            {
+        // busca la funcion con el id suministrado
+        for (FuncionDTO funcion : funciones) {
+            if (Objects.equals(funcion.getId(), id) ) {
+                logger.info("retornando funcion" + funcion);
                 return funcion;
             }
         }
-        
-        logger.severe("Error, no existe una funcion con el id dado.");
-        throw new FuncionException("No existe una funcion con el id dado.");
+
+        // si no encuentra la funcion
+        logger.severe("No existe funcnion con ese id");
+        throw new FuncionException("No existe funcion con ese id");
     }
     
     /**
      * Crea una nueva funcion.
-     * @param nueva la funcion nueva a agregar a la lista de funciones.
+     * @param newFuncion la funcion nueva a agregar a la lista de funciones.
      * @return Funcion creada.
      * @throws FuncionException  Si la funcion ya existe o no pudo ser creada.
      */
-    public FuncionDTO createFuncion(FuncionDTO nueva) throws FuncionException
+    public FuncionDTO createFuncion(FuncionDTO newFuncion) throws FuncionException
     {
-        logger.info("Recibiendo solicitud de agregar funcion " + nueva);
-        
-        for(FuncionDTO funcion: funciones)
-        {
-            if ( funcion.getId() == nueva.getId()  )
-            {
-                logger.severe("Ya existe una funcion con el id dado.");
-                throw new FuncionException("Ya existe una funcion con el id dado.");
+        logger.info("Recibiendo solicitud de agregar funcion " + newFuncion);
+
+        // La nueva funcion tiene id ?
+        if (newFuncion.getId() != null) {
+            // Busca la funcion con el id suministrado
+            for (FuncionDTO funcion : funciones) {
+                // si existe una funcion con ese id.
+                if (Objects.equals(funcion.getId(), newFuncion.getId() ) ) {
+                    logger.severe("Ya existe una funcion con ese id");
+                    throw new FuncionException("Ya existe una funcion con ese id");
+                }
             }
+
+            // La nueva funcion no tiene id ? 
+        } else {
+            
+            // Genera un id para la funcion.
+            logger.info("Generando id para el nuevo teatro");
+            long newId = 1;
+            for (FuncionDTO funcion : funciones) {
+                if (newId <= funcion.getId() ) {
+                    newId = funcion.getId() + 1;
+                }
+            }
+            
+            newFuncion.setId(newId);
         }
-        
-        logger.info("Funcion agregada " + nueva);
-        funciones.add(nueva);
-        return nueva;
+
+        // Agrega la funcion
+        logger.info("Agregando funcion " + newFuncion);
+        funciones.add(newFuncion);
+        return newFuncion;
     }
     
     /**
      * Actualiza la informacion de una funcion a partir de la informacion dada.
-     * @param pId Id de la funcion que se quiere actualizar.
-     * @param nueva Funcion con la informacion nueva.
+     * @param id Id de la funcion que se quiere actualizar.
+     * @param updatedFuncion Funcion con la informacion nueva.
      * @return La funcion actualizada.
      * @throws FuncionException Si la funcion no se encontro.
      */
-    public FuncionDTO updateFuncion(int pId, FuncionDTO nueva) throws FuncionException
+    public FuncionDTO updateFuncion(Long id, FuncionDTO updatedFuncion) throws FuncionException
     {
-        logger.info("Buscando la funcion.");
-        
-        for (int i = 0; i < funciones.size(); i++) 
-        {
-            if(funciones.get(i).getId() == pId)
-            {
-                logger.info("Actualizando informacion.");
-                funciones.set(i, nueva);
-                return nueva;
+        logger.info("Recibiendo solictud de modificar funcion " + updatedFuncion);
+
+        // Busca la funcion con el id suministrado.
+        for (FuncionDTO funcion : funciones) {
+            if (Objects.equals(funcion.getId(), id) ) {
+
+                // Modifica la funcion.
+                
+                funcion.setDia(updatedFuncion.getDia() );
+                funcion.setPrecio(updatedFuncion.getPrecio() );
+
+                // Retorna la funcion modificada.
+                logger.info("Modificando funcion " + funcion);
+                return funcion;
             }
         }
-        
-        logger.severe("No existe la funcion con el id dado.");
-        throw new FuncionException("No existe la funcion con el id dado.");
+
+        // No encontró la funcion con ese id ?
+        logger.severe("No existe un teatro con ese id");
+        throw new FuncionException("No existe un teatro con ese id");
     }
     
     /**
      * Borra la funcion con el id dado.
-     * @param pId Id de la funcion a borrar.
+     * @param id Id de la funcion a borrar.
+     * @return 
      * @throws FuncionException Si la funcion con el id dado no se encuentra.
      */
-    public void deleteFuncion(int pId) throws FuncionException
+    public FuncionDTO deleteFuncion(Long id) throws FuncionException
     {
-        for (int i = 0; i < funciones.size(); i++) 
-        {
-            if(funciones.get(i).getId() == pId)
-            {
-                logger.info("Eliminando funcion.");
-                funciones.remove(i);
-                return;
+        logger.info("Recibiendo solictud de eliminar funcion con id " + id);
+
+        // Busca la funcion con el id suministrado.
+        for (FuncionDTO funcion : funciones) {
+            if (Objects.equals(funcion.getId(), id) ) {
+
+                // Eimina la funcion.
+                logger.info("Eliminando funcion" + funcion);
+                funciones.remove(funcion);
+                return funcion;
             }
         }
-        
-        logger.severe("No existe la funcion con el id dado.");
-        throw new FuncionException("No existe la funcion con el id dado.");
+
+        // No encontró el teatro con ese id ?
+        logger.severe("No existe una funcion con ese id");
+        throw new FuncionException("No existe una funcion con ese id");
     }
 }

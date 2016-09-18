@@ -16,13 +16,8 @@ public class FuncionDTO
     /**
      * Identificador unico de la funcion.
      */
-    private int id;
-    
-    /**
-     * Hora de la funcion.
-     */
-    private int hora;
-    
+    private Long id;
+        
     /**
      * Precio de la funcion.
      */
@@ -32,12 +27,7 @@ public class FuncionDTO
      * Fecha de la funcion.
      */
     private Date dia;
-    
-    /**
-     * Boolean que indica si la funcion pertenece o no a un festival.
-     */
-    private boolean esFestival;
-    
+        
     /**
      * 
      */
@@ -49,37 +39,26 @@ public class FuncionDTO
     /**
      * Constructor de la funcion.
      * @param pId Id de la funcion.
-     * @param pHora Hora de la funcion.
      * @param pPrecio Precio de la funcion.
      * @param pDia Fecha de la funcion.
-     * @param pFestival Si la funcion pertenece o no a un festival.
+
      */
-    public FuncionDTO(int pId, int pHora, double pPrecio, Date pDia, boolean pFestival)
+    public FuncionDTO(Long pId, double pPrecio, Date pDia)
     {
         id = pId;
-        hora = pHora;
         precio = pPrecio;
         dia = pDia;
-        esFestival= pFestival;
     }
     
     /**
      * Retorna el id de la funcion.
      * @return Id de la funcion.
      */
-    public int getId()
+    public Long getId()
     {
         return id;
     }
     
-    /**
-     * Retorna la hora de la funcion.
-     * @return Hora de la funcion.
-     */
-    public int getHora()
-    {
-        return hora;
-    }
     
     /**
      * Retorna el precio de la funcion.
@@ -100,32 +79,14 @@ public class FuncionDTO
     }
     
     /**
-     * Indica si la funcion pertenece a un festival.
-     * @return 
-     */
-    public boolean esFestival()
-    {
-        return esFestival;
-    }
-    
-    /**
      * Cambia el id de la funcion.
      * @param pId Nuevo id.
      */
-    public void setId(int pId)
+    public void setId(Long pId)
     {
         id = pId;
     }
-    
-    /**
-     * Cambia la hora de la funcion.
-     * @param pHora Nueva hora.
-     */
-    public void setHora(int pHora)
-    {
-        hora = pHora;
-    }
-    
+        
     /**
      * Cambia el precio de la funcion.
      * @param pPrecio Nuevo precio.
@@ -144,18 +105,9 @@ public class FuncionDTO
         dia = pDia;
     }
     
-    /**
-     * Modifica la funcion para indicar si esta pertenece a un festival o no.
-     * @param pFestival 
-     */
-    public void setEsFestival(boolean pFestival)
-    {
-        esFestival = pFestival;
-    }
-    
     @Override
     public String toString()
     {
-        return "{id:" + id + ", hora:" + hora + ", precio:" + precio + ", dia:" + dia + ", esFestival:" + esFestival + " }";
+        return "{id:" + id + ", precio:" + precio + ", dia:" + dia + " }";
     }
 }

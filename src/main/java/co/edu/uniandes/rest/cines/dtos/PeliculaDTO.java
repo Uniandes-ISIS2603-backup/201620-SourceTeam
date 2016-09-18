@@ -15,7 +15,6 @@ public class PeliculaDTO
     private String nombre;
     private String anuncio;
     private String creditos;
-    private String critico;
     private int duracion ;
     private String pais;
 
@@ -37,14 +36,13 @@ public class PeliculaDTO
      * @param dura duracion de la pelicula
      * @param paisP pais de la pelicula
      */
-    public PeliculaDTO(String nomb, String anun, String credi, String criti, int dura, String paisP)
+    public PeliculaDTO(String nomb, String anun, String credi, int dura, String paisP)
     {
 		super();
                 this.id = 0L;
                 this.nombre = nomb;
                 this.anuncio = anun;
 		this.creditos = credi;
-		this.critico = criti;
                 this.duracion = dura;
                 this.pais = paisP;
     }
@@ -104,21 +102,6 @@ public class PeliculaDTO
     public void setCreditos(String credi) {
         this.creditos = credi;
     }
-
-    /**
-     * @return el critico de la pelicula
-     */
-    public String getCritico() {
-        return critico;
-    }
-    
-    /**
-     * @param criti el critico de la pelicula
-     */
-    
-    public void setCritico(String criti) {
-        this.critico = criti;
-    }
     
     /**
      * @return la duracion de la pelicula
@@ -151,6 +134,6 @@ public class PeliculaDTO
      */
     @Override
     public String toString() {
-    	return "{nombre : " + getNombre()+ " duracion : " + getDuracion() + ", critico : \"" + getCritico() + "\" }" ;  
+    	return "{nombre : " + getNombre()+ " duracion : " + getDuracion() + "}" ;  
     }
 }

@@ -8,6 +8,7 @@ package co.edu.uniandes.rest.cines.mocks;
 import co.edu.uniandes.rest.cines.dtos.CriticoDTO;
 import co.edu.uniandes.rest.cines.dtos.FestivalDTO;
 import co.edu.uniandes.rest.cines.dtos.FuncionDTO;
+import co.edu.uniandes.rest.cines.dtos.PeliculaDTO;
 import co.edu.uniandes.rest.cines.exceptions.FuncionException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -40,9 +41,9 @@ public class FuncionMock
         if(funciones == null)
         {
             funciones = new ArrayList<>();
-            funciones.add( new FuncionDTO(1L, 1500, new Date(), new CriticoDTO(1L,1, "Juan", 10208, new FestivalDTO(1L, 1, "Aventura", "Pat1" )) ) );
-            funciones.add( new FuncionDTO(2L, 3400, new Date(), new CriticoDTO(2L,2, "Pablo", 25445,new FestivalDTO(2L, 1, "Accion", "Pat2")) ) );
-            funciones.add( new FuncionDTO(3L, 8100, new Date(),new CriticoDTO(3L,3, "Pedro", 36546, new FestivalDTO(3L, 1, "Thriller", "Pat3")) ) );
+            funciones.add( new FuncionDTO(1L, 1500, new Date(), new PeliculaDTO("superman", "heroe", "nn" , 180, "estados unidos") ) );
+            funciones.add( new FuncionDTO(2L, 3400, new Date(), new PeliculaDTO("batman", "heroe", "nn", 180, "estados unidos") ) );
+            funciones.add( new FuncionDTO(3L, 8100, new Date(), new PeliculaDTO("tarzan", "heroe", "nn", 180, "estados unidos") ) );
         }
         
         // indica que se muestren todos los mensajes

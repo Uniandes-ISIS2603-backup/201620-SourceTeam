@@ -25,6 +25,10 @@
                     <input id="anuncio" name="name" class="form-control" type="number" ng-model="currentRecord.precio" ng-init="currentRecord.precio" required />
                 </div>
             </div>
+            <label for="festival" class="col-md-2 control-label">Película</label>
+                <div class="col-md-10" style="margin-bottom: 10px">
+                    <select id="pelicula" name="pelicula" ng-options="rc.nombre for rc in peliculas track by rc.id" class="form-control" type="text" ng-model="currentRecord.festival" ></select>
+                </div>
             <button type="button" ui-sref='funcionesList'>Cancel</button>   
             <button type="submit" >Save</button>
         </fieldset>

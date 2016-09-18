@@ -6,6 +6,7 @@
                 <th>Id</th>
                 <th>Fecha</th>
                 <th>Precio</th>
+                <th>Pelicula</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -14,6 +15,7 @@
                <td id="{{$index}}-id">{{record.id}}</td>    
                <td id="{{$index}}-dia">{{record.dia}}</td> 
                <td id="{{$index}}-precio">{{record.precio}}</td>
+               <td id="{{$index}}-precio">{{record.pelicula.nombre}}</td>
                <td>
                     <button id="{{$index}}-edit-btn" class="btn btn-default btn-sm" ui-sref="funcionEdit({funcionId: record.id})"><span class="glyphicon glyphicon-edit"></span> Edit</button>
                     <button id="{{$index}}-delete-btn" class="btn btn-default btn-sm" ng-click="ctrl.deleteRecord(record)"><span class="glyphicon glyphicon-minus"></span> Remove</button>

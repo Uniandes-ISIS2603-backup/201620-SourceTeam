@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.rest.cines.dtos;
 
+import java.io.Console;
 import java.util.Date;
 
 /**
@@ -33,6 +34,13 @@ public class FuncionDTO
      */
     private CriticoDTO critico;
         
+    
+    /**
+     * Crítico de la funcion.
+     */
+    private PeliculaDTO pelicula;
+        
+    
     /**
      * 
      */
@@ -46,14 +54,15 @@ public class FuncionDTO
      * @param pId Id de la funcion.
      * @param pPrecio Precio de la funcion.
      * @param pDia Fecha de la funcion.
+     * @param pelicula
 
      */
-    public FuncionDTO(Long pId, double pPrecio, Date pDia, CriticoDTO critico)
+    public FuncionDTO(Long pId, double pPrecio, Date pDia, PeliculaDTO pelicula)
     {
         id = pId;
         precio = pPrecio;
         dia = pDia;
-        this.critico = critico;
+        this.pelicula = pelicula;
     }
     
     /**
@@ -120,6 +129,23 @@ public class FuncionDTO
         this.critico = critico;
     }
     
+        /**
+     * Cambia la pelicula de la funcion.
+     * @param pelicula Nuevo precio.
+     */
+    public void setPelicula(PeliculaDTO pelicula)
+    {
+        this.pelicula = pelicula;
+    }
+    
+     /**
+     * Retorna la pelicula de la funcion.
+     */
+    public PeliculaDTO getPelicula()
+    {
+        return this.pelicula;
+    }
+    
     /**
      * Cambia la fecha de la funcion.
      * @param pDia Nueva fecha.
@@ -132,6 +158,6 @@ public class FuncionDTO
     @Override
     public String toString()
     {
-        return "{id:" + id + ", precio:" + precio + ", dia:" + dia + " }";
+        return "{id:" + id + ", precio:" + precio + ", dia:" + dia +" }";
     }
 }

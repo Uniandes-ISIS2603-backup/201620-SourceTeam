@@ -65,7 +65,6 @@
              
             this.saveRecord = function (id) {
                  currentRecord = $scope.currentRecord;
-                console.log(currentRecord.pelicula);
                  // En caso de que el id sea nulo significa que el registro no existe entonces se crea.        
                  if (id == null) {
  

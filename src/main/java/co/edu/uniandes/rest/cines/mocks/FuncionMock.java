@@ -155,6 +155,7 @@ public class FuncionMock
                 
                 funcion.setDia(updatedFuncion.getDia() );
                 funcion.setPrecio(updatedFuncion.getPrecio() );
+                funcion.setPelicula(updatedFuncion.getPelicula());
 
                 // Retorna la funcion modificada.
                 logger.info("Modificando funcion " + funcion);

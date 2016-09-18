@@ -4,12 +4,11 @@
             var basePath = 'src/modules/salas/';
             $urlRouterProvider.otherwise("/salas");
             
-            $stateProvider
-            .state('salas', {
+            $stateProvider.state('salas', {
             url:"/salas",
             abstract: true,
             views: {
-                    'salaInstanceView': {
+                    'salaView': {
                         controller: 'salasCtrl',
                         controllerAs: 'ctrl',
                         templateUrl: basePath + 'salas.html'

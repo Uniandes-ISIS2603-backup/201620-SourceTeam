@@ -1,21 +1,29 @@
-<div class="container-fluid" >
-    <table class="table table-striped" class="col-md-4">
-        <thead>
-            <tr>
-                <th>Id</th> 
-                <th>Name</th>        
-                <th>Actions</th>
-            </tr>   
-        </thead>                    
-        <tbody>
-            <tr ng-repeat="record in records">
-                <td id="{{$index}}-id">{{record.id}}</td>
-                <td id="{{$index}}-name">{{record.nombre}}</td>
-                <td>
-                    <button id="{{$index}}-edit-btn" class="btn btn-default btn-sm" ui-sref="teatroEdit({teatroId: record.id})"><span class="glyphicon glyphicon-edit"></span> Edit</button>
-                    <button id="{{$index}}-delete-btn" class="btn btn-default btn-sm" ng-click="ctrl.deleteRecord(record)"><span class="glyphicon glyphicon-minus"></span> Remove</button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+<div class="col-md-12">
+    <div class="container-fluid">
+        
+    <button class="btn btn-default" ui-sref="teatrosCreate">Crear Teatro</button>
+    
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Id</th>    
+                    <th>Nombre</th>  
+                    <th>Ciudad</th>   
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="record in records">
+                    <td id="{{$index}}-name">{{record.id}}</td>
+                    <td id="{{$index}}-descrption">{{record.nombre}}</td>
+                    <td id="{{$index}}-isbn">{{record.ciudad}}</td>
+                    <td>
+                        <button id="{{$index}}-edit-btn" class="btn btn-default btn-sm" ui-sref="teatroEdit({teatroId: record.id})"><span class="glyphicon glyphicon-edit"></span> Edit</button>
+                        <button id="{{$index}}-delete-btn" class="btn btn-default btn-sm" ng-click="ctrl.deleteRecord(record)"><span class="glyphicon glyphicon-minus"></span> Remove</button>
+
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
 </div>

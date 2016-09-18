@@ -1,8 +1,3 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 (function (ng){
     
     var mod = ng.module("teatrosModule", ["ngMessages"]);
@@ -14,10 +9,22 @@
         $urlRouterProvider.otherwise("/teatrosList");
         
         $stateProvider
-        .state('teatrosList', {
+        .state('teatros', {
             url:"/teatros",
+            abstract: true,
             views: {
                     'mainView': {
+                        controller: 'teatrosCtrl',
+                        controllerAs: 'ctrl',
+                        templateUrl: basePath + 'teatros.html'
+                    }
+                }
+        })
+        .state('teatrosList', {
+            url:"/list",
+            parent: 'teatros',
+            views: {
+                    'teatroView': {
                         controller: 'teatrosCtrl',
                         controllerAs: 'ctrl',
                         templateUrl: basePath + 'teatros.list.html'
@@ -25,9 +32,10 @@
                 }
         })
         .state('teatrosCreate', {
-            url: '/teatros/create',
+            url: '/create',
+            parent: 'teatros',
             views: {
-                'mainView': {
+                'teatroView': {
                     controller: 'teatrosCtrl',
                     controllerAs: 'ctrl',
                     templateUrl: basePath + 'teatros.create.html'
@@ -35,17 +43,19 @@
             }
         })
         .state('teatroEdit', {
-            url: '/teatros/:teatroId',
-            param: {
-                    teatroId: null
-            },
-            views: {
-                'mainView': {
-                    controller: 'teatrosCtrl',
-                    controllerAs: 'ctrl',
-                    templateUrl: basePath + 'teatros.create.html'
+            url: '/{teatroId:int}/edit',
+                param: {'teatroId': null},
+                parent: 'teatros',
+                views: {
+                    'teatroView': {
+                        controller: 'teatrosCtrl',
+                        controllerAs: 'ctrl',
+                        templateUrl: basePath + 'teatros.create.html'
+                    },
+                    'childView': {
+                        templateUrl: basePath + 'teatros.instance.html'
+                    }
                 }
-            }
         });
     }]);
 

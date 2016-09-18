@@ -80,9 +80,9 @@ public class BoletaMock {
     	// la nueva Boletas tiene id ?
     	if ( newBoleta.getId()!= null && newBoleta.getId() != 0  ) {
 	    	// busca la Boletas con el id suministrado
-	        for (BoletaDTO city : boletas) {
+	        for (BoletaDTO boleta : boletas) {
 	        	// si existe una Boletas con ese id
-	            if (Objects.equals(city.getId(), newBoleta.getId())){
+	            if (Objects.equals(boleta.getId(), newBoleta.getId())){
 	            	logger.severe("Ya existe una Boletas con ese id");
 	                throw new BoletaException("Ya existe una boleta con ese id");
 	            }
@@ -93,9 +93,9 @@ public class BoletaMock {
     		// genera un id para la Boletas
     		logger.info("Generando id paa la nueva Boletas");
     		long newId = 1;
-	        for (BoletaDTO city : boletas) {
-	            if (newId <= city.getId()){
-	                newId =  city.getId() + 1;
+	        for (BoletaDTO boleta : boletas) {
+	            if (newId <= boleta.getId()){
+	                newId =  boleta.getId() + 1;
 	            }
 	        }
 	        newBoleta.setId(newId);

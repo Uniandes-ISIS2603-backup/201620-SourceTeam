@@ -3,15 +3,15 @@
 
     mod.controller("peliculasCtrl", ['$scope', '$state', '$stateParams', '$http', 'peliculasContext', function ($scope, $state, $stateParams, $http, context) {
 
-            // inicialmente el listado de clientes está vacio
+            // inicialmente el listado de peliculas está vacio
             $scope.records = {};
-            // carga los clientes
+            // carga las peliculas
             $http.get(context).then(function(response){
                 $scope.records = response.data;    
             }, responseError);
 
-            // el controlador recibió un clienteNombre ??
-            // revisa los parámetros (ver el :clienteNombre en la definición de la ruta)
+            // el controlador recibió un peliculaId ??
+            // revisa los parámetros (ver el :peliculaId en la definición de la ruta)
             if ($stateParams.peliculaId !== null && $stateParams.peliculaId!== undefined) {
                 
                 // toma el id del parámetro
@@ -24,7 +24,7 @@
                         $scope.currentRecord = response.data;
                     }, responseError);
 
-            // el controlador no recibió un clienteNombre
+            // el controlador no recibió una peliculaId
             } else
             {
                 // el registro actual debe estar vacio

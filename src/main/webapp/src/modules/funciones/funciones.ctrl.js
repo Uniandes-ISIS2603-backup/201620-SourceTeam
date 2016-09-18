@@ -1,5 +1,4 @@
 (function (ng){
-    
     var mod = ng.module("funcionesModule");
     
     mod.controller("funcionesCtrl", ['$scope', '$state', '$stateParams', '$http', 'funcionesContext', function ($scope, $state, $stateParams, $http, context) {

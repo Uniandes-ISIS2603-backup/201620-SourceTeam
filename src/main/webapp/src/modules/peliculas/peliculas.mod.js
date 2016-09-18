@@ -1,17 +1,14 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-var mod = angular.module('peliculasModule', ["ngMessages"]);
- mod.constant("peliculasContext", "api/peliculas");
-mod.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider){
+(function (ng) {
+    var mod = ng.module("peliculasModule",["ngMessages"]);
+    mod.constant("peliculasContext", "api/peliculas");
+    mod.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider){
         var basePath = 'src/modules/peliculas/';
          $urlRouterProvider.otherwise("/peliculas");
         $stateProvider.state('peliculasList', {
                 url: '/peliculas',
+                parent: 'funcionEdit',
                 views: {
-                    'mainView': {
+                    'funcionInstanceView': {
                         controller: 'peliculasCtrl',
                         controllerAs: 'ctrl',
                         templateUrl: basePath + 'peliculas.list.html'
@@ -19,8 +16,9 @@ mod.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
                 }
             }).state('peliculasCreate', {
                 url: '/peliculas/create',
+                parent: 'funcionEdit',
                 views: {
-                    'mainView': {
+                    'funcionInstanceView': {
                         controller: 'peliculasCtrl',
                         controllerAs: 'ctrl',
                         templateUrl: basePath + 'peliculas.create.html'
@@ -32,8 +30,9 @@ mod.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
                 param: {
                     peliculaId: null
                 },
+                parent: 'funcionEdit',
                 views: {
-                    'mainView': {
+                    'funcionInstanceView': {
                         controller: 'peliculasCtrl',
                         controllerAs: 'ctrl',
                         templateUrl: basePath + 'peliculas.create.html'
@@ -42,4 +41,4 @@ mod.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
             });
        
 }]);
-
+})(window.angular);

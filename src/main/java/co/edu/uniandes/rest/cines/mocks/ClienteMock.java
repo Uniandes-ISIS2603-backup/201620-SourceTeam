@@ -78,9 +78,9 @@ public class ClienteMock {
     	// la nueva Clientes tiene id ?
     	if ( newCliente.getId()!= null && newCliente.getId() != 0  ) {
 	    	// busca la Clientes con el id suministrado
-	        for (ClienteDTO city : clientes) {
+	        for (ClienteDTO cliente : clientes) {
 	        	// si existe una Clientes con ese id
-	            if (Objects.equals(city.getId(), newCliente.getId())){
+	            if (Objects.equals(cliente.getId(), newCliente.getId())){
 	            	logger.severe("Ya existe una Clientes con ese id");
 	                throw new ClienteException("Ya existe una cliente con ese id");
 	            }
@@ -91,9 +91,9 @@ public class ClienteMock {
     		// genera un id para la Clientes
     		logger.info("Generando id paa la nueva Clientes");
     		long newId = 1;
-	        for (ClienteDTO city : clientes) {
-	            if (newId <= city.getId()){
-	                newId =  city.getId() + 1;
+	        for (ClienteDTO cliente : clientes) {
+	            if (newId <= cliente.getId()){
+	                newId =  cliente.getId() + 1;
 	            }
 	        }
 	        newCliente.setId(newId);

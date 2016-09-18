@@ -5,8 +5,6 @@
  */
 package co.edu.uniandes.rest.cines.dtos;
 
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Objeto de transferencia de datos del teatro.

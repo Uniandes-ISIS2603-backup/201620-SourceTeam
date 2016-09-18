@@ -1,17 +1,25 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
     var mod = angular.module("salasModule", ["ngMessages"]);
     mod.constant("salasContext", "api/salas");
     mod.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
             var basePath = 'src/modules/salas/';
             $urlRouterProvider.otherwise("/salas");
-     
-            $stateProvider.state('salasList', {
+            
+            $stateProvider
+            .state('salas', {
+            url:"/salas",
+            abstract: true,
+            views: {
+                    'salaInstanceView': {
+                        controller: 'salasCtrl',
+                        controllerAs: 'ctrl',
+                        templateUrl: basePath + 'salas.html'
+                    }
+                }
+            })
+                    
+            .state('salasList', {
                 url: '/salas',
-                parent: 'teatroEdit',   
+                parent: 'teatroEdit',
                 views: {
                     'teatroInstanceView': {
                         controller: 'salasCtrl',
@@ -41,6 +49,9 @@
                         controller: 'salasCtrl',
                         controllerAs: 'ctrl',
                         templateUrl: basePath + 'salas.create.html'
+                    },
+                    'childView': {
+                        templateUrl: basePath + 'salas.instance.html'
                     }
                 }
             });

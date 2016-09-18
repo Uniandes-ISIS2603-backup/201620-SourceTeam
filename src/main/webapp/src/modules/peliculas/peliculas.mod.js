@@ -6,9 +6,8 @@
          $urlRouterProvider.otherwise("/peliculas");
         $stateProvider.state('peliculasList', {
                 url: '/peliculas',
-                parent: 'funcionEdit',
                 views: {
-                    'funcionInstanceView': {
+                    'mainView': {
                         controller: 'peliculasCtrl',
                         controllerAs: 'ctrl',
                         templateUrl: basePath + 'peliculas.list.html'
@@ -16,9 +15,8 @@
                 }
             }).state('peliculasCreate', {
                 url: '/peliculas/create',
-                parent: 'funcionEdit',
                 views: {
-                    'funcionInstanceView': {
+                    'mainView': {
                         controller: 'peliculasCtrl',
                         controllerAs: 'ctrl',
                         templateUrl: basePath + 'peliculas.create.html'
@@ -30,9 +28,8 @@
                 param: {
                     peliculaId: null
                 },
-                parent: 'funcionEdit',
                 views: {
-                    'funcionInstanceView': {
+                    'mainView': {
                         controller: 'peliculasCtrl',
                         controllerAs: 'ctrl',
                         templateUrl: basePath + 'peliculas.create.html'

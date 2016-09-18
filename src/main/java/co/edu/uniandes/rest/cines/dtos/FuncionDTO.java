@@ -27,6 +27,11 @@ public class FuncionDTO
      * Fecha de la funcion.
      */
     private Date dia;
+    
+    /**
+     * Crítico de la funcion.
+     */
+    private CriticoDTO critico;
         
     /**
      * 
@@ -43,11 +48,12 @@ public class FuncionDTO
      * @param pDia Fecha de la funcion.
 
      */
-    public FuncionDTO(Long pId, double pPrecio, Date pDia)
+    public FuncionDTO(Long pId, double pPrecio, Date pDia, CriticoDTO critico)
     {
         id = pId;
         precio = pPrecio;
         dia = pDia;
+        this.critico = critico;
     }
     
     /**
@@ -79,6 +85,15 @@ public class FuncionDTO
     }
     
     /**
+     * Retorna el critico de la funcion.
+     * @return Critico de la funcion.
+     */
+    public CriticoDTO getCritico()
+    {
+        return critico;
+    }
+    
+    /**
      * Cambia el id de la funcion.
      * @param pId Nuevo id.
      */
@@ -94,6 +109,15 @@ public class FuncionDTO
     public void setPrecio(double pPrecio)
     {
         precio = pPrecio;
+    }
+    
+    /**
+     * Cambia el critico de la funcion.
+     * @param critico Nuevo precio.
+     */
+    public void setPrecio(CriticoDTO critico)
+    {
+        this.critico = critico;
     }
     
     /**

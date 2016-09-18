@@ -44,7 +44,7 @@
             param: {
                     funcionId: null
             },
-            parent: 'funcion',
+            parent: 'funciones',
             views: {
                 'mainView': {
                     controller: 'funcionesCtrl',

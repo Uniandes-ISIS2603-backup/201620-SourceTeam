@@ -7,7 +7,7 @@
      
             $stateProvider.state('boletasList', {
                 url: '/boletas',
-                parent: 'clienteEdit',
+                parent: 'funcionEdit',
                 views: {
                     'funcionInstanceView': {
                         controller: 'boletasCtrl',
@@ -52,3 +52,6 @@
             });
         }]);
 })(window.angular);
+
+
+

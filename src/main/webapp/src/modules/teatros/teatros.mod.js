@@ -35,9 +35,9 @@
             }
         })
         .state('teatroEdit', {
-            url: '/teatros/:idTeatro',
+            url: '/teatros/:teatroId',
             param: {
-                    idTeatro: null
+                    teatroId: null
             },
             views: {
                 'mainView': {

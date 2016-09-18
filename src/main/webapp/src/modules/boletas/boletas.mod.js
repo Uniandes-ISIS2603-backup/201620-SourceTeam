@@ -12,7 +12,17 @@
                     'clienteInstanceView': {
                         controller: 'boletasCtrl',
                         controllerAs: 'ctrl',
-                        templateUrl: basePath + 'boletas.list.html'
+                        templateUrl: basePath + 'boletas.listnoedit.html'
+                    }
+                }
+            }).state('boletasListNoEdit', {
+                url: '/boletas',
+                parent: 'clienteEdit',
+                views: {
+                    'clienteInstanceView': {
+                        controller: 'boletasCtrl',
+                        controllerAs: 'ctrl',
+                        templateUrl: basePath + 'boletas.listnoedit.html'
                     }
                 }
             }).state('boletaCreate', {

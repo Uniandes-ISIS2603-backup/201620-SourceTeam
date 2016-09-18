@@ -21,9 +21,9 @@
         })
         .state('funcionesList', {
             url: '/funciones',
-            parent: 'funciones',
+            parent: 'teatroEdit',
             views: {
-                'mainView': {
+                'teatroInstanceView': {
                     controller: 'funcionesCtrl',
                     controllerAs: 'ctrl',
                     templateUrl: basePath + 'funciones.list.html'
@@ -31,9 +31,9 @@
             }
         }).state('funcionesCreate', {
                     url: '/funciones/create',
-                parent: 'funciones',
+                parent: 'teatroEdit',
                 views: {
-                    'mainView': {
+                    'teatroInstanceView': {
                         controller: 'funcionesCtrl',
                         controllerAs: 'ctrl',
                         templateUrl: basePath + 'funciones.create.html'
@@ -44,9 +44,9 @@
             param: {
                     funcionId: null
             },
-            parent: 'funciones',
+            parent: 'teatroEdit',
             views: {
-                'mainView': {
+                'teatroInstanceView': {
                     controller: 'funcionesCtrl',
                     controllerAs: 'ctrl',
                     templateUrl: basePath + 'funciones.create.html'

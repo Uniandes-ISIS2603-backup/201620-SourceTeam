@@ -19,11 +19,14 @@ public class CriticoDTO {
     
     private int credencial;
     
+    //Relación con el festival
+    private FestivalDTO festival;
+    
     public CriticoDTO(){
         
     }
     
-    public CriticoDTO(Long id, int duracion, String nombre, int credencial){
+    public CriticoDTO(Long id, int duracion, String nombre, int credencial, FestivalDTO festival){
         
         this.id = id;
         
@@ -32,6 +35,8 @@ public class CriticoDTO {
         this.nombre = nombre;
         
         this.credencial = credencial;
+        
+        this.festival = festival;
         
     }
     
@@ -51,6 +56,10 @@ public class CriticoDTO {
         return credencial;
     }
     
+    public FestivalDTO getFestival(){
+        return this.festival;
+    }
+    
     public void setDuracion(int duracion){
         this.duracion = duracion;
     }
@@ -67,9 +76,13 @@ public class CriticoDTO {
         this.id =id;
     }
     
+    public void setFestival(FestivalDTO festival){
+        this.festival = festival;
+    }
+    
     @Override
     public String toString(){
-        return "Id : " + id + ", nombre: " + nombre + ", duracion: " + duracion + " credencial: " + credencial;
+        return "Id : " + id + ", nombre: " + nombre + ", duracion: " + duracion + " credencial: " + credencial + " festival: " + festival;
     }
     
 }

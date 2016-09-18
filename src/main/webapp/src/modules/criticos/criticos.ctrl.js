@@ -1,7 +1,7 @@
 (function (ng) {
     var mod = ng.module("criticosModule");
 
-    mod.controller("criticosCtrl", ['$scope', '$state', '$stateParams', '$http', 'criticosContext', function ($scope, $state, $stateParams, $http, context) {
+    mod.controller("criticosCtrl", ['$scope', '$state', '$stateParams', '$http', 'criticosContext', 'festivalesContext', function ($scope, $state, $stateParams, $http, context, festivalesContext) {
 
             // inicialmente el listado de criticos está vacio
             $scope.records = {};
@@ -31,11 +31,15 @@
                 $scope.currentRecord = {
                     credencial: undefined /*Tipo Long. El valor se asigna en el backend*/,
                     nombre: '' /*Tipo String*/,
-                    duracion: undefined /*Tipo Long*/
+                    duracion: undefined /*Tipo Long*/,
+                    festival: {} /*Objeto que representa instancia de Festival*/
                 };
-              
                 $scope.alerts = [];
             }
+            
+            $http.get(festivalesContext).then(function (response) {
+                $scope.festivales = response.data;
+            });
 
 
             this.saveRecord = function (id) {

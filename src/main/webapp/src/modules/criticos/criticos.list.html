@@ -7,6 +7,7 @@
                 <th>Name</th>
                 <th>Credencial</th>
                 <th>Duración</th>
+                <th>Festival</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -16,7 +17,7 @@
                 <td id="{{$index}}-name">{{record.nombre}}</td>
                 <td id="{{$index}}-credencial">{{record.credencial}}</td>
                 <td id="{{$index}}-duracion">{{record.duracion}}</td>
-
+                <td id="{{$index}}-festival">{{record.festival.nombre}}</td>
                 <td>
                     <button id="{{$index}}-edit-btn" class="btn btn-default btn-sm" ui-sref="criticosEdit({criticoId: record.id})"><span class="glyphicon glyphicon-edit"></span> Edit</button>
                     <button id="{{$index}}-delete-btn" class="btn btn-default btn-sm" ng-click="ctrl.deleteRecord(record)"><span class="glyphicon glyphicon-minus"></span> Remove</button>

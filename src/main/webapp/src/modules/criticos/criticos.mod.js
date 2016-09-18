@@ -10,7 +10,17 @@
             var basePath = 'src/modules/criticos/';
             $urlRouterProvider.otherwise("/criticosList");
      
-            $stateProvider.state('criticosList', {
+            $stateProvider.state('criticos', {
+                url: '/criticos',
+                abstract: true,
+                views: {
+                    'mainView': {
+                        controller: 'criticosCtrl',
+                        controllerAs: 'ctrl',
+                        templateUrl: basePath + 'criticos.html'
+                    }
+                }
+            }).state('criticosList', {
                 url: '/criticos',
                 views: {
                     'mainView': {

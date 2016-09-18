@@ -1,9 +1,4 @@
-/* 
-  * To change this license header, choose License Headers in Project Properties.
-  * To change this template file, choose Tools | Templates
-  * and open the template in the editor.
-  */
- (function (ng) {
+(function (ng) {
      
      var mod = ng.module("teatrosModule");
      
@@ -39,7 +34,7 @@
               {
                   // El registro actual tiene que estar vacio.
                   $scope.currentRecord = {
-                     nombre: undefined /* Tipo String. El valor se asigna en el backend */,
+                     nombre: undefined  ,
                     ciudad: undefined
                   };
                 
@@ -52,7 +47,7 @@
                  currentRecord = $scope.currentRecord;
                  if(record!=null)
                  {   
-                     return $http.delete(context + "/" + record.nombre)
+                     return $http.delete(context + "/" + record.id)
                          .then(function () { 
                              $scope.records = {};
                              $http.get(context).then(function(response){
@@ -62,20 +57,6 @@
                          }, responseError); 
                  }
              };
-             
-             this.updateRecord = function (id) {
-                  currentRecord = $scope.currentRecord;
-                      
-                     // Se ejecuta PUT en el recurso REST.  
-                     return $http.put(context + "/" + currentRecord.nombre, currentRecord)
-                         .then(function () {
-                             // $http.put es una promesa.
-                             // Cuando termine bien, cambie de estado.   
-                             $state.go('teatrosList');
-                         }, responseError);
-                 
-             };  
-             
              
               this.saveRecord = function (id) {
                   currentRecord = $scope.currentRecord;
@@ -95,7 +76,7 @@
                  } else {
                      
                      // Se ejecuta PUT en el recurso REST.  
-                     return $http.put(context + "/" + currentRecord.nombre, currentRecord)
+                     return $http.put(context + "/" + currentRecord.id, currentRecord)
                          .then(function () {
                              // $http.put es una promesa.
                              // Cuando termine bien, cambie de estado.   

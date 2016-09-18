@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 (function (ng){
     
     var mod = ng.module("teatrosModule", ["ngMessages"]);
@@ -36,15 +35,15 @@
             }
         })
         .state('teatroEdit', {
-            url: '/teatros/:nombreTeatro',
+            url: '/teatros/:idTeatro',
             param: {
-                    nombreTeatro: null
+                    idTeatro: null
             },
             views: {
                 'mainView': {
                     controller: 'teatrosCtrl',
                     controllerAs: 'ctrl',
-                    templateUrl: basePath + 'teatros.update.html'
+                    templateUrl: basePath + 'teatros.create.html'
                 }
             }
         });

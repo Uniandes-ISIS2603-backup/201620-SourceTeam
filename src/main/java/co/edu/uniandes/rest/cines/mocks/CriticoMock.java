@@ -35,7 +35,7 @@ public class CriticoMock {
         if(criticos == null)
         {
             criticos = new ArrayList<>();
-            criticos.add( new CriticoDTO(1L,1, "Juan", 10208, new FestivalDTO(1L, 1, "Aventura", "Pat1")));
+            criticos.add( new CriticoDTO(1L,1, "Juan", 10208, new FestivalDTO(1L, 1, "Aventura", "Pat1" )));
             criticos.add( new CriticoDTO(2L,2, "Pablo", 25445,new FestivalDTO(2L, 1, "Accion", "Pat2")));
             criticos.add( new CriticoDTO(3L,3, "Pedro", 36546, new FestivalDTO(3L, 1, "Thriller", "Pat3"))) ;
         }

@@ -56,12 +56,17 @@
                         templateUrl: basePath + 'teatros.instance.html'
                     }
                 }
+        }).state('festivalTeatrosList', {
+            url:"/list",
+            parent: 'festivalesEdit',
+            views: {
+                    'festivalesInstanceView': {
+                        controller: 'teatrosCtrl',
+                        controllerAs: 'ctrl',
+                        templateUrl: basePath + 'teatros.listNoEdit.html'
+                    }
+                }
         });
     }]);
 
 })(window.angular);
-
-
-
-
-

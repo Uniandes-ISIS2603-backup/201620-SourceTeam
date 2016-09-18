@@ -10,10 +10,21 @@ var moduloFestival = ng.module("festivalesModule",['ui.router']);
         var basePath = 'src/modules/festivales/';
         $urlRouterProvider.otherwise("/festivalesList");
         $stateProvider
-                .state('festivalesList',{
+                .state('festivales',{
                     url: "/festivales",
+                    abstract : true,
                      views: {
                     'mainView': {
+                        controller: 'festivalesCtrl',
+                        controllerAs: 'ctrl',
+                        templateUrl: basePath + 'festivales.html'
+                    }
+                }
+                }).state('festivalesList',{
+                    url: "/list",
+                    parent : 'festivales',
+                     views: {
+                    'festivalesView': {
                         controller: 'festivalesCtrl',
                         controllerAs: 'ctrl',
                         templateUrl: basePath + 'festivales.list.html'
@@ -21,8 +32,9 @@ var moduloFestival = ng.module("festivalesModule",['ui.router']);
                 }
                 }).state('festivalesCreate', {
                 url: '/festivales/create',
+                parent : 'festivales',
                 views: {
-                    'mainView': {
+                    'festivalesView': {
                         controller: 'festivalesCtrl',
                         controllerAs: 'ctrl',
                         templateUrl: basePath + 'festivales.create.html'
@@ -32,11 +44,15 @@ var moduloFestival = ng.module("festivalesModule",['ui.router']);
             }).state('festivalesEdit', {
                 url: '/festivales/:festivalId',
                 param: { festivalId : null},
+                parent: 'festivales',
                 views: {
-                    'mainView': {
+                    'festivalesView': {
                         controller: 'festivalesCtrl',
                         controllerAs: 'ctrl',
                         templateUrl: basePath + 'festivales.create.html'
+                    },
+                    'childView':{
+                        templateUrl: basePath + 'festivales.instance.html'
                     }
                 }
             });

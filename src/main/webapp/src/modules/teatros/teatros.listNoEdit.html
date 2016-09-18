@@ -1,0 +1,26 @@
+<div class="col-md-12">
+    <div class="container-fluid">
+            
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Id</th>    
+                    <th>Nombre</th>  
+                    <th>Ciudad</th>   
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="record in records">
+                    <td id="{{$index}}-name">{{record.id}}</td>
+                    <td id="{{$index}}-descrption">{{record.nombre}}</td>
+                    <td id="{{$index}}-isbn">{{record.ciudad}}</td>
+                    <td>
+                        <button id="{{$index}}-delete-btn" class="btn btn-default btn-sm" ng-click="ctrl.deleteRecord(record)"><span class="glyphicon glyphicon-minus"></span> Remove</button>
+
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>

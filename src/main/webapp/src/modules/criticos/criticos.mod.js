@@ -13,8 +13,9 @@
             $stateProvider.state('criticos', {
                 url: '/criticos',
                 abstract: true,
+                parent : 'festivalesEdit',
                 views: {
-                    'mainView': {
+                    'festivalesInstanceView': {
                         controller: 'criticosCtrl',
                         controllerAs: 'ctrl',
                         templateUrl: basePath + 'criticos.html'
@@ -22,8 +23,9 @@
                 }
             }).state('criticosList', {
                 url: '/criticos',
+                parent : 'festivalesEdit',
                 views: {
-                    'mainView': {
+                    'festivalesInstanceView': {
                         controller: 'criticosCtrl',
                         controllerAs: 'ctrl',
                         templateUrl: basePath + 'criticos.list.html'
@@ -31,8 +33,9 @@
                 }
             }).state('criticosCreate', {
                 url: '/criticos/create',
+                parent : 'festivalesEdit',
                 views: {
-                    'mainView': {
+                    'festivalesInstanceView': {
                         controller: 'criticosCtrl',
                         controllerAs: 'ctrl',
                         templateUrl: basePath + 'criticos.create.html'
@@ -41,11 +44,12 @@
 
             }).state('criticosEdit', {
                 url: '/criticos/:criticoId',
+                parent : 'festivalesEdit',
                 param: {
                     criticoId: null
                 },
                 views: {
-                    'mainView': {
+                    'festivalesInstanceView': {
                         controller: 'criticosCtrl',
                         controllerAs: 'ctrl',
                         templateUrl: basePath + 'criticos.create.html'

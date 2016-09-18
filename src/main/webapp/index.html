@@ -58,28 +58,17 @@
     <body style="padding-top: 20px;">
         <nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" 
+                            data-target="#navbardemo" aria-expanded="false" aria-controls="navbar">
+                        <span class="glyphicon glyphicon-menu-hamburger" style="color: white"></span>
+                    </button>
+                </div> 
                 <div id="navbardemo" class="navbar-collapse collapse" aria-expanded="false" style="height:1px;float:left;">
                     <ul class="nav navbar-nav" style="margin-left: 0">
-                        <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown"><font color="white">Festival</font>
-                            <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a ui-sref="festivalesCreate">Crear festival</a></li>    
-                                <li><a ui-sref="festivalesList">Lista festivales</a></li>
-                            </ul>
-                        </li> 
+                        <li><a ui-sref="festivalesList">Festivales</a></li>
                     </ul>
-                    <ul class="nav navbar-nav" style="margin-left: 0">
-                        <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown"><font color="white">Críticos</font>
-                            <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a ui-sref="criticosCreate">Crear crítico</a></li>    
-                                <li><a ui-sref="criticosList">Lista críticos</a></li>
-                            </ul>
-                        </li> 
-                    </ul>
-                    <ul class="nav navbar-nav" style="margin-left: 0">
+                                        <ul class="nav navbar-nav" style="margin-left: 0">
                         <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown"><font color="white">Boletas</font>
                             <span class="caret"></span></a>

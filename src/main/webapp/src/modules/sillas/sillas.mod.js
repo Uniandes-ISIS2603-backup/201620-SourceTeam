@@ -15,7 +15,7 @@
                         templateUrl: basePath + 'sillas.list.html'
                     }
                 }
-            }).state('sillaCreate', {
+            }).state('sillasCreate', {
                 url: '/sillas/create',
                 parent: 'salasEdit',
                 views: {

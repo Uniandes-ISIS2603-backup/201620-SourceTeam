@@ -1,24 +1,21 @@
 <div class="col-md-6 well">
     <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="ctrl.closeAlert($index)" dismiss-on-timeout="5000">{{alert.msg}} </alert>
-    <form novalidate name="form" id="funciones-form" role="form" ng-submit="form.$valid && ctrl.saveRecord(currentRecord.idd)">
+    <form novalidate name="form" id="funciones-form" role="form" ng-submit="ctrl.saveRecord(currentRecord.id)">
         
         <div ng-messages="form.$error">     
             <div ng-message="required">Llene los campos requeridos</div>
         </div>
         
         <fieldset>
-            <input id="id" class="form-control" type="hidden" ng-model="currentRecord.id"/>
-            <div class="form-group col-md-12" ng-class="{'has-success': form.name.$valid && form.name.$dirty, 'has-error': form.name.$invalid && (form.name.$dirty || form.$submitted)}" >
-                <label for="name" class="col-md-2 control-label">Id</label> 
-                <div class="col-md-10">  
-                    <input id="anuncio" name="name" class="form-control" type="text" ng-model="currentRecord.id" ng-init="currentRecord.id" required />
+            <label for="name" class="col-md-2 control-label">Id</label>
+                <div class="col-md-10">
+                    <input id="id" readonly="readonly" name="name" class="form-control" type="number" ng-model="currentRecord.id" ng-init="currentRecord.id" required />
                 </div>
-            </div>
-            <input id="id" class="form-control" type="hidden" ng-model="currentRecord.fecha"/>
+            <input id="fecha" class="form-control" type="hidden" ng-model="currentRecord.dia"/>
             <div class="form-group col-md-12" ng-class="{'has-success': form.name.$valid && form.name.$dirty, 'has-error': form.name.$invalid && (form.name.$dirty || form.$submitted)}" >
                 <label for="name" class="col-md-2 control-label">Fecha</label> 
                 <div class="col-md-10"> 
-                    <input id="anuncio" name="name" class="form-control" type="date" ng-model="currentRecord.fecha" ng-init="currentRecord.fecha" required />
+                    <input id="fecha" name="name" class="form-control" type="datetime" ng-model="currentRecord.dia" ng-init="currentRecord.dia" required />
                 </div>
             </div>
             <input id="id" class="form-control" type="hidden" ng-model="currentRecord.precio"/>
@@ -26,13 +23,6 @@
                 <label for="name" class="col-md-2 control-label">Precio</label> 
                 <div class="col-md-10">  
                     <input id="anuncio" name="name" class="form-control" type="number" ng-model="currentRecord.precio" ng-init="currentRecord.precio" required />
-                </div>
-            </div>
-            <input id="id" class="form-control" type="hidden" ng-model="currentRecord.hora"/>
-            <div class="form-group col-md-12" ng-class="{'has-success': form.name.$valid && form.name.$dirty, 'has-error': form.name.$invalid && (form.name.$dirty || form.$submitted)}" >
-                <label for="name" class="col-md-2 control-label">Hora</label> 
-                <div class="col-md-10">  
-                    <input id="anuncio" name="name" class="form-control" type="time" ng-model="currentRecord.hora" ng-init="currentRecord.hora" required />
                 </div>
             </div>
             <button type="button" ui-sref='funcionesList'>Cancel</button>   

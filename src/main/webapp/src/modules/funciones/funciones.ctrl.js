@@ -1,9 +1,3 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 (function (ng){
     
     var mod = ng.module("funcionesModule");
@@ -23,10 +17,10 @@
             if ($stateParams.funcionId !== null && $stateParams.funcionId !== undefined) {
                         
                 // Se toma el id del parámetro. 
-                idd = $stateParams.funcionId;
+                id = $stateParams.funcionId;
                 
                 // Se obtiene el dato del recurso REST.
-                $http.get(context + "/" + idd)  
+                $http.get(context + "/" + id)  
                     .then(function (response) {
                         // $http.get es una promesa.  
                         // Cuando llegue el dato, actualice currentRecord.        
@@ -42,10 +36,8 @@
             {
                 // El registro actual tiene que estar vacio.
                 $scope.currentRecord = {
-                    id: undefined /* Tipo int. El valor se asigna en el backend */,
-                    fecha: undefined,
-                    precio: undefined, 
-                    hora: undefined 
+                    dia: undefined,
+                    precio: undefined
                 };
               
                 $scope.alerts = [];
@@ -65,11 +57,25 @@
                             $state.go('funcionesList');
                         }, responseError); 
                 }
-            };  
-            
-            this.updateRecord = function (id) {
-                  currentRecord = $scope.currentRecord;
-                      
+            };
+             
+            this.saveRecord = function (id) {
+                 currentRecord = $scope.currentRecord;
+
+                 // En caso de que el id sea nulo significa que el registro no existe entonces se crea.        
+                 if (id == null) {
+ 
+                     // Se ejecuta POST en el recurso REST. 
+                     return $http.post(context, currentRecord)
+                         .then(function () {
+                             // $http.post es una promesa.
+                             // Cuando termine bien, cambie de estado.
+                             $state.go('funcionesList');   
+                         }, responseError);
+                             
+                 // En caso de que el id no sea null significa que el registro existe entonces se actualiza.
+                 } else {
+                     
                      // Se ejecuta PUT en el recurso REST.  
                      return $http.put(context + "/" + currentRecord.id, currentRecord)
                          .then(function () {
@@ -77,20 +83,7 @@
                              // Cuando termine bien, cambie de estado.   
                              $state.go('funcionesList');
                          }, responseError);
-                 
-             }; 
-             
-            this.saveRecord = function (id) {
-                currentRecord = $scope.currentRecord; 
-                // En caso de que el id sea nulo significa que el registro no existe entonces se crea.        
-
-                // Se ejecuta POST en el recurso REST. 
-                return $http.post(context, currentRecord)   
-                .then(function () {
-                    // $http.post es una promesa.   
-                    // Cuando termine bien, cambie de estado.
-                    $state.go('funcionesList');   
-                }, responseError);
+                 };
                 
             };  
             

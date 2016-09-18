@@ -40,15 +40,15 @@ public class FuncionResource
     
     /**
      * Obtiene la funcion con el id dado por parametro.
-     * @param pId Id de la funcion a buscar.
+     * @param id Id de la funcion a buscar.
      * @return Funcion con el id dado.
      * @throws FuncionException Si hay algun problema en el metodo.
      */
     @GET
     @Path("{id: \\d+}")
-    public FuncionDTO getFuncionById(@PathParam("id") int pId) throws FuncionException
+    public FuncionDTO getFuncion(@PathParam("id") Long id) throws FuncionException
     {
-        return funciones.getFuncionById(pId);
+        return funciones.getFuncion(id);
     }
     
     /**
@@ -65,28 +65,29 @@ public class FuncionResource
     
     /**
      * Modifica una funcion existente.
-     * @param pId Id de la funcion a modificar.
+     * @param id Id de la funcion a modificar.
      * @param nueva Funcion con la informacion que se quiere actualizar.
      * @return Funcion actualizada.
      * @throws FuncionException Si hay algun problema en el metodo.
      */
     @PUT
     @Path("{id: \\d+}")
-    public FuncionDTO updateFuncion(@PathParam("id") int pId, FuncionDTO nueva) throws FuncionException
+    public FuncionDTO updateFuncion(@PathParam("id") Long id, FuncionDTO nueva) throws FuncionException
     {
-        return funciones.updateFuncion(pId, nueva);
+        return funciones.updateFuncion(id, nueva);
     }
     
     /**
      * Elimina la funcion con el id dado.
-     * @param pId Id de la funcion que se quiere eliminar.
+     * @param id Id de la funcion que se quiere eliminar.
+     * @return 
      * @throws FuncionException Si hay algun problema en el metodo.
      */
     @DELETE
     @Path("{id: \\d+}")
-    public void deleteFuncion(@PathParam("id") int pId) throws FuncionException
+    public FuncionDTO deleteFuncion(@PathParam("id") Long id) throws FuncionException
     {
-        funciones.deleteFuncion(pId);
+        return funciones.deleteFuncion(id);
     }
     
 }

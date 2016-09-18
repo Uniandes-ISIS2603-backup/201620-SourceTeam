@@ -12,6 +12,10 @@ package co.edu.uniandes.rest.cines.dtos;
 public class TeatroDTO 
 {
     /**
+     * Id teatro.
+     */
+    private Long id;
+    /**
      * Ciudad donde se encuentra el teatro.
      */
     private String ciudad;
@@ -33,9 +37,11 @@ public class TeatroDTO
      * Crea un nuevo teatro.
      * @param pCiudad Ciudad donde se encuantra el teatro.
      * @param pNombre Nombre del teatro.
+     * @param pId Id.
      */
-    public TeatroDTO(String pCiudad, String pNombre)
+    public TeatroDTO(Long pId, String pCiudad, String pNombre)
     {
+        id = pId;
         ciudad = pCiudad;
         nombre = pNombre;
     }
@@ -58,6 +64,11 @@ public class TeatroDTO
         return nombre;
     }
     
+    public Long getId()
+    {
+        return id;
+    }
+    
     /**
      * Cambia el nombre del teatro.
      * @param pNombre Nuevo nomrbe.
@@ -74,6 +85,11 @@ public class TeatroDTO
     public void setCiudad(String pCiudad)
     {
         ciudad = pCiudad;
+    }
+    
+    public void setId(Long pId)
+    {
+        id = pId;
     }
     
     /**

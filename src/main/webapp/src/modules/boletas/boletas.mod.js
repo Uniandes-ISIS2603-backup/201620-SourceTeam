@@ -9,10 +9,10 @@
                 url: '/boletas',
                 parent: 'clienteEdit',
                 views: {
-                    'clienteInstanceView': {
+                    'funcionInstanceView': {
                         controller: 'boletasCtrl',
                         controllerAs: 'ctrl',
-                        templateUrl: basePath + 'boletas.listnoedit.html'
+                        templateUrl: basePath + 'boletas.list.html'
                     }
                 }
             }).state('boletasListNoEdit', {
@@ -29,7 +29,7 @@
                 url: '/boletas/create',
                 parent: 'clienteEdit',
                 views: {
-                    'clienteInstanceView': {
+                    'funcionInstanceView': {
                         controller: 'boletasCtrl',
                         controllerAs: 'ctrl',
                         templateUrl: basePath + 'boletas.create.html'
@@ -43,7 +43,7 @@
                 },
                 parent: 'clienteEdit',
                 views: {
-                    'clienteInstanceView': {
+                    'funcionInstanceView': {
                         controller: 'boletasCtrl',
                         controllerAs: 'ctrl',
                         templateUrl: basePath + 'boletas.create.html'

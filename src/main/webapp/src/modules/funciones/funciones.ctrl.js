@@ -37,7 +37,7 @@
                 $scope.currentRecord = {
                     dia: undefined,
                     precio: undefined,
-                    pelicula : {},
+                    pelicula : {}
                 };
               
                 $scope.alerts = [];

@@ -36,6 +36,13 @@ public class ClienteDTO {
         this.documento= pDocumento;
         this.afiliado= pAfiliado;
     }
+    public ClienteDTO(Long pId,String pNombre, String pApellido, Long pDocumento, boolean pAfiliado) {
+        this.id=pId;
+        this.nombres = pNombre;
+        this.apellidos = pApellido;
+        this.documento= pDocumento;
+        this.afiliado= pAfiliado;
+    }
     public Long getId() {
         return id;
     }

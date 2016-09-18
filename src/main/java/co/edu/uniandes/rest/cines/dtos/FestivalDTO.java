@@ -5,6 +5,8 @@
  */
 package co.edu.uniandes.rest.cines.dtos;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author s.ardila13
@@ -17,6 +19,7 @@ package co.edu.uniandes.rest.cines.dtos;
     private String nombre;
     
     private String patrocinador;
+    
     
     public FestivalDTO(){
         

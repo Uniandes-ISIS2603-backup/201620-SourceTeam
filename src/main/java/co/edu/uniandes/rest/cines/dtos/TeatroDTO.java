@@ -5,6 +5,9 @@
  */
 package co.edu.uniandes.rest.cines.dtos;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Objeto de transferencia de datos del teatro.
  * @author ba.bohorquez10
@@ -24,7 +27,7 @@ public class TeatroDTO
      * Nombre del teatro.
      */
     private String nombre;
-    
+        
     /**
      * 
      */

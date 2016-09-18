@@ -4,24 +4,24 @@
     <form novalidate name="form" id="festivales-form" role="form" ng-submit="ctrl.saveRecord(currentRecord.id)">
         
         <div ng-messages="form.$error">
-            <div ng-message="required">Llene los campos requeridos</div>
+            <div ng-message="required" style="margin-bottom: 10px">Llene los campos requeridos</div>
         </div>
    
         <fieldset>
                 <label for="name" class="col-md-2 control-label">Id</label>
-                <div class="col-md-10">
+                <div class="col-md-10" style="margin-bottom: 10px">
                     <input id="anuncio" name="name" readonly="readonly" class="form-control" type="text" ng-model="currentRecord.id" ng-init="currentRecord.id" required />
                 </div>
                 <label for="name" class="col-md-2 control-label">Nombre</label>
-                <div class="col-md-10">
+                <div class="col-md-10" style="margin-bottom: 10px">
                     <input id="anuncio" name="name" class="form-control" type="text" ng-model="currentRecord.nombre" ng-init="currentRecord.nombre" required />
                 </div>
                 <label for="name" class="col-md-2 control-label">Duración</label>
-                <div class="col-md-10">
+                <div class="col-md-10" style="margin-bottom: 10px">
                     <input id="anuncio" name="name" class="form-control" type="number" ng-model="currentRecord.duracion" ng-init="currentRecord.duracion" required />
                 </div>
                 <label for="name" class="col-md-2 control-label">Patrocinar</label>
-                <div class="col-md-10">
+                <div class="col-md-10" style="margin-bottom: 10px">
                     <input id="anuncio" name="name" class="form-control" type="text" ng-model="currentRecord.patrocinador" ng-init="currentRecord.patrocinador" required />
                 </div>
                 <br>

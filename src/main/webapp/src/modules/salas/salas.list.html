@@ -1,22 +1,26 @@
-<div class="container-fluid" >
-   
-    <table class="table table-striped" class="col-md-4">
-        <thead>
-            <tr>
-                <th>Numero</th>        
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr ng-repeat="record in records">
-                <td id="{{$index}}-numero">{{record.id}}</td>
+<div class="col-md-12">
+    <div class="container-fluid">
+        
+    <button class="btn btn-default" ui-sref="salasCreate">Crear Sala</button>
+    
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Numero</th>    
+                    <th>Actions</th>   
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="record in records">
+                    <td id="{{$index}}-name">{{record.id}}</td>
+                    <td>
+                        <button id="{{$index}}-edit-btn" class="btn btn-default btn-sm" ui-sref="salasEdit({salaId: record.id})"><span class="glyphicon glyphicon-edit"></span> Edit</button>
+                        <button id="{{$index}}-delete-btn" class="btn btn-default btn-sm" ng-click="ctrl.deleteRecord(record.id)"><span class="glyphicon glyphicon-minus"></span> Remove</button>
 
-                <td>
-                    <button id="{{$index}}-edit-btn" class="btn btn-default btn-sm" ui-sref="salasEdit({salaId: record.id})"><span class="glyphicon glyphicon-edit"></span> Edit</button>
-                    <button id="{{$index}}-delete-btn" class="btn btn-default btn-sm" ng-click="ctrl.deleteRecord(record.id)"><span class="glyphicon glyphicon-minus"></span> Remove</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 
-                </td>
-            </tr>
-        </tbody>
-    </table>
 </div>

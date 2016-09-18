@@ -1,7 +1,7 @@
 (function (ng){
     var mod = ng.module("funcionesModule");
     
-    mod.controller("funcionesCtrl", ['$scope', '$state', '$stateParams', '$http', 'funcionesContext', function ($scope, $state, $stateParams, $http, context) {
+    mod.controller("funcionesCtrl", ['$scope', '$state', '$stateParams', '$http', 'funcionesContext','peliculasContext', function ($scope, $state, $stateParams, $http, context, peliculasContext) {
             
             // El listado de funciones esta vacio en un principio.
             $scope.records = {};
@@ -36,11 +36,16 @@
                 // El registro actual tiene que estar vacio.
                 $scope.currentRecord = {
                     dia: undefined,
-                    precio: undefined
+                    precio: undefined,
+                    pelicula : {},
                 };
               
                 $scope.alerts = [];
              }
+             
+             $http.get(peliculasContext).then(function (response) {
+                $scope.peliculas = response.data;
+            });
              
             this.deleteRecord = function (record) 
             {
@@ -60,7 +65,7 @@
              
             this.saveRecord = function (id) {
                  currentRecord = $scope.currentRecord;
-
+                console.log(currentRecord.pelicula);
                  // En caso de que el id sea nulo significa que el registro no existe entonces se crea.        
                  if (id == null) {
  

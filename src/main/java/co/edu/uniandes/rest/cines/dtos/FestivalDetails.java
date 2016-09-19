@@ -12,7 +12,7 @@ import java.util.List;
  *
  * @author s.ardila13
  */
-public class FestivalDetailsDTO extends FestivalDTO {
+public class FestivalDetails extends FestivalDTO {
     
     //Lista de criticos del festival
     private List<CriticoDTO> criticos = new ArrayList<>();
@@ -20,15 +20,15 @@ public class FestivalDetailsDTO extends FestivalDTO {
     //Lista de teatros del festival
     private List<TeatroDTO> teatros = new ArrayList<>();
     
-    public FestivalDetailsDTO(){
+    public FestivalDetails(){
         
     }
     
-    public FestivalDetailsDTO(Long id, int duracion, String nombre, String patrocinador){
+    public FestivalDetails(Long id, int duracion, String nombre, String patrocinador){
         super(id, duracion, nombre, patrocinador);
     }
     
-    public FestivalDetailsDTO(FestivalDTO festival){
+    public FestivalDetails(FestivalDTO festival){
         super(festival.getId(), festival.getDuracion(), festival.getNombre(), festival.getPatrocinador());
     }
     

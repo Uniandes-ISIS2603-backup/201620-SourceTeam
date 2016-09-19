@@ -23,7 +23,17 @@
                     }
                 }
 
-            }).state('peliculasEdit', {
+            }).state('festivalPeliculasList', {
+            url:"/list",
+            parent: 'festivalesEdit',
+            views: {
+                    'festivalesInstanceView': {
+                        controller: 'peliculasCtrl',
+                        controllerAs: 'ctrl',
+                        templateUrl: basePath + 'peliculas.listNoEdit.html'
+                    }
+                }
+        }).state('peliculasEdit', {
                 url: '/peliculas/:peliculaId',
                 param: {
                     peliculaId: null

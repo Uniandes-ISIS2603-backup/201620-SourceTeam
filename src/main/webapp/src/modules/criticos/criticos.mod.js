@@ -30,16 +30,6 @@
                         templateUrl: basePath + 'criticos.list.html'
                     }
                 }
-            }).state('festivalesCriticosList', {
-                url: '/criticos',
-                parent : 'festivalesEdit',
-                views: {
-                    'festivalesInstanceView': {
-                        controller: 'criticosCtrl',
-                        controllerAs: 'ctrl',
-                        templateUrl: basePath + 'criticos.listnoedit.html'
-                    }
-                }
             }).state('criticosListNoEdit', {
                 url: '/criticos',
                 parent: 'funcionEdit',

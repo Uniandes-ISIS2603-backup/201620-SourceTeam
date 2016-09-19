@@ -7,15 +7,11 @@
         </div>
         
         <fieldset>
-            <label for="name" class="col-md-2 control-label">Id</label>
-                <div class="col-md-10">
-                    <input id="idnum" idnum="idnum" class="form-control" type="number" ng-model="currentRecord.id" ng-init="currentRecord.id" readonly ="readonly" />
-                </div>
             <input id="fecha" class="form-control" type="hidden" ng-model="currentRecord.dia"/>
             <div class="form-group col-md-12" ng-class="{'has-success': form.name.$valid && form.name.$dirty, 'has-error': form.name.$invalid && (form.name.$dirty || form.$submitted)}" >
                 <label for="name" class="col-md-2 control-label">Fecha</label> 
                 <div class="col-md-10"> 
-                    <input id="fecha" name="name" class="form-control" type="datetime" ng-model="currentRecord.dia" ng-init="currentRecord.dia" required />
+                    <input id="fecha" name="name" class="form-control" type="date" ng-model="currentRecord.dia" ng-init="currentRecord.dia" required />
                 </div>
             </div>
             <input id="id" class="form-control" type="hidden" ng-model="currentRecord.precio"/>
@@ -27,7 +23,11 @@
             </div>
             <label for="festival" class="col-md-2 control-label">Película</label>
                 <div class="col-md-10" style="margin-bottom: 10px">
-                    <select id="pelicula" name="pelicula" ng-options="rc.nombre for rc in peliculas track by rc.id" class="form-control" type="text" ng-model="currentRecord.pelicula" ></select>
+                    <select id="pelicula" name="pelicula" ng-options="rc.nombre for rc in peliculas track by rc.nombre" class="form-control" type="text" ng-model="currentRecord.pelicula" ng-init="currentRecord.pelicula" ></select>
+                </div>
+            <label for="festival" class="col-md-2 control-label">Sala</label>
+                <div class="col-md-10" style="margin-bottom: 10px">
+                    <select id="sala" name="sala" ng-options="rc.id for rc in salas track by rc.id" class="form-control" type="text" ng-model="currentRecord.sala" ></select>
                 </div>
             <button type="button" ui-sref='funcionesList'>Cancel</button>   
             <button type="submit" >Save</button>

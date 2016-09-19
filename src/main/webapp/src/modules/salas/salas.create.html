@@ -8,10 +8,6 @@
    
         <fieldset>
             <div class="form-group col-md-12" ng-class="{'has-success': form.name.$valid && form.name.$dirty, 'has-error': form.name.$invalid && (form.name.$dirty || form.$submitted)}" >
-               <label for="id" class="col-md-2 control-label">Id</label>
-                <div class="col-md-10">
-                    <input id="id" id="id" class="form-control" type="number" ng-model="currentRecord.id" ng-init="currentRecord.id" readonly="readonly" />
-                </div>
                 <label for="numSala" class="col-md-2 control-label">Numero sala</label>
                 <div class="col-md-10">
                     <input id="numSala" numSala="numSala" class="form-control" type="number" ng-model="currentRecord.numSala" ng-init="currentRecord.numSala" required />
@@ -28,10 +24,10 @@
                 <div class="col-md-10">
                     <input id="numSillasPreferenciales" numSillasPreferenciales="numSillasPreferenciales" class="form-control" type="number" ng-model="currentRecord.numSillasPreferenciales" ng-init="currentRecord.numSillasPreferenciales" required />
                 </div>
-                 <label for="esFestival" class="col-md-4 control-label">Es festival</label>
+                <label for="afili" class="col-md-4 control-label">Es Festival</label>
                 <div class="col-md-10">
                     
-                    <input id="esFestival" esFestival="esFestival" type="boolean" ng-model="currentRecord.esFestival" ng-true-value="true" ng-false-value="false"/>
+                    <input id="festival" afili="festival" type="checkbox" ng-model="currentRecord.festival" ng-true-value="true" ng-false-value="false"/>
                 </div>
                 
             </div>

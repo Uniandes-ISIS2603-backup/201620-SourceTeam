@@ -35,10 +35,10 @@ public class SalaDTO
      * @param numSillasP numero de sillas preferenciales
      * @param esF la sala es festival o no
      */
-    public SalaDTO(int numSal, int numS, int numSillasG, int numSillasP, Boolean esF)
+    public SalaDTO(Long id, int numSal, int numS, int numSillasG, int numSillasP, Boolean esF)
     {
                 super();
-                 id = 0L;
+                this.id = id;
                 this.numSala = numSal;
 		this.numSillas = numS;
 		this.numSillasGenerales = numSillasG;

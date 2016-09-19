@@ -34,9 +34,9 @@ public class PeliculaMock
     	if (peliculas == null) {
                 try {
                     peliculas = new ArrayList<>();
-                    createPelicula(new PeliculaDTO("superman", "heroe", "nn" , 180, "estados unidos"));
-                    createPelicula(new PeliculaDTO("batman", "heroe", "nn", 180, "estados unidos"));
-                    createPelicula(new PeliculaDTO("tarzan", "heroe", "nn", 180, "estados unidos"));
+                    createPelicula(new PeliculaDTO(0L, "superman", "heroe", "nn" , 180, "estados unidos"));
+                    createPelicula(new PeliculaDTO(0L, "batman", "heroe", "nn", 180, "estados unidos"));
+                    createPelicula(new PeliculaDTO(0L, "tarzan", "heroe", "nn", 180, "estados unidos"));
                 } catch (PeliculaException ex) {
                     Logger.getLogger(PeliculaMock.class.getName()).log(Level.SEVERE, null, ex);
                 }

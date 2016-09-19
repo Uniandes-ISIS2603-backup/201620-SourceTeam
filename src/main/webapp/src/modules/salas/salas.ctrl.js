@@ -7,7 +7,7 @@
             $scope.records = {};
             // carga las salas
             $http.get(context).then(function(response){
-                $scope.records = response.data;    
+                $scope.records = response.data;  
             }, responseError);
 
             // el controlador recibió un numSala ??
@@ -30,7 +30,7 @@
                 // el registro actual debe estar vacio
                 $scope.currentRecord = {
                     id: undefined /*Tipo Long. El valor se asigna en el backend*/,
-                    name: '' /*Tipo String*/
+                    name: '' /*Tipo String*/,
                 };
               
                 $scope.alerts = [];

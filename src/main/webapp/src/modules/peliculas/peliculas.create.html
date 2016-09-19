@@ -9,10 +9,6 @@
    
         <fieldset>
             <div class="form-group col-md-12" ng-class="{'has-success': form.name.$valid && form.name.$dirty, 'has-error': form.name.$invalid && (form.name.$dirty || form.$submitted)}" >
-                <label for="idnum" class="col-md-2 control-label">Id</label>
-                <div class="col-md-10">
-                    <input id="id" id="id" class="form-control" type="number" ng-model="currentRecord.id" ng-init="currentRecord.id" readonly="readonly" />
-                </div>
                 <label for="nombre" class="col-md-2 control-label">Nombre</label>
                 <div class="col-md-10">
                     <input id="nombre" nombre="nombre" class="form-control" type="text" ng-model="currentRecord.nombre" ng-init="currentRecord.nombre" required />
@@ -24,10 +20,6 @@
                 <label for="creditos" class="col-md-2 control-label">Creditos</label>
                 <div class="col-md-10">
                     <input id="creditos" creditos="creditos" class="form-control" type="text" ng-model="currentRecord.creditos" ng-init="currentRecord.creditos" required />
-                </div>
-                <label for="critico" class="col-md-2 control-label">Critico</label>
-                <div class="col-md-10">
-                    <input id="critico" critico="critico" class="form-control" type="text" ng-model="currentRecord.critico" ng-init="currentRecord.critico" required />
                 </div>
                 <label for="duracion" class="col-md-2 control-label">Duracion</label>
                 <div class="col-md-10">

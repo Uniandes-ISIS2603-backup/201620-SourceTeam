@@ -36,10 +36,10 @@ public class PeliculaDTO
      * @param dura duracion de la pelicula
      * @param paisP pais de la pelicula
      */
-    public PeliculaDTO(String nomb, String anun, String credi, int dura, String paisP)
+    public PeliculaDTO(Long id, String nomb, String anun, String credi, int dura, String paisP)
     {
 		super();
-                this.id = 0L;
+                this.id = id;
                 this.nombre = nomb;
                 this.anuncio = anun;
 		this.creditos = credi;

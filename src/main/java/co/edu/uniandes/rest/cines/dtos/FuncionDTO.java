@@ -20,11 +20,6 @@ public class FuncionDTO
     private Long id;
         
     /**
-     * Precio de la funcion.
-     */
-    private double precio;
-    
-    /**
      * Fecha de la funcion.
      */
     private Date dia;
@@ -39,6 +34,11 @@ public class FuncionDTO
      * Crítico de la funcion.
      */
     private PeliculaDTO pelicula;
+        
+    /**
+     * Sala de la funcion.
+     */
+    private SalaDTO sala;
         
     
     /**
@@ -57,12 +57,12 @@ public class FuncionDTO
      * @param pelicula
 
      */
-    public FuncionDTO(Long pId, double pPrecio, Date pDia, PeliculaDTO pelicula)
+    public FuncionDTO(Long pId, Date pDia, PeliculaDTO pelicula, SalaDTO sala)
     {
         id = pId;
-        precio = pPrecio;
         dia = pDia;
         this.pelicula = pelicula;
+        this.sala = sala;
     }
     
     /**
@@ -74,15 +74,6 @@ public class FuncionDTO
         return id;
     }
     
-    
-    /**
-     * Retorna el precio de la funcion.
-     * @return Precio de la funcion.
-     */
-    public double getPrecio()
-    {
-        return precio;
-    }
     
     /**
      * Retorna la fecha de la funcion.
@@ -103,21 +94,22 @@ public class FuncionDTO
     }
     
     /**
+     * Retorna la sala de la funcion.
+     * @return Sala de la funcion.
+     */
+    public SalaDTO getSala()
+    {
+        return sala;
+    }
+    
+    
+    /**
      * Cambia el id de la funcion.
      * @param pId Nuevo id.
      */
     public void setId(Long pId)
     {
         id = pId;
-    }
-        
-    /**
-     * Cambia el precio de la funcion.
-     * @param pPrecio Nuevo precio.
-     */
-    public void setPrecio(double pPrecio)
-    {
-        precio = pPrecio;
     }
     
     /**
@@ -146,6 +138,15 @@ public class FuncionDTO
         return this.pelicula;
     }
     
+    
+     /**
+     * Retorna la sala de la funcion.
+     */
+    public void setSala(SalaDTO sala)
+    {
+        this.sala = sala;
+    }
+    
     /**
      * Cambia la fecha de la funcion.
      * @param pDia Nueva fecha.
@@ -158,6 +159,6 @@ public class FuncionDTO
     @Override
     public String toString()
     {
-        return "{id:" + id + ", precio:" + precio + ", dia:" + dia +" }";
+        return "{id:" + id + ", precio:" + ", dia:" + dia +" }";
     }
 }

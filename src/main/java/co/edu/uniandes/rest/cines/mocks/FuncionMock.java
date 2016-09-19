@@ -9,6 +9,7 @@ import co.edu.uniandes.rest.cines.dtos.CriticoDTO;
 import co.edu.uniandes.rest.cines.dtos.FestivalDTO;
 import co.edu.uniandes.rest.cines.dtos.FuncionDTO;
 import co.edu.uniandes.rest.cines.dtos.PeliculaDTO;
+import co.edu.uniandes.rest.cines.dtos.SalaDTO;
 import co.edu.uniandes.rest.cines.exceptions.FuncionException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -41,9 +42,9 @@ public class FuncionMock
         if(funciones == null)
         {
             funciones = new ArrayList<>();
-            funciones.add( new FuncionDTO(1L, 1500, new Date(), new PeliculaDTO("superman", "heroe", "nn" , 180, "estados unidos") ) );
-            funciones.add( new FuncionDTO(2L, 3400, new Date(), new PeliculaDTO("batman", "heroe", "nn", 180, "estados unidos") ) );
-            funciones.add( new FuncionDTO(3L, 8100, new Date(), new PeliculaDTO("tarzan", "heroe", "nn", 180, "estados unidos") ) );
+            funciones.add( new FuncionDTO(1L, new Date(), new PeliculaDTO(0L, "superman", "heroe", "nn" , 180, "estados unidos"),new SalaDTO(0L, 1, 30 ,15, 15, Boolean.TRUE) ) );
+            funciones.add( new FuncionDTO(2L, new Date(), new PeliculaDTO(0L, "batman", "heroe", "nn", 180, "estados unidos"),new SalaDTO(0L, 2, 30, 15, 15, Boolean.TRUE) ) );
+            funciones.add( new FuncionDTO(3L, new Date(), new PeliculaDTO(0L, "tarzan", "heroe", "nn", 180, "estados unidos"),new SalaDTO(0L, 3, 30, 15, 15, Boolean.TRUE) ) );
         }
         
         // indica que se muestren todos los mensajes
@@ -154,8 +155,8 @@ public class FuncionMock
                 // Modifica la funcion.
                 
                 funcion.setDia(updatedFuncion.getDia() );
-                funcion.setPrecio(updatedFuncion.getPrecio() );
                 funcion.setPelicula(updatedFuncion.getPelicula());
+                funcion.setSala(updatedFuncion.getSala());
 
                 // Retorna la funcion modificada.
                 logger.info("Modificando funcion " + funcion);

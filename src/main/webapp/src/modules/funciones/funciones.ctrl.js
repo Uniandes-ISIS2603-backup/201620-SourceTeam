@@ -1,7 +1,7 @@
 (function (ng){
     var mod = ng.module("funcionesModule");
     
-    mod.controller("funcionesCtrl", ['$scope', '$state', '$stateParams', '$http', 'funcionesContext','peliculasContext', function ($scope, $state, $stateParams, $http, context, peliculasContext) {
+    mod.controller("funcionesCtrl", ['$scope', '$state', '$stateParams', '$http', 'funcionesContext','peliculasContext', 'salasContext', function ($scope, $state, $stateParams, $http, context, peliculasContext,salasContext) {
             
             // El listado de funciones esta vacio en un principio.
             $scope.records = {};
@@ -37,14 +37,16 @@
                 $scope.currentRecord = {
                     dia: undefined,
                     precio: undefined,
-                    pelicula : {}
+                    pelicula : {},
+                    sala : {}
                 };
               
                 $scope.alerts = [];
              }
              
-             $http.get(peliculasContext).then(function (response) {
+            $http.get(peliculasContext, salasContext).then(function (response) {
                 $scope.peliculas = response.data;
+                $scope.salas  = response.data;
             });
              
             this.deleteRecord = function (record) 

@@ -11,24 +11,33 @@
             $urlRouterProvider.otherwise("/criticosList");
      
             $stateProvider.state('criticos', {
-                url: '/criticos',
-                abstract: true,
-                parent : 'festivalesEdit',
-                views: {
-                    'festivalesInstanceView': {
+            url:"/criticos",
+            abstract: true,
+            views: {
+                    'mainView': {
                         controller: 'criticosCtrl',
                         controllerAs: 'ctrl',
                         templateUrl: basePath + 'criticos.html'
                     }
                 }
-            }).state('criticosList', {
+        }).state('criticosList', {
+                url: '/criticos',
+                parent : 'criticos',
+                views: {
+                    'criticosView': {
+                        controller: 'criticosCtrl',
+                        controllerAs: 'ctrl',
+                        templateUrl: basePath + 'criticos.list.html'
+                    }
+                }
+            }).state('festivalesCriticosList', {
                 url: '/criticos',
                 parent : 'festivalesEdit',
                 views: {
                     'festivalesInstanceView': {
                         controller: 'criticosCtrl',
                         controllerAs: 'ctrl',
-                        templateUrl: basePath + 'criticos.list.html'
+                        templateUrl: basePath + 'criticos.listnoedit.html'
                     }
                 }
             }).state('criticosListNoEdit', {
@@ -55,12 +64,11 @@
 
             }).state('criticosEdit', {
                 url: '/criticos/:criticoId',
-                parent : 'festivalesEdit',
                 param: {
                     criticoId: null
                 },
                 views: {
-                    'festivalesInstanceView': {
+                    'mainView': {
                         controller: 'criticosCtrl',
                         controllerAs: 'ctrl',
                         templateUrl: basePath + 'criticos.create.html'

@@ -32,9 +32,9 @@ public class FestivalMock {
         if(festivales == null)
         {
             festivales = new ArrayList<>();
-            festivales.add( new FestivalDTO(1L, 1, "Aventura", "Pat1") );
-            festivales.add( new FestivalDTO(2L, 1, "Accion", "Pat2"));
-            festivales.add( new FestivalDTO(3L, 1, "Thriller", "Pat3") );
+            festivales.add( new FestivalDTO(1L, 1, "Cannes Lion Festival", "Pat1") );
+            festivales.add( new FestivalDTO(2L, 1, "TIFF", "Pat2"));
+            festivales.add( new FestivalDTO(3L, 1, "Festival de cine de Bogotá", "Pat3") );
         }
         
     	// indica que se muestren todos los mensajes

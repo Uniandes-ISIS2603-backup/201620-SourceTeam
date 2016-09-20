@@ -21,7 +21,7 @@ import javax.ws.rs.Produces;
  *
  * @author s.rodriguez20
  */
-@Path("sillas")
+@Path("teatros/{idTeatro: \\d+}/salas/{idSala: \\d+}/sillas")
 @Produces("application/json")
 public class SillaResource {
     SillaMock sillas = new SillaMock();

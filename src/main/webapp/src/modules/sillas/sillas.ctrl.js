@@ -1,12 +1,13 @@
 (function (ng) {
     var mod = ng.module("sillasModule");
 
-    mod.controller("sillasCtrl", ['$scope', '$state', '$stateParams', '$http', 'sillasContext', function ($scope, $state, $stateParams, $http, context) {
-
+    mod.controller("sillasCtrl", ['$scope', '$state', '$stateParams', '$http', 'teatrosContext','salasContext', function ($scope, $state, $stateParams, $http,teatrosContext,salasContext) {
+            salasContext = "salas"
+            $scope.sillasContext = 'sillas';
             // inicialmente el listado de sillas está vacio
             $scope.records = {};
             // carga las ciudades
-            $http.get(context).then(function(response){
+            $http.get(teatrosContext + "/" + $stateParams.teatroId +"/" + salasContext + "/" + $stateParams.salaId + "/" + $scope.sillasContext).then(function(response){
                 $scope.records = response.data;    
             }, responseError);
 
@@ -17,7 +18,7 @@
                 // toma el id del parámetro
                 id = $stateParams.sillaId;
                 // obtiene el dato del recurso REST
-                $http.get(context + "/" + id)
+                    $http.get(teatrosContext + "/" + $stateParams.teatroId+"/" + salasContext + "/" + $stateParams.salaId + "/" + + $scope.sillasContext + id)
                     .then(function (response) {
                         // $http.get es una promesa
                         // cuando llegue el dato, actualice currentRecord
@@ -44,7 +45,7 @@
                 if (id == null) {
 
                     // ejecuta POST en el recurso REST
-                    return $http.post(context, currentRecord)
+                    return $http.post(teatrosContext + "/" + $stateParams.teatroId+"/" +salasContext + "/" +$stateParams.salaId + "/" + $scope.sillasContext + id, currentRecord)
                         .then(function () {
                             // $http.post es una promesa
                             // cuando termine bien, cambie de estado
@@ -55,7 +56,7 @@
                 } else {
                     
                     // ejecuta PUT en el recurso REST
-                    return $http.put(context + "/" + currentRecord.id, currentRecord)
+                    return $http.put(teatrosContext + "/" + $stateParams.teatroId+"/" +salasContext + "/" + $stateParams.salaId + "/" + $scope.sillasContext + "/" + currentRecord.id, currentRecord)
                         .then(function () {
                             // $http.put es una promesa
                             // cuando termine bien, cambie de estado
@@ -69,10 +70,10 @@
                 if(id!=null)
                 {            
                     // ejecuta delete en el recurso REST
-                    return $http.delete(context + "/" + id,currentRecord)
+                    return $http.delete(teatrosContext + "/" + $stateParams.teatroId+"/" +salasContext + "/" + $stateParams.salaId + "/" + $scope.sillasContext + "/" + id,currentRecord)
                         .then(function () {
                             $scope.records = {};
-                            $http.get(context).then(function(response){
+                            $http.get(teatrosContext + "/" + $stateParams.teatroId+"/" +salasContext + "/" + $stateParams.salaId + "/" + $scope.sillasContext+"/" + id).then(function(response){
                                 $scope.records = response.data;    
                             }, responseError);
                             $state.go('sillasList');

@@ -27,7 +27,7 @@
                 }
             }).state('boletaCreate', {
                 url: '/boletas/create',
-                parent: 'clienteEdit',
+                parent: 'funcionEdit',
                 views: {
                     'funcionInstanceView': {
                         controller: 'boletasCtrl',
@@ -47,6 +47,16 @@
                         controller: 'boletasCtrl',
                         controllerAs: 'ctrl',
                         templateUrl: basePath + 'boletas.create.html'
+                    }
+                }
+            }).state('boletaComprar', {
+                url: '/boletas',
+                parent: 'clienteEdit',
+                views: {
+                    'clienteInstanceView': {
+                        controller: 'boletasCtrl',
+                        controllerAs: 'ctrl',
+                        templateUrl: basePath + 'boletas.comprar.html'
                     }
                 }
             });

@@ -22,9 +22,8 @@
                 }
         }).state('criticosList', {
                 url: '/criticos',
-                parent : 'criticos',
                 views: {
-                    'criticosView': {
+                    'mainView': {
                         controller: 'criticosCtrl',
                         controllerAs: 'ctrl',
                         templateUrl: basePath + 'criticos.list.html'
@@ -32,7 +31,6 @@
                 }
             }).state('criticosListNoEdit', {
                 url: '/criticos',
-                parent: 'funcionEdit',
                 views: {
                     'funcionInstanceView': {
                         controller: 'criticosCtrl',
@@ -43,9 +41,8 @@
             })
                     .state('criticosCreate', {
                 url: '/criticos/create',
-                parent : 'festivalesEdit',
                 views: {
-                    'festivalesInstanceView': {
+                    'mainView': {
                         controller: 'criticosCtrl',
                         controllerAs: 'ctrl',
                         templateUrl: basePath + 'criticos.create.html'

@@ -32,7 +32,7 @@
                     id : undefined,
                     nombre: '' /*Tipo String*/,
                     duracion: undefined /*Tipo String*/,
-                    patrocinador: '' /*Tipo String*/
+                    patrocinador: '' /*Tipo String*/    
                     
                 };
               

@@ -1,13 +1,15 @@
 (function (ng){
     var mod = ng.module("funcionesModule");
     
-    mod.controller("funcionesCtrl", ['$scope', '$state', '$stateParams', '$http', 'funcionesContext','peliculasContext', 'salasContext', function ($scope, $state, $stateParams, $http, context, peliculasContext,salasContext) {
+    mod.controller("funcionesCtrl", ['$scope', '$state', '$stateParams', '$http','peliculasContext', 'teatrosContext', function ($scope, $state, $stateParams, $http, peliculasContext,teatrosContext) {
             
+            // inicialmente el listado de salas está vacio
+            $scope.context = '/funciones';
             // El listado de funciones esta vacio en un principio.
             $scope.records = {};
             
             // Se cargan las funciones.
-            $http.get(context).then(function(response){
+            $http.get(teatrosContext + "/" + $stateParams.teatroId + $scope.context).then(function(response){
                 $scope.records = response.data;    
             }, responseError);
             
@@ -19,7 +21,7 @@
                 id = $stateParams.funcionId;
                 
                 // Se obtiene el dato del recurso REST.
-                $http.get(context + "/" + id)  
+                $http.get(teatrosContext + "/" + $stateParams.teatroId + $scope.context + "/" + id)  
                     .then(function (response) {
                         // $http.get es una promesa.  
                         // Cuando llegue el dato, actualice currentRecord.        
@@ -38,13 +40,13 @@
                     dia: undefined,
                     precio: undefined,
                     pelicula : {},
-                    sala : {}
+                    teatro : {}
                 };
               
                 $scope.alerts = [];
              }
              
-            $http.get(peliculasContext, salasContext).then(function (response) {
+            $http.get(peliculasContext, teatrosContext).then(function (response) {
                 $scope.peliculas = response.data;
                 $scope.salas  = response.data;
             });
@@ -54,7 +56,7 @@
                 currentRecord = $scope.currentRecord;
                 if(record != null)
                 {   
-                    return $http.delete(context + "/" + record.id)
+                    return $http.delete(teatrosContext + "/" + $stateParams.teatroId + $scope.context + "/" + record.id)
                         .then(function () { 
                             $scope.records = {};
                             $http.get(context).then(function(response){
@@ -82,7 +84,7 @@
                  } else {
                      
                      // Se ejecuta PUT en el recurso REST.  
-                     return $http.put(context + "/" + currentRecord.id, currentRecord)
+                     return $http.put(teatrosContext + "/" + $stateParams.teatroId + $scope.context + "/" + currentRecord.id, currentRecord)
                          .then(function () {
                              // $http.put es una promesa.
                              // Cuando termine bien, cambie de estado.   

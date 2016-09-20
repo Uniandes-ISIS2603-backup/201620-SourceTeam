@@ -31,6 +31,7 @@
                 }
             }).state('criticosListNoEdit', {
                 url: '/criticos',
+                parent : 'funcionEdit',
                 views: {
                     'funcionInstanceView': {
                         controller: 'criticosCtrl',

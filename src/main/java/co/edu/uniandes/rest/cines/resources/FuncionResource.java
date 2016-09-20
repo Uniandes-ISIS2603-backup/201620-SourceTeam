@@ -21,7 +21,7 @@ import javax.ws.rs.Produces;
  *
  * @author ba.bohorquez10
  */
-@Path("funciones")
+@Path("teatros/{idTeatro: \\d+}/funciones")
 @Produces("application/json")
 public class FuncionResource 
 {

@@ -45,8 +45,8 @@ public class TeatroResource
      * @throws TeatroException Si hay algun problema en el metodo.
      */
     @GET
-    @Path("{id: \\d+}")
-    public TeatroDTO getTeatro(@PathParam("id") Long id) throws TeatroException {
+    @Path("{idTeatro: \\d+}")
+    public TeatroDTO getTeatro(@PathParam("idTeatro") Long id) throws TeatroException {
         return teatros.getTeatro(id);
     }
 
@@ -70,8 +70,8 @@ public class TeatroResource
      * @throws TeatroException Si hay algun problema en el metodo.
      */
     @PUT
-    @Path("{id: \\d+}")
-    public TeatroDTO updateTeatro(@PathParam("id") Long id, TeatroDTO nuevo) throws TeatroException {
+    @Path("{idTeatro: \\d+}")
+    public TeatroDTO updateTeatro(@PathParam("idTeatro") Long id, TeatroDTO nuevo) throws TeatroException {
         return teatros.updateTeatro(id, nuevo);
     }
     
@@ -81,8 +81,8 @@ public class TeatroResource
      * @throws TeatroException Si hay algun problema en el metodo.
      */
     @DELETE
-    @Path("{id: \\d+}")
-    public TeatroDTO deleteTeatro(@PathParam("id") Long id) throws TeatroException {
+    @Path("{idTeatro: \\d+}")
+    public TeatroDTO deleteTeatro(@PathParam("idTeatro") Long id) throws TeatroException {
     	return teatros.deleteTeatro(id);
     }
 }

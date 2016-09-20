@@ -22,7 +22,7 @@ import javax.ws.rs.Produces;
  *
  * @author ya.bejarano10
  */
-@Path("salas")
+@Path("teatros/{idTeatro: \\d+}/salas")
 @Produces("application/json")
 public class SalaResource 
 {

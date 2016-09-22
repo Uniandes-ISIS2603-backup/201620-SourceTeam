@@ -1,27 +1,36 @@
-
 <div class="col-md-6 well">
     <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="ctrl.closeAlert($index)" dismiss-on-timeout="5000">{{alert.msg}} </alert>
-    <form novalidate name="form" id="festivales-form" role="form" ng-submit="form.$valid">
+    <form novalidate name="form" id="boletas-form" role="form" ng-submit="form.$valid && ctrl.saveRecord(currentRecord.id)">
         
         <div ng-messages="form.$error">
-            <div ng-message="required">Llene los campos requeridos</div>
+            <div ng-message="required">Comprar Boletas</div>
         </div>
    
         <fieldset>
             <div class="form-group col-md-12" ng-class="{'has-success': form.name.$valid && form.name.$dirty, 'has-error': form.name.$invalid && (form.name.$dirty || form.$submitted)}" >
-                <label for="precio" class="col-md-2 control-label">Id</label>
-                <div class="col-md-10">
-                    <select id="festival" name="festival" ng-options="rc.id for rc in boletas track by rc.id" class="form-control" type="text" ng-model="currentRecord.id" ></select>
+                <label for="teatros" class="col-md-2 control-label">Teatro</label>
+                <div class="col-md-10" style="margin-bottom: 10px">
+                    <select id="teatros" name="teatros" 
+                            ng-options="rc.nombre for rc in teatros track by rc.id" class="form-control" type="text" 
+                            ng-model="currentRecord.teatro" ng-init="currentRecord.teatro"
+                            ng-change="ctrl.actualizarFunciones()">                        
+                    </select>
                 </div>
-            </div>
-            <div class="form-group col-md-12" ng-class="{'has-success': form.name.$valid && form.name.$dirty, 'has-error': form.name.$invalid && (form.name.$dirty || form.$submitted)}" >
-                <label for="precio" class="col-md-2 control-label">Cantidad</label>
-                    <input id="camtidad" names="cantidad" class="form-control" type="number" ng-model="currentRecord.cantidad" ng-init="currentRecord.cantidad" required />
+                <label for="funciones" class="col-md-2 control-label">Funcion</label>
+                <div class="col-md-10" style="margin-bottom: 10px">
+                    <select id="funciones" name="funciones" ng-options="(rc.pelicula.nombre+' '+rc.dia) for rc in funciones track by rc.id" class="form-control" type="text" ng-model="currentRecord.funcion" ng-init="currentRecord.funcion" ></select>
+                </div>
+                <label for="cantidad" class="col-md-2 control-label">Cantidad de boletas</label>
+                    <input id="cantidad" name="cantidad" class="form-control" type="number" ng-model="currentRecord.cantidad" ng-init="currentRecord.cantidad" required />
                 <div class="col-md-10">
                 </div>
+                    
             </div>
-            <button type="button" ui-sref='boletasListNoEdit'>Cancel</button>
-            <button type="submit" >Save</button>    
+            <button type="submit" id="{{$index}}-buy-btn" class="btn btn-default btn-sm" ><span class="glyphicon glyphicon-shopping-cart"></span> Comprar</button>
+            <button class="btn btn-default btn-sm" type="button" ui-sref='boletasListNoEdit'>Cancel</button>
+            
+            
+            
         </fieldset>
     </form>
 </div>

@@ -1,7 +1,7 @@
 (function (ng) {
     var mod = ng.module("boletasModule");
 
-    mod.controller("boletasCtrl", ['$scope', '$state', '$stateParams', '$http', 'boletasContext', function ($scope, $state, $stateParams, $http, context) {
+    mod.controller("boletasCtrl", ['$scope', '$state', '$stateParams', '$http', 'boletasContext','funcionesContext','teatrosContext', function ($scope, $state, $stateParams, $http, context,funcionesContext,teatrosContext) {
 
             // inicialmente el listado de boletas está vacio
             $scope.records = {};
@@ -30,13 +30,16 @@
                 // el registro actual debe estar vacio
                 $scope.currentRecord = {
                     id: undefined /*Tipo Long. El valor se asigna en el backend*/,
-                    name: '' /*Tipo String*/
+                    precio: 2000 /*Tipo String*/,
+                    funcion:{}
                 };
               
                 $scope.alerts = [];
             }
-
-
+            $http.get(teatrosContext).then(function (response) {
+                $scope.teatros = response.data;
+            });
+            
             this.saveRecord = function (id) {
                 currentRecord = $scope.currentRecord;
                 
@@ -48,7 +51,7 @@
                         .then(function () {
                             // $http.post es una promesa
                             // cuando termine bien, cambie de estado
-                            $state.go('boletasList');
+                            $state.go('boletasListNoEdit');
                         }, responseError);
                         
                 // si el id no es null, es un registro existente entonces lo actualiza
@@ -59,10 +62,11 @@
                         .then(function () {
                             // $http.put es una promesa
                             // cuando termine bien, cambie de estado
-                            $state.go('boletasList');
+                            $state.go('boletasListNoEdit');
                         }, responseError);
                 };
             };
+            
 
             this.deleteRecord = function (id) {
                 currentRecord = $scope.currentRecord;
@@ -79,6 +83,13 @@
                         }, responseError); 
                 }
                 }
+
+            this.actualizarFunciones = function () {
+                var idTeatro = $scope.currentRecord.teatro.id;
+                $http.get(teatrosContext + "/" + idTeatro + "/funciones").then(function (response) {
+                    $scope.funciones = response.data;
+                });
+            }
             
             // -----------------------------------------------------------------
             // Funciones para manejra los mensajes en la aplicación

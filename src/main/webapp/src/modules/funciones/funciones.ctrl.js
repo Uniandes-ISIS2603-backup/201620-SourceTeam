@@ -9,8 +9,13 @@
             $scope.records = {};
             
             // Se cargan las funciones.
-            $http.get(teatrosContext + "/" + $stateParams.teatroId + $scope.context).then(function(response){
-                $scope.records = response.data;    
+            $http.get(teatrosContext + "/" + $stateParams.teatroId + $scope.context)
+                    .then(function(response){
+                        
+                $scope.records = response.data;
+                angular.forEach($scope.records, function(value) {
+                    value.dia = new Date(value.dia);
+                });
             }, responseError);
             
             // El controlador recibió un clienteNombre ??  
@@ -27,6 +32,7 @@
                         // Cuando llegue el dato, actualice currentRecord.        
                         
                         $scope.currentRecord = response.data; 
+                        $scope.currentRecord.dia = new Date($scope.currentRecord.dia);
                     }, responseError); 
                     
                     

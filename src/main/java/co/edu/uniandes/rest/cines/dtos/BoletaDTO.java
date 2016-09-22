@@ -12,6 +12,15 @@ package co.edu.uniandes.rest.cines.dtos;
 public class BoletaDTO {
     private Long id;
     private int precio;
+    private FuncionDTO funcion;
+
+    public FuncionDTO getFuncion() {
+        return funcion;
+    }
+
+    public void setFuncion(FuncionDTO funcion) {
+        this.funcion = funcion;
+    }
     
 
     /**
@@ -57,7 +66,7 @@ public class BoletaDTO {
     }
     @Override
     public String toString() {
-        return "{ id : " + id + ", precio:" + precio+"}";
+        return "{ id : " + id + ", precio:" + precio+ "funcion:" + funcion+"}";
     }
     
 }

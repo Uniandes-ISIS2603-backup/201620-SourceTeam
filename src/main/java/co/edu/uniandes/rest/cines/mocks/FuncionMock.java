@@ -42,9 +42,9 @@ public class FuncionMock
         if(funciones == null)
         {
             funciones = new ArrayList<>();
-            funciones.add( new FuncionDTO(1L, new Date(), new PeliculaDTO(0L, "superman", "heroe", "nn" , 180, "estados unidos"),new SalaDTO(0L, 1, 30 ,15, 15, Boolean.TRUE) ) );
-            funciones.add( new FuncionDTO(2L, new Date(), new PeliculaDTO(0L, "batman", "heroe", "nn", 180, "estados unidos"),new SalaDTO(0L, 2, 30, 15, 15, Boolean.TRUE) ) );
-            funciones.add( new FuncionDTO(3L, new Date(), new PeliculaDTO(0L, "tarzan", "heroe", "nn", 180, "estados unidos"),new SalaDTO(0L, 3, 30, 15, 15, Boolean.TRUE) ) );
+            funciones.add( new FuncionDTO(1L, new Date(), new PeliculaDTO(0L, "superman", "heroe", "nn" , 180, "estados unidos"),new SalaDTO(0L, 1, 30 ,15, 15, Boolean.TRUE),200 ) );
+            funciones.add( new FuncionDTO(2L, new Date(), new PeliculaDTO(0L, "batman", "heroe", "nn", 180, "estados unidos"),new SalaDTO(0L, 2, 30, 15, 15, Boolean.TRUE),300 ) );
+            funciones.add( new FuncionDTO(3L, new Date(), new PeliculaDTO(0L, "tarzan", "heroe", "nn", 180, "estados unidos"),new SalaDTO(0L, 3, 30, 15, 15, Boolean.TRUE),400 ) );
         }
         
         // indica que se muestren todos los mensajes
@@ -155,6 +155,7 @@ public class FuncionMock
                 // Modifica la funcion.
                 
                 funcion.setDia(updatedFuncion.getDia() );
+                funcion.setPrecio(updatedFuncion.getPrecio() );
                 funcion.setPelicula(updatedFuncion.getPelicula());
                 funcion.setSala(updatedFuncion.getSala());
 

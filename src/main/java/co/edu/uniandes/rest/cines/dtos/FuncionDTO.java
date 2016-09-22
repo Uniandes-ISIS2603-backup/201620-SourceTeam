@@ -29,6 +29,7 @@ public class FuncionDTO
      */
     private CriticoDTO critico;
         
+    private int precio;
     
     /**
      * Crítico de la funcion.
@@ -57,13 +58,25 @@ public class FuncionDTO
      * @param pelicula
 
      */
-    public FuncionDTO(Long pId, Date pDia, PeliculaDTO pelicula, SalaDTO sala)
+    public FuncionDTO(Long pId, Date pDia, PeliculaDTO pelicula, SalaDTO sala, int precio)
     {
         id = pId;
         dia = pDia;
         this.pelicula = pelicula;
         this.sala = sala;
+        this.precio = precio;
     }
+    
+    public void setPrecio(int pPrecio)
+    {
+        this.precio = pPrecio;
+    }
+    
+    public int getPrecio()
+    {
+        return precio;
+    }
+    
     
     /**
      * Retorna el id de la funcion.
@@ -159,6 +172,6 @@ public class FuncionDTO
     @Override
     public String toString()
     {
-        return "{id:" + id + ", precio:" + ", dia:" + dia +" }";
+        return "{id:" + id + ", precio:" + precio + ", dia:" + dia +" }";
     }
 }

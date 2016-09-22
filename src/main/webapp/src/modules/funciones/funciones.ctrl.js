@@ -55,6 +55,7 @@
             $http.get(peliculasContext, teatrosContext).then(function (response) {
                 $scope.peliculas = response.data;
                 $scope.salas  = response.data;
+                $scope.precio = response.data;
             });
              
             this.deleteRecord = function (record) 
@@ -65,7 +66,7 @@
                     return $http.delete(teatrosContext + "/" + $stateParams.teatroId + $scope.context + "/" + record.id)
                         .then(function () { 
                             $scope.records = {};
-                            $http.get(context).then(function(response){
+                            $http.get(teatrosContext).then(function(response){
                                 $scope.records = response.data;    
                             }, responseError);
                             $state.go('funcionesList');
@@ -79,7 +80,7 @@
                  if (id == null) {
  
                      // Se ejecuta POST en el recurso REST. 
-                     return $http.post(context, currentRecord)
+                     return $http.post(teatrosContext + "/" + $stateParams.teatroId + $scope.context, currentRecord)
                          .then(function () {
                              // $http.post es una promesa.
                              // Cuando termine bien, cambie de estado.

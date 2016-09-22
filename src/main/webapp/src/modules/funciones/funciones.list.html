@@ -6,6 +6,7 @@
                 <th>Id</th>
                 <th>Fecha</th>
                 <th>Película</th>
+                <th>Precio</th>
                 <th>Sala</th>
                 <th>Actions</th>
             </tr>
@@ -15,6 +16,7 @@
                <td id="{{$index}}-id">{{record.id}}</td>    
                <td id="{{$index}}-dia">{{record.dia}}</td> 
                <td id="{{$index}}-precio">{{record.pelicula.nombre}}</td>
+               <td id="{{$index}}-precio">{{record.precio}}</td>
                <td id="{{$index}}-precio">{{record.teatro.id}}</td>
                <td>
                     <button id="{{$index}}-edit-btn" class="btn btn-default btn-sm" ui-sref="funcionEdit({funcionId: record.id})"><span class="glyphicon glyphicon-edit"></span> Edit</button>

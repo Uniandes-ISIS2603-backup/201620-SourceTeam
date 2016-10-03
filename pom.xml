@@ -3,13 +3,13 @@
     <modelVersion>4.0.0</modelVersion>
     
     <groupId>co.edu.uniandes.sourceteam</groupId>
-    <artifactId>FestivalCine</artifactId>
+    <artifactId>festivalcine</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     
-	<modules>
-        <module>FestivalCine-back</module>
-        <module>FestivalCine-web</module>
+    <modules>
+        <module>festivalcine-back</module>
+        <module>festivalcine-web</module>
     </modules>
 	
     <properties>
@@ -71,17 +71,17 @@
                     </configuration>
                 </plugin>
                 <plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-surefire-plugin</artifactId>
-					<configuration>
-						<systemProperties>
-							<property>
-								<name>derby.stream.error.file</name>
-								<value>target/derby.log</value>
-							</property>
-						</systemProperties>
-					</configuration>
-				</plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <configuration>
+                        <systemProperties>
+                            <property>
+                                <name>derby.stream.error.file</name>
+                                <value>target/derby.log</value>
+                            </property>
+                        </systemProperties>
+                    </configuration>
+                </plugin>
             </plugins>
         </pluginManagement>
     </build>

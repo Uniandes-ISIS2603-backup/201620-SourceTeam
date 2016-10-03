@@ -8,7 +8,7 @@
     	<version>1.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
-    <artifactId>FestivalCine.back</artifactId>
+    <artifactId>FestivalCine-back</artifactId>
     <packaging>jar</packaging>
 	
     <dependencies>

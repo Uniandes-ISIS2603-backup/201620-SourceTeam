@@ -8,8 +8,8 @@
     <packaging>pom</packaging>
     
 	<modules>
-        <module>FestivalCine.back</module>
-        <module>FestivalCine.web</module>
+        <module>FestivalCine-back</module>
+        <module>FestivalCine-web</module>
     </modules>
 	
     <properties>

@@ -4,7 +4,7 @@
 
     <parent>
         <groupId>co.edu.uniandes.sourceteam</groupId>
-        <artifactId>FestivalCine</artifactId>
+        <artifactId>festivalcine</artifactId>
         <version>1.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>

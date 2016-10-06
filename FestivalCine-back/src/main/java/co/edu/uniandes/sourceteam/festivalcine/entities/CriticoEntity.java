@@ -6,11 +6,24 @@
 package co.edu.uniandes.sourceteam.festivalcine.entities;
 
 import java.io.Serializable;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  *
  * @author s.ardila13
  */
 public class CriticoEntity extends BaseEntity implements Serializable{
+    @PodamExclude
+    @OneToOne
+    private FestivalEntity fetival;
     
+    public FestivalEntity getFestival(){
+        return fetival;
+    }
+    
+    public void getFestival(FestivalEntity festival){
+        this.fetival = festival;
+    }
 }

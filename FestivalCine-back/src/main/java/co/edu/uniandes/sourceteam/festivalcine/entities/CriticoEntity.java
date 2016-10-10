@@ -23,7 +23,7 @@ public class CriticoEntity extends BaseEntity implements Serializable{
         return fetival;
     }
     
-    public void getFestival(FestivalEntity festival){
+    public void setFestival(FestivalEntity festival){
         this.fetival = festival;
     }
 }

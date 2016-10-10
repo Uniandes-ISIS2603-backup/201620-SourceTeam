@@ -16,7 +16,7 @@ public class FestivalPersistence {
 
     private static final Logger LOGGER = Logger.getLogger(FestivalPersistence.class.getName());
 
-    @PersistenceContext(unitName = "FestivalPU")
+    @PersistenceContext(unitName = "SourceteamPU")
     protected EntityManager em;    
  
     

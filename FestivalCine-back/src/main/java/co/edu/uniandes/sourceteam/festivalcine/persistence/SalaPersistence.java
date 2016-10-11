@@ -9,6 +9,6 @@ package co.edu.uniandes.sourceteam.festivalcine.persistence;
  *
  * @author ya.bejarano10
  */
-public class PeliculaPersistance {
+public class SalaPersistence {
     
 }

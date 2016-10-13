@@ -5,7 +5,7 @@
   Remplazar por los valores de su configuración
   <persistence-unit name="sourceteamPU" transaction-type="JTA">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-    <jta-data-source>java:app/jdbc/company</jta-data-source>
+    <jta-data-source>java:app/jdbc/sourceteam</jta-data-source>
     <!--class>co.edu.uniandes.csw.company.entities.CompanyEntity</class>
     <class>co.edu.uniandes.csw.company.entities.EmployeeEntity</class>
     <class>co.edu.uniandes.csw.company.entities.DepartmentEntity</class-->

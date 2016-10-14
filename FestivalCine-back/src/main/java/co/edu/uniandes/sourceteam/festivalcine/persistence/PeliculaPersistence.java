@@ -5,7 +5,6 @@
  */
 package co.edu.uniandes.sourceteam.festivalcine.persistence;
 
-import co.edu.uniandes.sourceteam.festivalcine.entities.FestivalEntity;
 import co.edu.uniandes.sourceteam.festivalcine.entities.PeliculaEntity;
 import java.util.List;
 import java.util.logging.Level;
@@ -14,6 +13,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -27,13 +27,26 @@ public class PeliculaPersistence
 
     @PersistenceContext(unitName = "SourceteamPU")
     protected EntityManager em;    
- 
+    
+    public  PeliculaEntity find(Long id) {
+        LOGGER.log(Level.INFO, "Consultando Pelicula con id={0}", id);
+        return em.find(PeliculaEntity.class, id);
+    }
     
     public List<PeliculaEntity> findAll() {
         LOGGER.info("Consultando todos las Películas");
         Query q = em.createQuery("select u from PeliculaEntity u");
         return q.getResultList();
     }
+    
+    public PeliculaEntity findByName(String name) {
+        LOGGER.log(Level.INFO, "Consultando Pelicula con name= ", name);
+        TypedQuery<PeliculaEntity> q
+                = em.createQuery("select u from PeliculaEntity u where u.name = :name", PeliculaEntity.class);
+        q = q.setParameter("name", name);
+        return q.getSingleResult();
+    }
+    
         
     public PeliculaEntity create(PeliculaEntity entity) {
         LOGGER.info("Creando una Pelicula nuevo");

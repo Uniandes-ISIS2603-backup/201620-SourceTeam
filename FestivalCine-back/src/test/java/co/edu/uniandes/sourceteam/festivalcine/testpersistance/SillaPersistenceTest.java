@@ -49,7 +49,7 @@ public class SillaPersistenceTest {
     }
 
     @Inject
-    private SillaPersistence companyPersistence;
+    private SillaPersistence sillaPersistence;
 
     @PersistenceContext
     private EntityManager em;
@@ -64,7 +64,7 @@ public class SillaPersistenceTest {
         PodamFactory factory = new PodamFactoryImpl();
         SillaEntity newEntity = factory.manufacturePojo(SillaEntity.class);
 
-        SillaEntity result = companyPersistence.create(newEntity);
+        SillaEntity result = sillaPersistence.create(newEntity);
 
         Assert.assertNotNull(result);
         SillaEntity entity = em.find(SillaEntity.class, result.getId());

@@ -6,14 +6,14 @@
   <persistence-unit name="SourceteamPU" transaction-type="JTA">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <jta-data-source>java:app/jdbc/sourceteam</jta-data-source>
-    <class>co.edu.uniandes.csw.sourceteam.entities.BoletaEntity</class>
-    <class>co.edu.uniandes.csw.sourceteam.entities.ClienteEntity</class>
-    <class>co.edu.uniandes.csw.sourceteam.entities.CriticoEntity</class>
-    <class>co.edu.uniandes.csw.sourceteam.entities.FestivalEntity</class>
-    <class>co.edu.uniandes.csw.sourceteam.entities.FuncionEntity</class>
-    <class>co.edu.uniandes.csw.sourceteam.entities.PeliculaEntity</class>
-    <class>co.edu.uniandes.csw.sourceteam.entities.SalaEntity</class>
-    <class>co.edu.uniandes.csw.sourceteam.entities.SillaEntity</class>
+    <class>co.edu.uniandes.sourceteam.entities.BoletaEntity</class>
+    <class>co.edu.uniandes.sourceteam.entities.ClienteEntity</class>
+    <class>co.edu.uniandes.sourceteam.entities.CriticoEntity</class>
+    <class>co.edu.uniandes.sourceteam.entities.FestivalEntity</class>
+    <class>co.edu.uniandes.sourceteam.entities.FuncionEntity</class>
+    <class>co.edu.uniandes.sourceteam.entities.PeliculaEntity</class>
+    <class>co.edu.uniandes.sourceteam.entities.SalaEntity</class>
+    <class>co.edu.uniandes.sourceteam.entities.SillaEntity</class>
     <properties>
       <property name="eclipselink.logging.level" value="FINE"/>
       <property name="eclipselink.ddl-generation" value="create-or-extend-tables"/>

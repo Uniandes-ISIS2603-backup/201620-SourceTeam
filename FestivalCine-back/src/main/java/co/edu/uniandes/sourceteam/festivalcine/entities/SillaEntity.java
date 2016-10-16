@@ -15,14 +15,15 @@ import uk.co.jemos.podam.common.PodamExclude;
 @Entity
 public class SillaEntity extends BaseEntity implements Serializable {
     
-    
+    @PodamExclude
     @ManyToOne
     private SalaEntity sala;
+    
     private int fila;
     private int numero;
     private boolean preferencial;
     private boolean reservada;
-    @ManyToOne
+  
    
 
     public int getFila() {

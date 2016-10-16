@@ -29,11 +29,47 @@ import javax.persistence.Entity;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import uk.co.jemos.podam.common.PodamExclude;
 
 
 @Entity
 public class BoletaEntity extends BaseEntity implements Serializable {
+    @PodamExclude
+    @ManyToOne
+    private BoletaEntity boleta;
+    
+    @PodamExclude
+    @ManyToOne
+    private ClienteEntity cliente;
+    
+    private int precio;
+
+    public BoletaEntity getBoleta() {
+        return boleta;
+    }
+
+    public void setBoleta(BoletaEntity boleta) {
+        this.boleta = boleta;
+    }
+
+    public ClienteEntity getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(ClienteEntity cliente) {
+        this.cliente = cliente;
+    }
+
+    public int getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(int precio) {
+        this.precio = precio;
+    }
+    
     
     
 }

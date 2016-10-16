@@ -8,6 +8,7 @@ package co.edu.uniandes.sourceteam.festivalcine.entities;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 /**
@@ -16,7 +17,7 @@ import javax.persistence.OneToMany;
  */
 public class SalaEntity extends BaseEntity implements Serializable
 {
-        @OneToMany(mappedBy = "sala")
+        @ManyToOne
         private TeatroEntity teatro = new TeatroEntity();
         
         @OneToMany(mappedBy = "sala")

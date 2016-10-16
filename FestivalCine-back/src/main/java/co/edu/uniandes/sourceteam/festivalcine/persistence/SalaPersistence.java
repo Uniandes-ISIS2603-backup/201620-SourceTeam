@@ -13,6 +13,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -26,13 +27,24 @@ public class SalaPersistence
     @PersistenceContext(unitName = "SourceteamPU")
     protected EntityManager em;    
  
-    
+    public  SalaEntity find(Long id) {
+        LOGGER.log(Level.INFO, "Consultando Sala con id={0}", id);
+        return em.find(SalaEntity.class, id);
+    }
     public List<SalaEntity> findAll() {
         LOGGER.info("Consultando todos las Salas");
         Query q = em.createQuery("select u from SalaEntity u");
         return q.getResultList();
     }
-        
+       
+    public SalaEntity findByNumero(long num) {
+        LOGGER.log(Level.INFO, "Consultando sala con numero= ", num);
+        TypedQuery<SalaEntity> q
+                = em.createQuery("select u from SalaEntity u where u.numSala = :numSala", SalaEntity.class);
+        q = q.setParameter("numeSala", num);
+        return q.getSingleResult();
+    }
+    
     public SalaEntity create(SalaEntity entity) {
         LOGGER.info("Creando una sala nueva");
         em.persist(entity);

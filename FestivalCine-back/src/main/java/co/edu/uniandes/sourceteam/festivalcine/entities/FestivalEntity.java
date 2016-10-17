@@ -26,6 +26,46 @@ public class FestivalEntity extends BaseEntity implements Serializable {
     @OneToMany(mappedBy = "festival")
     private List<PeliculaEntity> peliculas = new ArrayList<>();
     
+    private Long id;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public int getDuracion() {
+        return duracion;
+    }
+
+    public void setDuracion(int duracion) {
+        this.duracion = duracion;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getPatrocinador() {
+        return patrocinador;
+    }
+
+    public void setPatrocinador(String patrocinador) {
+        this.patrocinador = patrocinador;
+    }
+    
+    private int duracion;
+    
+    private String nombre;
+    
+    private String patrocinador;
+    
     public List<TeatroEntity> getTeatros(){
         return teatros;
     }

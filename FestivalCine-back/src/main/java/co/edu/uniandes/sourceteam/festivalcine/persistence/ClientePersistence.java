@@ -29,14 +29,6 @@ public class ClientePersistence {
         return em.find(ClienteEntity.class, id);
     }
 
-    public ClienteEntity findByName(String name) {
-        LOGGER.log(Level.INFO, "Consultando Cliente con name= ", name);
-        TypedQuery<ClienteEntity> q
-                = em.createQuery("select u from ClienteEntity u where u.name = :name", ClienteEntity.class);
-        q = q.setParameter("name", name);
-        return q.getSingleResult();
-    }
-
     public List<ClienteEntity> findAll() {
         LOGGER.info("Consultando todos los Clientes");
         Query q = em.createQuery("select u from ClienteEntity u");

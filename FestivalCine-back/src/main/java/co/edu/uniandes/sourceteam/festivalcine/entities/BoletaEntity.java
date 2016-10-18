@@ -38,22 +38,23 @@ import uk.co.jemos.podam.common.PodamExclude;
 public class BoletaEntity extends BaseEntity implements Serializable {
     @PodamExclude
     @ManyToOne
-    private BoletaEntity boleta;
+    private FuncionEntity funcion;
     
     @PodamExclude
     @ManyToOne
     private ClienteEntity cliente;
+
+    public FuncionEntity getFuncion() {
+        return funcion;
+    }
+
+    public void setFuncion(FuncionEntity funcion) {
+        this.funcion = funcion;
+    }
     
     private int precio;
 
-    public BoletaEntity getBoleta() {
-        return boleta;
-    }
-
-    public void setBoleta(BoletaEntity boleta) {
-        this.boleta = boleta;
-    }
-
+   
     public ClienteEntity getCliente() {
         return cliente;
     }

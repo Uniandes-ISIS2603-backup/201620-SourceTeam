@@ -59,6 +59,48 @@ public class SillaPersistenceTest {
 
     private List<SillaEntity> data = new ArrayList<SillaEntity>();
     
+    @Before
+    public void setUp() {
+        try {
+            utx.begin();
+            em.joinTransaction();
+            clearData();
+            insertData();
+            utx.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            try {
+                utx.rollback();
+            } catch (Exception e1) {
+                e1.printStackTrace();
+            }
+        }
+    }
+    
+    /**
+     * Limpia las tablas que están implicadas en la prueba.
+     */
+    private void clearData() {
+        em.createQuery("delete  from DepartmentEntity").executeUpdate();
+        em.createQuery("delete  from CompanyEntity").executeUpdate();
+    }
+
+    /**
+     * Para el correcto funcionamiento de las pruebas, inserta los datos
+     * iniciales en la base de datos utilizando un manejador de persistencia.
+     *
+     * Crea una compañía y luego le adiciona tres departamentos.
+     */
+    private void insertData() {
+       PodamFactory factory = new PodamFactoryImpl();
+        for(int i = 0; i < 3;i++){
+            SillaEntity silla = factory.manufacturePojo(SillaEntity.class);
+            em.persist(silla);
+            data.add(silla);
+        }
+
+    }
+    
     @Test
     public void createSillaTest() {
         PodamFactory factory = new PodamFactoryImpl();

@@ -28,13 +28,11 @@ public class SillaPersistence {
         LOGGER.log(Level.INFO, "Consultando Silla con id={0}", id);
         return em.find(SillaEntity.class, id);
     }
-
-    public SillaEntity findByName(String name) {
-        LOGGER.log(Level.INFO, "Consultando Silla con name= ", name);
-        TypedQuery<SillaEntity> q
-                = em.createQuery("select u from SillaEntity u where u.name = :name", SillaEntity.class);
-        q = q.setParameter("name", name);
-        return q.getSingleResult();
+     public List<SillaEntity> findAllInSala(Long salaId) {
+        LOGGER.log(Level.INFO, "Consultando todas las sillas de la sala id={0}", salaId);
+        TypedQuery q = em.createQuery("select d from SillaEntity d  where d.sala.id = :salaId", SillaEntity.class);
+        q = q.setParameter("salaId", salaId);
+        return q.getResultList();
     }
 
     public List<SillaEntity> findAll() {

@@ -9,6 +9,7 @@ import co.edu.uniandes.sourceteam.festivalcine.entities.SillaEntity;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -18,6 +19,7 @@ import javax.persistence.TypedQuery;
  *
  * @author s.rodriguez20
  */
+@Stateless
 public class SillaPersistence {
     private static final Logger LOGGER = Logger.getLogger(SillaPersistence.class.getName());
 

@@ -17,7 +17,7 @@ import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
+import org.junit.Assert.*;
 import org.jboss.arquillian.junit.Arquillian;
 import org.junit.runner.RunWith;
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -71,7 +71,6 @@ public class FestivalPersistenceTest {
             }
             catch(Exception e1){
                 e1.printStackTrace();
-                fail("falla en la configuracion de la ba de datos");
             }
         }
     }

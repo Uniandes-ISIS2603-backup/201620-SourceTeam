@@ -8,8 +8,10 @@ package co.edu.uniandes.sourceteam.festivalcine.entities;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  *
@@ -17,11 +19,16 @@ import javax.persistence.OneToMany;
  */
 public class SalaEntity extends BaseEntity implements Serializable
 {
+        @PodamExclude
         @ManyToOne
         private TeatroEntity teatro = new TeatroEntity();
         
         @OneToMany(mappedBy = "sala")
         private List<SillaEntity> sillas = new ArrayList();
+        
+        @PodamExclude
+        @OneToMany(mappedBy = "sala", cascade = CascadeType.ALL, orphanRemoval = true)
+        private List<FuncionEntity> funciones = new ArrayList<>();
         
         private int numSala;
         private int numSillas;

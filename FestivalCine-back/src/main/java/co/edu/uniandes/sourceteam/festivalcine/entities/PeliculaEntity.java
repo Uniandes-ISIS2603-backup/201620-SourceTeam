@@ -6,8 +6,13 @@
 package co.edu.uniandes.sourceteam.festivalcine.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  *
@@ -15,9 +20,11 @@ import javax.persistence.OneToOne;
  */
 @Entity
 public class PeliculaEntity extends BaseEntity implements Serializable
-{
-    @OneToOne(mappedBy = "pelicula")
-    private CriticoEntity critico = new CriticoEntity();
+{   
+    @PodamExclude
+    @OneToMany(mappedBy = "pelicula", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<FuncionEntity> funciones = new ArrayList<>();
+    
     private String nombre;
     private String anuncio;
     private String creditos;

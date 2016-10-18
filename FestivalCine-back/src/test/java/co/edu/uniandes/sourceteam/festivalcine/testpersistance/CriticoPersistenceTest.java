@@ -42,7 +42,7 @@ public class CriticoPersistenceTest {
         .addPackage(CriticoEntity.class.getPackage())
         .addPackage(CriticoPersistence.class.getPackage())
         .addAsManifestResource("META-INF/persistence.xml","persistence.xml")
-        .addAsManifestResource("META-INF/benas.xml","beans.xml");
+        .addAsManifestResource("META-INF/beans.xml","beans.xml");
     }
 
     private void clearData() {

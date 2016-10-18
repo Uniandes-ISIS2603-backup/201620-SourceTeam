@@ -33,7 +33,9 @@ import javax.persistence.OneToMany;
 
 
 @Entity
-public class ClienteEntity extends BaseEntity implements Serializable {
+public class ClienteEntity extends BaseEntity implements Serializable 
+{
+    
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<BoletaEntity> boletas = new ArrayList<>();
     

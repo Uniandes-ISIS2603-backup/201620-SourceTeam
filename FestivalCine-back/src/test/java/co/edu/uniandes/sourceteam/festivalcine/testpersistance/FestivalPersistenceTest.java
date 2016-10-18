@@ -41,7 +41,7 @@ public class FestivalPersistenceTest {
         .addPackage(FestivalEntity.class.getPackage())
         .addPackage(FestivalPersistence.class.getPackage())
         .addAsManifestResource("META-INF/persistence.xml","persistence.xml")
-        .addAsManifestResource("META-INF/benas.xml","beans.xml");
+        .addAsManifestResource("META-INF/beans.xml","beans.xml");
     }
     
     @Inject

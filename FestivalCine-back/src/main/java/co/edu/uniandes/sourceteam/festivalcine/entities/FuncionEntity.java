@@ -11,8 +11,10 @@ import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  *
@@ -25,12 +27,15 @@ public class FuncionEntity extends BaseEntity implements Serializable
     
     private double precio;
     
-    @OneToOne
+    @PodamExclude
+    @ManyToOne
     private PeliculaEntity pelicula;
     
-    @OneToOne
+    @PodamExclude
+    @ManyToOne
     private SalaEntity sala;
     
+    @PodamExclude
     @OneToMany(mappedBy = "funcion", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<BoletaEntity> boletas = new ArrayList<>();
     

@@ -17,14 +17,16 @@ import uk.co.jemos.podam.common.PodamExclude;
  */
 public class FestivalEntity extends BaseEntity implements Serializable {
     
-    @PodamExclude
     @OneToMany(mappedBy = "festival")
-    private List<TeatroEntity> teatros = new ArrayList<>();
-    
-    
-    @PodamExclude
-    @OneToMany(mappedBy = "festival")
-    private List<PeliculaEntity> peliculas = new ArrayList<>();
+    private List<CriticoEntity> criticos = new ArrayList<>();
+
+    public List<CriticoEntity> getCriticos() {
+        return criticos;
+    }
+
+    public void setCriticos(List<CriticoEntity> criticos) {
+        this.criticos = criticos;
+    }
     
     private Long id;
 
@@ -66,19 +68,4 @@ public class FestivalEntity extends BaseEntity implements Serializable {
     
     private String patrocinador;
     
-    public List<TeatroEntity> getTeatros(){
-        return teatros;
-    }
-    
-    public void setTeatros(List<TeatroEntity> teatros){
-        this.teatros = teatros;
-    }
-    
-    public List<PeliculaEntity> getPelicula(){
-        return peliculas;
-    }
-    
-    public void setPeliculas(List<PeliculaEntity> peliculas){
-        this.peliculas = peliculas;
-    }
 }

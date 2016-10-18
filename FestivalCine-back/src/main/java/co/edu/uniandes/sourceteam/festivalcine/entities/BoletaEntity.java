@@ -43,6 +43,8 @@ public class BoletaEntity extends BaseEntity implements Serializable {
     @PodamExclude
     @ManyToOne
     private ClienteEntity cliente;
+    
+     private int precio;
 
     public FuncionEntity getFuncion() {
         return funcion;
@@ -51,9 +53,6 @@ public class BoletaEntity extends BaseEntity implements Serializable {
     public void setFuncion(FuncionEntity funcion) {
         this.funcion = funcion;
     }
-    
-    private int precio;
-
    
     public ClienteEntity getCliente() {
         return cliente;

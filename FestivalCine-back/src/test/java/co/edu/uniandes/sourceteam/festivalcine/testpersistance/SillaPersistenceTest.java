@@ -38,6 +38,7 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  *
  * @author s.rodriguez20
  */
+@RunWith(Arquillian.class)
 public class SillaPersistenceTest {
     
     

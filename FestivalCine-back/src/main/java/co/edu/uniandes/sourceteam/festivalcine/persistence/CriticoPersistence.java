@@ -10,6 +10,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 
 @Stateless
@@ -25,6 +26,14 @@ public class CriticoPersistence {
         LOGGER.info("Consultando todos los criticos");
         Query q = em.createQuery("select u from CriticoEntity u");
         return q.getResultList();
+    }
+    
+    public CriticoEntity findByName(String name) {
+        LOGGER.log(Level.INFO, "Consultando critico con name = {0}", name);
+        TypedQuery<CriticoEntity> q
+                = em.createQuery("select u from CriticoEntity u where u.name = :name", CriticoEntity.class);
+        q = q.setParameter("name", name); 
+        return q.getSingleResult();
     }
         
     public CriticoEntity create(CriticoEntity entity) {

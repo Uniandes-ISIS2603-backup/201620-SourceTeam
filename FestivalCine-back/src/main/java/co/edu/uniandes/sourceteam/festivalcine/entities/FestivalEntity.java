@@ -19,6 +19,11 @@ import uk.co.jemos.podam.common.PodamExclude;
 @Entity
 public class FestivalEntity extends BaseEntity implements Serializable {
     
+    private int duracion;
+        
+    private String patrocinador;
+    
+    @PodamExclude
     @OneToMany(mappedBy = "festival")
     private List<CriticoEntity> criticos = new ArrayList<>();
 
@@ -38,14 +43,6 @@ public class FestivalEntity extends BaseEntity implements Serializable {
         this.duracion = duracion;
     }
 
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
     public String getPatrocinador() {
         return patrocinador;
     }
@@ -53,11 +50,5 @@ public class FestivalEntity extends BaseEntity implements Serializable {
     public void setPatrocinador(String patrocinador) {
         this.patrocinador = patrocinador;
     }
-    
-    private int duracion;
-    
-    private String nombre;
-    
-    private String patrocinador;
-    
+        
 }

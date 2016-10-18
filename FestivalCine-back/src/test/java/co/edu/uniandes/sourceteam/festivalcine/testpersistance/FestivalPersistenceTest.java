@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.sourceteam.festivalcine.testpersistance;
 
+import co.edu.uniandes.sourceteam.festivalcine.entities.CriticoEntity;
 import co.edu.uniandes.sourceteam.festivalcine.entities.FestivalEntity;
 import co.edu.uniandes.sourceteam.festivalcine.persistence.FestivalPersistence;
 import java.util.ArrayList;
@@ -99,15 +100,13 @@ public class FestivalPersistenceTest {
         Assert.assertEquals(data.size(), list.size());
         for (FestivalEntity festival : list ) {
             boolean found = false;
-            for (FestivalEntity festival2 : data) {
+            for (FestivalEntity festival2 : data ) {
                 if (festival.getId().equals(festival2.getId())) {
                     found = true;
                 }
             }
-            if(!found)
-                break;
             Assert.assertTrue(found);
-        }   
+        }    
     }
     
     

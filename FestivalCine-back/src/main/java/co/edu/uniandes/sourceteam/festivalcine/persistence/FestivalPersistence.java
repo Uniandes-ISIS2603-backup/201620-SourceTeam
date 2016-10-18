@@ -2,7 +2,6 @@
 package co.edu.uniandes.sourceteam.festivalcine.persistence;
 
 import co.edu.uniandes.sourceteam.festivalcine.entities.FestivalEntity;
-import co.edu.uniandes.sourceteam.festivalcine.entities.TeatroEntity;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;

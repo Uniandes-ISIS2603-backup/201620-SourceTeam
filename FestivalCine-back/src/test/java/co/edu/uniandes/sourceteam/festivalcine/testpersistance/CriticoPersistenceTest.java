@@ -88,7 +88,6 @@ public class CriticoPersistenceTest {
             }
             catch(Exception e1){
                 e1.printStackTrace();
-                fail("falla en la configuracion de la ba de datos");
             }
         }
     }
@@ -115,8 +114,6 @@ public class CriticoPersistenceTest {
                     found = true;
                 }
             }
-            if(!found)
-                break;
             Assert.assertTrue(found);
         }    
     }

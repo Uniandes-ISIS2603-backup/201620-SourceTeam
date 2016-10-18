@@ -8,6 +8,7 @@ package co.edu.uniandes.sourceteam.festivalcine.entities;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import uk.co.jemos.podam.common.PodamExclude;
 
@@ -15,6 +16,7 @@ import uk.co.jemos.podam.common.PodamExclude;
  *
  * @author s.ardila13
  */
+@Entity
 public class FestivalEntity extends BaseEntity implements Serializable {
     
     @OneToMany(mappedBy = "festival")
@@ -26,16 +28,6 @@ public class FestivalEntity extends BaseEntity implements Serializable {
 
     public void setCriticos(List<CriticoEntity> criticos) {
         this.criticos = criticos;
-    }
-    
-    private Long id;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public int getDuracion() {

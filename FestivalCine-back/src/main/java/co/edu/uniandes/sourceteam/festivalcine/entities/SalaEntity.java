@@ -23,7 +23,7 @@ public class SalaEntity extends BaseEntity implements Serializable
 {
         @PodamExclude
         @ManyToOne
-        private TeatroEntity teatro = new TeatroEntity();
+        private TeatroEntity teatro;
         
         @OneToMany(mappedBy = "sala")
         private List<SillaEntity> sillas = new ArrayList();

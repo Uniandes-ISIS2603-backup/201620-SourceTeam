@@ -110,7 +110,7 @@ public class CriticoPersistenceTest {
         Assert.assertEquals(data.size(), list.size());
         for (CriticoEntity critico : list ) {
             boolean found = false;
-            for (CriticoEntity critico2 : data && !found) {
+            for (CriticoEntity critico2 : data ) {
                 if (critico.getId().equals(critico2.getId())) {
                     found = true;
                 }
@@ -127,14 +127,6 @@ public class CriticoPersistenceTest {
     public void findCriticoTest() {
         CriticoEntity entity = data.get(0);
         CriticoEntity newEntity = criticoPersistence.find(entity.getId());
-        Assert.assertNotNull(newEntity);
-        Assert.assertEquals(entity.getName(), newEntity.getName());
-    }
-    
-    @Test
-    public void findFestivalByNameTest() {
-        CriticoEntity entity = data.get(0);
-        CriticoEntity newEntity = criticoPersistence.findByName(entity.getName());
         Assert.assertNotNull(newEntity);
         Assert.assertEquals(entity.getName(), newEntity.getName());
     }
@@ -166,7 +158,7 @@ public class CriticoPersistenceTest {
 
         critico.setId(entidad.getId());
 
-        criticoPersistence.update(festival);
+        criticoPersistence.update(critico);
 
         CriticoEntity resp = em.find(CriticoEntity.class, entidad.getId());
 

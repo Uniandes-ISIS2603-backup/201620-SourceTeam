@@ -100,7 +100,7 @@ public class FestivalPersistenceTest {
         Assert.assertEquals(data.size(), list.size());
         for (FestivalEntity festival : list ) {
             boolean found = false;
-            for (FestivalEntity festival2 : data && !found) {
+            for (FestivalEntity festival2 : data) {
                 if (festival.getId().equals(festival2.getId())) {
                     found = true;
                 }
@@ -118,16 +118,7 @@ public class FestivalPersistenceTest {
         FestivalEntity newEntity = festivalPersistence.find(entity.getId());
         Assert.assertNotNull(newEntity);
         Assert.assertEquals(entity.getName(), newEntity.getName());
-    }
-    
-    @Test
-    public void findFestivalByNameTest() {
-        FestivalEntity entity = data.get(0);
-        FestivalEntity newEntity = festivalPersistence.findByName(entity.getName());
-        Assert.assertNotNull(newEntity);
-        Assert.assertEquals(entity.getName(), newEntity.getName());
-    }
-    
+    }  
 
     /**
      * Test of create method, of class FestivalPersistence.

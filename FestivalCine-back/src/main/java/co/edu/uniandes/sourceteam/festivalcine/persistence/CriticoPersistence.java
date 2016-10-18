@@ -2,6 +2,7 @@
 package co.edu.uniandes.sourceteam.festivalcine.persistence;
 
 import co.edu.uniandes.sourceteam.festivalcine.entities.CriticoEntity;
+import co.edu.uniandes.sourceteam.festivalcine.entities.TeatroEntity;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -48,5 +49,10 @@ public class CriticoPersistence {
         CriticoEntity entity = em.find(CriticoEntity.class, id);
         assert entity != null;
         em.remove(entity);
+    }
+
+    public CriticoEntity find(Long id) {
+        LOGGER.log(Level.INFO, "Consultando critico con id={0}", id);
+        return em.find(CriticoEntity.class, id);
     }
 }

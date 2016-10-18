@@ -2,6 +2,7 @@
 package co.edu.uniandes.sourceteam.festivalcine.persistence;
 
 import co.edu.uniandes.sourceteam.festivalcine.entities.FestivalEntity;
+import co.edu.uniandes.sourceteam.festivalcine.entities.TeatroEntity;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,7 +26,12 @@ public class FestivalPersistence {
         Query q = em.createQuery("select u from FestivalEntity u");
         return q.getResultList();
     }
-        
+    
+    public FestivalEntity find(Long id) {
+        LOGGER.log(Level.INFO, "Consultando teatro con id={0}", id);
+        return em.find(FestivalEntity.class, id);
+    }
+            
     public FestivalEntity create(FestivalEntity entity) {
         LOGGER.info("Creando un Festival nuevo");
         em.persist(entity);

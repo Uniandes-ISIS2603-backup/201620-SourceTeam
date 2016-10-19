@@ -107,13 +107,6 @@ public class SalaPersistanceTest
         Assert.assertEquals(entity.getNumSala(), newEntity.getNumSala());
     }
     
-    @Test
-    public void findSalaByNumeroTest() {
-        SalaEntity entity = data.get(0);
-        SalaEntity newEntity = salaPersistence.findByNumero(entity.getNumSala());
-        Assert.assertNotNull(newEntity);
-        Assert.assertEquals(entity.getNumSala(), newEntity.getNumSala());
-    }
     
     @Test
     public void createSalaTest() {

@@ -5,9 +5,7 @@
  */
 package co.edu.uniandes.sourceteam.festivalcine.testpersistance;
 
-import co.edu.uniandes.sourceteam.festivalcine.entities.PeliculaEntity;
 import co.edu.uniandes.sourceteam.festivalcine.entities.SalaEntity;
-import co.edu.uniandes.sourceteam.festivalcine.persistence.PeliculaPersistence;
 import co.edu.uniandes.sourceteam.festivalcine.persistence.SalaPersistence;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +18,7 @@ import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import uk.co.jemos.podam.api.PodamFactory;
@@ -49,8 +48,41 @@ public class SalaPersistanceTest
 
     @Inject
     UserTransaction utx;
-
+    
+    @Before
+    public void setUp() {
+        try {
+            utx.begin();
+            em.joinTransaction();
+            clearData();
+            insertData();
+            utx.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            try {
+                utx.rollback();
+            } catch (Exception e1) {
+                e1.printStackTrace();
+            }
+        }
+    }
+    
+    private void clearData() {
+        em.createQuery("delete from SalaEntity").executeUpdate();
+    }
     private List<SalaEntity> data = new ArrayList<SalaEntity>();
+    
+    private void insertData() {
+        PodamFactory factory = new PodamFactoryImpl();
+        for (int i = 0; i < 3; i++) {
+            SalaEntity entity = factory.manufacturePojo(SalaEntity.class);
+            
+            
+            em.persist(entity);
+            data.add(entity);
+        }
+    }
+    
     
     @Test
     public void findAllSalasTest() {

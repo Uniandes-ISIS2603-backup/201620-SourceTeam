@@ -18,6 +18,7 @@ import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import uk.co.jemos.podam.api.PodamFactory;
@@ -47,8 +48,40 @@ public class PeliculaPersistanceTest
 
     @Inject
     UserTransaction utx;
-
+    
+    @Before
+    public void setUp() {
+        try {
+            utx.begin();
+            em.joinTransaction();
+            clearData();
+            insertData();
+            utx.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            try {
+                utx.rollback();
+            } catch (Exception e1) {
+                e1.printStackTrace();
+            }
+        }
+    }
+    
+    private void clearData() {
+        em.createQuery("delete from PeliculaEntity").executeUpdate();
+    }
     private List<PeliculaEntity> data = new ArrayList<PeliculaEntity>();
+    
+    private void insertData() {
+        PodamFactory factory = new PodamFactoryImpl();
+        for (int i = 0; i < 3; i++) {
+            PeliculaEntity entity = factory.manufacturePojo(PeliculaEntity.class);
+            
+            
+            em.persist(entity);
+            data.add(entity);
+        }
+    }
     
     @Test
     public void findAllPeliculasTest() {

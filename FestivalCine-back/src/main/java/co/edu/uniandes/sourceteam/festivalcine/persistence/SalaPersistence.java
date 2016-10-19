@@ -37,7 +37,7 @@ public class SalaPersistence
         return q.getResultList();
     }
        
-    public SalaEntity findByNumero(long num) {
+    public SalaEntity findByNumero(int num) {
         LOGGER.log(Level.INFO, "Consultando sala con numero= ", num);
         TypedQuery<SalaEntity> q
                 = em.createQuery("select u from SalaEntity u where u.numSala = :numSala", SalaEntity.class);

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.edu.uniandes.sourceteam.festivalcine.testpersistance;
+package co.edu.uniandes.sourceteam.festivalcine.test.persistance;
 
 import co.edu.uniandes.sourceteam.festivalcine.entities.CriticoEntity;
 import co.edu.uniandes.sourceteam.festivalcine.entities.FestivalEntity;

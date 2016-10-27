@@ -1,4 +1,4 @@
-package co.edu.uniandes.sourceteam.festivalcine.testpersistance;
+package co.edu.uniandes.sourceteam.festivalcine.test.persistance;
 
 import co.edu.uniandes.sourceteam.festivalcine.entities.TeatroEntity;
 import co.edu.uniandes.sourceteam.festivalcine.persistence.TeatroPersistence;

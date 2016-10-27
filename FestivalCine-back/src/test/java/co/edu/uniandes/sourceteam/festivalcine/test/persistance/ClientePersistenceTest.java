@@ -21,7 +21,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-package co.edu.uniandes.sourceteam.festivalcine.testpersistance;
+package co.edu.uniandes.sourceteam.festivalcine.test.persistance;
 import co.edu.uniandes.sourceteam.festivalcine.entities.ClienteEntity;
 import co.edu.uniandes.sourceteam.festivalcine.persistence.ClientePersistence;
 import java.util.ArrayList;

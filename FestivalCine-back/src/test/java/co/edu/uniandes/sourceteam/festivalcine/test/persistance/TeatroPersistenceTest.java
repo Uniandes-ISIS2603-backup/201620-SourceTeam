@@ -160,4 +160,21 @@ public class TeatroPersistenceTest
         Assert.assertEquals(newEntity.getName(), resp.getName() );
         Assert.assertEquals(newEntity.getCiudad(), resp.getCiudad() );
     }
+    
+    @Test
+    public void getTeatroByNameTest1() {
+        TeatroEntity entity = data.get(0);
+        TeatroEntity newEntity = teatroPersistence.findByName( entity.getName() );
+        Assert.assertNotNull(newEntity);
+        Assert.assertEquals(entity.getName(), newEntity.getName());
+    }
+   
+    
+    @Test
+    public void getTeatroByNameTest2() {
+        
+        TeatroEntity newEntity = teatroPersistence.findByName("");
+        Assert.assertNull(newEntity);
+     
+    }
 }

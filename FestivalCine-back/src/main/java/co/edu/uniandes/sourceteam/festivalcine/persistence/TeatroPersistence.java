@@ -9,6 +9,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 /**
  * 
@@ -26,6 +27,21 @@ public class TeatroPersistence
     {
         LOGGER.log(Level.INFO, "Consultando teatro con id={0}", id);
         return em.find(TeatroEntity.class, id);
+    }
+    
+    public TeatroEntity findByName(String name)
+    {
+        LOGGER.log(Level.INFO, "Consultando teatro con name = {0}", name);
+        TypedQuery<TeatroEntity> q
+                = em.createQuery("select u from TeatroEntity u where u.name = :name", TeatroEntity.class);
+        q = q.setParameter("name", name);
+        
+       List<TeatroEntity> companiesSimilarName = q.getResultList();
+        if (companiesSimilarName.isEmpty() ) {
+            return null; 
+        } else {
+            return companiesSimilarName.get(0);
+        }
     }
     
     public List<TeatroEntity> findAll() 

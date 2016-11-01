@@ -26,6 +26,7 @@ public class PeliculaLogic implements IPeliculaLogic
      * @return Colección de objetos de CompanyEntity.
      *
      */
+    @Override
     public List<PeliculaEntity> getPeliculas() {
         return persistence.findAll();
     }
@@ -37,8 +38,15 @@ public class PeliculaLogic implements IPeliculaLogic
      * @return Instancia de CompanyEntity con los datos del Company consultado.
      *
      */
+    @Override
     public PeliculaEntity getPelicula(Long id) {
         return persistence.find(id);
+    }
+    
+    
+    @Override
+    public PeliculaEntity getPeliculaByName(String name) {
+        return persistence.findByName(name);
     }
 
     /**
@@ -48,6 +56,7 @@ public class PeliculaLogic implements IPeliculaLogic
      * @return Objeto de CompanyEntity con los datos nuevos y su ID.
      *
      */
+    @Override
     public PeliculaEntity createPelicula(PeliculaEntity entity) throws Exception {
         PeliculaEntity alreadyExist = getPeliculaByName(entity.getName());
         if (alreadyExist != null) {
@@ -66,6 +75,7 @@ public class PeliculaLogic implements IPeliculaLogic
      * @return Instancia de CompanyEntity con los datos actualizados.
      *
      */
+    @Override
     public  PeliculaEntity updatePelicula(PeliculaEntity entity) {
         return persistence.update(entity);
     }
@@ -76,13 +86,11 @@ public class PeliculaLogic implements IPeliculaLogic
      * @param id Identificador de la instancia a eliminar.
      *
      */
+    @Override
     public void deletePelicula(Long id) {
         persistence.delete(id);
     }
-
-    public PeliculaEntity getPeliculaByName(String name) {
-        return persistence.findByName(name);
-    }
+    
 
     
 }

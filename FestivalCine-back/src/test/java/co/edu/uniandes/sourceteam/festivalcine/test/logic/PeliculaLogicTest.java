@@ -16,11 +16,13 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.UserTransaction;
 import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
 
@@ -28,6 +30,7 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  *
  * @author ya.bejarano10
  */
+@RunWith(Arquillian.class)
 public class PeliculaLogicTest 
 {
     private PodamFactory factory = new PodamFactoryImpl();
@@ -60,7 +63,6 @@ public class PeliculaLogicTest
                 .addPackage(PeliculaEntity.class.getPackage())
                 .addPackage(PeliculaLogic.class.getPackage())
                 .addPackage(IPeliculaLogic.class.getPackage())
-                .addPackage(PeliculaPersistence.class.getPackage())
                 .addPackage(PeliculaPersistence.class.getPackage())
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
@@ -116,7 +118,9 @@ public class PeliculaLogicTest
      * Prueba para crear un Company con un nombre que no existe
      */
     @Test
-    public void createPeliculaTest1() throws Exception {
+    public void createPeliculaTest1() throws Exception 
+    {
+        PodamFactory factory = new PodamFactoryImpl();
         PeliculaEntity newEntity = factory.manufacturePojo(PeliculaEntity.class);
        
         PeliculaEntity result = peliculaLogic.createPelicula(newEntity);

@@ -1,10 +1,12 @@
 package co.edu.uniandes.sourceteam.festivalcine.ejbs;
 
+import co.edu.uniandes.sourceteam.festivalcine.api.ICriticoLogic;
 import co.edu.uniandes.sourceteam.festivalcine.entities.FestivalEntity;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import co.edu.uniandes.sourceteam.festivalcine.api.IFestivalLogic;
+import co.edu.uniandes.sourceteam.festivalcine.entities.CriticoEntity;
 import co.edu.uniandes.sourceteam.festivalcine.persistence.FestivalPersistence;
 
 @Stateless
@@ -13,9 +15,11 @@ public class FestivalLogic implements IFestivalLogic {
     
     @Inject private FestivalPersistence persistence;
 
+    @Inject 
+    private ICriticoLogic criticosLogic;
     
     @Override
-    public List<FestivalEntity> getFestivales(Long festivalId) {
+    public List<FestivalEntity> getFestivales() {
         return persistence.findAll();
     }
     
@@ -25,8 +29,15 @@ public class FestivalLogic implements IFestivalLogic {
     }
 
     @Override
-    public FestivalEntity createFestival(FestivalEntity entity) {
-        return persistence.create(entity);
+    public FestivalEntity createFestival(FestivalEntity entity) throws Exception {
+       FestivalEntity alreadyExist = getFestivalByName(entity.getName());
+        if (alreadyExist != null) {
+            throw new Exception("Ya existe una festival con ese nombre");
+        } else
+        {
+            persistence.create(entity);
+        }
+        return entity;
     }
 
     @Override
@@ -39,5 +50,47 @@ public class FestivalLogic implements IFestivalLogic {
         persistence.delete(id);
     }
 
+    @Override
+    public FestivalEntity getFestivalByName(String name) {
+        return persistence.findByName(name);
+    
+    }
+    
+    @Override
+    public List<CriticoEntity> listCriticos(Long festivalId) {
+        return persistence.find(festivalId).getCriticos();
+    }
+
+    @Override
+    public CriticoEntity getCritico(Long festivalId, Long criticoId) {
+        List<CriticoEntity> list = persistence.find(festivalId).getCriticos();
+        for(int i = 0; i < list.size(); i++){
+            if(list.get(i).getId() == criticoId){
+                return list.get(i);
+            }
+        }
+        return null;
+    }
+    
+    @Override
+    public CriticoEntity addCritico(Long festivalId, Long criticoId) {
+        FestivalEntity festivalEntity = persistence.find(festivalId);
+        CriticoEntity criticoEntity = criticosLogic.getCritico(criticoId);
+        criticoEntity.setFestival(festivalEntity);
+        return criticoEntity;
+    }
+    
+    @Override
+    public void removeCritico(Long festivalId, Long criticoId) {
+        FestivalEntity festival = persistence.find(festivalId);
+        List<CriticoEntity> list = festival.getCriticos();
+        for(int i = 0; i < list.size(); i++){
+            if(list.get(i).getId() == criticoId)
+            {
+                list.get(i).setFestival(null);
+                break;
+            }
+        }
+    }
 
 }

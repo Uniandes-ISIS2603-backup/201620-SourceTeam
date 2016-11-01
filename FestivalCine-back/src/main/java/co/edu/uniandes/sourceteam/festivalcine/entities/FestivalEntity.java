@@ -50,5 +50,24 @@ public class FestivalEntity extends BaseEntity implements Serializable {
     public void setPatrocinador(String patrocinador) {
         this.patrocinador = patrocinador;
     }
+
+    public boolean removeCritico(Long idCritico) {
+        for(int i = 0; i < criticos.size(); i++){
+            if(criticos.get(i).getId() == idCritico)
+            {
+                criticos.remove(i);
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public CriticoEntity findCritico(Long id){
+        for (int i  =0 ; i < criticos.size(); i++){
+            if(criticos.get(i).getId() == id)
+                return criticos.get(i);
+        } 
+        return null;
+    }
         
 }

@@ -162,7 +162,8 @@ public class TeatroPersistenceTest
     }
     
     @Test
-    public void getTeatroByNameTest1() {
+    public void getTeatroByNameTest1() 
+    {
         TeatroEntity entity = data.get(0);
         TeatroEntity newEntity = teatroPersistence.findByName( entity.getName() );
         Assert.assertNotNull(newEntity);
@@ -171,7 +172,8 @@ public class TeatroPersistenceTest
    
     
     @Test
-    public void getTeatroByNameTest2() {
+    public void getTeatroByNameTest2() 
+    {
         
         TeatroEntity newEntity = teatroPersistence.findByName("");
         Assert.assertNull(newEntity);

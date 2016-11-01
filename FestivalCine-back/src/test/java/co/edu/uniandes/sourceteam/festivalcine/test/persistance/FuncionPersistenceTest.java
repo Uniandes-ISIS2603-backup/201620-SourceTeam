@@ -163,4 +163,23 @@ public class FuncionPersistenceTest
         Assert.assertEquals( newEntity.getName(), resp.getName() );
         Assert.assertEquals( newEntity.getDia(), resp.getDia() );
     }
+    
+    @Test
+    public void getTeatroByNameTest1() 
+    {
+        FuncionEntity entity = data.get(0);
+        FuncionEntity newEntity = funcionPersistence.findByName( entity.getName() );
+        Assert.assertNotNull(newEntity);
+        Assert.assertEquals(entity.getName(), newEntity.getName());
+    }
+   
+    
+    @Test
+    public void getTeatroByNameTest2() 
+    {
+        
+        FuncionEntity newEntity = funcionPersistence.findByName("");
+        Assert.assertNull(newEntity);
+     
+    }
 }

@@ -7,7 +7,6 @@ package co.edu.uniandes.sourceteam.festivalcine.test.logic;
 
 import co.edu.uniandes.sourceteam.festivalcine.api.ISalaLogic;
 import co.edu.uniandes.sourceteam.festivalcine.ejbs.SalaLogic;
-import co.edu.uniandes.sourceteam.festivalcine.entities.PeliculaEntity;
 import co.edu.uniandes.sourceteam.festivalcine.entities.SalaEntity;
 import co.edu.uniandes.sourceteam.festivalcine.persistence.SalaPersistence;
 import java.util.ArrayList;

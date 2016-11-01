@@ -119,7 +119,9 @@ public class SalaLogicTest
      * Prueba para crear un Company con un nombre que no existe
      */
     @Test
-    public void createSalaTest1() throws Exception {
+    public void createSalaTest1() throws Exception 
+    {
+        PodamFactory factory = new PodamFactoryImpl();
         SalaEntity newEntity = factory.manufacturePojo(SalaEntity.class);
        
         SalaEntity result = salaLogic.createSala(newEntity);

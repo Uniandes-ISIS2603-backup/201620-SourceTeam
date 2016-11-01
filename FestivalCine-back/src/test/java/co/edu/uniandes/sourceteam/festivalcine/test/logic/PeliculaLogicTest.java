@@ -64,7 +64,6 @@ public class PeliculaLogicTest
                 .addPackage(PeliculaLogic.class.getPackage())
                 .addPackage(IPeliculaLogic.class.getPackage())
                 .addPackage(PeliculaPersistence.class.getPackage())
-                .addPackage(PeliculaPersistence.class.getPackage())
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
@@ -119,7 +118,9 @@ public class PeliculaLogicTest
      * Prueba para crear un Company con un nombre que no existe
      */
     @Test
-    public void createPeliculaTest1() throws Exception {
+    public void createPeliculaTest1() throws Exception 
+    {
+        PodamFactory factory = new PodamFactoryImpl();
         PeliculaEntity newEntity = factory.manufacturePojo(PeliculaEntity.class);
        
         PeliculaEntity result = peliculaLogic.createPelicula(newEntity);

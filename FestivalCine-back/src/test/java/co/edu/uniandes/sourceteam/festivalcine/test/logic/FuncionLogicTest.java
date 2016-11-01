@@ -105,7 +105,7 @@ public class FuncionLogicTest
     }
     
     @Test(expected = Exception.class)
-    public void createCompanyTest2() throws Exception 
+    public void createFuncionTest2() throws Exception 
     {
         FuncionEntity newEntity = factory.manufacturePojo(FuncionEntity.class);
         newEntity.setName( data.get(0).getName() ); 
@@ -113,7 +113,7 @@ public class FuncionLogicTest
     }
     
     @Test(expected = Exception.class)
-    public void createCompanyTest3() throws Exception 
+    public void createFuncionTest3() throws Exception 
     {
         FuncionEntity newEntity = factory.manufacturePojo(FuncionEntity.class);
         newEntity.setPrecio(-2);

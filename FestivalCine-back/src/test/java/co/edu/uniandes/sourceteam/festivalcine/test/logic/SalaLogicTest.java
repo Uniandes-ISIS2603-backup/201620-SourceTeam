@@ -31,6 +31,7 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  *
  * @author ya.bejarano10
  */
+@RunWith(Arquillian.class)
 public class SalaLogicTest 
 {
     private PodamFactory factory = new PodamFactoryImpl();
@@ -60,7 +61,6 @@ public class SalaLogicTest
     @Deployment
     public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
-                .addPackage(PeliculaEntity.class.getPackage())
                 .addPackage(SalaLogic.class.getPackage())
                 .addPackage(ISalaLogic.class.getPackage())
                 .addPackage(SalaPersistence.class.getPackage())
@@ -108,7 +108,7 @@ public class SalaLogicTest
      */
     private void insertData() {
 
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 6 ; i++) {
             SalaEntity entity = factory.manufacturePojo(SalaEntity.class);
             em.persist(entity);
             data.add(entity);
@@ -125,7 +125,7 @@ public class SalaLogicTest
         SalaEntity result = salaLogic.createSala(newEntity);
         Assert.assertNotNull(result);
 
-        PeliculaEntity entity = em.find(PeliculaEntity.class, result.getId());
+        SalaEntity entity = em.find(SalaEntity.class, result.getId());
 
         Assert.assertEquals(newEntity.getName(), entity.getName());
         Assert.assertEquals(newEntity.getId(), entity.getId());

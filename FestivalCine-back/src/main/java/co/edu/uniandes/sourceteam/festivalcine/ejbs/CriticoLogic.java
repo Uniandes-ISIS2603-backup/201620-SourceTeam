@@ -29,7 +29,6 @@ import co.edu.uniandes.sourceteam.festivalcine.persistence.CriticoPersistence;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import javax.persistence.NoResultException;
 
 
 @Stateless

@@ -26,6 +26,7 @@ public class SalaLogic implements ISalaLogic
      * @return Colección de objetos de CompanyEntity.
      *
      */
+    @Override
     public List<SalaEntity> getSalas() {
         return persistence.findAll();
     }
@@ -37,6 +38,7 @@ public class SalaLogic implements ISalaLogic
      * @return Instancia de CompanyEntity con los datos del Company consultado.
      *
      */
+    @Override
     public SalaEntity getSala(Long id) {
         return persistence.find(id);
     }
@@ -69,6 +71,7 @@ public class SalaLogic implements ISalaLogic
      * @return Instancia de CompanyEntity con los datos actualizados.
      *
      */
+    @Override
     public  SalaEntity updateSala(SalaEntity entity) {
         return persistence.update(entity);
     }
@@ -79,6 +82,7 @@ public class SalaLogic implements ISalaLogic
      * @param id Identificador de la instancia a eliminar.
      *
      */
+    @Override
     public void deleteSala(Long id) {
         persistence.delete(id);
     }

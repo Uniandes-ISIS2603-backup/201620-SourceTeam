@@ -121,7 +121,6 @@ public class SalaLogicTest
     @Test
     public void createSalaTest1() throws Exception 
     {
-        PodamFactory factory = new PodamFactoryImpl();
         SalaEntity newEntity = factory.manufacturePojo(SalaEntity.class);
        
         SalaEntity result = salaLogic.createSala(newEntity);

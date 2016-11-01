@@ -29,7 +29,26 @@ public class SillaPersistence {
     public SillaEntity find(Long id) {
         LOGGER.log(Level.INFO, "Consultando Silla con id={0}", id);
         return em.find(SillaEntity.class, id);
+        
     }
+    
+    public SillaEntity findByPos(Long salaId, int fila , int numero) {
+        TypedQuery q = em.createQuery("select d from SillaEntity d  where d.sala.id = :salaId and d.fila = :fila and d.numero = :numero", SillaEntity.class);
+        q = q.setParameter("salaId", salaId);
+        q = q.setParameter("fila", fila);
+        q = q.setParameter("numero", numero);
+
+        List<SillaEntity> departmentsSimilarName = q.getResultList();
+        if (departmentsSimilarName.isEmpty()) {
+            return null;
+        } else {
+            return departmentsSimilarName.get(0);
+        }
+
+    }
+    
+    
+    
      public List<SillaEntity> findAllInSala(Long salaId) {
         LOGGER.log(Level.INFO, "Consultando todas las sillas de la sala id={0}", salaId);
         TypedQuery q = em.createQuery("select d from SillaEntity d  where d.sala.id = :salaId", SillaEntity.class);

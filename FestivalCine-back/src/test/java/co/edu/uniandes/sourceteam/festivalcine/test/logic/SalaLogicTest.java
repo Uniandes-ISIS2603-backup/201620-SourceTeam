@@ -186,7 +186,7 @@ public class SalaLogicTest
     public void deleteSalaTest() {
         SalaEntity entity = data.get(1);
         salaLogic.deleteSala(entity.getId());
-        PeliculaEntity deleted = em.find(PeliculaEntity.class, entity.getId());
+        SalaEntity deleted = em.find(SalaEntity.class, entity.getId());
         Assert.assertNull(deleted);
     }
 
@@ -204,7 +204,7 @@ public class SalaLogicTest
 
         salaLogic.updateSala(pojoEntity);
 
-        PeliculaEntity resp = em.find(PeliculaEntity.class, entity.getId());
+        SalaEntity resp = em.find(SalaEntity.class, entity.getId());
 
         Assert.assertEquals(pojoEntity.getName(), resp.getName());
         Assert.assertEquals(pojoEntity.getId(), resp.getId());

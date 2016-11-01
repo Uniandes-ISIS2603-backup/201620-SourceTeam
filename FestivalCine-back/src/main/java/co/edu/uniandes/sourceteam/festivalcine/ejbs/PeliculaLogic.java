@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.sourceteam.festivalcine.ejbs;
 
+import co.edu.uniandes.sourceteam.festivalcine.api.IPeliculaLogic;
 import co.edu.uniandes.sourceteam.festivalcine.entities.PeliculaEntity;
 import co.edu.uniandes.sourceteam.festivalcine.persistence.PeliculaPersistence;
 import java.util.List;
@@ -14,7 +15,7 @@ import javax.inject.Inject;
  *
  * @author ya.bejarano10
  */
-public class PeliculaLogic 
+public class PeliculaLogic implements IPeliculaLogic
 {
     @Inject
     private PeliculaPersistence persistence;
@@ -82,5 +83,6 @@ public class PeliculaLogic
     public PeliculaEntity getPeliculaByName(String name) {
         return persistence.findByName(name);
     }
+
     
 }

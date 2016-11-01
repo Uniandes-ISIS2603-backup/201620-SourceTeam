@@ -9,6 +9,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 
 @Stateless
@@ -31,7 +32,7 @@ public class FestivalPersistence {
         return em.find(FestivalEntity.class, id);
     }
             
-    public FestivalEntity create(FestivalEntity entity) {
+    public FestivalEntity create(FestivalEntity entity) throws Exception{
         LOGGER.info("Creando un Festival nuevo");
         em.persist(entity);
         LOGGER.info("Festival creado");
@@ -53,5 +54,19 @@ public class FestivalPersistence {
         FestivalEntity entity = em.find(FestivalEntity.class, id);
         assert entity != null;
         em.remove(entity);
+    }
+
+    public FestivalEntity findByName(String name) {
+        LOGGER.log(Level.INFO, "Consultando festival con name = {0}", name);
+        TypedQuery<FestivalEntity> q
+                = em.createQuery("select u from FestivalEntity u where u.name = :name", FestivalEntity.class);
+        q = q.setParameter("name", name);
+        
+       List<FestivalEntity> festivalSimilarName = q.getResultList();
+        if (festivalSimilarName.isEmpty() ) {
+            return null; 
+        } else {
+            return festivalSimilarName.get(0);
+        }
     }
 }

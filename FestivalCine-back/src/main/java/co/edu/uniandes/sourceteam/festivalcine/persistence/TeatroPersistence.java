@@ -36,11 +36,11 @@ public class TeatroPersistence
                 = em.createQuery("select u from TeatroEntity u where u.name = :name", TeatroEntity.class);
         q = q.setParameter("name", name);
         
-       List<TeatroEntity> companiesSimilarName = q.getResultList();
-        if (companiesSimilarName.isEmpty() ) {
+       List<TeatroEntity> teatrosSimilarName = q.getResultList();
+        if (teatrosSimilarName.isEmpty() ) {
             return null; 
         } else {
-            return companiesSimilarName.get(0);
+            return teatrosSimilarName.get(0);
         }
     }
     

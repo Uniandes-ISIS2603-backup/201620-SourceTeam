@@ -15,11 +15,11 @@ import java.util.List;
  */
 public interface IPeliculaLogic 
 {
-    public List<PeliculaEntity> getPelicula();
+    public List<PeliculaEntity> getPeliculas();
     public PeliculaEntity getPelicula(Long id);
-    public PeliculaEntity createPelicula(PeliculaEntity entity);
+    public PeliculaEntity createPelicula(PeliculaEntity entity)throws Exception;
     public PeliculaEntity updatePelicula(PeliculaEntity entity);
-    public PeliculaEntity findByName(String name);
+    public PeliculaEntity getPeliculaByName(String nombre);
     public void deletePelicula(Long id);
     
 }

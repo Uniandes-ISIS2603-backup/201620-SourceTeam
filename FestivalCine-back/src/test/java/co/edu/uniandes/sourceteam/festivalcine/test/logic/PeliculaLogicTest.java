@@ -120,7 +120,6 @@ public class PeliculaLogicTest
     @Test
     public void createPeliculaTest1() throws Exception 
     {
-        PodamFactory factory = new PodamFactoryImpl();
         PeliculaEntity newEntity = factory.manufacturePojo(PeliculaEntity.class);
        
         PeliculaEntity result = peliculaLogic.createPelicula(newEntity);
@@ -150,7 +149,7 @@ public class PeliculaLogicTest
      */
     @Test
     public void getPeliculasTest() {
-        List<PeliculaEntity> list = peliculaLogic.getPelicula();
+        List<PeliculaEntity> list = peliculaLogic.getPeliculas();
         Assert.assertEquals(data.size(), list.size());
         for (PeliculaEntity entity : list) {
             boolean found = false;

@@ -8,6 +8,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 /**
  * 
@@ -25,6 +26,21 @@ public class FuncionPersistence
     {
         LOGGER.log(Level.INFO, "Consultando funcion con id={0}", id);
         return em.find(FuncionEntity.class, id);
+    }
+    
+    public FuncionEntity findByName(String name)
+    {
+        LOGGER.log(Level.INFO, "Consultando funcion con name = {0}", name);
+        TypedQuery<FuncionEntity> q
+                = em.createQuery("select u from FuncionEntity u where u.name = :name", FuncionEntity.class);
+        q = q.setParameter("name", name);
+        
+       List<FuncionEntity> funcionesSimilarName = q.getResultList();
+        if (funcionesSimilarName.isEmpty() ) {
+            return null;
+        } else {
+            return funcionesSimilarName.get(0);
+        }
     }
     
     public List<FuncionEntity> findAll() 

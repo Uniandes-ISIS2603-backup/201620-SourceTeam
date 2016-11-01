@@ -7,7 +7,6 @@ package co.edu.uniandes.sourceteam.festivalcine.test.logic;
 
 import co.edu.uniandes.sourceteam.festivalcine.api.ISalaLogic;
 import co.edu.uniandes.sourceteam.festivalcine.ejbs.SalaLogic;
-import co.edu.uniandes.sourceteam.festivalcine.entities.PeliculaEntity;
 import co.edu.uniandes.sourceteam.festivalcine.entities.SalaEntity;
 import co.edu.uniandes.sourceteam.festivalcine.persistence.SalaPersistence;
 import java.util.ArrayList;
@@ -121,7 +120,6 @@ public class SalaLogicTest
     @Test
     public void createSalaTest1() throws Exception 
     {
-        PodamFactory factory = new PodamFactoryImpl();
         SalaEntity newEntity = factory.manufacturePojo(SalaEntity.class);
        
         SalaEntity result = salaLogic.createSala(newEntity);
@@ -187,7 +185,7 @@ public class SalaLogicTest
     public void deleteSalaTest() {
         SalaEntity entity = data.get(1);
         salaLogic.deleteSala(entity.getId());
-        PeliculaEntity deleted = em.find(PeliculaEntity.class, entity.getId());
+        SalaEntity deleted = em.find(SalaEntity.class, entity.getId());
         Assert.assertNull(deleted);
     }
 
@@ -205,7 +203,7 @@ public class SalaLogicTest
 
         salaLogic.updateSala(pojoEntity);
 
-        PeliculaEntity resp = em.find(PeliculaEntity.class, entity.getId());
+        SalaEntity resp = em.find(SalaEntity.class, entity.getId());
 
         Assert.assertEquals(pojoEntity.getName(), resp.getName());
         Assert.assertEquals(pojoEntity.getId(), resp.getId());

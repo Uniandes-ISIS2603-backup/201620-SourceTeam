@@ -1,5 +1,12 @@
-package co.edu.uniandes.sourceteam.festivalcine.test.persistance;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package co.edu.uniandes.sourceteam.festivalcine.test.logic;
 
+import co.edu.uniandes.sourceteam.festivalcine.api.ITeatroLogic;
+import co.edu.uniandes.sourceteam.festivalcine.ejbs.TeatroLogic;
 import co.edu.uniandes.sourceteam.festivalcine.entities.TeatroEntity;
 import co.edu.uniandes.sourceteam.festivalcine.persistence.TeatroPersistence;
 import java.util.ArrayList;
@@ -24,33 +31,41 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  * @author ba.bohorquez10
  */
 @RunWith(Arquillian.class)
-public class TeatroPersistenceTest 
+public class TeatroLogicTest 
 {
+    private PodamFactory factory = new PodamFactoryImpl();
+    
+    @Inject
+    private ITeatroLogic teatroLogic;
+    
+    @PersistenceContext
+    private EntityManager em;
+
+    @Inject
+    private UserTransaction utx;
+    
+    
+    private List<TeatroEntity> data = new ArrayList<TeatroEntity>();
+    
+    
     @Deployment
-    public static JavaArchive createDeployment() {
+    public static JavaArchive createDeployment()
+    {
         return ShrinkWrap.create(JavaArchive.class)
                 .addPackage(TeatroEntity.class.getPackage())
+                .addPackage(TeatroLogic.class.getPackage())
+                .addPackage(ITeatroLogic.class.getPackage())
                 .addPackage(TeatroPersistence.class.getPackage())
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
     
-    @Inject
-    private TeatroPersistence teatroPersistence;
-
-    @PersistenceContext
-    private EntityManager em;
-
-    @Inject
-    UserTransaction utx;
-
-    private List<TeatroEntity> data = new ArrayList<TeatroEntity>();
-
+    
     @Before
-    public void setUp() {
+    public void setUp() 
+    {
         try {
             utx.begin();
-            em.joinTransaction();
             clearData();
             insertData();
             utx.commit();
@@ -71,8 +86,8 @@ public class TeatroPersistenceTest
     
     private void insertData() 
     {
-        PodamFactory factory = new PodamFactoryImpl();
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 3; i++) 
+        {
             TeatroEntity entity = factory.manufacturePojo(TeatroEntity.class);
             em.persist(entity);
             data.add(entity);
@@ -80,103 +95,77 @@ public class TeatroPersistenceTest
     }
     
     @Test
-    public void createTeatroTest() 
+    public void createTeatroTest1() throws Exception
     {
-        PodamFactory factory = new PodamFactoryImpl();
         TeatroEntity newEntity = factory.manufacturePojo(TeatroEntity.class);
-
-        TeatroEntity result = teatroPersistence.create(newEntity);
-
+        TeatroEntity result = teatroLogic.createTeatro(newEntity);
         Assert.assertNotNull(result);
         TeatroEntity entity = em.find(TeatroEntity.class, result.getId());
-        Assert.assertNotNull(entity);
         Assert.assertEquals(newEntity.getName(), entity.getName());
+        Assert.assertEquals(newEntity.getId(), entity.getId());
+    }
+    
+    
+    @Test(expected = Exception.class)
+    public void createCompanyTest2() throws Exception 
+    {
+        TeatroEntity newEntity = factory.manufacturePojo(TeatroEntity.class);
+        newEntity.setName( data.get(0).getName() );
+        TeatroEntity result = teatroLogic.createTeatro(newEntity);
     }
     
     @Test
-    public void getTeatrosTest()
-    {
-        List<TeatroEntity> list = teatroPersistence.findAll();
+    public void getTeatrosTest() {
+        List<TeatroEntity> list = teatroLogic.getTeatros();
         Assert.assertEquals(data.size(), list.size());
-        for (TeatroEntity ent : list) 
-        {
+        for (TeatroEntity entity : list) {
             boolean found = false;
-            for (TeatroEntity entity : data) {
-                if ( ent.getId().equals(entity.getId() ) ) {
+            for (TeatroEntity storedEntity : data) {
+                if (entity.getId().equals(storedEntity.getId() ) ) 
+                {
                     found = true;
                 }
             }
+            
             Assert.assertTrue(found);
         }
     }
-
-    /**
-     * Prueba para consultar un Teatro.
-     *
-     * 
-     */
+    
     @Test
-    public void getTeatroTest() 
-    {
+    public void getTeatroTest() {
         TeatroEntity entity = data.get(0);
-        TeatroEntity newEntity = teatroPersistence.find( entity.getId() );
-        Assert.assertNotNull(newEntity);
-        Assert.assertEquals( entity.getName(), newEntity.getName() );
-        Assert.assertEquals( entity.getCiudad(), newEntity.getCiudad() );
+        TeatroEntity resultEntity = teatroLogic.getTeatro( entity.getId() );
+        Assert.assertNotNull(resultEntity);
+        Assert.assertEquals(entity.getName(), resultEntity.getName());
+        Assert.assertEquals(entity.getId(), resultEntity.getId());
     }
-
-    /**
-     * Prueba para eliminar un Teatro.
-     *
-     * 
-     */
+    
+    
     @Test
     public void deleteTeatroTest() 
     {
-        TeatroEntity entity = data.get(0);
-        teatroPersistence.delete(entity.getId() );
-        TeatroEntity deleted = em.find(TeatroEntity.class, entity.getId() );
+        TeatroEntity entity = data.get(1);
+        teatroLogic.deleteTeatro( entity.getId() );
+        TeatroEntity deleted = em.find( TeatroEntity.class, entity.getId() );
         Assert.assertNull(deleted);
     }
 
-    /**
-     * Prueba para actualizar un Teatro.
-     *
-     * 
-     */
+   
     @Test
     public void updateTeatroTest() 
     {
         TeatroEntity entity = data.get(0);
-        PodamFactory factory = new PodamFactoryImpl();
-        TeatroEntity newEntity = factory.manufacturePojo(TeatroEntity.class);
+        TeatroEntity pojoEntity = factory.manufacturePojo(TeatroEntity.class);
 
-        newEntity.setId(entity.getId() );
+        pojoEntity.setId( entity.getId() );
 
-        teatroPersistence.update(newEntity);
+        teatroLogic.updateTeatro(pojoEntity);
 
-        TeatroEntity resp = em.find(TeatroEntity.class, entity.getId() );
+        TeatroEntity resp = em.find( TeatroEntity.class, entity.getId() );
 
-        Assert.assertEquals(newEntity.getName(), resp.getName() );
-        Assert.assertEquals(newEntity.getCiudad(), resp.getCiudad() );
+        Assert.assertEquals(pojoEntity.getName(), resp.getName());
+        Assert.assertEquals(pojoEntity.getId(), resp.getId());
     }
     
-    @Test
-    public void getTeatroByNameTest1() 
-    {
-        TeatroEntity entity = data.get(0);
-        TeatroEntity newEntity = teatroPersistence.findByName( entity.getName() );
-        Assert.assertNotNull(newEntity);
-        Assert.assertEquals(entity.getName(), newEntity.getName());
-    }
-   
     
-    @Test
-    public void getTeatroByNameTest2() 
-    {
-        
-        TeatroEntity newEntity = teatroPersistence.findByName("");
-        Assert.assertNull(newEntity);
-     
-    }
 }

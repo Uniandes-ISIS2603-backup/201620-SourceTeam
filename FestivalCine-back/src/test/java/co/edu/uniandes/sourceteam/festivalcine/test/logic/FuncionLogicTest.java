@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.edu.uniandes.sourceteam.festivalcine.test.persistance;
+package co.edu.uniandes.sourceteam.festivalcine.test.logic;
 
+import co.edu.uniandes.sourceteam.festivalcine.api.IFuncionLogic;
+import co.edu.uniandes.sourceteam.festivalcine.ejbs.FuncionLogic;
 import co.edu.uniandes.sourceteam.festivalcine.entities.FuncionEntity;
 import co.edu.uniandes.sourceteam.festivalcine.persistence.FuncionPersistence;
 import java.util.ArrayList;
@@ -29,33 +31,40 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  * @author ba.bohorquez10
  */
 @RunWith(Arquillian.class)
-public class FuncionPersistenceTest 
+public class FuncionLogicTest 
 {
+    private PodamFactory factory = new PodamFactoryImpl();
+    
+    @Inject
+    private IFuncionLogic funcionLogic;
+    
+    @PersistenceContext
+    private EntityManager em;
+
+    @Inject
+    private UserTransaction utx;
+    
+    
+    private List<FuncionEntity> data = new ArrayList<FuncionEntity>();
+    
+    
     @Deployment
-    public static JavaArchive createDeployment() {
+    public static JavaArchive createDeployment()
+    {
         return ShrinkWrap.create(JavaArchive.class)
                 .addPackage(FuncionEntity.class.getPackage())
+                .addPackage(FuncionLogic.class.getPackage())
+                .addPackage(IFuncionLogic.class.getPackage())
                 .addPackage(FuncionPersistence.class.getPackage())
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
     
-    @Inject
-    private FuncionPersistence funcionPersistence;
-
-    @PersistenceContext
-    private EntityManager em;
-
-    @Inject
-    UserTransaction utx;
-
-    private List<FuncionEntity> data = new ArrayList<FuncionEntity>();
-
     @Before
-    public void setUp() {
+    public void setUp() 
+    {
         try {
             utx.begin();
-            em.joinTransaction();
             clearData();
             insertData();
             utx.commit();
@@ -76,8 +85,8 @@ public class FuncionPersistenceTest
     
     private void insertData() 
     {
-        PodamFactory factory = new PodamFactoryImpl();
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 3; i++) 
+        {
             FuncionEntity entity = factory.manufacturePojo(FuncionEntity.class);
             em.persist(entity);
             data.add(entity);
@@ -85,101 +94,85 @@ public class FuncionPersistenceTest
     }
     
     @Test
-    public void createFuncionTest() 
+    public void createFuncionTest1() throws Exception
     {
-        PodamFactory factory = new PodamFactoryImpl();
         FuncionEntity newEntity = factory.manufacturePojo(FuncionEntity.class);
-
-        FuncionEntity result = funcionPersistence.create(newEntity);
-
+        FuncionEntity result = funcionLogic.createFuncion(newEntity);
         Assert.assertNotNull(result);
         FuncionEntity entity = em.find(FuncionEntity.class, result.getId());
-        Assert.assertNotNull(entity);
         Assert.assertEquals(newEntity.getName(), entity.getName());
+        Assert.assertEquals(newEntity.getId(), entity.getId());
+    }
+    
+    @Test(expected = Exception.class)
+    public void createFuncionTest2() throws Exception 
+    {
+        FuncionEntity newEntity = factory.manufacturePojo(FuncionEntity.class);
+        newEntity.setName( data.get(0).getName() ); 
+        FuncionEntity result = funcionLogic.createFuncion(newEntity);
+    }
+    
+    @Test(expected = Exception.class)
+    public void createFuncionTest3() throws Exception 
+    {
+        FuncionEntity newEntity = factory.manufacturePojo(FuncionEntity.class);
+        newEntity.setPrecio(-2);
+        FuncionEntity result = funcionLogic.createFuncion(newEntity);
     }
     
     @Test
-    public void getFuncionsTest()
+    public void getFuncionesTest() 
     {
-        List<FuncionEntity> list = funcionPersistence.findAll();
+        List<FuncionEntity> list = funcionLogic.getFunciones();
         Assert.assertEquals(data.size(), list.size());
-        for (FuncionEntity ent : list) 
+        for (FuncionEntity entity : list) 
         {
             boolean found = false;
-            for (FuncionEntity entity : data) {
-                if ( ent.getId().equals(entity.getId() ) ) {
+            for (FuncionEntity storedEntity : data) {
+                if (entity.getId().equals(storedEntity.getId() ) ) 
+                {
                     found = true;
                 }
             }
+            
             Assert.assertTrue(found);
         }
     }
-
-    /**
-     * Prueba para consultar un Funcion.
-     *
-     */
+    
     @Test
     public void getFuncionTest() 
     {
         FuncionEntity entity = data.get(0);
-        FuncionEntity newEntity = funcionPersistence.find( entity.getId() );
-        Assert.assertNotNull(newEntity);
-        Assert.assertEquals( entity.getName(), newEntity.getName() );
-        Assert.assertEquals( entity.getDia(), newEntity.getDia() );
-        
+        FuncionEntity resultEntity = funcionLogic.getFuncion( entity.getId() );
+        Assert.assertNotNull(resultEntity);
+        Assert.assertEquals(entity.getName(), resultEntity.getName());
+        Assert.assertEquals(entity.getId(), resultEntity.getId());
     }
-
-    /**
-     * Prueba para eliminar un Funcion.
-     *
-     */
+    
     @Test
     public void deleteFuncionTest() 
     {
-        FuncionEntity entity = data.get(0);
-        funcionPersistence.delete(entity.getId());
-        FuncionEntity deleted = em.find(FuncionEntity.class, entity.getId());
+        FuncionEntity entity = data.get(1);
+        funcionLogic.deleteFuncion( entity.getId() );
+        FuncionEntity deleted = em.find( FuncionEntity.class, entity.getId() );
         Assert.assertNull(deleted);
     }
 
-    /**
-     * Prueba para actualizar un Funcion.
-     *
-     */
+   
     @Test
     public void updateFuncionTest() 
     {
         FuncionEntity entity = data.get(0);
-        PodamFactory factory = new PodamFactoryImpl();
-        FuncionEntity newEntity = factory.manufacturePojo(FuncionEntity.class);
+        FuncionEntity pojoEntity = factory.manufacturePojo(FuncionEntity.class);
 
-        newEntity.setId( entity.getId() );
+        pojoEntity.setId( entity.getId() );
 
-        funcionPersistence.update(newEntity);
+        funcionLogic.updateFuncion(pojoEntity);
 
         FuncionEntity resp = em.find( FuncionEntity.class, entity.getId() );
 
-        Assert.assertEquals( newEntity.getName(), resp.getName() );
-        Assert.assertEquals( newEntity.getDia(), resp.getDia() );
+        Assert.assertEquals(pojoEntity.getName(), resp.getName());
+        Assert.assertEquals(pojoEntity.getId(), resp.getId());
     }
     
-    @Test
-    public void getTeatroByNameTest1() 
-    {
-        FuncionEntity entity = data.get(0);
-        FuncionEntity newEntity = funcionPersistence.findByName( entity.getName() );
-        Assert.assertNotNull(newEntity);
-        Assert.assertEquals(entity.getName(), newEntity.getName());
-    }
-   
-    
-    @Test
-    public void getTeatroByNameTest2() 
-    {
-        
-        FuncionEntity newEntity = funcionPersistence.findByName("");
-        Assert.assertNull(newEntity);
-     
-    }
 }

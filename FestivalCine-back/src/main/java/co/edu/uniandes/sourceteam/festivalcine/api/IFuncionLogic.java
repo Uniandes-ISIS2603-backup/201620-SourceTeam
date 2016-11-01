@@ -14,13 +14,13 @@ import java.util.List;
  */
 public interface IFuncionLogic 
 {
-     public List<FuncionEntity> getFuncions();
+    public List<FuncionEntity> getFunciones();
 
     public FuncionEntity getFuncion(Long id);
 
     public FuncionEntity getFuncionByName(String name);
 
-    public FuncionEntity createFuncion(FuncionEntity entity);
+    public FuncionEntity createFuncion(FuncionEntity entity) throws Exception;
 
     public FuncionEntity updateFuncion(FuncionEntity entity);
 

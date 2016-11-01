@@ -38,6 +38,7 @@ public class ClienteLogic implements IClienteLogic {
      * @return Instancia de ClienteEntity con los datos del Cliente consultado.
      *
      */
+    @Override
     public ClienteEntity getCliente(Long id) {
         return persistence.find(id);
     }

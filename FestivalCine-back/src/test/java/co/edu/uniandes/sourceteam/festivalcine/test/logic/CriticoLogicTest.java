@@ -32,7 +32,8 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  * @author s.ardila13
  */
 @RunWith(Arquillian.class)
-public class CriticoLogicTest {
+public class CriticoLogicTest 
+{
     
     FestivalEntity festival;
     

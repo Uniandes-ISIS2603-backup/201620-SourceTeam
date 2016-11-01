@@ -56,6 +56,7 @@ public class CriticoLogic implements ICriticoLogic {
      * @return Instancia de CriticoEntity con los datos del Critico consultado.
      * 
      */
+    @Override
     public CriticoEntity getCritico(Long id) {
         return persistence.find(id);
     }
@@ -67,6 +68,7 @@ public class CriticoLogic implements ICriticoLogic {
      * @return el primer empleado con ese nombre .
      * 
      */
+    @Override
     public CriticoEntity findByName(String name) {
         return persistence.findByName(name);
     }

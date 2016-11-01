@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.sourceteam.festivalcine.ejbs;
 
+import co.edu.uniandes.sourceteam.festivalcine.api.ISalaLogic;
 import co.edu.uniandes.sourceteam.festivalcine.entities.SalaEntity;
 import co.edu.uniandes.sourceteam.festivalcine.persistence.SalaPersistence;
 import java.util.List;
@@ -14,7 +15,7 @@ import javax.inject.Inject;
  *
  * @author ya.bejarano10
  */
-public class SalaLogic
+public class SalaLogic implements ISalaLogic
 {
     @Inject
     private SalaPersistence persistence;
@@ -45,9 +46,12 @@ public class SalaLogic
      *
      * @param entity Objeto de CompanyEntity con los datos nuevos
      * @return Objeto de CompanyEntity con los datos nuevos y su ID.
+     * @throws java.lang.Exception
      *
      */
-    public SalaEntity createSala(SalaEntity entity) throws Exception {
+    @Override
+    public SalaEntity createSala(SalaEntity entity) throws Exception
+    {
         SalaEntity alreadyExist = getSala(entity.getId());
         if (alreadyExist != null) {
             throw new Exception("Ya existe una sala con ese Id");

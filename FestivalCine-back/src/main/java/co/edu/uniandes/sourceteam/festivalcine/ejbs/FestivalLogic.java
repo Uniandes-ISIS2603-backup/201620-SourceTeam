@@ -18,7 +18,7 @@ public class FestivalLogic implements IFestivalLogic {
     public List<FestivalEntity> getFestivales(Long festivalId) {
         return persistence.findAll();
     }
-
+    
     @Override
     public FestivalEntity getFestival(Long festivalid) {
         return persistence.find(festivalid);

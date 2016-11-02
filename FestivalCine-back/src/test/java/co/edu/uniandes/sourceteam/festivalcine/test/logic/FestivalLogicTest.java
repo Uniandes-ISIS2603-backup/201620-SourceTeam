@@ -37,9 +37,7 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
 @RunWith(Arquillian.class)
 public class FestivalLogicTest {
     private PodamFactory factory = new PodamFactoryImpl();
-    
-    FestivalEntity festival;
-    
+        
     @Inject
     private IFestivalLogic festivalLogic;
     
@@ -102,10 +100,7 @@ public class FestivalLogicTest {
             em.persist(criticos);
             criticosData.add(criticos);
         }
-
-        festival = factory.manufacturePojo(FestivalEntity.class);
-        festival.setId(1L);
-        em.persist(festival);
+        
         for (int i = 0; i < 3; i++) {
             FestivalEntity entity = factory.manufacturePojo(FestivalEntity.class);
             em.persist(entity);
@@ -156,12 +151,8 @@ public class FestivalLogicTest {
     }
     
     @Test
-    public void getFestivalTest() {
+    public void getFestivalesTest() {
         List<FestivalEntity> list = festivalLogic.getFestivales();
-        for(int i = 0; i < data.size();i++){
-            System.out.println(data.get(i).toString());
-            System.out.println(list.get(i).toString());            
-        }
         Assert.assertEquals(data.size(), list.size());
         for (FestivalEntity entity : list) {
             boolean found = false;

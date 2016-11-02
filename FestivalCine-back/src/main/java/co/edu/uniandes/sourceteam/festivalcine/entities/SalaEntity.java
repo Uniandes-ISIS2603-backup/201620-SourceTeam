@@ -35,37 +35,7 @@ public class SalaEntity extends BaseEntity implements Serializable
         private int numSala;
         private int numSillas;
 
-    public TeatroEntity getTeatro() {
-        return teatro;
-    }
-
-    public void setTeatro(TeatroEntity teatro) {
-        this.teatro = teatro;
-    }
-
-    public List<SillaEntity> getSillas() {
-        return sillas;
-    }
-
-    public void setSillas(List<SillaEntity> sillas) {
-        this.sillas = sillas;
-    }
-
-    public List<FuncionEntity> getFunciones() {
-        return funciones;
-    }
-
-    public void setFunciones(List<FuncionEntity> funciones) {
-        this.funciones = funciones;
-    }
-
-    public boolean isEsFestival() {
-        return esFestival;
-    }
-
-    public void setEsFestival(boolean esFestival) {
-        this.esFestival = esFestival;
-    }
+    
         private int numSillasGenerales;
         private int numSillasPreferenciales;
         private boolean esFestival;
@@ -114,6 +84,30 @@ public class SalaEntity extends BaseEntity implements Serializable
        {
            esFestival = e;
        }
+       
+       public TeatroEntity getTeatro() {
+        return teatro;
+    }
+
+    public void setTeatro(TeatroEntity teatro) {
+        this.teatro = teatro;
+    }
+
+    public List<SillaEntity> getSillas() {
+        return sillas;
+    }
+
+    public void setSillas(List<SillaEntity> sillas) {
+        this.sillas = sillas;
+    }
+
+    public List<FuncionEntity> getFunciones() {
+        return funciones;
+    }
+
+    public void setFunciones(List<FuncionEntity> funciones) {
+        this.funciones = funciones;
+    }
 
         
         

@@ -158,6 +158,10 @@ public class FestivalLogicTest {
     @Test
     public void getFestivalTest() {
         List<FestivalEntity> list = festivalLogic.getFestivales();
+        for(int i = 0; i < data.size();i++){
+            System.out.println(data.get(i).toString());
+            System.out.println(list.get(i).toString());            
+        }
         Assert.assertEquals(data.size(), list.size());
         for (FestivalEntity entity : list) {
             boolean found = false;

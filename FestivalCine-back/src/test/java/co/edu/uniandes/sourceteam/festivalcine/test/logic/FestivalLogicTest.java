@@ -75,6 +75,7 @@ public class FestivalLogicTest {
     public void setUp() {
         try {
             utx.begin();
+            em.joinTransaction();
             clearData();
             insertData();
             utx.commit();

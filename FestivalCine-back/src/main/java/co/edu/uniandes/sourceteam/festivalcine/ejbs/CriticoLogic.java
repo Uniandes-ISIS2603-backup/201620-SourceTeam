@@ -80,7 +80,7 @@ public class CriticoLogic implements ICriticoLogic {
      * 
      */
     @Override
-    public CriticoEntity createCritico(CriticoEntity entity) {
+    public CriticoEntity createCritico(CriticoEntity entity) throws Exception {
         persistence.create(entity);
         return entity;
     }

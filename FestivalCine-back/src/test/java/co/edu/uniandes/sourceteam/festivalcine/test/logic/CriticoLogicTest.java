@@ -6,12 +6,17 @@
 package co.edu.uniandes.sourceteam.festivalcine.test.logic;
 
 import co.edu.uniandes.sourceteam.festivalcine.api.ICriticoLogic;
+import co.edu.uniandes.sourceteam.festivalcine.api.IFestivalLogic;
 import co.edu.uniandes.sourceteam.festivalcine.ejbs.CriticoLogic;
+import co.edu.uniandes.sourceteam.festivalcine.ejbs.FestivalLogic;
 import co.edu.uniandes.sourceteam.festivalcine.entities.CriticoEntity;
 import co.edu.uniandes.sourceteam.festivalcine.entities.FestivalEntity;
 import co.edu.uniandes.sourceteam.festivalcine.persistence.CriticoPersistence;
+import co.edu.uniandes.sourceteam.festivalcine.persistence.FestivalPersistence;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -32,15 +37,11 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  * @author s.ardila13
  */
 @RunWith(Arquillian.class)
-public class CriticoLogicTest 
-{
-    
-    FestivalEntity festival;
-    
+public class CriticoLogicTest {
     private PodamFactory factory = new PodamFactoryImpl();
     
     @Inject
-    private CriticoLogic criticoLogic;
+    private ICriticoLogic criticoLogic;
     
     @PersistenceContext
     private EntityManager em;
@@ -50,23 +51,29 @@ public class CriticoLogicTest
     
     private List<CriticoEntity> criticoData = new ArrayList<CriticoEntity>();
     
+     FestivalEntity festival;
     
     @Deployment
     public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
+                .addPackage(FestivalEntity.class.getPackage())
+                .addPackage(FestivalLogic.class.getPackage())
+                .addPackage(IFestivalLogic.class.getPackage())
+                .addPackage(FestivalPersistence.class.getPackage())
+                .addPackage(CriticoPersistence.class.getPackage())
                 .addPackage(CriticoEntity.class.getPackage())
                 .addPackage(CriticoLogic.class.getPackage())
                 .addPackage(ICriticoLogic.class.getPackage())
-                .addPackage(CriticoPersistence.class.getPackage())
-                .addPackage(FestivalEntity.class.getPackage())
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
+    
     
     @Before
     public void setUp() {
         try {
             utx.begin();
+            em.joinTransaction();
             clearData();
             insertData();
             utx.commit();
@@ -80,13 +87,11 @@ public class CriticoLogicTest
         }
     }
     
-    
     private void clearData() {
         em.createQuery("delete from CriticoEntity").executeUpdate();
-        em.createQuery("delete from FestivalEntity").executeUpdate();
     }
-    
-    private void insertData() {
+
+   private void insertData() {
 
         festival = factory.manufacturePojo(FestivalEntity.class);
         festival.setId(1L);
@@ -111,9 +116,7 @@ public class CriticoLogicTest
     
     @Test(expected = Exception.class)
     public void createCriticoTest2() throws Exception {
-        CriticoEntity critico = factory.manufacturePojo(CriticoEntity.class);
-        critico.setFestival(festival);
-        critico.setName(criticoData.get(0).getName());
+        CriticoEntity critico = criticoData.get(0);
         CriticoEntity result = criticoLogic.createCritico(critico);
     }
     

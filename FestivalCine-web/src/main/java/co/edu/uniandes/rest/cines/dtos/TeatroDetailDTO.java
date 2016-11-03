@@ -13,11 +13,12 @@ import java.util.List;
  */
 public class TeatroDetailDTO extends TeatroDTO
 {
+    
     private List<SalaDTO> salas = new ArrayList<>();
     
     public TeatroDetailDTO()
     {
-        
+         
     }
     public TeatroDetailDTO(Long id, String pCiudad, String pNombre)
     {

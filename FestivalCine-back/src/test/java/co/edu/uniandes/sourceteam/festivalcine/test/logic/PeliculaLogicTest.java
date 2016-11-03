@@ -118,7 +118,7 @@ public class PeliculaLogicTest
      * Prueba para crear un Company con un nombre que no existe
      */
     @Test
-    public void createPeliculaTest1() throws Exception 
+    public void createPeliculaTest1() 
     {
         PeliculaEntity newEntity = factory.manufacturePojo(PeliculaEntity.class);
        
@@ -136,7 +136,7 @@ public class PeliculaLogicTest
      * Prueba para crear un Company con un nombre que ya existe
      */
     @Test(expected = Exception.class)
-    public void createPeliculaTest2() throws Exception {
+    public void createPeliculaTest2() {
         PeliculaEntity newEntity = factory.manufacturePojo(PeliculaEntity.class);
         newEntity.setName(data.get(0).getName());
         PeliculaEntity result = peliculaLogic.createPelicula(newEntity);

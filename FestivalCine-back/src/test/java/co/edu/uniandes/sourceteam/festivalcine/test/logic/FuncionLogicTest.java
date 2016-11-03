@@ -6,9 +6,13 @@
 package co.edu.uniandes.sourceteam.festivalcine.test.logic;
 
 import co.edu.uniandes.sourceteam.festivalcine.api.IFuncionLogic;
+import co.edu.uniandes.sourceteam.festivalcine.api.IPeliculaLogic;
 import co.edu.uniandes.sourceteam.festivalcine.ejbs.FuncionLogic;
+import co.edu.uniandes.sourceteam.festivalcine.ejbs.PeliculaLogic;
 import co.edu.uniandes.sourceteam.festivalcine.entities.FuncionEntity;
+import co.edu.uniandes.sourceteam.festivalcine.entities.PeliculaEntity;
 import co.edu.uniandes.sourceteam.festivalcine.persistence.FuncionPersistence;
+import co.edu.uniandes.sourceteam.festivalcine.persistence.PeliculaPersistence;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
@@ -44,8 +48,9 @@ public class FuncionLogicTest
     @Inject
     private UserTransaction utx;
     
-    
     private List<FuncionEntity> data = new ArrayList<FuncionEntity>();
+    
+    private List<PeliculaEntity> peliculasData = new ArrayList<>();
     
     
     @Deployment
@@ -56,6 +61,10 @@ public class FuncionLogicTest
                 .addPackage(FuncionLogic.class.getPackage())
                 .addPackage(IFuncionLogic.class.getPackage())
                 .addPackage(FuncionPersistence.class.getPackage())
+                .addPackage(PeliculaEntity.class.getPackage())
+                .addPackage(PeliculaLogic.class.getPackage())
+                .addPackage(IPeliculaLogic.class.getPackage())
+                .addPackage(PeliculaPersistence.class.getPackage())
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
@@ -65,6 +74,7 @@ public class FuncionLogicTest
     {
         try {
             utx.begin();
+            em.joinTransaction();
             clearData();
             insertData();
             utx.commit();
@@ -81,15 +91,25 @@ public class FuncionLogicTest
     private void clearData() 
     {
         em.createQuery("delete from FuncionEntity").executeUpdate();
+        em.createQuery("delete from PeliculaEntity").executeUpdate();
     }
     
     private void insertData() 
     {
         for (int i = 0; i < 3; i++) 
         {
+            PeliculaEntity actual = factory.manufacturePojo(PeliculaEntity.class);
+            em.persist(actual);
+            peliculasData.add(actual);
+        }
+        
+        for (int i = 0; i < 3; i++) 
+        {
             FuncionEntity entity = factory.manufacturePojo(FuncionEntity.class);
             em.persist(entity);
             data.add(entity);
+            
+            data.get(i).setPelicula( peliculasData.get(i) );
         }
     }
     
@@ -175,4 +195,27 @@ public class FuncionLogicTest
         Assert.assertEquals(pojoEntity.getId(), resp.getId());
     }
     
+    
+    @Test
+    public void getPeliculaTest() 
+    {
+        FuncionEntity entity = data.get(0);
+        PeliculaEntity pelicula = peliculasData.get(0);
+        PeliculaEntity resp = funcionLogic.getPelicula ( entity.getId() );
+
+        Assert.assertEquals( pelicula.getName(), resp.getName() );
+        Assert.assertEquals( pelicula.getId(), resp.getId() );
+       
+    }
+    
+    @Test
+    public void setPeliculaTest()
+    {
+        FuncionEntity entity = data.get(0);
+        PeliculaEntity sala = peliculasData.get(1);
+        PeliculaEntity resp = funcionLogic.setPelicula( entity.getId(), sala.getId() );
+
+        Assert.assertNotNull(resp);
+        Assert.assertEquals( sala.getId(), resp.getId() );
+    }
 }

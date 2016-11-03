@@ -6,6 +6,7 @@
 package co.edu.uniandes.sourceteam.festivalcine.api;
 
 import co.edu.uniandes.sourceteam.festivalcine.entities.FuncionEntity;
+import co.edu.uniandes.sourceteam.festivalcine.entities.PeliculaEntity;
 import java.util.List;
 
 /**
@@ -25,4 +26,8 @@ public interface IFuncionLogic
     public FuncionEntity updateFuncion(FuncionEntity entity);
 
     public void deleteFuncion(Long id);
+    
+    public PeliculaEntity getPelicula(Long funcionId);
+    
+    public PeliculaEntity setPelicula(Long funcionId, Long peliculaId);
 }

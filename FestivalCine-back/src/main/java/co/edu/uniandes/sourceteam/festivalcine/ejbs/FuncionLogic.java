@@ -6,7 +6,9 @@
 package co.edu.uniandes.sourceteam.festivalcine.ejbs;
 
 import co.edu.uniandes.sourceteam.festivalcine.api.IFuncionLogic;
+import co.edu.uniandes.sourceteam.festivalcine.api.IPeliculaLogic;
 import co.edu.uniandes.sourceteam.festivalcine.entities.FuncionEntity;
+import co.edu.uniandes.sourceteam.festivalcine.entities.PeliculaEntity;
 import co.edu.uniandes.sourceteam.festivalcine.entities.TeatroEntity;
 import co.edu.uniandes.sourceteam.festivalcine.persistence.FuncionPersistence;
 import java.util.Date;
@@ -23,6 +25,9 @@ public class FuncionLogic implements IFuncionLogic
 {
     @Inject
     private FuncionPersistence persistence;
+    
+    @Inject
+    private IPeliculaLogic peliculasLogic;
     
     @Override
     public List<FuncionEntity> getFunciones() 
@@ -72,5 +77,21 @@ public class FuncionLogic implements IFuncionLogic
     public void deleteFuncion(Long id)
     {
         persistence.delete(id);
+    }
+    
+    @Override
+    public PeliculaEntity getPelicula(Long funcionId)
+    {
+        return persistence.find(funcionId).getPelicula();
+    }
+    
+    @Override
+    public PeliculaEntity setPelicula(Long funcionId, Long peliculaId)
+    {
+        FuncionEntity funcionEntity = persistence.find(funcionId);
+        PeliculaEntity peliculaEntity = peliculasLogic.getPelicula(peliculaId);
+        funcionEntity.setPelicula(peliculaEntity);
+        
+        return peliculaEntity;
     }
 }

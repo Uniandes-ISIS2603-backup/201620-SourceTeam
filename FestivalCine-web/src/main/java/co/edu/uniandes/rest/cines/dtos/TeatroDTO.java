@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -5,15 +6,11 @@
  */
 package co.edu.uniandes.rest.cines.dtos;
 
-import co.edu.uniandes.sourceteam.festivalcine.entities.TeatroEntity;
-import javax.xml.bind.annotation.XmlRootElement;
-
 
 /**
  * Objeto de transferencia de datos del teatro.
  * @author ba.bohorquez10
  */
-@XmlRootElement
 public class TeatroDTO 
 {
     /**
@@ -38,24 +35,17 @@ public class TeatroDTO
         
     }
     
-    
-    public TeatroDTO(TeatroEntity entity)
+    /**
+     * Crea un nuevo teatro.
+     * @param pCiudad Ciudad donde se encuantra el teatro.
+     * @param pNombre Nombre del teatro.
+     * @param pId Id.
+     */
+    public TeatroDTO(Long pId, String pCiudad, String pNombre)
     {
-        if(entity != null)
-        {
-            this.nombre = entity.getName();
-            this.id = entity.getId();
-            this.ciudad = entity.getCiudad();
-        }
-    }
-    
-    public TeatroEntity toEntity() 
-    {
-        TeatroEntity entity = new TeatroEntity();
-        entity.setName(this.getNombre());
-        entity.setId(this.getId());
-        
-        return entity;
+        id = pId;
+        ciudad = pCiudad;
+        nombre = pNombre;
     }
     
     /**

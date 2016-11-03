@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 package co.edu.uniandes.rest.cines.dtos;
+import co.edu.uniandes.sourceteam.festivalcine.entities.SalaEntity;
+import co.edu.uniandes.sourceteam.festivalcine.entities.TeatroEntity;
 import java.util.ArrayList;
 //import co.edu.uniandes.sourceteam.festivalcine.entities.TeatroEntity;
 import java.util.List;
@@ -30,7 +32,7 @@ public class TeatroDetailDTO extends TeatroDTO
         List<SalaEntity> list = entity.getSalas();
         for (SalaEntity sala : list) 
         {
-            this.salas.add( new SalaDTO(sala) );
+            //this.salas.add( new SalaDTO(sala) );
         }
     }
     
@@ -42,7 +44,7 @@ public class TeatroDetailDTO extends TeatroDTO
         
         for (SalaDTO sala : this.salas) 
         {         
-            entity.getSalas().add( sala.toEntity() );
+           // entity.getSalas().add( sala.toEntity() );
         }
         
         return entity;

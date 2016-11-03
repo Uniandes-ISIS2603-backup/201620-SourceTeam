@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.rest.cines.dtos;
 
+import co.edu.uniandes.sourceteam.festivalcine.entities.TeatroEntity;
 import javax.xml.bind.annotation.XmlRootElement;
 
 
@@ -51,7 +52,7 @@ public class TeatroDTO
     public TeatroEntity toEntity() 
     {
         TeatroEntity entity = new TeatroEntity();
-        entity.setName(this.getName());
+        entity.setName(this.getNombre());
         entity.setId(this.getId());
         
         return entity;

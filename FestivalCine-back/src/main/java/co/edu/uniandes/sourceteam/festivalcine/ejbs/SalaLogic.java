@@ -57,7 +57,7 @@ public class SalaLogic implements ISalaLogic
         SalaEntity alreadyExist = getSala(entity.getId());
         if (alreadyExist != null) 
         {
-            throw new Exception("Ya existe un teatro con ese nombre.");
+            throw new Exception("Ya existe una sala con ese nombre.");
         } 
         else
         {

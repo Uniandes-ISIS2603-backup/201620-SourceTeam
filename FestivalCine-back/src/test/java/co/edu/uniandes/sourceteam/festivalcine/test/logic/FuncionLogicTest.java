@@ -7,12 +7,16 @@ package co.edu.uniandes.sourceteam.festivalcine.test.logic;
 
 import co.edu.uniandes.sourceteam.festivalcine.api.IFuncionLogic;
 import co.edu.uniandes.sourceteam.festivalcine.api.IPeliculaLogic;
+import co.edu.uniandes.sourceteam.festivalcine.api.ISalaLogic;
 import co.edu.uniandes.sourceteam.festivalcine.ejbs.FuncionLogic;
 import co.edu.uniandes.sourceteam.festivalcine.ejbs.PeliculaLogic;
+import co.edu.uniandes.sourceteam.festivalcine.ejbs.SalaLogic;
 import co.edu.uniandes.sourceteam.festivalcine.entities.FuncionEntity;
 import co.edu.uniandes.sourceteam.festivalcine.entities.PeliculaEntity;
+import co.edu.uniandes.sourceteam.festivalcine.entities.SalaEntity;
 import co.edu.uniandes.sourceteam.festivalcine.persistence.FuncionPersistence;
 import co.edu.uniandes.sourceteam.festivalcine.persistence.PeliculaPersistence;
+import co.edu.uniandes.sourceteam.festivalcine.persistence.SalaPersistence;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
@@ -52,6 +56,8 @@ public class FuncionLogicTest
     
     private List<PeliculaEntity> peliculasData = new ArrayList<>();
     
+    private List<SalaEntity> salasData = new ArrayList<>();
+    
     
     @Deployment
     public static JavaArchive createDeployment()
@@ -65,6 +71,10 @@ public class FuncionLogicTest
                 .addPackage(PeliculaLogic.class.getPackage())
                 .addPackage(IPeliculaLogic.class.getPackage())
                 .addPackage(PeliculaPersistence.class.getPackage())
+                .addPackage(SalaEntity.class.getPackage())
+                .addPackage(SalaLogic.class.getPackage())
+                .addPackage(ISalaLogic.class.getPackage())
+                .addPackage(SalaPersistence.class.getPackage())
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
@@ -91,6 +101,7 @@ public class FuncionLogicTest
     private void clearData() 
     {
         em.createQuery("delete from FuncionEntity").executeUpdate();
+        em.createQuery("delete from SalaEntity").executeUpdate();
         em.createQuery("delete from PeliculaEntity").executeUpdate();
     }
     
@@ -105,11 +116,19 @@ public class FuncionLogicTest
         
         for (int i = 0; i < 3; i++) 
         {
+            SalaEntity actual = factory.manufacturePojo(SalaEntity.class);
+            em.persist(actual);
+            salasData.add(actual);
+        }
+        
+        for (int i = 0; i < 3; i++) 
+        {
             FuncionEntity entity = factory.manufacturePojo(FuncionEntity.class);
             em.persist(entity);
             data.add(entity);
             
             data.get(i).setPelicula( peliculasData.get(i) );
+            data.get(i).setSala( salasData.get(i) );
         }
     }
     
@@ -218,4 +237,32 @@ public class FuncionLogicTest
         Assert.assertNotNull(resp);
         Assert.assertEquals( sala.getId(), resp.getId() );
     }
+    
+    
+    @Test
+    public void getSalaTest()
+    {
+        FuncionEntity entity = data.get(0);
+        SalaEntity sala = salasData.get(0);
+        SalaEntity resp = funcionLogic.getSala( entity.getId() );
+
+        Assert.assertEquals( sala.getName(), resp.getName() );
+        Assert.assertEquals( sala.getId(), resp.getId() );
+    }
+    
+    @Test
+    public void setSalaTest()
+    {
+        FuncionEntity entity = data.get(0);
+        SalaEntity sala = salasData.get(1);
+        SalaEntity resp = funcionLogic.setSala( entity.getId(), sala.getId() );
+
+        Assert.assertNotNull(resp);
+        Assert.assertEquals( sala.getId(), resp.getId() );
+    }
+    
 }
+    
+    
+ 
+

@@ -7,8 +7,10 @@ package co.edu.uniandes.sourceteam.festivalcine.ejbs;
 
 import co.edu.uniandes.sourceteam.festivalcine.api.IFuncionLogic;
 import co.edu.uniandes.sourceteam.festivalcine.api.IPeliculaLogic;
+import co.edu.uniandes.sourceteam.festivalcine.api.ISalaLogic;
 import co.edu.uniandes.sourceteam.festivalcine.entities.FuncionEntity;
 import co.edu.uniandes.sourceteam.festivalcine.entities.PeliculaEntity;
+import co.edu.uniandes.sourceteam.festivalcine.entities.SalaEntity;
 import co.edu.uniandes.sourceteam.festivalcine.entities.TeatroEntity;
 import co.edu.uniandes.sourceteam.festivalcine.persistence.FuncionPersistence;
 import java.util.Date;
@@ -28,6 +30,9 @@ public class FuncionLogic implements IFuncionLogic
     
     @Inject
     private IPeliculaLogic peliculasLogic;
+    
+    @Inject
+    private ISalaLogic salasLogic;
     
     @Override
     public List<FuncionEntity> getFunciones() 
@@ -93,5 +98,21 @@ public class FuncionLogic implements IFuncionLogic
         funcionEntity.setPelicula(peliculaEntity);
         
         return peliculaEntity;
+    }
+    
+    @Override
+    public SalaEntity getSala(Long funcionId)
+    {
+        return persistence.find(funcionId).getSala();
+    }
+    
+    @Override
+    public SalaEntity setSala(Long funcionId, Long salaId)
+    {
+        FuncionEntity funcionEntity = persistence.find(funcionId);
+        SalaEntity salaEntity = salasLogic.getSala(salaId);
+        funcionEntity.setSala(salaEntity);
+        
+        return salaEntity; 
     }
 }

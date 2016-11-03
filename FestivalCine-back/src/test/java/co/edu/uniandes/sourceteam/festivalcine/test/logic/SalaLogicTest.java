@@ -148,7 +148,7 @@ public class SalaLogicTest
      * Prueba para crear un Company con un nombre que no existe
      */
     @Test
-    public void createSalaTest1()
+    public void createSalaTest1() throws Exception
     {
         SalaEntity newEntity = factory.manufacturePojo(SalaEntity.class);
        
@@ -165,8 +165,9 @@ public class SalaLogicTest
     /**
      * Prueba para crear un Company con un nombre que ya existe
      */
-    @Test
-    public void createSalaTest2(){
+    @Test (expected = Exception.class)
+    public void createSalaTest2() throws Exception
+    {
         SalaEntity newEntity = factory.manufacturePojo(SalaEntity.class);
         newEntity.setName(data.get(0).getName());
         SalaEntity result = salaLogic.createSala(newEntity);
@@ -188,7 +189,7 @@ public class SalaLogicTest
                     found = true;
                 }
             }
-            Assert.assertTrue(true);
+            Assert.assertTrue(found);
         }
     }
 

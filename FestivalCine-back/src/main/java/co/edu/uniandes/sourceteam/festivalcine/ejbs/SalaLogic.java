@@ -52,11 +52,18 @@ public class SalaLogic implements ISalaLogic
      *
      */
     @Override
-    public SalaEntity createSala(SalaEntity entity) 
+    public SalaEntity createSala(SalaEntity entity) throws Exception
     {
-     
+        SalaEntity alreadyExist = getSala(entity.getId());
+        if (alreadyExist != null) 
+        {
+            throw new Exception("Ya existe un teatro con ese nombre.");
+        } 
+        else
+        {
             persistence.create(entity);
-             return entity;
+        }
+        return entity;
     }
 
     /**

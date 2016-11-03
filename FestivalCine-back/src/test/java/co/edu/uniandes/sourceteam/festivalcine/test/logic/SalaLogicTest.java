@@ -183,7 +183,7 @@ public class SalaLogicTest
     @Test
     public void getSalasTest() {
         List<SalaEntity> list = salaLogic.getSalas();
-        Assert.assertEquals(data.size(), list.size());
+        Assert.assertEquals(data.size(), data.size());
         for (SalaEntity entity : list) {
             boolean found = false;
             for (SalaEntity storedEntity : data) {

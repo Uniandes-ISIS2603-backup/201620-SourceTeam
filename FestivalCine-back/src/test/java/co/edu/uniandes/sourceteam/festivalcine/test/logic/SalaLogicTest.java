@@ -146,6 +146,7 @@ public class SalaLogicTest
 
     /**
      * Prueba para crear un Company con un nombre que no existe
+     * @throws java.lang.Exception
      */
     @Test
     public void createSalaTest1() throws Exception
@@ -164,8 +165,9 @@ public class SalaLogicTest
 
     /**
      * Prueba para crear un Company con un nombre que ya existe
+     * @throws java.lang.Exception
      */
-    @Test (expected = Exception.class)
+    @Test(expected = Exception.class)
     public void createSalaTest2() throws Exception
     {
         SalaEntity newEntity = factory.manufacturePojo(SalaEntity.class);

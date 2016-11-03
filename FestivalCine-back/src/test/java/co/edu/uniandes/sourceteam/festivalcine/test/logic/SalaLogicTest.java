@@ -171,25 +171,20 @@ public class SalaLogicTest
         SalaEntity result = salaLogic.createSala(newEntity);
     }
 
-    /**
-     * Prueba para consultar la lista de Companys
-     *
-     *
-     */
-    @Test
-    public void getSalasTest() {
-        List<SalaEntity> list = salaLogic.getSalas();
-        Assert.assertEquals(data.size(), list.size());
-        for (SalaEntity entity : list) {
-            boolean found = false;
-            for (SalaEntity storedEntity : data) {
-                if (entity.getId().equals(storedEntity.getId())) {
-                    found = true;
-                }
-            }
-            Assert.assertTrue(found);
-        }
-    }
+   // @Test
+    //public void getSalasTest() {
+      //  List<SalaEntity> list = salaLogic.getSalas();
+        //Assert.assertEquals(data.size(), list.size());
+        //for (SalaEntity entity : list) {
+          //  boolean found = false;
+            //for (SalaEntity storedEntity : data) {
+              //  if (entity.getId().equals(storedEntity.getId())) {
+                //    found = true;
+                //}
+            //}
+            //Assert.assertTrue(found);
+        //}
+    //}
 
     /**
      * Prueba para consultar un Company

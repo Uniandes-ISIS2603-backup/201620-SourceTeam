@@ -107,15 +107,10 @@ public class SalaLogicTest
         }
     }
 
-    /**
-     * Limpia las tablas que están implicadas en la prueba.
-     *
-     *
-     */
     private void clearData() {
         em.createQuery("delete from SillaEntity").executeUpdate();
-        em.createQuery("delete from TeatroEntity").executeUpdate();
         em.createQuery("delete from SalaEntity").executeUpdate();
+        em.createQuery("delete from TeatroEntity").executeUpdate();
         
     }
 

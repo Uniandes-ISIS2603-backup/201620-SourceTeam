@@ -114,8 +114,9 @@ public class SalaLogicTest
      */
     private void clearData() {
         em.createQuery("delete from SillaEntity").executeUpdate();
-        em.createQuery("delete from SalaEntity").executeUpdate();
         em.createQuery("delete from TeatroEntity").executeUpdate();
+        em.createQuery("delete from SalaEntity").executeUpdate();
+        
     }
 
     /**
@@ -183,7 +184,7 @@ public class SalaLogicTest
     @Test
     public void getSalasTest() {
         List<SalaEntity> list = salaLogic.getSalas();
-        Assert.assertEquals(data.size(), data.size());
+        Assert.assertEquals(data.size(), list.size());
         for (SalaEntity entity : list) {
             boolean found = false;
             for (SalaEntity storedEntity : data) {

@@ -25,7 +25,7 @@ public class SalaEntity extends BaseEntity implements Serializable
         @ManyToOne
         private TeatroEntity teatro;
         
-        @OneToMany(mappedBy = "sala")
+        @OneToMany(mappedBy = "sala", cascade = CascadeType.ALL, orphanRemoval = true)
         private List<SillaEntity> sillas = new ArrayList();
         
         @PodamExclude

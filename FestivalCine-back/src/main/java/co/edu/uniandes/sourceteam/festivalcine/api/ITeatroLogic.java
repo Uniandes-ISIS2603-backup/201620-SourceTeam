@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.sourceteam.festivalcine.api;
 
+import co.edu.uniandes.sourceteam.festivalcine.entities.SalaEntity;
 import co.edu.uniandes.sourceteam.festivalcine.entities.TeatroEntity;
 import java.util.List;
 
@@ -25,4 +26,13 @@ public interface ITeatroLogic
     public TeatroEntity updateTeatro(TeatroEntity entity);
 
     public void deleteTeatro(Long id);
+    
+    public SalaEntity getSala(Long teatroId, Long salaId);
+    
+    public List<SalaEntity> listSalas(Long teatroId);
+    
+    public SalaEntity addSala(Long teatroId, Long salaId);
+    
+    public void removeSala(Long teatroId, Long salaId);
+    
 }

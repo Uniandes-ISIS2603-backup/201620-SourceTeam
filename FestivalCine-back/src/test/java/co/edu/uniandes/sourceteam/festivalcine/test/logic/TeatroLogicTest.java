@@ -5,9 +5,13 @@
  */
 package co.edu.uniandes.sourceteam.festivalcine.test.logic;
 
+import co.edu.uniandes.sourceteam.festivalcine.api.ISalaLogic;
 import co.edu.uniandes.sourceteam.festivalcine.api.ITeatroLogic;
+import co.edu.uniandes.sourceteam.festivalcine.ejbs.SalaLogic;
 import co.edu.uniandes.sourceteam.festivalcine.ejbs.TeatroLogic;
+import co.edu.uniandes.sourceteam.festivalcine.entities.SalaEntity;
 import co.edu.uniandes.sourceteam.festivalcine.entities.TeatroEntity;
+import co.edu.uniandes.sourceteam.festivalcine.persistence.SalaPersistence;
 import co.edu.uniandes.sourceteam.festivalcine.persistence.TeatroPersistence;
 import java.util.ArrayList;
 import java.util.List;
@@ -44,8 +48,9 @@ public class TeatroLogicTest
     @Inject
     private UserTransaction utx;
     
-    
     private List<TeatroEntity> data = new ArrayList<TeatroEntity>();
+    
+    private List<SalaEntity> salasData = new ArrayList<>();
     
     
     @Deployment
@@ -56,6 +61,10 @@ public class TeatroLogicTest
                 .addPackage(TeatroLogic.class.getPackage())
                 .addPackage(ITeatroLogic.class.getPackage())
                 .addPackage(TeatroPersistence.class.getPackage())
+                .addPackage(SalaEntity.class.getPackage())
+                .addPackage(SalaLogic.class.getPackage())
+                .addPackage(ISalaLogic.class.getPackage())
+                .addPackage(SalaPersistence.class.getPackage())
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
@@ -66,6 +75,7 @@ public class TeatroLogicTest
     {
         try {
             utx.begin();
+            em.joinTransaction();
             clearData();
             insertData();
             utx.commit();
@@ -81,6 +91,7 @@ public class TeatroLogicTest
     
     private void clearData() 
     {
+        em.createQuery("delete from SalaEntity").executeUpdate();
         em.createQuery("delete from TeatroEntity").executeUpdate();
     }
     
@@ -88,10 +99,23 @@ public class TeatroLogicTest
     {
         for (int i = 0; i < 3; i++) 
         {
+            SalaEntity salaActual = factory.manufacturePojo(SalaEntity.class);
+            em.persist(salaActual);
+            salasData.add(salaActual);
+        }
+        
+        for (int i = 0; i < 3; i++) 
+        {
             TeatroEntity entity = factory.manufacturePojo(TeatroEntity.class);
             em.persist(entity);
             data.add(entity);
+            
+            if (i == 0) 
+            {
+                salasData.get(0).setTeatro(entity);
+            }
         }
+        
     }
     
     @Test
@@ -107,7 +131,7 @@ public class TeatroLogicTest
     
     
     @Test(expected = Exception.class)
-    public void createCompanyTest2() throws Exception 
+    public void createTeatroTest2() throws Exception 
     {
         TeatroEntity newEntity = factory.manufacturePojo(TeatroEntity.class);
         newEntity.setName( data.get(0).getName() );
@@ -168,4 +192,40 @@ public class TeatroLogicTest
     }
     
     
+    @Test
+    public void getSalasTest() {
+        TeatroEntity entity = data.get(0);
+        SalaEntity sala = salasData.get(0);
+        SalaEntity resp = teatroLogic.getSala( entity.getId(), sala.getId() );
+
+        Assert.assertEquals( sala.getName(), resp.getName() );
+        Assert.assertEquals( sala.getId(), resp.getId() );
+        
+    }
+    
+    @Test
+    public void listSalasTest() 
+    {
+        List<SalaEntity> list = teatroLogic.listSalas( data.get(0).getId() );
+        Assert.assertEquals( 1, list.size() );
+    }
+    
+    @Test
+    public void addSalaTest() 
+    {
+        TeatroEntity entity = data.get(0);
+        SalaEntity sala = salasData.get(1);
+        SalaEntity resp = teatroLogic.addSala( entity.getId(), sala.getId() );
+
+        Assert.assertNotNull(resp);
+        Assert.assertEquals( sala.getId(), resp.getId() );
+    }
+    
+    @Test
+    public void removeSalaTest()
+    {
+        teatroLogic.removeSala( data.get(0).getId(), salasData.get(0).getId() );
+        SalaEntity resp = teatroLogic.getSala(data.get(0).getId(), salasData.get(0).getId() );
+        Assert.assertNull(resp);
+    }
 }

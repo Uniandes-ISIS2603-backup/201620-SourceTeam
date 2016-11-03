@@ -6,9 +6,17 @@
 package co.edu.uniandes.sourceteam.festivalcine.test.logic;
 
 import co.edu.uniandes.sourceteam.festivalcine.api.ISalaLogic;
+import co.edu.uniandes.sourceteam.festivalcine.api.ISillaLogic;
+import co.edu.uniandes.sourceteam.festivalcine.api.ITeatroLogic;
 import co.edu.uniandes.sourceteam.festivalcine.ejbs.SalaLogic;
+import co.edu.uniandes.sourceteam.festivalcine.ejbs.SillaLogic;
+import co.edu.uniandes.sourceteam.festivalcine.ejbs.TeatroLogic;
 import co.edu.uniandes.sourceteam.festivalcine.entities.SalaEntity;
+import co.edu.uniandes.sourceteam.festivalcine.entities.SillaEntity;
+import co.edu.uniandes.sourceteam.festivalcine.entities.TeatroEntity;
 import co.edu.uniandes.sourceteam.festivalcine.persistence.SalaPersistence;
+import co.edu.uniandes.sourceteam.festivalcine.persistence.SillaPersistence;
+import co.edu.uniandes.sourceteam.festivalcine.persistence.TeatroPersistence;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
@@ -53,6 +61,7 @@ public class SalaLogicTest
      *
      */
     private List<SalaEntity> data = new ArrayList<SalaEntity>();
+    private List<SillaEntity> sillasData = new ArrayList<>();
 
     /**
      *
@@ -60,10 +69,18 @@ public class SalaLogicTest
     @Deployment
     public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
+                .addPackage(TeatroLogic.class.getPackage())
+                .addPackage(ITeatroLogic.class.getPackage())
+                .addPackage(TeatroPersistence.class.getPackage())
+                .addPackage(TeatroEntity.class.getPackage())
+                .addPackage(SalaPersistence.class.getPackage())
                 .addPackage(SalaLogic.class.getPackage())
                 .addPackage(ISalaLogic.class.getPackage())
-                .addPackage(SalaPersistence.class.getPackage())
-                .addPackage(SalaPersistence.class.getPackage())
+                .addPackage(SalaEntity.class.getPackage())
+                .addPackage(SillaLogic.class.getPackage())
+                .addPackage(ISillaLogic.class.getPackage())
+                .addPackage(SillaPersistence.class.getPackage())
+                .addPackage(SillaEntity.class.getPackage())
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
@@ -96,7 +113,9 @@ public class SalaLogicTest
      *
      */
     private void clearData() {
+        em.createQuery("delete from SillaEntity").executeUpdate();
         em.createQuery("delete from SalaEntity").executeUpdate();
+        em.createQuery("delete from TeatroEntity").executeUpdate();
     }
 
     /**
@@ -106,9 +125,20 @@ public class SalaLogicTest
      *
      */
     private void insertData() {
-
-        for (int i = 0; i < 6 ; i++) {
-            SalaEntity entity = factory.manufacturePojo(SalaEntity.class);
+        TeatroEntity teatro = factory.manufacturePojo(TeatroEntity.class);
+        em.persist(teatro);
+       for (int i = 0; i < 3; i++) 
+        {
+            SillaEntity sillaActual = factory.manufacturePojo(SillaEntity.class);
+            em.persist(sillaActual);
+            sillasData.add(sillaActual);
+        }
+        
+        for (int i = 0; i < 3; i++) 
+        {
+           SalaEntity entity = factory.manufacturePojo(SalaEntity.class);
+            entity.setTeatro(teatro);
+            entity.setSillas(sillasData);
             em.persist(entity);
             data.add(entity);
         }
@@ -118,7 +148,7 @@ public class SalaLogicTest
      * Prueba para crear un Company con un nombre que no existe
      */
     @Test
-    public void createSalaTest1() throws Exception 
+    public void createSalaTest1()
     {
         SalaEntity newEntity = factory.manufacturePojo(SalaEntity.class);
        
@@ -135,8 +165,8 @@ public class SalaLogicTest
     /**
      * Prueba para crear un Company con un nombre que ya existe
      */
-    @Test(expected = Exception.class)
-    public void createSalaTest2() throws Exception {
+    @Test
+    public void createSalaTest2(){
         SalaEntity newEntity = factory.manufacturePojo(SalaEntity.class);
         newEntity.setName(data.get(0).getName());
         SalaEntity result = salaLogic.createSala(newEntity);

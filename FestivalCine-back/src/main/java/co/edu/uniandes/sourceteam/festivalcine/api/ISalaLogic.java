@@ -16,7 +16,7 @@ public interface ISalaLogic
 {
     public List<SalaEntity> getSalas();
     public SalaEntity getSala(Long id);
-    public SalaEntity createSala(SalaEntity entity)throws Exception;
+    public SalaEntity createSala(SalaEntity entity);
     public SalaEntity updateSala(SalaEntity entity);
     public void deleteSala(Long id);
     

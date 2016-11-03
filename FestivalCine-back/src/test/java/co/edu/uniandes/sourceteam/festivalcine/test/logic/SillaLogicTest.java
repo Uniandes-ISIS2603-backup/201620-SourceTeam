@@ -114,7 +114,6 @@ public class SillaLogicTest {
      *
      */
     private void clearData() {
-        em.createQuery("delete from EmployeeEntity").executeUpdate();
         em.createQuery("delete from SillaEntity").executeUpdate();
         em.createQuery("delete from SalaEntity").executeUpdate();
     }
@@ -159,7 +158,8 @@ public class SillaLogicTest {
     public void createSillaTest2() throws Exception {
         SillaEntity dept = factory.manufacturePojo(SillaEntity.class);
         dept.setSala(fatherEntity);
-        dept.setName(sillaData.get(0).getName());
+        dept.setFila(sillaData.get(0).getFila());
+        dept.setNumero(sillaData.get(0).getNumero());
         SillaEntity result = sillaLogic.createSilla(sillaData.get(0).getSala().getId(), dept);
     }
     /**

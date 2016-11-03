@@ -186,11 +186,6 @@ public class SalaLogicTest
         //}
     //}
 
-    /**
-     * Prueba para consultar un Company
-     *
-     *
-     */
     @Test
     public void getSalaTest() {
         SalaEntity entity = data.get(0);

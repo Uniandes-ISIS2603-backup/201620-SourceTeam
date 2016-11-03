@@ -8,7 +8,6 @@ package co.edu.uniandes.sourceteam.festivalcine.ejbs;
 
 import co.edu.uniandes.sourceteam.festivalcine.api.IClienteLogic;
 import co.edu.uniandes.sourceteam.festivalcine.entities.ClienteEntity;
-import co.edu.uniandes.sourceteam.festivalcine.exceptions.BusinessLogicException;
 import co.edu.uniandes.sourceteam.festivalcine.persistence.ClientePersistence;
 import java.util.List;
 import javax.ejb.Stateless;

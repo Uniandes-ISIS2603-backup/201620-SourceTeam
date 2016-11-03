@@ -57,14 +57,8 @@ public class PeliculaLogic implements IPeliculaLogic
      *
      */
     @Override
-    public PeliculaEntity createPelicula(PeliculaEntity entity) throws Exception {
-        PeliculaEntity alreadyExist = getPeliculaByName(entity.getName());
-        if (alreadyExist != null) {
-            throw new Exception("Ya existe una pelicula con ese nombre");
-        } else
-        {
+    public PeliculaEntity createPelicula(PeliculaEntity entity) {
             persistence.create(entity);
-        }
         return entity;
     }
 

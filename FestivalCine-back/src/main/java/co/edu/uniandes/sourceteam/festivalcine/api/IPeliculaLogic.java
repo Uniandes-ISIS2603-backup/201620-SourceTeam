@@ -17,7 +17,7 @@ public interface IPeliculaLogic
 {
     public List<PeliculaEntity> getPeliculas();
     public PeliculaEntity getPelicula(Long id);
-    public PeliculaEntity createPelicula(PeliculaEntity entity)throws Exception;
+    public PeliculaEntity createPelicula(PeliculaEntity entity);
     public PeliculaEntity updatePelicula(PeliculaEntity entity);
     public PeliculaEntity getPeliculaByName(String nombre);
     public void deletePelicula(Long id);

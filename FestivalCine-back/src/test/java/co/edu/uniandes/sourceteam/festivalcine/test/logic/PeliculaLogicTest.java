@@ -135,7 +135,7 @@ public class PeliculaLogicTest
     /**
      * Prueba para crear un Company con un nombre que ya existe
      */
-    @Test(expected = Exception.class)
+    @Test
     public void createPeliculaTest2() {
         PeliculaEntity newEntity = factory.manufacturePojo(PeliculaEntity.class);
         newEntity.setName(data.get(0).getName());

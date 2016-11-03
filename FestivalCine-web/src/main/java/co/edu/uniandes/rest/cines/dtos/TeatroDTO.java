@@ -5,11 +5,14 @@
  */
 package co.edu.uniandes.rest.cines.dtos;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 
 /**
  * Objeto de transferencia de datos del teatro.
  * @author ba.bohorquez10
  */
+@XmlRootElement
 public class TeatroDTO 
 {
     /**
@@ -34,17 +37,24 @@ public class TeatroDTO
         
     }
     
-    /**
-     * Crea un nuevo teatro.
-     * @param pCiudad Ciudad donde se encuantra el teatro.
-     * @param pNombre Nombre del teatro.
-     * @param pId Id.
-     */
-    public TeatroDTO(Long pId, String pCiudad, String pNombre)
+    
+    public TeatroDTO(TeatroEntity entity)
     {
-        id = pId;
-        ciudad = pCiudad;
-        nombre = pNombre;
+        if(entity != null)
+        {
+            this.nombre = entity.getName();
+            this.id = entity.getId();
+            this.ciudad = entity.getCiudad();
+        }
+    }
+    
+    public TeatroEntity toEntity() 
+    {
+        TeatroEntity entity = new TeatroEntity();
+        entity.setName(this.getName());
+        entity.setId(this.getId());
+        
+        return entity;
     }
     
     /**

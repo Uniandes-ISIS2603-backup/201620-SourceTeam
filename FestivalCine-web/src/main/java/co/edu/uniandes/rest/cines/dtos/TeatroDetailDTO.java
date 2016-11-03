@@ -27,7 +27,7 @@ public class TeatroDetailDTO extends TeatroDTO
     
     public TeatroDetailDTO(TeatroDTO nuevo)
     {
-        super(nuevo.getId(), nuevo.getCiudad(), nuevo.getNombre() );
+        super(nuevo.getId(), nuevo.getCiudad(), nuevo.getNombre());
     }
     
     public List<SalaDTO> getSalas()

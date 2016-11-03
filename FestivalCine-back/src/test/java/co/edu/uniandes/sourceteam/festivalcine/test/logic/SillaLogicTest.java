@@ -114,7 +114,6 @@ public class SillaLogicTest {
      *
      */
     private void clearData() {
-        em.createQuery("delete from EmployeeEntity").executeUpdate();
         em.createQuery("delete from SillaEntity").executeUpdate();
         em.createQuery("delete from SalaEntity").executeUpdate();
     }

@@ -78,4 +78,13 @@ public class FuncionEntity extends BaseEntity implements Serializable
         sala = nSala;
     }
     
+    public List<BoletaEntity> getBoletas()
+    {
+        return boletas;
+    }
+    
+    public void setBoletas( List<BoletaEntity> n)
+    {
+        boletas = n;
+    }
 }

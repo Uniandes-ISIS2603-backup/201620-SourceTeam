@@ -97,7 +97,7 @@ public class CriticoResource {
      */
     @PUT
     @Path("{id: \\d+}")
-    public CriticoDetailDTO updateCritico(@PathParam("id") long id, CriticoDetailDTO critico) throws CriticoException{
+    public CriticoDetailDTO updateCritico(@PathParam("id") long id, CriticoDetailDTO critico) throws Exception{
         CriticoEntity entity = critico.toEntity();
         entity.setId(id);
         

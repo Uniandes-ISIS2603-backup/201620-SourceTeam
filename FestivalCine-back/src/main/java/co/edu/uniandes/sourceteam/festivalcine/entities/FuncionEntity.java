@@ -35,6 +35,10 @@ public class FuncionEntity extends BaseEntity implements Serializable
     private SalaEntity sala;
     
     @PodamExclude
+    @ManyToOne
+    private FestivalEntity festival;
+    
+    @PodamExclude
     @OneToMany(mappedBy = "funcion", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<BoletaEntity> boletas = new ArrayList<>();
     
@@ -78,4 +82,21 @@ public class FuncionEntity extends BaseEntity implements Serializable
         sala = nSala;
     }
     
+    public List<BoletaEntity> getBoletas()
+    {
+        return boletas;
+    }
+    
+    public void setBoletas( List<BoletaEntity> n)
+    {
+        boletas = n;
+    }
+    
+    public FestivalEntity getFestival(){
+        return this.festival;
+    }
+    
+    public void setFestival(FestivalEntity festival){
+        this.festival = festival;
+    }
 }

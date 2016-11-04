@@ -184,11 +184,15 @@ public class FestivalLogicTest {
     }
     
     @Test
-    public void updateFestivalTest() {
+    public void updateFestivalTest() throws Exception {
         FestivalEntity entity = data.get(0);
         FestivalEntity pojoEntity = factory.manufacturePojo(FestivalEntity.class);
 
         pojoEntity.setId(entity.getId());
+        if(pojoEntity.getDuracion() < 0)
+            pojoEntity.setDuracion(pojoEntity.getDuracion()*-1);
+        else if (pojoEntity.getDuracion() == 0)
+            pojoEntity.setDuracion(1);
 
         festivalLogic.updateFestival(pojoEntity);
 

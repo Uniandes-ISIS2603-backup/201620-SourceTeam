@@ -6,9 +6,15 @@
 package co.edu.uniandes.rest.cines.resources;
 
 import co.edu.uniandes.rest.cines.dtos.FuncionDTO;
+import co.edu.uniandes.rest.cines.dtos.FuncionDetailDTO;
 import co.edu.uniandes.rest.cines.exceptions.FuncionException;
 import co.edu.uniandes.rest.cines.mocks.FuncionMock;
+import co.edu.uniandes.sourceteam.festivalcine.api.IFuncionLogic;
+import co.edu.uniandes.sourceteam.festivalcine.entities.FuncionEntity;
+import java.util.ArrayList;
 import java.util.List;
+import javax.inject.Inject;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -16,78 +22,121 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.MediaType;
 
 /**
  *
  * @author ba.bohorquez10
  */
-@Path("teatros/{idTeatro: \\d+}/funciones")
-@Produces("application/json")
+@Consumes(MediaType.APPLICATION_JSON)
+@Produces(MediaType.APPLICATION_JSON)
+@Path("funcions/{idFuncion: \\d+}/funciones")
 public class FuncionResource 
 {
-    FuncionMock funciones = new FuncionMock();
+    
+    @Inject
+    private IFuncionLogic funcionLogic;
     
     /**
-     * Obtiene el listado de funciones.
-     * @return El listado de funciones.
-     * @throws FuncionException Si hay algun problema con el metodo.
+     * Convierte una lista de FuncionEntity a una lista de FuncionDetailDTO.
+     * 
+     * 
+     * @param entityList Lista de FuncionEntity a convertir
+     * @return Lista de FuncionDetailDTO convertida.
+     */
+    private List<FuncionDetailDTO> listEntity2DTO(List<FuncionEntity> entityList) 
+    {
+        List<FuncionDetailDTO> list = new ArrayList<>();
+        
+        for (FuncionEntity entity : entityList)
+        {
+            list.add( new FuncionDetailDTO(entity) );
+        }
+        
+        return list;
+    }
+    
+    
+    /**
+     * Obtiene la lista de registros de Funcion.
+     * 
+     * @return Colección de objetos de FuncionDetailDTO.
      */
     @GET
-    public List<FuncionDTO> getFunciones() throws FuncionException
+    public List<FuncionDetailDTO> getFunciones()
     {
-        return funciones.getFunciones();
+        return listEntity2DTO( funcionLogic.getFunciones() );
     }
     
     /**
-     * Obtiene la funcion con el id dado por parametro.
-     * @param id Id de la funcion a buscar.
-     * @return Funcion con el id dado.
-     * @throws FuncionException Si hay algun problema en el metodo.
+     * Obtiene los datos de una instancia Funcion a partir de su ID.
+     * @param id Identificador de la instancia a consultar.
+     * @return Intancia de FuncionDetailDTO con los datos de Funcion consultado.
      */
     @GET
-    @Path("{id: \\d+}")
-    public FuncionDTO getFuncion(@PathParam("id") Long id) throws FuncionException
+    @Path("{idFuncion: \\d+}")
+    public FuncionDetailDTO getFuncion(@PathParam("idFuncion") Long id) 
     {
-        return funciones.getFuncion(id);
+        return new FuncionDetailDTO( funcionLogic.getFuncion(id) );
+    }
+
+    /**
+     * Obtiene los datos de una instancia de Funcion a partir de su nombre.
+     * 
+     * @param name Nombre de la Funcion que se quiere buscar.
+     * 
+     * @return Instancia FuncionDetailDTO con el nombre dado.
+     * 
+     */
+    @GET
+    @Path("/name")
+    public FuncionDetailDTO getFuncionByName(@QueryParam("name") String name)
+    {
+        return new FuncionDetailDTO( funcionLogic.getFuncionByName(name) );
     }
     
     /**
-     * Crea una nueva funcion.
-     * @param nueva Nueva funcion.
-     * @return La funcion creada.
-     * @throws FuncionException 
+     * Crea una Funcion en la base de datos.
+     * 
+     * @param dto Objeto de FuncionDetailDTO con los nuevos datos.
+     * @return Objeto de FuncionDetailDTO con los nuevos datos y su respectivo id.
+     * 
+     * @throws Exception Si el funcion que se quiere crear ya existe o hay 
+     * un funcion con el mismo nombre.
      */
     @POST
-    public FuncionDTO createFuncion(FuncionDTO nueva) throws FuncionException
+    public FuncionDetailDTO createFuncion(FuncionDetailDTO dto) throws Exception
     {
-        return funciones.createFuncion(nueva);
+        return new FuncionDetailDTO( funcionLogic.createFuncion( dto.toEntity() ) );
     }
     
     /**
-     * Modifica una funcion existente.
-     * @param id Id de la funcion a modificar.
-     * @param nueva Funcion con la informacion que se quiere actualizar.
-     * @return Funcion actualizada.
-     * @throws FuncionException Si hay algun problema en el metodo.
+     * Actualiza la información de una instancia Funcion.
+     * 
+     * @param id Identificador de la instancia Funcion a modificar.
+     * @param dto Intancia FuncionDetailDTO con los nuevos datos.
+     * @return Intancia de FuncionDetailDTO con los datos actualizados.
      */
     @PUT
     @Path("{id: \\d+}")
-    public FuncionDTO updateFuncion(@PathParam("id") Long id, FuncionDTO nueva) throws FuncionException
+    public FuncionDetailDTO updateFuncion(@PathParam("id") Long id, FuncionDetailDTO dto) 
     {
-        return funciones.updateFuncion(id, nueva);
+        FuncionEntity entity = dto.toEntity();
+        entity.setId(id);
+        return new FuncionDetailDTO( funcionLogic.updateFuncion(entity) );
     }
     
     /**
-     * Elimina la funcion con el id dado.
-     * @param id Id de la funcion que se quiere eliminar.
-     * @return 
-     * @throws FuncionException Si hay algun problema en el metodo.
+     * Elimina una instancia de Funcion de la base de datos.
+     * 
+     * @param id Identificador de la instancia a eliminar.
      */
     @DELETE
     @Path("{id: \\d+}")
-    public FuncionDTO deleteFuncion(@PathParam("id") Long id) throws FuncionException
+    public void deleteFuncion(@PathParam("id") Long id) 
     {
-        return funciones.deleteFuncion(id);
+        funcionLogic.deleteFuncion(id);
     }
     
 }

@@ -38,7 +38,12 @@ public class FestivalLogic implements IFestivalLogic {
        FestivalEntity alreadyExist = getFestivalByName(entity.getName());
         if (alreadyExist != null) {
             throw new Exception("Ya existe una festival con ese nombre");
-        } else
+        }
+        else if(entity.getDuracion() < 1)
+        {
+            throw new Exception("La duración debe ser mayor o iguala  un día.");
+        }
+        else
         {
             persistence.create(entity);
         }
@@ -46,7 +51,16 @@ public class FestivalLogic implements IFestivalLogic {
     }
 
     @Override
-    public FestivalEntity updateFestival(FestivalEntity entity) {
+    public FestivalEntity updateFestival(FestivalEntity entity) throws Exception {
+        FestivalEntity alreadyExist = getFestivalByName(entity.getName());
+        if(alreadyExist != null)
+        {
+            throw new Exception("Ya existe una festival con ese nombre");
+        }
+        else if(entity.getDuracion() < 1)
+        {
+            throw new Exception("La duración debe ser mayor o iguala  un día.");
+        }            
        return persistence.update(entity);
     }
 

@@ -82,6 +82,8 @@ public class CriticoLogic implements ICriticoLogic {
      */
     @Override
     public CriticoEntity createCritico(CriticoEntity entity) throws Exception {
+        if(entity.getDuracion() <=0)
+            throw new Exception("La duracion debe ser mayor a 0");
         persistence.create(entity);
         return entity;
     }
@@ -94,7 +96,9 @@ public class CriticoLogic implements ICriticoLogic {
      * 
      */
     @Override
-    public CriticoEntity updateCritico(CriticoEntity entity) {
+    public CriticoEntity updateCritico(CriticoEntity entity) throws Exception {
+        if(entity.getDuracion() <= 0)
+            throw new Exception("La duracion debe ser mayor a 0.");
         return persistence.update(entity);
     }
 

@@ -33,7 +33,7 @@ public interface IFestivalLogic {
     public List<FestivalEntity> getFestivales();
     public FestivalEntity getFestival(Long festivalid);
     public FestivalEntity createFestival(FestivalEntity entity) throws Exception;
-    public FestivalEntity updateFestival(FestivalEntity entity);
+    public FestivalEntity updateFestival(FestivalEntity entity) throws Exception;
     public void deleteFestival(Long id);
     public List<CriticoEntity> listCriticos(Long festivalId);
     public CriticoEntity addCritico(Long festivalId, Long criticoId);

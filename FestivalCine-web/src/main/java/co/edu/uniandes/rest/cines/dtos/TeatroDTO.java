@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * 
  */
 package co.edu.uniandes.rest.cines.dtos;
 
@@ -28,7 +26,7 @@ public class TeatroDTO
     /**
      * Nombre del teatro.
      */
-    private String nombre;
+    private String name;
         
     /**
      * 
@@ -43,7 +41,7 @@ public class TeatroDTO
     {
         if(entity != null)
         {
-            this.nombre = entity.getName();
+            this.name = entity.getName();
             this.id = entity.getId();
             this.ciudad = entity.getCiudad();
         }
@@ -52,8 +50,10 @@ public class TeatroDTO
     public TeatroEntity toEntity() 
     {
         TeatroEntity entity = new TeatroEntity();
+        
         entity.setName(this.getNombre());
         entity.setId(this.getId());
+        entity.setCiudad(this.getCiudad() );
         
         return entity;
     }
@@ -73,7 +73,7 @@ public class TeatroDTO
      */
     public String getNombre()
     {
-        return nombre;
+        return name;
     }
     
     public Long getId()
@@ -87,7 +87,7 @@ public class TeatroDTO
      */
     public void setNombre(String pNombre)
     {
-        nombre = pNombre;
+        name = pNombre;
     }
     
     /**
@@ -111,6 +111,6 @@ public class TeatroDTO
     @Override
     public String toString()
     {
-        return "{ nombre:" + nombre + ", ciudad:" + ciudad + "}";
+        return "{ nombre:" + name + ", ciudad:" + ciudad + "}";
     }
 }

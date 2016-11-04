@@ -31,7 +31,7 @@ public interface ICriticoLogic {
     public List<CriticoEntity> getCriticos();
     public CriticoEntity getCritico(Long id);
     public CriticoEntity createCritico( CriticoEntity entity) throws Exception;
-    public CriticoEntity updateCritico(CriticoEntity entity);
+    public CriticoEntity updateCritico(CriticoEntity entity) throws Exception;
     public CriticoEntity findByName(String name);
     public void deleteCritico(Long id);
 

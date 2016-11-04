@@ -107,6 +107,10 @@ public class CriticoLogicTest {
     @Test
     public void createCriticoTest() throws Exception{
         CriticoEntity newEntity = factory.manufacturePojo(CriticoEntity.class);
+        if(newEntity.getDuracion() < 0)
+            newEntity.setDuracion(newEntity.getDuracion()*-1);
+        else if(newEntity.getDuracion() == 0)
+            newEntity.setDuracion(1);
         CriticoEntity result = criticoLogic.createCritico( newEntity);
         Assert.assertNotNull(result);
         CriticoEntity entity = em.find(CriticoEntity.class, result.getId());
@@ -154,13 +158,19 @@ public class CriticoLogicTest {
     }
     
         @Test
-    public void updateCriticoTest() {
+    public void updateCriticoTest() throws Exception{
         CriticoEntity entity = criticoData.get(0);
         CriticoEntity pojoEntity = factory.manufacturePojo(CriticoEntity.class);
 
         pojoEntity.setId(entity.getId());
+        
+        if(pojoEntity.getDuracion() < 0)
+            pojoEntity.setDuracion(pojoEntity.getDuracion()*-1);
+        else if(pojoEntity.getDuracion() == 0)
+            pojoEntity.setDuracion(1);
 
         criticoLogic.updateCritico( pojoEntity);
+
 
         CriticoEntity resp = em.find(CriticoEntity.class, entity.getId());
 

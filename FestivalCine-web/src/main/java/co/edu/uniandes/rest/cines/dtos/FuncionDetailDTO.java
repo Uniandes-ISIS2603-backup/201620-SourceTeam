@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.annotation.XmlRootElement;
 import uk.co.jemos.podam.common.PodamExclude;
-
 /**
  *
  * @author ba.bohorquez10
@@ -20,15 +19,12 @@ import uk.co.jemos.podam.common.PodamExclude;
 @XmlRootElement
 public class FuncionDetailDTO extends FuncionDTO
 {
-    @PodamExclude
     private PeliculaDTO pelicula;
     
-    @PodamExclude
     private SalaDTO sala;
     
     private List<BoletaDTO> boletas = new ArrayList<>();
     
-    @PodamExclude
     private FestivalDTO festival;
     
     public FuncionDetailDTO()
@@ -57,7 +53,9 @@ public class FuncionDetailDTO extends FuncionDTO
            this.boletas.add( new BoletaDTO(boleta) );
        }
        
-       if(entity.)
+       if(entity.getFestival() != null){
+           this.festival  = new FestivalDTO(entity.getFestival());
+       }
     }
     
     @Override

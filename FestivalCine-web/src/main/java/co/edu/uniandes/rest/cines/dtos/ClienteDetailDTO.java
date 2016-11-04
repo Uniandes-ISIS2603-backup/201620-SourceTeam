@@ -17,7 +17,7 @@ import java.util.List;
 public class ClienteDetailDTO extends ClienteDTO{
    
     // relación  cero o muchos boletas 
-    private List<BoletaDTO> reviews = new ArrayList<>();
+    private List<BoletaDTO> boletas = new ArrayList<>();
     
         
     
@@ -39,14 +39,14 @@ public class ClienteDetailDTO extends ClienteDTO{
      * @return the boleta
      */
     public List<BoletaDTO> getReviews() {
-        return reviews;
+        return boletas;
     }
 
     /**
      * @param reviews the boleta to set
      */
     public void setReviews(List<BoletaDTO> reviews) {
-        this.reviews = reviews;
+        this.boletas = reviews;
     }
 
     

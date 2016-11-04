@@ -31,14 +31,12 @@ public class SalaMock {
 
         
     	if (salas == null) {
-                try {
+               
                     salas = new ArrayList<>();
-                    createSala(new SalaDTO(0L, 1, 30 ,15, 15, Boolean.TRUE));
-                    createSala(new SalaDTO(0L, 2, 30, 15, 15, Boolean.TRUE));
-                    createSala(new SalaDTO(0L, 3, 30, 15, 15, Boolean.TRUE));
-                } catch (SalaException ex) {
-                    Logger.getLogger(SalaMock.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                    //createSala(new SalaDTO(0L, 1, 30 ,15, 15, Boolean.TRUE));
+                    //createSala(new SalaDTO(0L, 2, 30, 15, 15, Boolean.TRUE));
+                    //createSala(new SalaDTO(0L, 3, 30, 15, 15, Boolean.TRUE));
+               
         }
         
     	// indica que se muestren todos los mensajes

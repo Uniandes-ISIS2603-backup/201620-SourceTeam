@@ -4,7 +4,8 @@
  * and open the template in the editor.
  */
 package co.edu.uniandes.rest.cines.dtos;
-
+import co.edu.uniandes.sourceteam.festivalcine.entities.CriticoEntity;
+import co.edu.uniandes.sourceteam.festivalcine.entities.SalaEntity;
 /**
  *
  * @author ya.bejarano10
@@ -27,28 +28,32 @@ public class SalaDTO
         */
     }
 
-    /**
-     * Constructor con parámetros.
-     * @param numSal numero de la sala
-     * @param numS numero de sillas
-     * @param numSillasG numero de sillas generales
-     * @param numSillasP numero de sillas preferenciales
-     * @param esF la sala es festival o no
-     */
-    public SalaDTO(Long id, int numSal, int numS, int numSillasG, int numSillasP, Boolean esF)
-    {
-                super();
-                this.id = id;
-                this.numSala = numSal;
-		this.numSillas = numS;
-		this.numSillasGenerales = numSillasG;
-                this.numSillasPreferenciales = numSillasP;
-                this.esFestival = esF;
+    public SalaDTO(SalaEntity entity){
+        if(entity != null)
+        {
+            this.id = entity.getId();
+        
+            this.numSala = entity.getNumSala();
+            this.numSillas = entity.getNumSillas();
+            this.numSillasGenerales = entity.getNumSillasGenerales();
+            this.numSillasPreferenciales = entity.getNumSillasPreferenciales();
+        }
+                
     }
 
     /**
      * @return el numero de la sala
      */
+    
+    public SalaEntity toEntity(){
+        SalaEntity entity = new SalaEntity();
+        entity.setId(this.getId());
+        entity.setNumSala(this.getNumSala());
+        entity.setNumSillas(this.getNumSillas());
+        entity.setNumSillasGenerales(this.getNumSillasGenerales());
+        entity.setNumSillasPreferenciales(this.getNumSillasPreferenciales());
+        return entity;
+    }
     public Long getId()
     {
         return id;

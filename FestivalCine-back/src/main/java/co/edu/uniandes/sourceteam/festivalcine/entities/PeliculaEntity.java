@@ -31,6 +31,14 @@ public class PeliculaEntity extends BaseEntity implements Serializable
     private int duracion;
     private String pais;
     
+    public List<FuncionEntity> getFunciones()
+    {
+        return funciones;
+    }
+    public void setFunciones(List<FuncionEntity> fun)
+    {
+        funciones = fun;
+    }
     public String getNombre()
     {
         return  nombre;

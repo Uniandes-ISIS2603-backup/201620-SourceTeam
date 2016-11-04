@@ -99,4 +99,5 @@ public class FuncionEntity extends BaseEntity implements Serializable
     public void setFestival(FestivalEntity festival){
         this.festival = festival;
     }
+
 }

@@ -1,16 +1,17 @@
-
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * 
  */
 package co.edu.uniandes.rest.cines.dtos;
+
+import co.edu.uniandes.sourceteam.festivalcine.entities.TeatroEntity;
+import javax.xml.bind.annotation.XmlRootElement;
 
 
 /**
  * Objeto de transferencia de datos del teatro.
  * @author ba.bohorquez10
  */
+@XmlRootElement
 public class TeatroDTO 
 {
     /**
@@ -25,7 +26,7 @@ public class TeatroDTO
     /**
      * Nombre del teatro.
      */
-    private String nombre;
+    private String name;
         
     /**
      * 
@@ -35,17 +36,26 @@ public class TeatroDTO
         
     }
     
-    /**
-     * Crea un nuevo teatro.
-     * @param pCiudad Ciudad donde se encuantra el teatro.
-     * @param pNombre Nombre del teatro.
-     * @param pId Id.
-     */
-    public TeatroDTO(Long pId, String pCiudad, String pNombre)
+    
+    public TeatroDTO(TeatroEntity entity)
     {
-        id = pId;
-        ciudad = pCiudad;
-        nombre = pNombre;
+        if(entity != null)
+        {
+            this.name = entity.getName();
+            this.id = entity.getId();
+            this.ciudad = entity.getCiudad();
+        }
+    }
+    
+    public TeatroEntity toEntity() 
+    {
+        TeatroEntity entity = new TeatroEntity();
+        
+        entity.setName(this.getNombre());
+        entity.setId(this.getId());
+        entity.setCiudad(this.getCiudad() );
+        
+        return entity;
     }
     
     /**
@@ -63,7 +73,7 @@ public class TeatroDTO
      */
     public String getNombre()
     {
-        return nombre;
+        return name;
     }
     
     public Long getId()
@@ -77,7 +87,7 @@ public class TeatroDTO
      */
     public void setNombre(String pNombre)
     {
-        nombre = pNombre;
+        name = pNombre;
     }
     
     /**
@@ -101,6 +111,6 @@ public class TeatroDTO
     @Override
     public String toString()
     {
-        return "{ nombre:" + nombre + ", ciudad:" + ciudad + "}";
+        return "{ nombre:" + name + ", ciudad:" + ciudad + "}";
     }
 }

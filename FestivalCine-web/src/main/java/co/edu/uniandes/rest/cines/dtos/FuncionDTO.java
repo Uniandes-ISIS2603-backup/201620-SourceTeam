@@ -5,42 +5,21 @@
  */
 package co.edu.uniandes.rest.cines.dtos;
 
-import java.io.Console;
+import co.edu.uniandes.sourceteam.festivalcine.entities.FuncionEntity;
 import java.util.Date;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * Objeto de transferencia de datos de Funcion.
  * @author ba.bohorquez10
  */
-public class FuncionDTO 
+@XmlRootElement
+public class FuncionDTO
 {
-    /**
-     * Identificador unico de la funcion.
-     */
     private Long id;
-        
-    /**
-     * Fecha de la funcion.
-     */
+    private String name;
     private Date dia;
-    
-    /**
-     * Crítico de la funcion.
-     */
-    private CriticoDTO critico;
-        
-    private int precio;
-    
-    /**
-     * Crítico de la funcion.
-     */
-    private PeliculaDTO pelicula;
-        
-    /**
-     * Sala de la funcion.
-     */
-    private SalaDTO sala;
-        
+    private double precio;
     
     /**
      * 
@@ -50,123 +29,59 @@ public class FuncionDTO
         
     }
     
-    /**
-     * Constructor de la funcion.
-     * @param pId Id de la funcion.
-     * @param pPrecio Precio de la funcion.
-     * @param pDia Fecha de la funcion.
-     * @param pelicula
+    public FuncionDTO(FuncionEntity entity)
+    {
+        if (entity != null) 
+        {
+            this.name = entity.getName();
+            this.id = entity.getId();
+            this.dia = entity.getDia();
+            this.precio = entity.getPrecio();
+        }
+    }
+    
+    public FuncionEntity toEntity() 
+    {
+        FuncionEntity entity = new FuncionEntity();
+        
+        entity.setName( this.getName() );
+        entity.setId( this.getId() );
+        entity.setDia( this.getDia() );
+        entity.setPrecio( this.getPrecio() );
+        
+        return entity;
+    }
 
-     */
-    public FuncionDTO(Long pId, Date pDia, PeliculaDTO pelicula, SalaDTO sala, int precio)
-    {
-        id = pId;
-        dia = pDia;
-        this.pelicula = pelicula;
-        this.sala = sala;
-        this.precio = precio;
-    }
-    
-    public void setPrecio(int pPrecio)
-    {
-        this.precio = pPrecio;
-    }
-    
-    public int getPrecio()
-    {
-        return precio;
-    }
-    
-    
-    /**
-     * Retorna el id de la funcion.
-     * @return Id de la funcion.
-     */
-    public Long getId()
-    {
+    public Long getId() {
         return id;
     }
-    
-    
-    /**
-     * Retorna la fecha de la funcion.
-     * @return Fecha de la funcion.
-     */
-    public Date getDia()
-    {
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Date getDia() {
         return dia;
     }
-    
-    /**
-     * Retorna el critico de la funcion.
-     * @return Critico de la funcion.
-     */
-    public CriticoDTO getCritico()
-    {
-        return critico;
+
+    public void setDia(Date dia) {
+        this.dia = dia;
     }
-    
-    /**
-     * Retorna la sala de la funcion.
-     * @return Sala de la funcion.
-     */
-    public SalaDTO getSala()
-    {
-        return sala;
+
+    public double getPrecio() {
+        return precio;
     }
-    
-    
-    /**
-     * Cambia el id de la funcion.
-     * @param pId Nuevo id.
-     */
-    public void setId(Long pId)
-    {
-        id = pId;
-    }
-    
-    /**
-     * Cambia el critico de la funcion.
-     * @param critico Nuevo precio.
-     */
-    public void setPrecio(CriticoDTO critico)
-    {
-        this.critico = critico;
-    }
-    
-        /**
-     * Cambia la pelicula de la funcion.
-     * @param pelicula Nuevo precio.
-     */
-    public void setPelicula(PeliculaDTO pelicula)
-    {
-        this.pelicula = pelicula;
-    }
-    
-     /**
-     * Retorna la pelicula de la funcion.
-     */
-    public PeliculaDTO getPelicula()
-    {
-        return this.pelicula;
-    }
-    
-    
-     /**
-     * Retorna la sala de la funcion.
-     */
-    public void setSala(SalaDTO sala)
-    {
-        this.sala = sala;
-    }
-    
-    /**
-     * Cambia la fecha de la funcion.
-     * @param pDia Nueva fecha.
-     */
-    public void setDia(Date pDia)
-    {
-        dia = pDia;
+
+    public void setPrecio(double precio) {
+        this.precio = precio;
     }
     
     @Override

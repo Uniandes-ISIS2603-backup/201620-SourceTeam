@@ -5,10 +5,13 @@
  */
 package co.edu.uniandes.rest.cines.resources;
 
-import co.edu.uniandes.rest.cines.dtos.TeatroDTO;
-import co.edu.uniandes.rest.cines.exceptions.TeatroException;
-import co.edu.uniandes.rest.cines.mocks.TeatroMock;
+import co.edu.uniandes.rest.cines.dtos.TeatroDetailDTO;
+import co.edu.uniandes.sourceteam.festivalcine.api.ITeatroLogic;
+import co.edu.uniandes.sourceteam.festivalcine.entities.TeatroEntity;
+import java.util.ArrayList;
 import java.util.List;
+import javax.inject.Inject;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -16,73 +19,120 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.MediaType;
 
 /**
  *
  * @author ba.bohorquez10
  */
+@Consumes(MediaType.APPLICATION_JSON)
+@Produces(MediaType.APPLICATION_JSON)
 @Path("teatros")
-@Produces("application/json")
 public class TeatroResource 
 {
-    TeatroMock teatros = new TeatroMock();
+    
+    @Inject
+    private ITeatroLogic teatroLogic;
     
     /**
-     * Obtiene el listado de teatros.
-     * @return Listado de teatros.
-     * @throws TeatroException Si ocurre algun problema en el metodo.
+     * Convierte una lista de TeatroEntity a una lista de TeatroDetailDTO.
+     * 
+     * 
+     * @param entityList Lista de TeatroEntity a convertir
+     * @return Lista de TeatroDetailDTO convertida.
+     */
+    private List<TeatroDetailDTO> listEntity2DTO(List<TeatroEntity> entityList) 
+    {
+        List<TeatroDetailDTO> list = new ArrayList<>();
+        
+        for (TeatroEntity entity : entityList)
+        {
+            list.add( new TeatroDetailDTO(entity) );
+        }
+        
+        return list;
+    }
+    
+    
+    /**
+     * Obtiene la lista de registros de Teatro.
+     * 
+     * @return Colección de objetos de TeatroDetailDTO.
      */
     @GET
-    public List<TeatroDTO>getTeatros() throws TeatroException
+    public List<TeatroDetailDTO> getTeatros()
     {
-        return teatros.getTeatros();
+        return listEntity2DTO( teatroLogic.getTeatros() );
     }
     
     /**
-     * Obtiene el teatro con el nombre que ingresa por parametro en el path.
-     * @param id Nombre del teatro que se quiere buscar.
-     * @return Teatro con el nombre dado.
-     * @throws TeatroException Si hay algun problema en el metodo.
+     * Obtiene los datos de una instancia Teatro a partir de su ID.
+     * @param id Identificador de la instancia a consultar.
+     * @return Intancia de TeatroDetailDTO con los datos del Teatro consultado.
      */
     @GET
     @Path("{idTeatro: \\d+}")
-    public TeatroDTO getTeatro(@PathParam("idTeatro") Long id) throws TeatroException {
-        return teatros.getTeatro(id);
+    public TeatroDetailDTO getTeatro(@PathParam("idTeatro") Long id) 
+    {
+        return new TeatroDetailDTO( teatroLogic.getTeatro(id) );
     }
 
     /**
-     * Crea un nuevo teatro a partir del DTO que ingresa por parametro.
-     * @param nuevo Nuevo teatro.
-     * @return Teatro creado.
-     * @throws TeatroException si hay algun problema con el metodo. 
+     * Obtiene los datos de una instancia de Teatro a partir de su nombre.
+     * 
+     * @param name Nombre del Teatro que se quiere buscar.
+     * 
+     * @return instancia TeatroDetailDTO con el nombre dado.
+     * 
+     */
+    @GET
+    @Path("/name")
+    public TeatroDetailDTO getTeatroByName(@QueryParam("name") String name)
+    {
+        return new TeatroDetailDTO( teatroLogic.getTeatroByName(name) );
+    }
+    
+    /**
+     * Crea un Teatro en la base de datos.
+     * 
+     * @param dto Objeto de TeatroDetailDTO con los nuevos datos.
+     * @return Objeto de TeatroDetailDTO con los nuevos datos y su respectivo id.
+     * 
+     * @throws Exception Si el teatro que se quiere crear ya existe o hay 
+     * un teatro con el mismo nombre.
      */
     @POST
-    public TeatroDTO createTeatro(TeatroDTO nuevo) throws TeatroException
+    public TeatroDetailDTO createTeatro(TeatroDetailDTO dto) throws Exception
     {
-        return teatros.createTeatro(nuevo);
+        return new TeatroDetailDTO( teatroLogic.createTeatro( dto.toEntity() ) );
     }
     
     /**
-     * Modifica el teatro con el nombre que ingresa por parametro en el path.
-     * @param id Nombre del teatro a modificar.
-     * @param nuevo DTO con la informacion de las modificaciones que se quieren realizar.
-     * @return Teatro modificado.
-     * @throws TeatroException Si hay algun problema en el metodo.
+     * Actualiza la información de una instancia Teatro.
+     * 
+     * @param id Identificador de la instancia Teatro a modificar.
+     * @param dto Intancia TeatroDetailDTO con los nuevos datos.
+     * @return Intancia de TeatroDetailDTO con los datos actualizados.
      */
     @PUT
-    @Path("{idTeatro: \\d+}")
-    public TeatroDTO updateTeatro(@PathParam("idTeatro") Long id, TeatroDTO nuevo) throws TeatroException {
-        return teatros.updateTeatro(id, nuevo);
+    @Path("{id: \\d+}")
+    public TeatroDetailDTO updateTeatro(@PathParam("id") Long id, TeatroDetailDTO dto) 
+    {
+        TeatroEntity entity = dto.toEntity();
+        entity.setId(id);
+        return new TeatroDetailDTO( teatroLogic.updateTeatro(entity) );
     }
     
     /**
-     * Elimina el teatro con el nombre que ingresa por parametro en el path.
-     * @param id Nombre del teatro que se quiere eliminar.
-     * @throws TeatroException Si hay algun problema en el metodo.
+     * Elimina una instancia de Teatro de la base de datos.
+     * 
+     * @param id Identificador de la instancia a eliminar.
      */
     @DELETE
-    @Path("{idTeatro: \\d+}")
-    public TeatroDTO deleteTeatro(@PathParam("idTeatro") Long id) throws TeatroException {
-    	return teatros.deleteTeatro(id);
+    @Path("{id: \\d+}")
+    public void deleteTeatro(@PathParam("id") Long id) 
+    {
+        teatroLogic.deleteTeatro(id);
     }
 }

@@ -37,10 +37,10 @@ public class TeatroMock
         if(teatros == null)
         {
             teatros = new ArrayList<>();
-            teatros.add( new TeatroDTO(1L, "Bogota", "Embajador") );
-            teatros.add( new TeatroDTO(2L, "Bogota", "Greco") );
-            teatros.add( new TeatroDTO(3L, "Springfield", "Azteca") );
-            teatros.add( new TeatroDTO(4L, "Bogota", "Cinemateca") );
+            //teatros.add( new TeatroDTO(1L, "Bogota", "Embajador") );
+            //teatros.add( new TeatroDTO(2L, "Bogota", "Greco") );
+            //teatros.add( new TeatroDTO(3L, "Springfield", "Azteca") );
+            //teatros.add( new TeatroDTO(4L, "Bogota", "Cinemateca") );
         }
         
         // indica que se muestren todos los mensajes

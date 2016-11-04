@@ -30,6 +30,8 @@ public class FuncionDetailDTO extends FuncionDTO
     
     @PodamExclude
     private FestivalDTO festival;
+
+    
     
     public FuncionDetailDTO()
     {
@@ -57,7 +59,10 @@ public class FuncionDetailDTO extends FuncionDTO
            this.boletas.add( new BoletaDTO(boleta) );
        }
        
-       if(entity.)
+       if(entity.getFestival() != null)
+       {
+           this.festival = new FestivalDTO(entity.getFestival());
+       }
     }
     
     @Override
@@ -107,5 +112,12 @@ public class FuncionDetailDTO extends FuncionDTO
         this.boletas = boletas;
     }
     
+    public FestivalDTO getFestival() {
+        return festival;
+    }
+
+    public void setFestival(FestivalDTO festival) {
+        this.festival = festival;
+    }
     
 }

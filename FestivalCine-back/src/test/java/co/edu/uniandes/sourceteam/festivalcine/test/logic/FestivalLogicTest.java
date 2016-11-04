@@ -120,6 +120,8 @@ public class FestivalLogicTest {
             d.setFestival(newEntity);
         }
 
+        if(newEntity.getDuracion() <= 0)
+            newEntity.setDuracion(1);
         FestivalEntity result = festivalLogic.createFestival(newEntity);
         Assert.assertNotNull(result);
 

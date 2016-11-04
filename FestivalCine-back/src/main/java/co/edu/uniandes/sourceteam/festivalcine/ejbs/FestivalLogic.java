@@ -6,7 +6,9 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import co.edu.uniandes.sourceteam.festivalcine.api.IFestivalLogic;
+import co.edu.uniandes.sourceteam.festivalcine.api.IFuncionLogic;
 import co.edu.uniandes.sourceteam.festivalcine.entities.CriticoEntity;
+import co.edu.uniandes.sourceteam.festivalcine.entities.FuncionEntity;
 import co.edu.uniandes.sourceteam.festivalcine.persistence.FestivalPersistence;
 
 @Stateless
@@ -17,6 +19,9 @@ public class FestivalLogic implements IFestivalLogic {
 
     @Inject 
     private ICriticoLogic criticosLogic;
+    
+    @Inject 
+    private IFuncionLogic funcionLogic;
     
     @Override
     public List<FestivalEntity> getFestivales() {
@@ -82,6 +87,47 @@ public class FestivalLogic implements IFestivalLogic {
     
     @Override
     public void removeCritico(Long festivalId, Long criticoId) {
+        FestivalEntity festival = persistence.find(festivalId);
+        List<CriticoEntity> list = festival.getCriticos();
+        for(int i = 0; i < list.size(); i++){
+            if(list.get(i).getId() == criticoId)
+            {
+                list.get(i).setFestival(null);
+                break;
+            }
+        }
+    }
+    
+    
+    
+    
+    
+    @Override
+    public List<FuncionEntity> listFunciones(Long festivalId) {
+        return persistence.find(festivalId).getFunciones();
+    }
+
+    @Override
+    public FuncionEntity getFuncion(Long festivalId, Long funcionId) {
+        List<FuncionEntity> list = persistence.find(festivalId).getFunciones();
+        for(int i = 0; i < list.size(); i++){
+            if(list.get(i).getId() == funcionId){
+                return list.get(i);
+            }
+        }
+        return null;
+    }
+    
+    @Override
+    public FuncionEntity addFuncion(Long festivalId, Long funcionId) {
+        FestivalEntity festivalEntity = persistence.find(festivalId);
+        FuncionEntity funcionEntity = funcionLogic.getFuncion(funcionId);
+ //       funcionEntity.set(festivalEntity);
+        return funcionEntity;
+    }
+    
+    @Override
+    public void removeFuncion(Long festivalId, Long criticoId) {
         FestivalEntity festival = persistence.find(festivalId);
         List<CriticoEntity> list = festival.getCriticos();
         for(int i = 0; i < list.size(); i++){

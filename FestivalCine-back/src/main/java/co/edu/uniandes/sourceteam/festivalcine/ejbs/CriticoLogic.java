@@ -25,6 +25,7 @@ package co.edu.uniandes.sourceteam.festivalcine.ejbs;
 
 import co.edu.uniandes.sourceteam.festivalcine.api.ICriticoLogic;
 import co.edu.uniandes.sourceteam.festivalcine.entities.CriticoEntity;
+import co.edu.uniandes.sourceteam.festivalcine.entities.FuncionEntity;
 import co.edu.uniandes.sourceteam.festivalcine.persistence.CriticoPersistence;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -106,6 +107,11 @@ public class CriticoLogic implements ICriticoLogic {
     @Override
     public void deleteCritico(Long id) {
         persistence.delete(id);
+    }
+
+    @Override
+    public FuncionEntity getFuncion(Long funcionId) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
   

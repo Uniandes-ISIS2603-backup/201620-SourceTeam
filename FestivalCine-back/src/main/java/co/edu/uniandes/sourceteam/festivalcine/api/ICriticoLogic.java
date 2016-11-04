@@ -24,6 +24,7 @@ SOFTWARE.
 package co.edu.uniandes.sourceteam.festivalcine.api;
 
 import co.edu.uniandes.sourceteam.festivalcine.entities.CriticoEntity;
+import co.edu.uniandes.sourceteam.festivalcine.entities.FuncionEntity;
 import java.util.List;
 
 public interface ICriticoLogic {
@@ -33,4 +34,6 @@ public interface ICriticoLogic {
     public CriticoEntity updateCritico(CriticoEntity entity);
     public CriticoEntity findByName(String name);
     public void deleteCritico(Long id);
+
+    public FuncionEntity getFuncion(Long funcionId);
 }

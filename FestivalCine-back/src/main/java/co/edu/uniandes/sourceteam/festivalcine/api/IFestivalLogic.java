@@ -25,6 +25,7 @@ package co.edu.uniandes.sourceteam.festivalcine.api;
 
 import co.edu.uniandes.sourceteam.festivalcine.entities.CriticoEntity;
 import co.edu.uniandes.sourceteam.festivalcine.entities.FestivalEntity;
+import co.edu.uniandes.sourceteam.festivalcine.entities.FuncionEntity;
 import java.util.List;
 
 public interface IFestivalLogic {
@@ -39,4 +40,8 @@ public interface IFestivalLogic {
     public void removeCritico(Long festivalId, Long criticoId);
     public CriticoEntity getCritico(Long festivalId, Long criticoId);
     public FestivalEntity getFestivalByName(String name);
+    public List<FuncionEntity> listFunciones(Long festivalId);
+    public FuncionEntity addFuncion(Long festivalId, Long funcionId);
+    public void removeFuncion(Long festivalId, Long funcionId);
+    public FuncionEntity getFuncion(Long festivalId, Long funcionId);
 }

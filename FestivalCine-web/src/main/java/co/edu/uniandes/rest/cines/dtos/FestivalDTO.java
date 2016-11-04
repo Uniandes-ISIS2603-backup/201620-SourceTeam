@@ -5,12 +5,16 @@
  */
 package co.edu.uniandes.rest.cines.dtos;
 
+import co.edu.uniandes.sourceteam.festivalcine.entities.FestivalEntity;
 import java.util.ArrayList;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author s.ardila13
- */public class FestivalDTO {
+ */
+@XmlRootElement
+public class FestivalDTO {
     
     private Long id;
     
@@ -25,16 +29,27 @@ import java.util.ArrayList;
         
     }
     
-    public FestivalDTO(Long id, int duracion, String nombre, String patrocinador){
+    public FestivalDTO(FestivalEntity entity){
         
-        this.id = id;
+        if(entity != null){
+            this.id = entity.getId();
                 
-        this.duracion = duracion;
+            this.duracion = entity.getDuracion();
         
-        this.nombre = nombre;
+            this.nombre = entity.getName();
         
-        this.patrocinador = patrocinador;
+            this.patrocinador = entity.getPatrocinador();
+        }
         
+    }
+    
+    public FestivalEntity toEntity(){
+        FestivalEntity entity = new FestivalEntity();
+        entity.setId(this.getId());
+        entity.setDuracion(this.getDuracion());
+        entity.setName(this.getNombre());
+        entity.setPatrocinador(this.getPatrocinador());
+        return entity;
     }
     
     public int getDuracion(){

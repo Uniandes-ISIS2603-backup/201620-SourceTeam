@@ -5,10 +5,14 @@
  */
 package co.edu.uniandes.rest.cines.dtos;
 
+import co.edu.uniandes.sourceteam.festivalcine.entities.CriticoEntity;
+import javax.xml.bind.annotation.XmlRootElement;
+
 /**
  *
  * @author s.ardila13
  */
+@XmlRootElement
 public class CriticoDTO {
     
     private Long id;
@@ -19,25 +23,32 @@ public class CriticoDTO {
     
     private int credencial;
     
-    //Relación con el festival
-    private FestivalDTO festival;
     
     public CriticoDTO(){
         
     }
     
-    public CriticoDTO(Long id, int duracion, String nombre, int credencial, FestivalDTO festival){
+    public CriticoDTO(CriticoEntity entity){
+        if(entity != null)
+        {
+            this.id = entity.getId();
         
-        this.id = id;
+            this.duracion = entity.getDuracion();
         
-        this.duracion = duracion;
+            this.nombre = entity.getName();
         
-        this.nombre = nombre;
-        
-        this.credencial = credencial;
-        
-        this.festival = festival;
-        
+            this.credencial = entity.getCredencial();
+        }
+                
+    }
+    
+    public CriticoEntity toEntity(){
+        CriticoEntity entity = new CriticoEntity();
+        entity.setId(this.id);
+        entity.setName(this.nombre);
+        entity.setDuracion(this.duracion);
+        entity.setCredencial(this.credencial);
+        return entity;
     }
     
     public int getDuracion(){
@@ -56,10 +67,6 @@ public class CriticoDTO {
         return credencial;
     }
     
-    public FestivalDTO getFestival(){
-        return this.festival;
-    }
-    
     public void setDuracion(int duracion){
         this.duracion = duracion;
     }
@@ -76,13 +83,9 @@ public class CriticoDTO {
         this.id =id;
     }
     
-    public void setFestival(FestivalDTO festival){
-        this.festival = festival;
-    }
-    
     @Override
     public String toString(){
-        return "Id : " + id + ", nombre: " + nombre + ", duracion: " + duracion + " credencial: " + credencial + " festival: " + festival;
+        return "Id : " + id + ", nombre: " + nombre + ", duracion: " + duracion + " credencial: " + credencial ;
     }
     
 }

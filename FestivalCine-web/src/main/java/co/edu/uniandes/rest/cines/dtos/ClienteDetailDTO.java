@@ -1,58 +1,67 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-
 package co.edu.uniandes.rest.cines.dtos;
+
+import co.edu.uniandes.sourceteam.festivalcine.entities.ClienteEntity;
+import co.edu.uniandes.sourceteam.festivalcine.entities.BoletaEntity;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
+import javax.xml.bind.annotation.XmlRootElement;
 
-/**
- *
- * @author Rubby
- */
-public class ClienteDetailDTO extends ClienteDTO{
-   
-    // relación  cero o muchos boletas 
-    private List<BoletaDTO> boletas = new ArrayList<>();
-    
-        
-    
+@XmlRootElement
+public class ClienteDetailDTO extends ClienteDTO {
+
+    // relación  cero o muchos con departments 
+    private List<BoletaDTO> departments = new ArrayList<>();
+
     public ClienteDetailDTO() {
-        
+        super();
     }
-   
-    public ClienteDetailDTO(String pNombre, String pApellido, Long pDocumento, boolean pAfiliado) {
-        super(pNombre, pApellido, pDocumento, pAfiliado);
-       
-     }
     
-    public ClienteDetailDTO(ClienteDTO cliente) {
-       super(cliente.getId(), cliente.getNombres(), cliente.getApellidos(), cliente.getDocumento(), cliente.isAfiliado());
-        
-       
-     }
+
     /**
-     * @return the boleta
+     * Crea un objeto ClienteDetailDTO a partir de un objeto ClienteEntity
+     * incluyendo los atributos de ClienteDTO.
+     *
+     * @param entity Entidad ClienteEntity desde la cual se va a crear el nuevo
+     * objeto.
+     *
      */
-    public List<BoletaDTO> getReviews() {
-        return boletas;
+    public ClienteDetailDTO(ClienteEntity entity) {
+        super(entity);
+        List<BoletaEntity> departmentsList = entity.getBoletas();
+        for (BoletaEntity bol : departmentsList) {
+            this.departments.add(new BoletaDTO(bol));
+        }
     }
 
     /**
-     * @param reviews the boleta to set
+     * Convierte un objeto ClienteDetailDTO a ClienteEntity incluyendo los
+     * atributos de ClienteDTO.
+     *
+     * @return objeto ClienteEntity.
+     *
      */
-    public void setReviews(List<BoletaDTO> reviews) {
-        this.boletas = reviews;
-    }
-
-    
-    
     @Override
-    public String toString() {
-        return super.toString() + ", Reviews \"" + getReviews().toString();
+    public ClienteEntity toEntity() {
+        ClienteEntity entity = super.toEntity();
+         List<BoletaDTO> departments = this.getBoletas();
+        for (BoletaDTO bol : this.departments) {         
+            entity.getBoletas().add(bol.toEntity());
+        }
+        return entity;
     }
+
+    /**
+     * @return the departments
+     */
+    public List<BoletaDTO> getBoletas() {
+        return departments;
+    }
+
+    /**
+     * @param departments the departments to set
+     */
+    public void setBoletas(List<BoletaDTO> departments) {
+        this.departments = departments;
+    }
+
 }

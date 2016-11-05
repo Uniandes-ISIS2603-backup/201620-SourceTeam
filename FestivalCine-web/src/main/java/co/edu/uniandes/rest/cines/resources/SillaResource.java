@@ -8,7 +8,9 @@ package co.edu.uniandes.rest.cines.resources;
 import co.edu.uniandes.rest.cines.dtos.SillaDTO;
 import co.edu.uniandes.rest.cines.exceptions.SillaException;
 import co.edu.uniandes.rest.cines.mocks.SillaMock;
+import co.edu.uniandes.sourceteam.festivalcine.api.ISillaLogic;
 import java.util.List;
+import javax.inject.Inject;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -24,6 +26,10 @@ import javax.ws.rs.Produces;
 @Path("teatros/{idTeatro: \\d+}/salas/{idSala: \\d+}/sillas")
 @Produces("application/json")
 public class SillaResource {
+    
+    
+    @Inject
+    private ISillaLogic companyLogic;
     SillaMock sillas = new SillaMock();
     
     /**

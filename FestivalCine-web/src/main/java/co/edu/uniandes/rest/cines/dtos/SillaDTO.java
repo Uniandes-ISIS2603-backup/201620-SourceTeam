@@ -5,6 +5,8 @@
  */
 package co.edu.uniandes.rest.cines.dtos;
 
+import co.edu.uniandes.sourceteam.festivalcine.entities.SillaEntity;
+
 /**
  * Objeto de transferencia de datos de Silla
  * @author s.rodriguez20
@@ -20,6 +22,31 @@ public class SillaDTO {
      *
      */
     public SillaDTO() {
+    }
+    
+    public SillaDTO(SillaEntity entity) {
+        if (entity != null) {
+            this.id = entity.getId();
+            this.fila=entity.getFila();
+            this.numero=entity.getNumero();
+            this.preferencial=entity.isPreferencial();
+            this.reservada=entity.isReservada();
+        }
+    }
+    /**
+     * Convierte un objeto SillaDTO a SillaEntity.
+     *
+     * @return Nueva objeto SillaEntity.
+     * 
+     */
+    public SillaEntity toEntity() {
+        SillaEntity entity = new SillaEntity();
+        entity.setId(this.getId());
+        entity.setFila(this.getFila());
+        entity.setNumero(this.getNumero());
+        entity.setPreferencial(this.getPreferencial());
+        entity.setReservada(this.getReservada());
+        return entity;
     }
 
     /**

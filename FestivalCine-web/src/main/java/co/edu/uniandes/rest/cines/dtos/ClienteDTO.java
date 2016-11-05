@@ -5,6 +5,8 @@
  */
 package co.edu.uniandes.rest.cines.dtos;
 
+import co.edu.uniandes.sourceteam.festivalcine.entities.ClienteEntity;
+
 /**
  * Objeto de transferencia de datos de Cliente
  * @author s.rodriguez20
@@ -20,6 +22,25 @@ public class ClienteDTO {
      *
      */
     public ClienteDTO() {
+    }
+    
+    public ClienteDTO(ClienteEntity entity) {
+        if (entity != null) {
+            this.nombres = entity.getName();
+            this.id = entity.getId();
+            this.afiliado= entity.isAfiliado();
+            this.documento=entity.getDocumento();
+            this.apellidos=entity.getApellidos();
+        }
+    }
+    public ClienteEntity toEntity() {
+        ClienteEntity entity = new ClienteEntity();
+        entity.setName(this.getNombres());
+        entity.setId(this.getId());
+        entity.setAfiliado(afiliado);
+        entity.setDocumento(documento);
+        entity.setApellidos(apellidos);
+        return entity;
     }
 
     /**

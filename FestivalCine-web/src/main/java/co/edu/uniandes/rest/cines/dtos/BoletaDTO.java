@@ -5,6 +5,8 @@
  */
 package co.edu.uniandes.rest.cines.dtos;
 
+import co.edu.uniandes.sourceteam.festivalcine.entities.BoletaEntity;
+
 /**
  * Objeto de transferencia de datos de Silla
  * @author s.rodriguez20
@@ -12,21 +14,27 @@ package co.edu.uniandes.rest.cines.dtos;
 public class BoletaDTO {
     private Long id;
     private int precio;
-    private FuncionDTO funcion;
-
-    public FuncionDTO getFuncion() {
-        return funcion;
-    }
-
-    public void setFuncion(FuncionDTO funcion) {
-        this.funcion = funcion;
-    }
+   
     
 
     /**
      *
      */
     public BoletaDTO() {
+    }
+    
+    public BoletaDTO(BoletaEntity entity) {
+        if (entity != null) {
+            this.id = entity.getId();
+            this.precio = entity.getPrecio();
+        }
+    }
+    
+    public BoletaEntity toEntity() {
+        BoletaEntity entity = new BoletaEntity();
+        entity.setId(this.getId());
+        entity.setPrecio(precio);
+        return entity;
     }
 
     /**
@@ -66,7 +74,7 @@ public class BoletaDTO {
     }
     @Override
     public String toString() {
-        return "{ id : " + id + ", precio:" + precio+ "funcion:" + funcion+"}";
+        return "{ id : " + id + ", precio:" + precio+ "}";
     }
     
 }

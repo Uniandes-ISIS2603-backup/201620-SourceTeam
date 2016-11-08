@@ -34,7 +34,7 @@
         </dependency>
         <dependency>
             <groupId>co.edu.uniandes.sourceteam</groupId>
-            <artifactId>festivalcine-back</artifactId>
+            <artifactId>FestivalCine-back</artifactId>
             <version>1.0-SNAPSHOT</version>
             <type>jar</type>
         </dependency>

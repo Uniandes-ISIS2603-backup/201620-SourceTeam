@@ -81,7 +81,7 @@ public class FestivalLogicTest {
             utx.commit();
         } catch (Exception e) {
             e.printStackTrace();
-            try {
+            try { 
                 utx.rollback();
             } catch (Exception e1) {
                 e1.printStackTrace();

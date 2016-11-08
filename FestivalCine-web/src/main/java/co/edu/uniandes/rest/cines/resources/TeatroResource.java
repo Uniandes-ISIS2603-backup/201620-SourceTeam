@@ -78,6 +78,10 @@ public class TeatroResource
         return new TeatroDetailDTO( teatroLogic.getTeatro(id) );
     }
 
+    
+    
+    
+    
     /**
      * Obtiene los datos de una instancia de Teatro a partir de su nombre.
      * 

@@ -38,6 +38,8 @@ public class FuncionDetailDTO extends FuncionDTO
         super();
     }
     
+    
+    
     public FuncionDetailDTO (FuncionEntity entity)
     {
        super(entity);

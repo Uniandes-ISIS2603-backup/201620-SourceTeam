@@ -13,6 +13,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import uk.co.jemos.podam.common.PodamExclude;
 
 /**
@@ -22,6 +24,7 @@ import uk.co.jemos.podam.common.PodamExclude;
 @Entity
 public class FuncionEntity extends BaseEntity implements Serializable
 {
+    @Temporal(TemporalType.DATE)
     private Date dia;
     
     private double precio;

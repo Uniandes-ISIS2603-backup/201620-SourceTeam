@@ -1,14 +1,31 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+The MIT License (MIT)
+
+Copyright (c) 2015 Los Andes University
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
  */
 package co.edu.uniandes.rest.cines.resources;
 
-import co.edu.uniandes.rest.cines.dtos.ClienteDTO;
-import co.edu.uniandes.rest.cines.exceptions.ClienteException;
-import co.edu.uniandes.rest.cines.mocks.ClienteMock;
 import java.util.List;
+
+import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -16,78 +33,114 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+import co.edu.uniandes.sourceteam.festivalcine.api.IClienteLogic;
+import co.edu.uniandes.rest.cines.dtos.ClienteDetailDTO;
+import co.edu.uniandes.sourceteam.festivalcine.entities.ClienteEntity;
+import co.edu.uniandes.sourceteam.festivalcine.exceptions.BusinessLogicException;
+import java.util.ArrayList;
+import javax.inject.Inject;
+import javax.ws.rs.QueryParam;
+import javax.ws.rs.WebApplicationException;
 
-/**
- *
- * @author s.rodriguez20
- */
-@Path("clientes")
-@Produces("application/json")
+@Path("/clientes")
+@Consumes(MediaType.APPLICATION_JSON)
+@Produces(MediaType.APPLICATION_JSON)
 public class ClienteResource {
-    ClienteMock clientes = new ClienteMock();
-    
+
+    @Inject
+    private IClienteLogic clienteLogic;
+
     /**
-     * Obtiene el listado de clientes.
+     * Convierte una lista de ClienteEntity a una lista de ClienteDetailDTO.
      *
-     * @return lista de Clientes
-     * @throws ClienteException excepción retornada por la lógica
+     * @param entityList Lista de ClienteEntity a convertir.
+     * @return Lista de ClienteDetailDTO convertida.
+     *
+     */
+    private List<ClienteDetailDTO> listEntity2DTO(List<ClienteEntity> entityList) {
+        List<ClienteDetailDTO> list = new ArrayList<>();
+        for (ClienteEntity entity : entityList) {
+            list.add(new ClienteDetailDTO(entity));
+        }
+        return list;
+    }
+
+    /**
+     * Obtiene la lista de los registros de Cliente
+     *
+     * @return Colección de objetos de ClienteDetailDTO
+     *
      */
     @GET
-    public List<ClienteDTO> getClientes() throws ClienteException {
-        return clientes.getClientes();
+    public List<ClienteDetailDTO> getClientes() {
+
+        return listEntity2DTO(clienteLogic.getClientes());
     }
 
-   
     /**
-     * Agrega una cliente
+     * Obtiene los datos de una instancia de Cliente a partir de su ID
      *
-     * @param cliente cliente a agregar
-     * @return datos de la cliente a agregar
-     * @throws ClienteException cuando ya existe una cliente con el id
-     * suministrado
-     */
-    @POST
-    public ClienteDTO createCliente(ClienteDTO cliente) throws ClienteException {
-        return clientes.createCliente(cliente);
-    }
-
-
-    /**
-     * Retorna una cliente dado su id
-     * 
-     * @param id id de la cliente a retornar
-     * @return una cliente
-     * @throws ClienteException excepción retornada por la lógica
+     * @param id Identificador de la instancia a consultar
+     * @return Instancia de ClienteDetailDTO con los datos del Cliente
+     * consultado
+     *
      */
     @GET
     @Path("{id: \\d+}")
-    public ClienteDTO getCliente(@PathParam("id") int id) throws ClienteException{
-       return clientes.getCliente(id);
-    }    
-    
+    public ClienteDetailDTO getCliente(@PathParam("id") Long id) {
+        return new ClienteDetailDTO(clienteLogic.getCliente(id));
+    }
+
     /**
-     * Actualiza la información de la cliente identificada con id
-     * 
-     * @param id de la cliente
-     * @param cliente con la que actualizar la información
-     * @return la cliente actualizada
-     * @throws ClienteException excepción retornada por la lógica
+     * Obtiene los datos de una instancia de Cliente a partir de su ID
+     *
+     * @param id Identificador de la instancia a consultar
+     * @return Instancia de ClienteDetailDTO con los datos del Cliente
+     * consultado
+     *
+     */
+    
+
+    /**
+     * Se encarga de crear un Cliente en la base de datos
+     *
+     * @param dto Objeto de ClienteDetailDTO con los datos nuevos
+     * @return Objeto de ClienteDetailDTOcon los datos nuevos y su ID
+     *
+     */
+    @POST
+    public ClienteDetailDTO createCliente(ClienteDetailDTO dto) throws BusinessLogicException {
+        return new ClienteDetailDTO(clienteLogic.createCliente(dto.toEntity()));
+    }
+
+    /**
+     * Actualiza la información de una instancia de Cliente
+     *
+     * @param id Identificador de la instancia de Cliente a modificar
+     * @param dto Instancia de ClienteDetailDTO con los nuevos datos
+     * @return Instancia de ClienteDetailDTO con los datos actualizados
+     *
      */
     @PUT
     @Path("{id: \\d+}")
-    public ClienteDTO updateCliente(@PathParam("id") int id, ClienteDTO cliente) throws ClienteException{
-        return clientes.updateCliente(id, cliente);
+    public ClienteDetailDTO updateCliente(@PathParam("id") Long id, ClienteDetailDTO dto) {
+        ClienteEntity entity = dto.toEntity();
+        entity.setId(id);
+        return new ClienteDetailDTO(clienteLogic.updateCliente(entity));
     }
-    
+
     /**
-     * Elimina una cliente dado su id
-     * 
-     * @param id de la cliente eliminada
-     * @throws ClienteException excepción retornada por la lógica
+     * Elimina una instancia de Cliente de la base de datos
+     *
+     * @param id Identificador de la instancia a eliminar
+     *
      */
     @DELETE
     @Path("{id: \\d+}")
-    public void deleteCliente(@PathParam("id")int id) throws ClienteException{
-        clientes.deleteCliente(id);
+    public void deleteCliente(@PathParam("id") Long id) {
+        clienteLogic.deleteCliente(id);
     }
+
+    
 }

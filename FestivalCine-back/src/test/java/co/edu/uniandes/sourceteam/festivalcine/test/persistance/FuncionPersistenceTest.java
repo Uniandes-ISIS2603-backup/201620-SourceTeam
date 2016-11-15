@@ -7,6 +7,7 @@ package co.edu.uniandes.sourceteam.festivalcine.test.persistance;
 
 import co.edu.uniandes.sourceteam.festivalcine.entities.FuncionEntity;
 import co.edu.uniandes.sourceteam.festivalcine.persistence.FuncionPersistence;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
@@ -96,6 +97,8 @@ public class FuncionPersistenceTest
         FuncionEntity entity = em.find(FuncionEntity.class, result.getId());
         Assert.assertNotNull(entity);
         Assert.assertEquals(newEntity.getName(), entity.getName());
+        SimpleDateFormat sdf = new SimpleDateFormat("yy/MM/dd");
+        Assert.assertEquals( sdf.format( entity.getDia() ), sdf.format( newEntity.getDia() ) );
     }
     
     @Test
@@ -126,8 +129,8 @@ public class FuncionPersistenceTest
         FuncionEntity newEntity = funcionPersistence.find( entity.getId() );
         Assert.assertNotNull(newEntity);
         Assert.assertEquals( entity.getName(), newEntity.getName() );
-        Assert.assertEquals( entity.getDia(), newEntity.getDia() );
-        
+        SimpleDateFormat sdf = new SimpleDateFormat("yy/MM/dd");
+        Assert.assertEquals( sdf.format( entity.getDia() ), sdf.format( newEntity.getDia() ) );
     }
 
     /**
@@ -153,7 +156,7 @@ public class FuncionPersistenceTest
         FuncionEntity entity = data.get(0);
         PodamFactory factory = new PodamFactoryImpl();
         FuncionEntity newEntity = factory.manufacturePojo(FuncionEntity.class);
-
+        
         newEntity.setId( entity.getId() );
 
         funcionPersistence.update(newEntity);
@@ -161,7 +164,8 @@ public class FuncionPersistenceTest
         FuncionEntity resp = em.find( FuncionEntity.class, entity.getId() );
 
         Assert.assertEquals( newEntity.getName(), resp.getName() );
-        Assert.assertEquals( newEntity.getDia(), resp.getDia() );
+        SimpleDateFormat sdf = new SimpleDateFormat("yy/MM/dd");
+        Assert.assertEquals( sdf.format( newEntity.getDia() ), sdf.format( resp.getDia() ) );
     }
     
     @Test

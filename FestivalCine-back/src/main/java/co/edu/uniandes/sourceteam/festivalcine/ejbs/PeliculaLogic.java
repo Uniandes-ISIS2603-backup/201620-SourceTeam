@@ -9,12 +9,14 @@ import co.edu.uniandes.sourceteam.festivalcine.api.IPeliculaLogic;
 import co.edu.uniandes.sourceteam.festivalcine.entities.PeliculaEntity;
 import co.edu.uniandes.sourceteam.festivalcine.persistence.PeliculaPersistence;
 import java.util.List;
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 /**
  *
  * @author ya.bejarano10
  */
+@Stateless
 public class PeliculaLogic implements IPeliculaLogic
 {
     @Inject

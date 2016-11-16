@@ -8,11 +8,13 @@ package co.edu.uniandes.sourceteam.festivalcine.ejbs;
 import co.edu.uniandes.sourceteam.festivalcine.api.IBoletaLogic;
 import co.edu.uniandes.sourceteam.festivalcine.entities.BoletaEntity;
 import java.util.List;
+import javax.ejb.Stateless;
 
 /**
  *
  * @author s.rodriguez20
  */
+@Stateless
 public class BoletaLogic implements IBoletaLogic {
 
     @Override

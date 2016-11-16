@@ -14,6 +14,7 @@ import co.edu.uniandes.sourceteam.festivalcine.persistence.SillaPersistence;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.NoResultException;
 
@@ -21,6 +22,7 @@ import javax.persistence.NoResultException;
  *
  * @author s.rodriguez20
  */
+@Stateless
 public class SillaLogic implements ISillaLogic{
     
    private static final Logger LOGGER = Logger.getLogger(SillaLogic.class.getName());

@@ -9,12 +9,14 @@ import co.edu.uniandes.sourceteam.festivalcine.api.ISalaLogic;
 import co.edu.uniandes.sourceteam.festivalcine.entities.SalaEntity;
 import co.edu.uniandes.sourceteam.festivalcine.persistence.SalaPersistence;
 import java.util.List;
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 /**
  *
  * @author ya.bejarano10
  */
+@Stateless
 public class SalaLogic implements ISalaLogic
 {
     @Inject

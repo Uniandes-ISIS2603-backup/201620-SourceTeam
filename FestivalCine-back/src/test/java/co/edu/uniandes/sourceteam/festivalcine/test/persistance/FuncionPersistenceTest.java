@@ -129,8 +129,8 @@ public class FuncionPersistenceTest
         FuncionEntity newEntity = funcionPersistence.find( entity.getId() );
         Assert.assertNotNull(newEntity);
         Assert.assertEquals( entity.getName(), newEntity.getName() );
-        SimpleDateFormat sdf = new SimpleDateFormat("yy/MM/dd");
-        Assert.assertEquals( sdf.format( entity.getDia() ), sdf.format( newEntity.getDia() ) );
+        Assert.assertEquals( entity.getDia(), newEntity.getDia() );
+        
     }
 
     /**
@@ -164,22 +164,20 @@ public class FuncionPersistenceTest
         FuncionEntity resp = em.find( FuncionEntity.class, entity.getId() );
 
         Assert.assertEquals( newEntity.getName(), resp.getName() );
-        SimpleDateFormat sdf = new SimpleDateFormat("yy/MM/dd");
-        Assert.assertEquals( sdf.format( newEntity.getDia() ), sdf.format( resp.getDia() ) );
+        Assert.assertEquals( newEntity.getDia(), resp.getDia() );
     }
     
     @Test
-    public void getTeatroByNameTest1() 
+    public void getFuncionByNameTest1() 
     {
         FuncionEntity entity = data.get(0);
         FuncionEntity newEntity = funcionPersistence.findByName( entity.getName() );
         Assert.assertNotNull(newEntity);
-        Assert.assertEquals(entity.getName(), newEntity.getName());
+        Assert.assertEquals( entity.getName(), newEntity.getName() );
     }
    
-    
     @Test
-    public void getTeatroByNameTest2() 
+    public void getFuncionByNameTest2() 
     {
         
         FuncionEntity newEntity = funcionPersistence.findByName("");

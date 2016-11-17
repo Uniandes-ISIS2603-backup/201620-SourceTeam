@@ -36,11 +36,8 @@ public class CriticoPersistence {
         return q.getSingleResult();
     }
         
-    public CriticoEntity create(CriticoEntity entity) throws Exception {
+    public CriticoEntity create(CriticoEntity entity) {
         LOGGER.info("Creando un critico nuevo");
-        CriticoEntity critico = find(entity.getId());
-        if(critico != null)
-            throw new Exception("Ya existe ese critico.");
         em.persist(entity);
         LOGGER.info("Critico creado");
         return entity;

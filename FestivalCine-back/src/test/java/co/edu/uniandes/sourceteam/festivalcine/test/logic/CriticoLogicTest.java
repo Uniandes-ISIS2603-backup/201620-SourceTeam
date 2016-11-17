@@ -121,6 +121,7 @@ public class CriticoLogicTest {
     @Test(expected = Exception.class)
     public void createCriticoTest2() throws Exception {
         CriticoEntity critico = criticoData.get(0);
+        critico.setDuracion(-1);
         CriticoEntity result = criticoLogic.createCritico(critico);
     }
     

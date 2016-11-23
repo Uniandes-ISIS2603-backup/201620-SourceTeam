@@ -7,9 +7,15 @@ package co.edu.uniandes.rest.cines.resources;
 
 
 import co.edu.uniandes.rest.cines.dtos.SalaDTO;
+import co.edu.uniandes.rest.cines.dtos.SalaDetailDTO;
 import co.edu.uniandes.rest.cines.exceptions.SalaException;
 import co.edu.uniandes.rest.cines.mocks.SalaMock;
+import co.edu.uniandes.sourceteam.festivalcine.api.ISalaLogic;
+import co.edu.uniandes.sourceteam.festivalcine.entities.SalaEntity;
+import java.util.ArrayList;
 import java.util.List;
+import javax.inject.Inject;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -17,81 +23,105 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 
 /**
  *
  * @author ya.bejarano10
  */
-@Path("teatros/{idTeatro: \\d+}/salas")
-@Produces("application/json")
+@Consumes(MediaType.APPLICATION_JSON)
+@Produces(MediaType.APPLICATION_JSON)
+@Path("salas/{idSala: \\d+}/salas")
 public class SalaResource 
 {
 
-
-    SalaMock sala = new SalaMock();
-
+    @Inject
+    private ISalaLogic salaLogic;
+    
     /**
-     * Obtiene el listado de salas.
-     *
-     * @return lista de salas
-     * @throws SalaException excepción retornada por la lógica
+     * Convierte una lista de SalaEntity a una lista de SalaDetailDTO.
+     * 
+     * 
+     * @param entityList Lista de SalaEntity a convertir
+     * @return Lista de SalaDetailDTO convertida.
+     */
+    private List<SalaDetailDTO> listEntity2DTO(List<SalaEntity> entityList) 
+    {
+        List<SalaDetailDTO> list = new ArrayList<>();
+        
+        for (SalaEntity entity : entityList)
+        {
+            list.add( new SalaDetailDTO(entity) );
+        }
+        
+        return list;
+    }
+    
+    
+    /**
+     * Obtiene la lista de registros de Sala.
+     * 
+     * @return Colección de objetos de SalaDetailDTO.
      */
     @GET
-    public List<SalaDTO> getSalas() throws SalaException {
-        return sala.getSalas();
+    public List<SalaDetailDTO> getSalas()
+    {
+        return listEntity2DTO( salaLogic.getSalas() );
     }
-
-   
+    
     /**
-     * Agrega una sala
-     *
-     * @param salaN sala a agregar
-     * @return datos de la sala a agregar
-     * @throws SalaException cuando ya existe una sala con el numero suministrado
+     * Obtiene los datos de una instancia Sala a partir de su ID.
+     * @param id Identificador de la instancia a consultar.
+     * @return Intancia de SalaDetailDTO con los datos de Sala consultado.
+     */
+    @GET
+    @Path("{idSala: \\d+}")
+    public SalaDetailDTO getSala(@PathParam("idSala") Long id) 
+    {
+        return new SalaDetailDTO( salaLogic.getSala(id) );
+    }
+    
+    /**
+     * Crea una Sala en la base de datos.
+     * 
+     * @param dto Objeto de SalaDetailDTO con los nuevos datos.
+     * @return Objeto de SalaDetailDTO con los nuevos datos y su respectivo id.
+     * 
+     * @throws Exception Si el sala que se quiere crear ya existe o hay 
+     * un funcion con el mismo nombre.
      */
     @POST
-    public SalaDTO createSala(SalaDTO salaN) throws SalaException {
-        return sala.createSala(salaN);
+    public SalaDetailDTO createSala(SalaDetailDTO dto) throws Exception
+    {
+        return new SalaDetailDTO( salaLogic.createSala(dto.toEntity()) );
     }
     
     /**
-     * Retorna una sala dado su numero
+     * Actualiza la información de una instancia Sala.
      * 
-     * @param id de la sala a retornar
-     * @return una sala
-     * @throws SalaeException excepción retornada por la lógica
-     */
-    @GET
-    @Path("{id: \\d+}")
-    public SalaDTO getSalaPorNumero(@PathParam("id") int id) throws SalaException {
-        return sala.getSalabyId(id);
-    }
-    
-    
-    /**
-     * Actualiza la información de una sala identificada con su numero
-     * 
-     * @param id de la sala
-     * @param salaP con el que actualizar la información
-     * @return la sala  actualizado
-     * @throws SalaException excepción retornada por la lógica
+     * @param id Identificador de la instancia sala a modificar.
+     * @param dto Intancia SalaDetailDTO con los nuevos datos.
+     * @return Intancia de SalaDetailDTO con los datos actualizados.
      */
     @PUT
     @Path("{id: \\d+}")
-    public SalaDTO updateSala(@PathParam("id") int id, SalaDTO salaP) throws SalaException{
-        return sala.updateSala(id, salaP);
+    public SalaDetailDTO updateSala(@PathParam("id") Long id, SalaDetailDTO dto) 
+    {
+        SalaEntity entity = dto.toEntity();
+        entity.setId(id);
+        return new SalaDetailDTO( salaLogic.updateSala(entity) );
     }
     
     /**
-     * Elimina una sala dado su numero
+     * Elimina una instancia de Sala de la base de datos.
      * 
-     * @param id de la sala eliminada
-     * @throws SalaException excepción retornada por la lógica
+     * @param id Identificador de la instancia a eliminar.
      */
     @DELETE
     @Path("{id: \\d+}")
-    public void deleteSala(@PathParam("id")int  id) throws SalaException{
-        sala.deleteSala(id);
+    public void deleteSala(@PathParam("id") Long id) 
+    {
+        salaLogic.deleteSala(id);
     }
 
     

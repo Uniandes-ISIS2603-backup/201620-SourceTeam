@@ -5,10 +5,13 @@
  */
 package co.edu.uniandes.rest.cines.resources;
 
-import co.edu.uniandes.rest.cines.dtos.PeliculaDTO;
-import co.edu.uniandes.rest.cines.exceptions.PeliculaException;
-import co.edu.uniandes.rest.cines.mocks.PeliculaMock;
+import co.edu.uniandes.rest.cines.dtos.PeliculaDetailDTO;
+import co.edu.uniandes.sourceteam.festivalcine.api.IPeliculaLogic;
+import co.edu.uniandes.sourceteam.festivalcine.entities.PeliculaEntity;
+import java.util.ArrayList;
 import java.util.List;
+import javax.inject.Inject;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -16,78 +19,113 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.MediaType;
 
 /**
  *
  * @author ya.bejarano10
  */
-@Path("peliculas")
-@Produces("application/json")
+@Consumes(MediaType.APPLICATION_JSON)
+@Produces(MediaType.APPLICATION_JSON)
+@Path("peliculas/{idPelicula: \\d+}/peliculas")
 public class PeliculaResource
 {
-    PeliculaMock pelicula = new PeliculaMock();
-
+    @Inject
+    private IPeliculaLogic peliculaLogic;
+    
     /**
-     * Obtiene el listado de peliculas.
-     *
-     * @return lista de peliculas
-     * @throws PeliculaException excepción retornada por la lógica
+     * Convierte una lista de PeliculaEntity a una lista de PeliculaDetailDTO.
+     * 
+     * 
+     * @param entityList Lista de FuncionEntity a convertir
+     * @return Lista de PeliculaDetailDTO convertida.
+     */
+    private List<PeliculaDetailDTO> listEntity2DTO(List<PeliculaEntity> entityList) 
+    {
+        List<PeliculaDetailDTO> list = new ArrayList<>();
+        
+        for (PeliculaEntity entity : entityList)
+        {
+            list.add( new PeliculaDetailDTO(entity) );
+        }
+        
+        return list;
+    }
+    
+    @GET
+    public List<PeliculaDetailDTO> getPeliculas()
+    {
+        return listEntity2DTO( peliculaLogic.getPeliculas() );
+    }
+    
+    /**
+     * Obtiene los datos de una instancia Pelicula a partir de su ID.
+     * @param id Identificador de la instancia a consultar.
+     * @return Intancia de PeliculaDetailDTO con los datos de pelicula consultado.
      */
     @GET
-    public List<PeliculaDTO> getPeliculas() throws PeliculaException {
-        return pelicula.getPeliculas();
+    @Path("{idPelicula: \\d+}")
+    public PeliculaDetailDTO getPelicula(@PathParam("idPelicula") Long id) 
+    {
+        return new PeliculaDetailDTO( peliculaLogic.getPelicula(id) );
     }
 
-   
     /**
-     * Agrega una pelicula
-     *
-     * @param peliculaN pelicula a agregar
-     * @return datos de la pelicula a agregar
-     * @throws PeliculaException cuando ya existe una pelicula con el nombre suministrado
+     * Obtiene los datos de una instancia de Pelicula a partir de su nombre.
+     * 
+     * @param name Nombre de la Pelicula que se quiere buscar.
+     * 
+     * @return Instancia PeliculaDetailDTO con el nombre dado.
+     * 
+     */
+    @GET
+    @Path("/name")
+    public PeliculaDetailDTO getPeliculaByName(@QueryParam("name") String name)
+    {
+        return new PeliculaDetailDTO( peliculaLogic.getPeliculaByName(name) );
+    }
+    
+    /**
+     * Crea una Pelicula en la base de datos.
+     * 
+     * @param dto Objeto de PeliculaDetailDTO con los nuevos datos.
+     * @return Objeto de PeliculaDetailDTO con los nuevos datos y su respectivo id.
+     * 
+     * @throws Exception Si el funcion que se quiere crear ya existe o hay 
+     * un funcion con el mismo nombre.
      */
     @POST
-    public PeliculaDTO createSala(PeliculaDTO peliculaN) throws PeliculaException {
-        return pelicula.createPelicula(peliculaN);
+    public PeliculaDetailDTO createFuncion(PeliculaDetailDTO dto) throws Exception
+    {
+        return new PeliculaDetailDTO( peliculaLogic.createPelicula(dto.toEntity()) );
     }
     
     /**
-     * Retorna una pelicula dado su nombre
+     * Actualiza la información de una instancia Pelicula.
      * 
-     * @param id de la pelicula a retornar
-     * @return una pelicula
-     * @throws PeliculaException excepción retornada por la lógica
-     */
-    @GET
-    @Path("{id: \\d+}")
-    public PeliculaDTO getPeliculaPorNombre(@PathParam("id") Long id) throws PeliculaException {
-        return pelicula.getPeliculaPorId(id);
-    }
-    
-    
-    /**
-     * Actualiza la información de un cliente identificada con su nombre
-     * 
-     * @param id de la pelicula
-     * @param peliculaP con el que actualizar la información
-     * @return la pelicula actualizada
-     * @throws PeliculaException excepción retornada por la lógica
+     * @param id Identificador de la instancia Pelicula a modificar.
+     * @param dto Intancia PeliculaDetailDTO con los nuevos datos.
+     * @return Intancia de PeliculaDetailDTO con los datos actualizados.
      */
     @PUT
     @Path("{id: \\d+}")
-    public PeliculaDTO updatePelicula(@PathParam("id") Long id, PeliculaDTO peliculaP) throws PeliculaException{
-        return pelicula.updatePelicula(id, peliculaP);
+    public PeliculaDetailDTO updatePelicula(@PathParam("id") Long id, PeliculaDetailDTO dto) 
+    {
+        PeliculaEntity entity = dto.toEntity();
+        entity.setId(id);
+        return new PeliculaDetailDTO( peliculaLogic.updatePelicula(entity) );
     }
     
     /**
-     * Elimina una pelicula dado su nombre
+     * Elimina una instancia de Pelicula de la base de datos.
      * 
-     * @param id de la pelicula
-     * @throws PeliculaException excepción retornada por la lógica
+     * @param id Identificador de la instancia a eliminar.
      */
     @DELETE
     @Path("{id: \\d+}")
-    public void deleteCity(@PathParam("id")Long id) throws PeliculaException{
-        pelicula.deletePelicula(id);
+    public void deletePelicula(@PathParam("id") Long id) 
+    {
+        peliculaLogic.deletePelicula(id);
     }
 }

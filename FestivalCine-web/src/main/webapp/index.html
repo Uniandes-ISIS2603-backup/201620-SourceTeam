@@ -8,6 +8,7 @@
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
         <title>Festival de Cine</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
         <link href="src/bootstrap2/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="src/bootstrap2/css/landing-page.css" />
 
@@ -108,24 +109,21 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a ui-sref="festivalesList" class="">Festivales</a>
+                    <li onclick="document.">
+                        <a ui-sref="festivalesList" class="page-scroll">Festivales</a>
                     </li>
                     <li>
-                        <a ui-sref="clientesList">Clientes</a>
+                        <a ui-sref="clientesList" class="page-scroll">Clientes</a>
                     </li>
                     <li>
-                        <a ui-sref="teatrosList">Teatros</a>
+                        <a ui-sref="teatrosList" class="page-scroll">Teatros</a>
                     </li>
                     <li>
-                        <a ui-sref="peliculasList">Películas</a>
+                        <a ui-sref="peliculasList" class="page-scroll">Películas</a>
                     </li>
                     <li>
-                        <a ui-sref="criticosList">Críticos</a>
+                        <a ui-sref="criticosList" class="page-scroll">Críticos</a>
                     </li>
-                    <li>
-                        <a ui-sref="criticosList">Críticos</a>
-                    </li> 
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -135,8 +133,7 @@
 
 
     <!-- Header -->
-    <a name="about"></a>
-    <div class="intro-header" style="height: 1000px">
+    <div class="intro-header" style="height: 950px">
         <div class="container">
 
             <div class="row">
@@ -154,74 +151,28 @@
     <!-- /.intro-header -->
 
     <!-- Page Content -->
+    <section id="#info" style="height: 800px">
+        <div class="content-section-a" ui-view="mainView">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-5 col-sm-6">
+                        <hr class="section-heading-spacer">
+                        <div class="clearfix"></div>
+                        <h2 class="section-heading">Death to the Stock Photo:<br>Special Thanks</h2>
+                        <p class="lead">A special thanks to <a target="_blank" href="src/bootstrap2/imgipad.jpg">Death to the Stock Photo</a> for providing the photographs that you see in this template. Visit their website to become a member.</p>
+                    </div>
+                    <div class="col-lg-5 col-lg-offset-2 col-sm-6">
+                        <img class="img-responsive" src="src/bootstrap2/img/ipad.png" alt="">
+                    </div>
+                </div>
+
+            </div>
+            <!-- /.container -->
+
+        </div>
+    </section>
     
-	<a  name="services"></a>
-    <div class="content-section-a" ui-view="mainView">
-
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-5 col-sm-6">
-                    <hr class="section-heading-spacer">
-                    <div class="clearfix"></div>
-                    <h2 class="section-heading">Death to the Stock Photo:<br>Special Thanks</h2>
-                    <p class="lead">A special thanks to <a target="_blank" href="bower_components/bootstrap2/img/dog.png">Death to the Stock Photo</a> for providing the photographs that you see in this template. Visit their website to become a member.</p>
-                </div>
-                <div class="col-lg-5 col-lg-offset-2 col-sm-6">
-                    <img class="img-responsive" src="bower_components/bootstrap2/img/ipad.png" alt="">
-                </div>
-            </div>
-
-        </div>
-        <!-- /.container -->
-
-    </div>
-    <!-- /.content-section-a -->
-
-    <div class="content-section-b">
-
-        <div class="container">
-
-            <div class="row">
-                <div class="col-lg-5 col-lg-offset-1 col-sm-push-6  col-sm-6">
-                    <hr class="section-heading-spacer">
-                    <div class="clearfix"></div>
-                    <h2 class="section-heading">3D Device Mockups<br>by PSDCovers</h2>
-                    <p class="lead">Turn your 2D designs into high quality, 3D product shots in seconds using free Photoshop actions by <a target="_blank" href="http://www.psdcovers.com/">PSDCovers</a>! Visit their website to download some of their awesome, free photoshop actions!</p>
-                </div>
-                <div class="col-lg-5 col-sm-pull-6  col-sm-6">
-                    <img class="img-responsive" src="img/dog.png" alt="">
-                </div>
-            </div>
-
-        </div>
-        <!-- /.container -->
-
-    </div>
-    <!-- /.content-section-b -->
-
-    <div class="content-section-a">
-
-        <div class="container">
-
-            <div class="row">
-                <div class="col-lg-5 col-sm-6">
-                    <hr class="section-heading-spacer">
-                    <div class="clearfix"></div>
-                    <h2 class="section-heading">Google Web Fonts and<br>Font Awesome Icons</h2>
-                    <p class="lead">This template features the 'Lato' font, part of the <a target="_blank" href="http://www.google.com/fonts">Google Web Font library</a>, as well as <a target="_blank" href="http://fontawesome.io">icons from Font Awesome</a>.</p>
-                </div>
-                <div class="col-lg-5 col-lg-offset-2 col-sm-6">
-                    <img class="img-responsive" src="img/phones.png" alt="">
-                </div>
-            </div>
-
-        </div>
-        <!-- /.container -->
-
-    </div>
-    <!-- /.content-section-a -->
-
-	<a  name="contact"></a>
+    <a  name="contact"></a>
     <div class="banner">
 
         <div class="container">
@@ -263,12 +214,6 @@
             </div>
         </div>
     </footer>
-
-    <!-- jQuery -->
-    <script src="js/jquery.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
        
     </body>
 </html>

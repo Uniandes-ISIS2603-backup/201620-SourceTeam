@@ -29,9 +29,9 @@ import javax.ws.rs.core.MediaType;
  *
  * @author ya.bejarano10
  */
+@Path("salas")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
-@Path("salas/{idSala: \\d+}/salas")
 public class SalaResource 
 {
 
@@ -64,7 +64,7 @@ public class SalaResource
      * @return Colección de objetos de SalaDetailDTO.
      */
     @GET
-    public List<SalaDetailDTO> getSalas()
+    public List<SalaDetailDTO> getSalas() throws SalaException
     {
         return listEntity2DTO( salaLogic.getSalas() );
     }
@@ -75,8 +75,8 @@ public class SalaResource
      * @return Intancia de SalaDetailDTO con los datos de Sala consultado.
      */
     @GET
-    @Path("{idSala: \\d+}")
-    public SalaDetailDTO getSala(@PathParam("idSala") Long id) 
+    @Path("{id: \\d+}")
+    public SalaDetailDTO getSala(@PathParam("id") Long id) 
     {
         return new SalaDetailDTO( salaLogic.getSala(id) );
     }

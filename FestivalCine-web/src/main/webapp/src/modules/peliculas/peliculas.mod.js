@@ -3,7 +3,7 @@
     mod.constant("peliculasContext", "api/peliculas");
     mod.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider){
         var basePath = 'src/modules/peliculas/';
-         $urlRouterProvider.otherwise("/peliculas");
+         $urlRouterProvider.otherwise("/peliculasList");
         $stateProvider.state('peliculasList', {
                 url: '/peliculas',
                 views: {

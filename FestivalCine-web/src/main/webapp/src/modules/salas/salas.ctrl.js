@@ -37,7 +37,10 @@
               
                 $scope.alerts = [];
             }
-
+               
+             $http.get(teatrosContext).then(function (response) {
+                $scope.teatros = response.data;
+            });
 
             this.saveRecord = function (id) {
                 currentRecord = $scope.currentRecord;
@@ -51,7 +54,7 @@
                         .then(function () {
                             // $http.post es una promesa
                             // cuando termine bien, cambie de estado
-                            $state.go('salasList');
+                            $state.go('salasListNoEdit');
                         }, responseError);
                         
                 // si el numero no es null, es un registro existente entonces lo actualiza
@@ -63,7 +66,7 @@
                         .then(function () {
                             // $http.put es una promesa
                             // cuando termine bien, cambie de estado
-                            $state.go('salasList');
+                            $state.go('salasListNoEdit');
                         }, responseError);
                 };
             };

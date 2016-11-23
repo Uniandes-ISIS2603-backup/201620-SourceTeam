@@ -9,12 +9,14 @@ import co.edu.uniandes.sourceteam.festivalcine.entities.SalaEntity;
 import co.edu.uniandes.sourceteam.festivalcine.entities.SillaEntity;
 import java.util.ArrayList;
 import java.util.List;
+import javax.xml.bind.annotation.XmlRootElement;
 import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  *
  * @author ya.bejarano10
  */
+@XmlRootElement
 public class SalaDetailDTO extends SalaDTO
 {
      @PodamExclude

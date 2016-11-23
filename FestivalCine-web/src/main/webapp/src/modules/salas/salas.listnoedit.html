@@ -1,0 +1,23 @@
+<div class="container-fluid" >
+    <div class="row">
+        
+    <table class="table table-striped" class="col-md-4">
+        <thead>
+            <tr>
+                <th>Num</th>        
+               
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="record in records">
+                <td id="{{$index}}-id">{{record.id}}</td>
+
+                <td>
+                    <button id="{{$index}}-delete-btn" class="btn btn-default btn-sm" ng-click="ctrl.deleteRecord(record.id)"><span class="glyphicon glyphicon-minus"></span> Remove</button>
+
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <button class="btn btn-default" ui-sref="salasCreate">Crear sala</button>
+</div>

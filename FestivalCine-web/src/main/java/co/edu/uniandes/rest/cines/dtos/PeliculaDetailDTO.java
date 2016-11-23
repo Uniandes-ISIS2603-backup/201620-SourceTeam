@@ -9,12 +9,14 @@ import co.edu.uniandes.sourceteam.festivalcine.entities.FuncionEntity;
 import co.edu.uniandes.sourceteam.festivalcine.entities.PeliculaEntity;
 import java.util.ArrayList;
 import java.util.List;
+import javax.xml.bind.annotation.XmlRootElement;
 import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  *
  * @author ya.bejarano10
  */
+@XmlRootElement
 public class PeliculaDetailDTO extends PeliculaDTO
 {
     @PodamExclude

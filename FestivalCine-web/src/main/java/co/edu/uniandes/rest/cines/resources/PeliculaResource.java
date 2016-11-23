@@ -6,6 +6,7 @@
 package co.edu.uniandes.rest.cines.resources;
 
 import co.edu.uniandes.rest.cines.dtos.PeliculaDetailDTO;
+import co.edu.uniandes.rest.cines.exceptions.PeliculaException;
 import co.edu.uniandes.sourceteam.festivalcine.api.IPeliculaLogic;
 import co.edu.uniandes.sourceteam.festivalcine.entities.PeliculaEntity;
 import java.util.ArrayList;
@@ -26,9 +27,10 @@ import javax.ws.rs.core.MediaType;
  *
  * @author ya.bejarano10
  */
+
+@Path("peliculas")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
-@Path("peliculas/{idPelicula: \\d+}/peliculas")
 public class PeliculaResource
 {
     @Inject
@@ -54,7 +56,7 @@ public class PeliculaResource
     }
     
     @GET
-    public List<PeliculaDetailDTO> getPeliculas()
+    public List<PeliculaDetailDTO> getPeliculas() throws PeliculaException
     {
         return listEntity2DTO( peliculaLogic.getPeliculas() );
     }
@@ -65,8 +67,8 @@ public class PeliculaResource
      * @return Intancia de PeliculaDetailDTO con los datos de pelicula consultado.
      */
     @GET
-    @Path("{idPelicula: \\d+}")
-    public PeliculaDetailDTO getPelicula(@PathParam("idPelicula") Long id) 
+    @Path("{id: \\d+}")
+    public PeliculaDetailDTO getPelicula(@PathParam("id") Long id) 
     {
         return new PeliculaDetailDTO( peliculaLogic.getPelicula(id) );
     }
@@ -96,7 +98,7 @@ public class PeliculaResource
      * un funcion con el mismo nombre.
      */
     @POST
-    public PeliculaDetailDTO createFuncion(PeliculaDetailDTO dto) throws Exception
+    public PeliculaDetailDTO createPelicula(PeliculaDetailDTO dto) throws Exception
     {
         return new PeliculaDetailDTO( peliculaLogic.createPelicula(dto.toEntity()) );
     }

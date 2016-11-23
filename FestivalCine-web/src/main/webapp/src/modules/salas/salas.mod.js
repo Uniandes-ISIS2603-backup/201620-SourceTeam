@@ -1,29 +1,30 @@
+(function (ng) {
     var mod = angular.module("salasModule", ["ngMessages"]);
     mod.constant("salasContext", "api/salas");
     mod.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
             var basePath = 'src/modules/salas/';
             $urlRouterProvider.otherwise("/salas");
             
-            $stateProvider.state('salas', {
+            $stateProvider.state('salasList', {
             url:"/salas",
-            abstract: true,
+            
             views: {
                     'salaView': {
                         controller: 'salasCtrl',
                         controllerAs: 'ctrl',
-                        templateUrl: basePath + 'salas.html'
+                        templateUrl: basePath + 'salas.list.html'
                     }
                 }
             })
                     
-            .state('salasList', {
+            .state('salasListNoEdit', {
                 url: '/salas',
                 parent: 'teatroEdit',
                 views: {
                     'teatroInstanceView': {
                         controller: 'salasCtrl',
                         controllerAs: 'ctrl',
-                        templateUrl: basePath + 'salas.list.html'
+                        templateUrl: basePath + 'salas.listnoedit.html'
                     }
                 }
             }).state('salasCreate', {
@@ -55,6 +56,6 @@
                 }
             });
         }]);
-(window.angular);
+})(window.angular);
 
 

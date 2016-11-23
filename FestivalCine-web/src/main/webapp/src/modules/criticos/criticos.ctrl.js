@@ -1,13 +1,14 @@
 (function (ng) {
     var mod = ng.module("criticosModule");
 
-    mod.controller("criticosCtrl", ['$scope', '$state', '$stateParams', '$http', 'criticosContext', 'festivalesContext', function ($scope, $state, $stateParams, $http, context, festivalesContext) {
+    mod.controller("criticosCtrl", ['$scope', '$state', '$stateParams', '$http', 'criticosContext', 'festivalesContext', '$anchorScroll', function ($scope, $state, $stateParams, $http, context, festivalesContext,$anchorScroll) {
 
             // inicialmente el listado de criticos está vacio
             $scope.records = {};
             // carga los criticos
             $http.get(context).then(function(response){
                 $scope.records = response.data;    
+                $anchorScroll('info');
             }, responseError);
 
             // el controlador recibió un CriticoCredencial ??

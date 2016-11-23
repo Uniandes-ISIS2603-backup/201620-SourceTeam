@@ -29,7 +29,7 @@ import javax.ws.rs.core.MediaType;
  *
  * @author ya.bejarano10
  */
-@Path("salas")
+@Path("teatros/{idTeatro: \\d+}/salas")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class SalaResource 

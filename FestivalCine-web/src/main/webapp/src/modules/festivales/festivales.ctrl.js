@@ -1,13 +1,14 @@
 (function (ng) {
     var mod = ng.module("festivalesModule");
 
-    mod.controller("festivalesCtrl", ['$scope', '$state', '$stateParams', '$http', 'festivalesContext', function ($scope, $state, $stateParams, $http, context) {
+    mod.controller("festivalesCtrl", ['$scope', '$state', '$stateParams', '$http', 'festivalesContext','$anchorScroll', function ($scope, $state, $stateParams, $http, context, $anchorScroll) {
 
             // inicialmente el listado de festivales está vacio
             $scope.records = {};
             // carga los festivales
             $http.get(context).then(function(response){
                 $scope.records = response.data;    
+                $anchorScroll('info');
             }, responseError);
 
             // el controlador recibió un FestivalNombre ??

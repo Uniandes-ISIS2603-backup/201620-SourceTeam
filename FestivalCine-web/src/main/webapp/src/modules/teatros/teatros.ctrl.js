@@ -2,14 +2,15 @@
      
      var mod = ng.module("teatrosModule");
      
-     mod.controller("teatrosCtrl", ['$scope', '$state', '$stateParams', '$http', 'teatrosContext', function ($scope, $state, $stateParams, $http, context) {
+     mod.controller("teatrosCtrl", ['$scope', '$state', '$stateParams', '$http', 'teatrosContext', '$anchorScroll' , function ($scope, $state, $stateParams, $http, context,$anchorScroll) {
              
              // El listado de teatros esta vacio en un principio.
              $scope.records = {};
              
              // Se cargan los teatros.
              $http.get(context).then(function(response){
-                 $scope.records = response.data;    
+                 $scope.records = response.data;
+                 $anchorScroll('info');
              }, responseError);
              
              // el controlador recibió un clienteNombre ??  

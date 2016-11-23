@@ -1,13 +1,14 @@
 (function (ng) {
     var mod = ng.module("peliculasModule");
 
-    mod.controller("peliculasCtrl", ['$scope', '$state', '$stateParams', '$http', 'peliculasContext', function ($scope, $state, $stateParams, $http, context) {
+    mod.controller("peliculasCtrl", ['$scope', '$state', '$stateParams', '$http', 'peliculasContext', '$anchorScroll' , function ($scope, $state, $stateParams, $http, context,$anchorScroll) {
 
             // inicialmente el listado de peliculas está vacio
             $scope.records = {};
             // carga las peliculas
             $http.get(context).then(function(response){
                 $scope.records = response.data;    
+                $anchorScroll('info');
             }, responseError);
 
             // el controlador recibió un peliculaId ??

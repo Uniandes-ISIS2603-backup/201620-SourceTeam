@@ -31,7 +31,7 @@ import javax.ws.rs.core.MediaType;
  */
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
-@Path("funcions/{idFuncion: \\d+}/funciones")
+@Path("teatros/{idTeatro: \\d+}/funciones")
 public class FuncionResource 
 {
     

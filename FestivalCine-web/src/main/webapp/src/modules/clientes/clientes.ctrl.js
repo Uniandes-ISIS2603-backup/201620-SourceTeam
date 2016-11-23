@@ -1,13 +1,14 @@
 (function (ng) {
     var mod = ng.module("clientesModule");
 
-    mod.controller("clientesCtrl", ['$scope', '$state', '$stateParams', '$http', 'clientesContext', function ($scope, $state, $stateParams, $http, context) {
+    mod.controller("clientesCtrl", ['$scope', '$state', '$stateParams', '$http', 'clientesContext','$anchorScroll' , function ($scope, $state, $stateParams, $http, context,$anchorScroll) {
 
             // inicialmente el listado de clientes está vacio
             $scope.records = {};
             // carga las ciudades
             $http.get(context).then(function(response){
-                $scope.records = response.data;    
+                $scope.records = response.data;   
+                $anchorScroll('info');
             }, responseError);
 
             // el controlador recibió un clienteId ??

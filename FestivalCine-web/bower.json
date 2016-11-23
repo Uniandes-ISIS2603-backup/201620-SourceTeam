@@ -6,9 +6,8 @@
     "angular": "^1.5.8",
     "bootstrap": "^3.3.7",
     "angular-ui-router": "~0.2.14",
-    "angular-messages": "^1.5.8" ,
-    "bootswatch-dist" : "#3.3.6-darkly" 
-  },
+    "angular-messages": "^1.5.8" 
+},
   "devDependencies": {}
 }
 

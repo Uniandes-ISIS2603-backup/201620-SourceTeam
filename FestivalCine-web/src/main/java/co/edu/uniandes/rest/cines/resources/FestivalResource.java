@@ -116,7 +116,7 @@ public class FestivalResource {
      */
     @PUT
     @Path("{id: \\d+}")
-    public FestivalDTO updateFestival(@PathParam("id") Long id, FestivalDTO festival) throws Exception{
+    public FestivalDTO updateFestival(@PathParam("id") Long id, FestivalDetailsDTO festival) throws Exception{
         FestivalEntity entity = festival.toEntity();
         entity.setId(id);
         FestivalEntity entidadAnterior = festivalLogic.getFestival(id);

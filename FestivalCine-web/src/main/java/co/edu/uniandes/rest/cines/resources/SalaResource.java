@@ -6,10 +6,8 @@
 package co.edu.uniandes.rest.cines.resources;
 
 
-import co.edu.uniandes.rest.cines.dtos.SalaDTO;
 import co.edu.uniandes.rest.cines.dtos.SalaDetailDTO;
 import co.edu.uniandes.rest.cines.exceptions.SalaException;
-import co.edu.uniandes.rest.cines.mocks.SalaMock;
 import co.edu.uniandes.sourceteam.festivalcine.api.ISalaLogic;
 import co.edu.uniandes.sourceteam.festivalcine.entities.SalaEntity;
 import java.util.ArrayList;
@@ -29,9 +27,10 @@ import javax.ws.rs.core.MediaType;
  *
  * @author ya.bejarano10
  */
-@Path("teatros/{idTeatro: \\d+}/salas")
+
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
+@Path("teatros/{idTeatro: \\d+}/salas")
 public class SalaResource 
 {
 
